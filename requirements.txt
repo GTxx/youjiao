@@ -1,0 +1,4 @@
+Mezzanine
+MySQL-python
+django-extensions
+ipython
