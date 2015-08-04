@@ -7,3 +7,5 @@ local_settings.py
 /static
 migrations
 .idea
+node_modules
+build

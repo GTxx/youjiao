@@ -1,0 +1,137 @@
+ul
+  li
+    list-style: none
+
+a
+  text-decoration: none
+
+$youjiao-pink: hotpink
+$wrapper-width: 1180px
+$font-gray: gray
+
+=clear-float
+  overflow: hidden
+  zoom: 1
+
+=list-fist
+  background: $youjiao-pink
+  font-weight: bold
+
+  a
+    color: white
+
+#youjiao-body
+  height: auto
+  margin: 0 auto
+
+.header
+  +clear-float
+  height: 151px
+  border-bottom: 4px solid $youjiao-pink
+
+  .header-top-wrapper
+    border-top: 1px solid #c0c0c0
+    border-bottom: 1px solid #c0c0c0
+
+  .header-top
+    width: $wrapper-width
+    margin: 0 auto
+    height: 30px
+    line-height: 30px
+
+    span
+      color: $font-gray
+      font-size: 14px
+    a
+      color: $font-gray
+
+    .header-login
+      float: right
+
+  .nav-wrapper
+    padding-top: 13px
+    box-sizing: border-box
+    height: 106px
+    width: $wrapper-width
+    margin: 0 auto
+
+    +clear-float
+
+    .search-input
+      padding-top: 62px
+      input
+        float: left
+        height: 30px
+        box-sizing: border-box
+      .search-button
+        display: inline-block
+        width: 30px
+        height: 30px
+        background: $youjiao-pink
+        float: left
+
+  .youjiao-logo
+    width: 111px
+    height: 93px
+    float: left
+
+  .youjiao-nav
+    ul
+      +clear-float
+      width: 600px
+      float: left
+      margin-top: 74px
+      margin-left: 124px
+
+      li
+        width: 80px
+        float: left
+        margin: 0 10px
+
+        a
+          color: $youjiao-pink
+
+.main
+  width: $wrapper-width
+  margin: 0 auto
+  +clear-float
+
+  .news-list
+    li
+      list-style: disc
+    a
+      color: $font-gray
+
+.list-fist
+  +list-fist
+
+.left-bar
+  width: 200px
+  float: left
+
+  a
+    color: $font-gray
+
+#main-body
+  width: 600px
+  float: left
+
+.right-bar
+  width: 200px
+  float: left
+
+.footer
+  margin: 0 auto
+  width: $wrapper-width
+  +clear-float
+
+  div
+    +clear-float
+
+  ul
+    width: 200px
+    float: left
+
+    a
+      color: $font-gray
+      font-size: 14px

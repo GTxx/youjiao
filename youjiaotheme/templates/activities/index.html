@@ -1,0 +1,13 @@
+{% extends "common/template_base.html" %}
+
+{% block leftBar %}
+    {% include 'activities/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <ul class="news-list">
+        {% for item in blogs %}
+            <li><a href="/activities/{{ item.id }}" >{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
