@@ -5,35 +5,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}vendor/css/normalize.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}build/css/youjiao.css">
+    {% block css %}
+    {% endblock %}
 </head>
 <body>
 <div id="youjiao-body">
-    <div class="header">
-        <div class="header-top-wrapper">
-            <div class="header-top">
-                <span>关于61幼教网</span>
-                <span class="header-login"><a href="">登陆</a> / <a href="">注册</a></span>
-            </div>
-        </div>
-        <div class="nav-wrapper">
-            <div class="youjiao-logo"></div>
-            <div class="youjiao-nav">
-                <ul>
-                    <li><a href="">首页</a></li>
-                    <li><a href="">幼教动态</a></li>
-                    <li><a href="">产品</a></li>
-                    <li><a href="">教学教研</a></li>
-                    <li><a href="">课件中心</a></li>
-                    <li><a href="">幼教阅读</a></li>
-                </ul>
-                <div class="search-input">
-                    <input type="text">
-                    <a class="search-button" href="javascript:;"></a>
-                </div>
 
-            </div>
-        </div>
-    </div>
+    {% include 'common/header.html' %}
+
     <div class="main">
         <div class="left-bar">
             {% block leftBar %}
@@ -41,51 +20,60 @@
         </div>
 
         <div id="main-body">
+            {% for a in object_list %}
+                {{ a.id }}{{ ss }}
+            {% endfor %}
             {% block content %}
             {% endblock %}
         </div>
         <div class="right-bar">
             <div class="weekly-hot">
                 <ul>
-                    <li>本周热点</li>
+                    <li class="list-first">本周热点</li>
                 </ul>
             </div>
             <div class="topics">
-
+                <p class="list-first">专题推荐</p>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <div>
-            <ul>
-                <li><a href="">关于61幼教网</a></li>
-                <li><a href="">了解61幼教网</a></li>
-                <li><a href="">加入61幼教网</a></li>
-                <li><a href="">联系我们</a></li>
-            </ul>
-            <ul>
-                <li><a href="">帮助中心</a></li>
-                <li><a href="">购买指南</a></li>
-                <li><a href="">疑难帮助</a></li>
-                <li><a href="">售后服务</a></li>
-            </ul>
-            <ul>
-                <li><a href="">服务支持</a></li>
-                <li><a href="">下载中心</a></li>
-                <li><a href="">61幼教网新语</a></li>
-                <li><a href="">经销在线订单</a></li>
-                <li><a href="">统一登陆平台</a></li>
-            </ul>
-            <ul>
-                <li><a href="">关注我们</a></li>
-                <li><a href="">新浪微薄</a></li>
-                <li><a href="">官方微信</a></li>
-            </ul>
-        </div>
-        <div>
-            <span>版权所有 61幼教网</span>
+    <div class="footer-wrapper">
+        <div class="footer">
+            <div>
+                <ul>
+                    <li class="list-style-none"><a href="">关于61幼教网</a></li>
+                    <li><a href="">了解61幼教网</a></li>
+                    <li><a href="">加入61幼教网</a></li>
+                    <li><a href="">联系我们</a></li>
+                </ul>
+                <ul>
+                    <li class="list-style-none"><a href="">帮助中心</a></li>
+                    <li><a href="">购买指南</a></li>
+                    <li><a href="">疑难帮助</a></li>
+                    <li><a href="">售后服务</a></li>
+                </ul>
+                <ul>
+                    <li class="list-style-none"><a href="">服务支持</a></li>
+                    <li><a href="">下载中心</a></li>
+                    <li><a href="">61幼教网新语</a></li>
+                    <li><a href="">经销在线订单</a></li>
+                    <li><a href="">统一登陆平台</a></li>
+                </ul>
+                <ul>
+                    <li class="list-style-none"><a href="">关注我们</a></li>
+                    <li><a href="">新浪微薄</a></li>
+                    <li><a href="">官方微信</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <span>©版权所有 61幼教网</span>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="{{ STATIC_URL }}vendor/js/jquery-1.11.3.min.js"></script>
+{% block js %}
+{% endblock %}
 </body>
 </html>

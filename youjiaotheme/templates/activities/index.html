@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block content %}
+    <h3>幼教动态</h3>
     <ul class="news-list">
         {% for item in blogs %}
-            <li><a href="/activities/{{ item.id }}" >{{ item.title }}</a></li>
+            <li>
+                <a href="/activities/{{ item.id }}">{{ item.title }} <span class="float-right">{{ item.publish_date | date:'[Y-m-d]' }}</span></a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

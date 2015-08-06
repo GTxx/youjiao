@@ -1,0 +1,44 @@
+{% extends "common/template_base_noright.html" %}
+
+{% block leftBar %}
+    {% include 'products/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="products-info">
+        <div class="products-simples"></div>
+        <div class="products-text-info">
+            <h3>清凉一夏 <span>幼儿园大班上册1--5</span></h3>
+            <ul>
+                <li>主编：xxx</li>
+                <li>责任编辑:xxx</li>
+                <li>出版社:xxx</li>
+                <li>开本：16开</li>
+                <li>版号: xxx</li>
+            </ul>
+            <a class="pink-button" href="javascript:;">添加收藏</a>
+            <a class="pink-button" href="javascript:;">关联课件</a>
+            <p><span>定价：</span><span>30.00元</span></p>
+            <p><span>如需购买请联系0512-69173537</span></p>
+        </div>
+    </div>
+    <div><a class="pink-button" href="javascript:;">图书详情</a><a href="javascript:;">图片评论</a></div>
+    <div>
+        <img src="" alt="" style="width: 432px;height: 436px">
+        <img src="" alt="" style="width: 432px;height: 436px">
+        <img src="" alt="" style="width: 432px;height: 436px">
+        <img src="" alt="" style="width: 432px;height: 436px">
+        <img src="" alt="" style="width: 432px;height: 436px">
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ STATIC_URL }}vendor/js/responsiveslides.js"></script>
+    <script>
+        $(function () {
+            $(".slide-banner").responsiveSlides({
+                pager: true
+            });
+        });
+    </script>
+{% endblock %}
