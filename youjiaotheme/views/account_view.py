@@ -3,6 +3,7 @@
 from django.shortcuts import redirect
 from django.views.generic.base import View, TemplateView
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 
 class LoginView(TemplateView):
@@ -28,3 +29,22 @@ class LoginView(TemplateView):
 class LogoutView(View):
     def get(self, request):
         logout(request)
+
+
+class RegisterView(TemplateView):
+    template_name = 'account/register.html'
+
+    def post(self, request):
+
+        if request.user.is_authenticated():
+            return redirect('/activities/1')
+
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        #check
+
+        #User.objects.create_user(username, email, password)
+
+        return redirect('/activities/1')
