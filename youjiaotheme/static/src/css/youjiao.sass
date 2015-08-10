@@ -11,7 +11,7 @@ a
 .float-right
   float: right
 
-$youjiao-pink: hotpink
+$youjiao-pink: rgb(255,88,116)
 $wrapper-width: 1180px
 $font-gray: gray
 $background-brown: rgb(255, 253, 241)
@@ -26,6 +26,26 @@ $background-brown: rgb(255, 253, 241)
   color: white !important
   a
     color: white !important
+
+=user-input($width)
+  outline: none
+  box-sizing: border-box
+  height: 40px
+  border: 1px solid #ccc
+  border-radius: 4px
+  width: $width
+
+=big-button
+  margin: 0 auto
+  display: block
+  width: 354px
+  height: 40px
+  background: $youjiao-pink
+  border-radius: 4px
+  color: white
+  text-align: center
+  line-height: 40px
+  font-size: 20px
 
 #youjiao-body
   height: auto
@@ -64,12 +84,14 @@ $background-brown: rgb(255, 253, 241)
       width: 226px
       height: 40px
       float: right
-      margin-top: 32px••••••••••
+      margin-top: 32px
       input
         float: left
         height: 30px
         box-sizing: border-box
         outline: none
+        border: 1px solid $youjiao-pink
+        border-radius: 4px 0 0 4px
       .search-button
         display: inline-block
         width: 30px
@@ -238,8 +260,6 @@ $background-brown: rgb(255, 253, 241)
       background: #ccc
       box-sizing: border-box
 
-
-
 .products-info
   +clear-float
 
@@ -257,3 +277,77 @@ $background-brown: rgb(255, 253, 241)
   width: 200px
   height: 40px
   +list-first
+
+.user-login
+  width: 472px
+  height: 352px
+  margin: 0 auto
+  border: 1px solid #CCCCCC
+  box-sizing: border-box
+  a
+    color: $font-gray
+
+  .user-login-header
+    margin: 0 auto
+    width: 320px
+    +clear-float
+
+  .user-login-type
+    height: 40px
+    color: $font-gray
+    border-bottom: 6px solid $youjiao-pink
+
+  .user-input-item
+    width: 354px
+    margin: 0 auto
+    line-height: 70px
+    text-align: center
+
+    label
+      display: inline-block
+      width: 64px
+      text-align: center
+
+    input
+      +user-input(266px)
+
+  .user-login-submit
+    +big-button
+
+  .user-login-forget, .user-reg-account
+    width: 354px
+    margin: 0 auto
+    text-align: center
+    line-height: 60px
+
+.user-reg
+  width: 548px
+  margin: 50px auto
+  border: 1px solid #ccc
+  padding-bottom: 40px
+
+  .user-reg-header
+    width: 180px
+    height: 34px
+    color: white
+    background: $youjiao-pink
+    text-align: center
+    line-height: 34px
+    margin-top: -34px
+
+  .user-input-item
+    width: 354px
+    margin: 0 auto
+    line-height: 70px
+    text-align: center
+
+    label
+      display: inline-block
+      width: 84px
+      text-align: center
+
+    input
+      +user-input(266px)
+
+  .user-submit-reg
+    +big-button
