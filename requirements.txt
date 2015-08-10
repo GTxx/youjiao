@@ -1,4 +1,3 @@
-Mezzanine
-MySQL-python
-django-extensions
-ipython
+flask-admin
+Flask-SQLAlchemy
+Flask-Script
