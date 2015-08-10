@@ -1,3 +1,0 @@
-- cd youjiaotheme/static
-- npm install
-- gulp
