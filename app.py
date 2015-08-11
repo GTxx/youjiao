@@ -7,6 +7,9 @@ from flask_sqlalchemy import SQLAlchemy
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
 from config import Config
+from flask_security import Security, login_required
+from flask_login import login_required
+from models.user import user_datastore
 
 
 # Create application
@@ -18,6 +21,7 @@ from models.activity import Activity
 from models.user import User
 
 db.init_app(app)
+security = Security(app, user_datastore)
 
 
 # Flask views
@@ -27,6 +31,7 @@ def index():
 
 
 @app.route('/activity/<id>')
+@login_required
 def activity_view(id):
     obj = Activity.query.get(id)
     return render_template('activity.html', activity=obj)

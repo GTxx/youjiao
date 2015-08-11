@@ -7,6 +7,9 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE
     SQLALCHEMY_ECHO = True
 
+    # login
+    # SECURITY_LOGIN_USER_TEMPLATE = 'login.html'
+
 try:
     from .local_config import LocalConfig
 
