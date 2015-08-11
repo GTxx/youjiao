@@ -1,0 +1,3 @@
+flask-admin
+Flask-SQLAlchemy
+Flask-Script
