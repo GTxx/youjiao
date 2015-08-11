@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from flask_admin import Admin
 from flask_admin.contrib import sqla
-from flask_admin.contrib.sqla import filters
+from flask_admin.contrib.sqla import filters, ModelView
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import TextAreaField
@@ -29,13 +30,19 @@ def index():
 @app.route('/activity/<id>')
 def activity_view(id):
     obj = Activity.query.get(id)
-    return render_template('activity.html', activity=obj)
+    return render_template('activity/activity.html', activity=obj)
+
+#
+# @app.route('/activity')
+# def activity_list():
+#     query = Activity.query.all()
+#     return render_template('activity_list.html', activity_list=query)
 
 
-@app.route('/activity')
-def activity_list():
-    query = Activity.query.all()
-    return render_template('activity_list.html', activity_list=query)
+@app.route('/category/<category>/')
+def category(category):
+    posts = Activity.query.filter_by(category=category).all()
+    return render_template('activity/home.html', activity_list=posts)
 
 
 class CKTextAreaWidget(TextArea):
@@ -57,14 +64,26 @@ class ActivityAdmin(sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_list = ('title', 'create_time', 'update_time', )
-    column_searchable_list = ('title', )
+    column_list = ('title', 'create_time', 'update_time', 'status', 'category')
+    column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
+    form_choices = {
+        'category': [
+            ('policy', u'幼教政策'),
+            ('news', u'幼教新闻'),
+        ],
+        'status': [
+            ('1', u'草稿'),
+            ('2', u'发布'),
+        ]
+    }
+
 
 class UserAdmin(sqla.ModelView):
     column_list = ('name', 'email', 'last_login', 'is_admin')
     column_searchable_list = ('name', 'email')
     form_excluded_columns = ('create_time', 'last_login')
+
 
 admin = Admin(app)
 admin.add_view(ActivityAdmin(Activity, db.session))
