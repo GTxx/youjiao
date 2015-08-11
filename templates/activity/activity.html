@@ -8,7 +8,7 @@
     <h1>{{ activity.title }}</h1>
     <div>
         {% autoescape off %}
-            {{ activity.content }}
+            {{ activity.html }}
         {% endautoescape %}
     </div>
 {% endblock %}

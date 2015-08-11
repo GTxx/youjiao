@@ -1,18 +1,17 @@
 {% extends "base/base.html" %}
-{##}
-{#{% block leftBar %}#}
-{#    {% include 'activities/left_bar.html' %}#}
-{#{% endblock %}#}
+
+{% block leftBar %}
+    {% include 'activity/left_bar.html' %}
+{% endblock %}
 
 {% block content %}
     <h3>幼教动态</h3>
     <ul class="news-list">
         {% for activity in activity_list %}
             <li>
-                <a href="/activities/{{ activity.id }}">{{ activity.title }} <span
-                        class="float-right">{{ activity.publish_date }}</span></a>
+                <a href="/activity/{{ activity.id }}">{{ activity.title }} <span
+                        class="new-date float-right">{{ activity.create_time }}</span></a>
             </li>
-            <li>
         {% endfor %}
     </ul>
 {% endblock %}
