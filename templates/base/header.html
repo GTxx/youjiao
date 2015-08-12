@@ -1,22 +1,22 @@
 <div class="header">
     <div class="nav-wrapper">
         <div class="youjiao-logo">
-            <img src="{{ url_for('static',filename='image/icons/61Logo.png') }}" alt="">
+            <a href="/index/"><img src="{{ url_for('static',filename='image/icons/61Logo.png') }}" alt=""></a>
         </div>
         <div class="youjiao-nav">
             <ul>
-                <li><a class="nav-active" href="">首页</a></li>
-                <li><a href="">幼教动态</a></li>
-                <li><a href="">产品</a></li>
-                <li><a href="">教学教研</a></li>
-                <li><a href="">课件中心</a></li>
-                <li class="border-right-none"><a href="">幼教网课</a></li>
+                <li><a class="nav-active" href="/index/">首页</a></li>
+                <li><a href="/category/policy/">幼教动态</a></li>
+                <li><a href="/category/policy/">产品</a></li>
+                <li><a href="/category/policy/">教学教研</a></li>
+                <li><a href="/category/policy/">课件中心</a></li>
+                <li class="border-right-none"><a href="/school/">幼教网课</a></li>
             </ul>
         </div>
         <div class="header-right">
             <div class="header-right-top">
                 <span>关于61幼教网</span>
-                <span class="header-login"><a href="">登陆</a> / <a href="">注册</a></span>
+                <span class="header-login"><a href="/account/login/">登陆</a> / <a href="/account/register/">注册</a></span>
             </div>
             <div class="search-input">
                 <input type="text">
