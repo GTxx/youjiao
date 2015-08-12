@@ -64,6 +64,11 @@ def home():
 
 @app.route('/school/')
 def school():
+    return render_template('school/school.html')
+
+
+@app.route('/school/lectures/')
+def school_sub():
     return render_template('school/home.html')
 
 
