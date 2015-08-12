@@ -47,6 +47,26 @@ def category(category):
     return render_template('activity/home.html', activity_list=posts)
 
 
+@app.route('/account/login/')
+def login():
+    return render_template('account/login.html')
+
+
+@app.route('/account/register/')
+def register():
+    return render_template('account/register.html')
+
+
+@app.route('/index/')
+def home():
+    return render_template('home/home.html')
+
+
+@app.route('/school/')
+def school():
+    return render_template('school/home.html')
+
+
 class CKTextAreaWidget(TextArea):
     def __call__(self, field, **kwargs):
         if kwargs.get('class'):

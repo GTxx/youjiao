@@ -5,13 +5,19 @@
 {% endblock %}
 
 {% block content %}
-    <h3>幼教动态</h3>
-    <ul class="news-list">
-        {% for activity in activity_list %}
-            <li>
-                <a href="/activity/{{ activity.id }}">{{ activity.title }} <span
-                        class="new-date float-right">{{ activity.create_time }}</span></a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div id="main-body">
+        <h3>幼教动态</h3>
+        <ul class="news-list">
+            {% for activity in activity_list %}
+                <li>
+                    <a href="/activity/{{ activity.id }}">{{ activity.title }} <span
+                            class="news-date float-right">[2015-06-29]</span></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'activity/right_bar.html' %}
 {% endblock %}

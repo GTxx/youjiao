@@ -14,30 +14,15 @@
     {% include 'base/header.html' %}
 
     <div class="main">
-        <div class="left-bar">
-            {% block leftBar %}
-            {% endblock %}
-        </div>
 
-        <div id="main-body">
-            {% for a in object_list %}
-                {{ a.id }}{{ ss }}
-            {% endfor %}
-            {% block content %}
-            {% endblock %}
-        </div>
-        <div class="right-bar">
-            <div class="weekly-hot">
-                <ul>
-                    <li class="right-list-first">本周热点</li>
-                </ul>
-            </div>
-            <div class="topics">
-                <ul>
-                    <li class="right-list-first">专题推荐</li>
-                </ul>
-            </div>
-        </div>
+        {% block leftBar %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block rightBar %}
+        {% endblock %}
     </div>
     <div class="footer-wrapper">
         <div class="footer">
