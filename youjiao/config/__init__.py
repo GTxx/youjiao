@@ -11,7 +11,7 @@ class BaseConfig(object):
     # SECURITY_LOGIN_USER_TEMPLATE = 'login.html'
 
 try:
-    from .local_config import LocalConfig
+    from youjiao.config.local_config import LocalConfig
 
     class Config(LocalConfig, BaseConfig):
         pass

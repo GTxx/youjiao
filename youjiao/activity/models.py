@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
 from datetime import datetime
-from .base import db
+from youjiao.extensions import db
+
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,9 +1,9 @@
 from __future__ import absolute_import
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from .base import db
 from flask_security import RoleMixin, UserMixin, SQLAlchemyUserDatastore
 from flask_security import Security
+from youjiao.extensions import db
 
 
 roles_users = db.Table(
