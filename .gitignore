@@ -9,3 +9,4 @@ migrations
 node_modules
 build
 .python-version
+*.sqlite

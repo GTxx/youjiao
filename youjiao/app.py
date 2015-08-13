@@ -1,21 +1,23 @@
 from __future__ import absolute_import
 
 from flask_admin import Admin
-from flask import Flask
+from flask import Flask, render_template
 from flask_security import Security
 
 from .config import Config
-from .activity.models import Activity
+from .content.models import Activity, Page
 from .user.models import user_datastore,User
 from .extensions import db
 
 from .user.admin import UserAdmin
-from .activity.admin import ActivityAdmin
-from .activity.views import activity
+from .user.views import user_bp
+from .content.admin import ActivityAdmin, PageAdmin
+from .content.views import content_bp
+
 
 # Flask views
 def index():
-    return '<a href="/admin/">Click me to get to Admin!</a>'
+    return render_template('activity/home.html')
 
 
 def create_app():
@@ -27,8 +29,10 @@ def create_app():
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
     admin.add_view(UserAdmin(User, db.session))
+    admin.add_view(PageAdmin(Page, db.session))
     # import ipdb; ipdb.set_trace()
-    app.register_blueprint(activity)
+    app.register_blueprint(content_bp)
+    app.register_blueprint(user_bp)
     app.add_url_rule('/', 'index', index)
     return app
 

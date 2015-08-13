@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'activity/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+<div id="main-body">
+    <h1>{{ activity.title }}</h1>
+
+    <div>
+        {% autoescape off %}
+        {{ activity.html }}
+        {% endautoescape %}
+    </div>
+</div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'activity/right_bar.html' %}
+{% endblock %}

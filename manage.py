@@ -23,5 +23,11 @@ def createdb():
     db.create_all()
 
 
+@manager.command
+def dropdb():
+    """Create database."""
+    db.drop_all()
+
+
 if __name__ == "__main__":
     manager.run()
