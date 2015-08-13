@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 
 from youjiao.activity.models import Activity
 
-activity = Blueprint("activity", __name__, template_folder='templates')
+activity = Blueprint("activity_content", __name__, template_folder='templates')
 
 
 @activity.route('/activity/<id>')

@@ -11,12 +11,11 @@ from .extensions import db
 
 from .user.admin import UserAdmin
 from .activity.admin import ActivityAdmin
+from .activity.views import activity
 
-
-# # Flask views
-# @app.route('/')
-# def index():
-#     return '<a href="/admin/">Click me to get to Admin!</a>'
+# Flask views
+def index():
+    return '<a href="/admin/">Click me to get to Admin!</a>'
 
 
 def create_app():
@@ -28,6 +27,9 @@ def create_app():
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
     admin.add_view(UserAdmin(User, db.session))
+    # import ipdb; ipdb.set_trace()
+    app.register_blueprint(activity)
+    app.add_url_rule('/', 'index', index)
     return app
 
 
