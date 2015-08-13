@@ -1,0 +1,5 @@
+<ul>
+    {% for activity in activity_list %}
+    <li><a href="/activity/{{ activity.id }}">{{ activity.title }}</a></li>
+    {% endfor %}
+</ul>

@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from flask_admin import Admin
 from flask_admin.contrib import sqla
 from flask_admin.contrib.sqla import filters, ModelView
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import TextAreaField
@@ -19,6 +20,7 @@ from models.activity import Activity
 from models.user import User
 from models.page import Page
 
+
 db.init_app(app)
 
 
@@ -34,7 +36,6 @@ def activity_view(id):
     return render_template('activity/activity.html', activity=obj)
 
 
-#
 # @app.route('/activity')
 # def activity_list():
 #     query = Activity.query.all()
@@ -70,6 +71,12 @@ def school():
 @app.route('/school/lectures/')
 def school_sub():
     return render_template('school/home.html')
+
+
+@app.route('/activity')
+def activity_list():
+    query = Activity.query.all()
+    return render_template('activity_list.html', activity_list=query)
 
 
 class CKTextAreaWidget(TextArea):
