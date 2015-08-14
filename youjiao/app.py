@@ -17,7 +17,7 @@ from .content.views import content_bp
 
 # Flask views
 def index():
-    return render_template('activity/home.html')
+    return render_template('home/home.html')
 
 
 def create_app():

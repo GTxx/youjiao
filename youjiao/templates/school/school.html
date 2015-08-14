@@ -9,12 +9,18 @@
         <h4>幼教网校 优秀讲座</h4>
 
         <div class="school-slides">
-
+            <ul class="rslides">
+                <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
+                <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
+                <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
+                <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
+                <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
+            </ul>
         </div>
         <div class="good-lectures">
             <div class="good-lectures-title">优秀课堂</div>
             <ul class="good-lectures-list">
-                <li class="lectures-active">
+                <li>
                     <img src="" alt="">
                     <h5>青花瓷</h5>
                     <a href="" class="start-download">开始下载</a>
@@ -34,7 +40,7 @@
         <div class="good-lectures">
             <div class="good-lectures-title">优秀讲座</div>
             <ul class="good-lectures-list">
-                <li class="lectures-active">
+                <li>
                     <img src="" alt="">
                     <h5>青花瓷</h5>
                     <a href="" class="start-download">开始下载</a>
@@ -54,7 +60,7 @@
         <div class="good-lectures">
             <div class="good-lectures-title">其他视频</div>
             <ul class="good-lectures-list">
-                <li class="lectures-active">
+                <li>
                     <img src="" alt="">
                     <h5>青花瓷</h5>
                     <a href="" class="start-download">开始下载</a>
@@ -74,7 +80,7 @@
         <div class="good-lectures">
             <div class="good-lectures-title">产品使用培训</div>
             <ul class="good-lectures-list">
-                <li class="lectures-active">
+                <li>
                     <img src="" alt="">
                     <h5>青花瓷</h5>
                     <a href="" class="start-download">开始下载</a>
@@ -94,7 +100,7 @@
         <div class="good-lectures">
             <div class="good-lectures-title">师资培训视频</div>
             <ul class="good-lectures-list">
-                <li class="lectures-active">
+                <li>
                     <img src="" alt="">
                     <h5>青花瓷</h5>
                     <a href="" class="start-download">开始下载</a>
@@ -112,4 +118,9 @@
             </ul>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
 {% endblock %}
