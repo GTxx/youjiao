@@ -16,5 +16,4 @@ $(function () {
     mouseOverAndOut(".book-advice-list li", "book-active");
     mouseOverAndOut(".good-lectures-list li", "lectures-active");
 
-
 });
