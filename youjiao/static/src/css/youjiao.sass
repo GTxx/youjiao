@@ -5,7 +5,7 @@ ul
 a
   text-decoration: none
 
-h1, h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5, h6, ul, ol, li
   margin: 0
   padding: 0
 
@@ -17,9 +17,11 @@ h1, h2, h3, h4, h5, h6
 
 $youjiao-pink: #fe5974
 $youjiao-pink-2: #ff7695
+$youjiao-font-pink: #ff3c4e
 $wrapper-width: 1180px
 $font-gray: gray
-$background-brown: #fffdf2
+$background-brown: #fefef1
+$background-brown-2: #fffdf2
 
 =main-noright
   width: 1000px
@@ -33,7 +35,7 @@ $background-brown: #fffdf2
   zoom: 1
 
 =list-first
-  background: $youjiao-pink
+  background: $youjiao-pink-2
   font-weight: bold
   color: white !important
   padding-left: 12px
@@ -182,7 +184,7 @@ $background-brown: #fffdf2
   ul
     margin: 0
     padding: 0
-    background: $background-brown
+    background: $background-brown-2
     padding-bottom: 26px
     margin-bottom: 48px
     li
@@ -232,7 +234,7 @@ $background-brown: #fffdf2
 
 .footer
   margin: 0 auto
-  width: 840px
+  width: 680px
   background: $background-brown
   +clear-float
 
@@ -265,18 +267,25 @@ $background-brown: #fffdf2
   padding: 0
 
 .rslides_tabs
-  width: 170px
+  width: 160px
   position: absolute
-  margin-top: -50px
+  bottom: 12px
   z-index: 2
+  right: 16px
+  text-align: center
   a
-    width: 20px
-    height: 20px
-    background: $youjiao-pink
+    display: inline-block
+    width: 22px
+    height: 22px
+    margin-left: 10px
+    background: #7a7a7a
     box-sizing: border-box
-    border: 2px solid white
-    border-radius: 10px
+    border: 3px solid white
+    border-radius: 50%
     float: left
+    color: transparent
+.rslides_here a
+  background: $youjiao-pink
 
 //.textbook-list
 //  +clear-float
@@ -351,7 +360,6 @@ $background-brown: #fffdf2
 
   .user-login-type
     height: 40px
-    color: black
     line-height: 40px
     color: $font-gray
     border-bottom: 6px solid $youjiao-pink
@@ -453,6 +461,7 @@ $background-brown: #fffdf2
       height: 372px
       background: #CCCCCC
       float: left
+      position: relative
     .home-slides-right
       padding: 0
       margin: 0
@@ -472,12 +481,12 @@ $background-brown: #fffdf2
     line-height: 30px
     color: white
     padding-left: 12px
-    background: $youjiao-pink
+    background: $youjiao-pink-2
     margin-bottom: 13px
   .textbook-active
     border: 1px solid #CCCCCC
     h5
-      color: $youjiao-pink !important
+      color: $youjiao-font-pink !important
 
 
   .textbook-advice
@@ -541,10 +550,10 @@ $background-brown: #fffdf2
   .book-active
     border: 1px solid #CCCCCC
     h5
-      color: $youjiao-pink !important
+      color: $youjiao-font-pink !important
     .start-download
-      border: 1px solid $youjiao-pink
-      background: $youjiao-pink !important
+      border: 1px solid $youjiao-font-pink
+      background: $youjiao-font-pink !important
       color: white !important
 
 #main-school-body
@@ -553,6 +562,7 @@ $background-brown: #fffdf2
     width: 976px
     height: 549px
     background: #CCCCCC
+    position: relative
 
   .good-lectures
     margin-top: 26px
@@ -562,7 +572,7 @@ $background-brown: #fffdf2
       line-height: 30px
       color: white
       padding-left: 12px
-      background: $youjiao-pink
+      background: $youjiao-pink-2
       margin-bottom: 13px
     .good-lectures-list
       margin: 0
@@ -596,10 +606,10 @@ $background-brown: #fffdf2
       .lectures-active
         border: 1px solid #CCCCCC
         h5
-          color: $youjiao-pink !important
+          color: $youjiao-font-pink !important
         .start-download
-          border: 1px solid $youjiao-pink
-          background: $youjiao-pink !important
+          border: 1px solid $youjiao-font-pink
+          background: $youjiao-font-pink !important
           color: white !important
 
   .good-lectures-rank
@@ -609,7 +619,7 @@ $background-brown: #fffdf2
       line-height: 30px
       color: white
       padding-left: 12px
-      background: $youjiao-pink
+      background: $youjiao-pink-2
       margin-bottom: 13px
     .rank-list
       width: 976px
@@ -669,3 +679,12 @@ $background-brown: #fffdf2
         width: 322px
         float: left
         box-sizing: border-box
+
+.textbook-advice-list li
+  cursor: pointer
+
+.book-advice-list li
+  cursor: pointer
+
+.good-lectures-list li
+  cursor: pointer
