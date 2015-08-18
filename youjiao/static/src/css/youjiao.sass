@@ -66,6 +66,9 @@ $background-brown-2: #fffdf2
   height: auto
   margin: 0 auto
 
+#main-noright-body
+  +main-noright
+
 .header
   +clear-float
   box-sizing: border-box
@@ -169,7 +172,7 @@ $background-brown-2: #fffdf2
   +clear-float
 
   .news-list
-
+    padding-left: 40px
     li
       list-style: disc
     a
@@ -213,15 +216,13 @@ $background-brown-2: #fffdf2
   float: left
   box-sizing: border-box
   ul
-    margin: 0
-    padding: 0
     li
       height: 30px
       padding-left: 16px
       color: black
       line-height: 30px
-    .right-list-first
-      +list-first
+.right-list-first
+  +list-first
 
   .weekly-hot
     height: 372px
@@ -475,86 +476,84 @@ $background-brown-2: #fffdf2
         line-height: 30px
         +list-first
 
-  .home-section-title
-    width: 140px
-    height: 30px
-    line-height: 30px
-    color: white
-    padding-left: 12px
-    background: $youjiao-pink-2
-    margin-bottom: 13px
-  .textbook-active
-    border: 1px solid #CCCCCC
-    h5
-      color: $youjiao-font-pink !important
+.home-section-title
+  width: 140px
+  height: 30px
+  line-height: 30px
+  color: white
+  padding-left: 12px
+  background: $youjiao-pink-2
+  margin-bottom: 13px
+.textbook-active
+  border: 1px solid #CCCCCC
+  h5
+    color: $youjiao-font-pink !important
 
 
-  .textbook-advice
-    margin-top: 26px
-    .textbook-advice-list
-      margin: 0
-      padding: 0
-      +clear-float
-      li
-        width: 243px
-        height: 296px
-        float: left
+.textbook-advice
+  margin-top: 26px
+  .textbook-advice-list
+    +clear-float
+    li
+      width: 243px
+      height: 296px
+      float: left
+      box-sizing: border-box
+      text-align: center
+      img
+        width: 215px
+        height: 215px
+        margin-top: 13px
+        background: #CCCCCC
+      h5
+        margin-top: 6px
+        font-size: 18px
+        color: $font-gray
+      h6
+        margin-top: 4px
+        color: $font-gray
+        font-size: 14px
+
+.book-center-advice
+  margin-top: 26px
+  .book-advice-list
+    margin: 0
+    padding: 0
+    +clear-float
+    li
+      width: 243px
+      height: 219px
+      float: left
+      box-sizing: border-box
+      text-align: center
+      img
+        width: 215px
+        height: 121px
+        margin-top: 13px
+        background: #CCCCCC
+      h5
+        margin-top: 6px
+        color: $font-gray
+        font-size: 18px
+      .start-download
+        display: block
+        width: 92px
+        height: 28px
+        margin: 8px auto 0 auto
+        background: white
+        color: $font-gray
+        border-radius: 4px
+        line-height: 28px
         box-sizing: border-box
-        text-align: center
-        img
-          width: 215px
-          height: 215px
-          margin-top: 13px
-          background: #CCCCCC
-        h5
-          margin-top: 6px
-          font-size: 18px
-          color: $font-gray
-        h6
-          margin-top: 4px
-          color: $font-gray
-          font-size: 14px
-
-  .book-center-advice
-    margin-top: 26px
-    .book-advice-list
-      margin: 0
-      padding: 0
-      +clear-float
-      li
-        width: 243px
-        height: 219px
-        float: left
-        box-sizing: border-box
-        text-align: center
-        img
-          width: 215px
-          height: 121px
-          margin-top: 13px
-          background: #CCCCCC
-        h5
-          margin-top: 6px
-          color: $font-gray
-          font-size: 18px
-        .start-download
-          display: block
-          width: 92px
-          height: 28px
-          margin: 8px auto 0 auto
-          background: white
-          color: $font-gray
-          border-radius: 4px
-          line-height: 28px
-          box-sizing: border-box
-          border: 1px solid #CCCCCC
-  .book-active
-    border: 1px solid #CCCCCC
-    h5
-      color: $youjiao-font-pink !important
-    .start-download
-      border: 1px solid $youjiao-font-pink
-      background: $youjiao-font-pink !important
-      color: white !important
+        border: 1px solid #CCCCCC
+.book-active
+  border: 1px solid #CCCCCC
+  h5
+    color: $youjiao-font-pink !important
+  .start-download
+    border: 1px solid $youjiao-font-pink
+    background: $youjiao-font-pink !important
+    color: white !important
 
 #main-school-body
   +main-noright
@@ -612,73 +611,73 @@ $background-brown-2: #fffdf2
           background: $youjiao-font-pink !important
           color: white !important
 
-  .good-lectures-rank
-    .lectures-rank-title
-      width: 140px
-      height: 30px
-      line-height: 30px
-      color: white
-      padding-left: 12px
-      background: $youjiao-pink-2
-      margin-bottom: 13px
-    .rank-list
-      width: 976px
-      height: 420px
-      .margin-top-13
-        margin-top: 13px
-      .rank-list-item
-        height: 105px
-        border-bottom: 1px solid #CCCCCC
-        box-sizing: border-box
-        +clear-float
-        img
-          width: 147px
-          height: 82px
-          background: #CCCCCC
-          margin-left: 12px
-          margin-top: 13px
-        div
-          width: 160px
-          box-sizing: border-box
-          padding-top: 16px
-          padding-left: 16px
-          float: right
-          h5
-            text-align: left
-          h6
-            color: $font-gray
-            text-align: center
-      .border-bottom-none
-        border-bottom: none
+.good-lectures-rank
+  .lectures-rank-title
+    width: 140px
+    height: 30px
+    line-height: 30px
+    color: white
+    padding-left: 12px
+    background: $youjiao-pink-2
+    margin-bottom: 13px
+  .rank-list
+    width: 976px
+    height: 420px
+    .margin-top-13
+      margin-top: 13px
+    .rank-list-item
+      height: 105px
+      border-bottom: 1px solid #CCCCCC
+      box-sizing: border-box
       +clear-float
-      .rank-list-left
-        float: left
-        width: 332px
+      img
+        width: 147px
+        height: 82px
+        background: #CCCCCC
+        margin-left: 12px
+        margin-top: 13px
+      div
+        width: 160px
         box-sizing: border-box
-        text-align: center
-        div
-          height: 210px
-          box-sizing: border-box
-          border-bottom: 1px solid #CCCCCC
-          img
-            width: 284px
-            height: 160px
-            background: #CCCCCC
-          h5
-            margin-top: 13px
-
-      .rank-list-middle
-        width: 322px
-        border-left: 1px solid #CCCCCC
-        border-right: 1px solid #CCCCCC
-
-        float: left
+        padding-top: 16px
+        padding-left: 16px
+        float: right
+        h5
+          text-align: left
+        h6
+          color: $font-gray
+          text-align: center
+    .border-bottom-none
+      border-bottom: none
+    +clear-float
+    .rank-list-left
+      float: left
+      width: 332px
+      box-sizing: border-box
+      text-align: center
+      div
+        height: 210px
         box-sizing: border-box
+        border-bottom: 1px solid #CCCCCC
+        img
+          width: 284px
+          height: 160px
+          background: #CCCCCC
+        h5
+          margin-top: 13px
 
-      .rank-list-right
-        width: 322px
-        float: left
-        box-sizing: border-box
+    .rank-list-middle
+      width: 322px
+      border-left: 1px solid #CCCCCC
+      border-right: 1px solid #CCCCCC
+
+      float: left
+      box-sizing: border-box
+
+    .rank-list-right
+      width: 322px
+      float: left
+      box-sizing: border-box
 
 .textbook-advice-list li
   cursor: pointer
@@ -688,3 +687,152 @@ $background-brown-2: #fffdf2
 
 .good-lectures-list li
   cursor: pointer
+
+
+//activity
+
+.activity-content
+  box-sizing: border-box
+  border: 1px solid $font-gray
+  padding: 80px 140px 0
+  min-height: 1000px
+
+
+#main-big-body
+  width: 780px
+  box-sizing: border-box
+  float: left
+  padding: 0 24px 56px
+  +clear-float
+
+.right-bar-small
+  width: 220px
+  float: left
+  box-sizing: border-box
+  ul
+    padding-bottom: 26px
+    li
+      height: 30px
+      padding-left: 16px
+      color: black
+      line-height: 30px
+    a
+     color: $font-gray
+
+//product
+.product-slides-main
+  position: relative
+  overflow: hidden
+
+.product-container
+  +clear-float
+  box-sizing: border-box
+  margin-top: 20px
+
+.samples-imgs
+  width: 484px
+  height: 590px
+  float: left
+  div
+    width: 484px
+    height: 100px
+    margin-top: 30px
+    background: #CCCCCC
+
+.product-info
+  float: left
+  width: 450px
+  margin-left: 42px
+  .product-title
+    border-bottom: 1px solid #CCCCCC
+    padding-bottom: 20px
+    box-sizing: border-box
+    h3
+      font-size: 40px
+    span
+      float: right
+  table
+    margin-top: 68px
+    margin-left: 50px
+    .product-info-detail
+      text-align: justify
+    tr
+      line-height: 30px
+  .product-button
+    +clear-float
+    padding-left: 20px
+    margin-top: 116px
+  .product-collection, .product-associate
+    width: 160px
+    height: 50px
+    background: $youjiao-pink-2
+    text-align: center
+    float: left
+    line-height: 50px
+    color: white
+    margin-left: 30px
+    font-size: 22px
+  .product-order
+    margin-left: 50px
+    margin-top: 54px
+    .product-price
+      color: $youjiao-pink-2
+
+.product-detail-comments
+  padding-bottom: 50px
+  margin-bottom: 56px
+  margin-top: 30px
+  border: 1px solid #CCCCCC
+  .detail-comment-title
+    border-bottom: 1px solid #CCCCCC
+    div
+      display: inline-block
+      width: 166px
+      height: 60px
+      color: black
+      line-height: 60px
+      text-align: center
+    .book-detail-button
+      background: $youjiao-pink-2
+      color: white
+  .detail-comment-content
+    box-sizing: border-box
+    padding: 30px 20px
+    img
+      margin: 20px 20px
+      width: 422px
+      height: 422px
+      background: #CCCCCC
+
+.product-s-slides-main
+  +clear-float
+  position: relative
+
+.courseware-slides-main
+  overflow: hidden
+  zoom: 1
+  position: relative
+
+.courseware-comment-content
+    box-sizing: border-box
+    padding: 30px 20px
+    img
+      margin: 20px 20px
+      width: 422px
+      height: 240px
+      background: #CCCCCC
+.other-associate-courseware
+  box-sizing: border-box
+  padding: 30px 20px
+  border: 1px solid #CCCCCC
+  +clear-float
+  div
+    float: left
+  p
+    text-align: center
+  img
+    margin: 20px 20px
+    width: 422px
+    height: 240px
+    background: #CCCCCC
+

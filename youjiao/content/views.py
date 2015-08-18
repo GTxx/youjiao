@@ -20,7 +20,43 @@ def school():
 def school_sub():
     return render_template('school/home.html')
 
+
 @content_bp.route('/category/<category>/')
 def category(category):
     posts = Activity.query.filter_by(category=category).filter_by(status=2).all()
     return render_template('activity/home.html', activity_list=posts)
+
+
+@content_bp.route('/product/')
+def product():
+    return render_template('product/home.html')
+
+
+@content_bp.route('/product/detail/')
+def product_detail():
+    return render_template('product/detail.html')
+
+
+@content_bp.route('/product/sub/')
+def product_sub():
+    return render_template('product/sub_node.html')
+
+
+@content_bp.route('/courseware/')
+def courseware():
+    return render_template('courseware/home.html')
+
+
+@content_bp.route('/courseware/detail/')
+def courseware_detail():
+    return render_template('courseware/detail.html')
+
+
+@content_bp.route('/courseware/list/')
+def courseware_list():
+    return render_template('courseware/list.html')
+
+
+@content_bp.route('/courseware/sub/')
+def courseware_sub():
+    return render_template('courseware/sub_node.html')

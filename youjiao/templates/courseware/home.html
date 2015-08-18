@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'courseware/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <div class="courseware-slides">
+            <div class="courseware-slides-main">
+                <ul class="rslides">
+                    <li><img src="http://placekitten.com/g/732/412" alt=""></li>
+                    <li><img src="http://placekitten.com/g/732/412" alt=""></li>
+                    <li><img src="http://placekitten.com/g/732/412" alt=""></li>
+                    <li><img src="http://placekitten.com/g/732/412" alt=""></li>
+                    <li><img src="http://placekitten.com/g/732/412" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="book-center-advice">
+            <div class="home-section-title">课件中心推荐</div>
+            <ul class="book-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+            </ul>
+        </div>
+        <div class="book-center-advice">
+            <div class="home-section-title">优秀课堂推荐</div>
+            <ul class="book-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>青花瓷</h5>
+                    <a href="" class="start-download">开始下载</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'courseware/right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+{% endblock %}

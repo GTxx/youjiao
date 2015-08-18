@@ -5,17 +5,20 @@
 {% endblock %}
 
 {% block content %}
-<div id="main-body">
-    <h1>{{ activity.title }}</h1>
+<div id="main-noright-body">
 
-    <div>
-        {% autoescape off %}
-        {{ activity.html }}
-        {% endautoescape %}
+    <span>幼教动态-幼教政策-{{ activity.title }}</span>
+    <div class="activity-content">
+        <h2 class="activity-title">{{ activity.title }}</h2>
+
+        <div class="activity-author">
+            来源： 中国学前教育研究会 2015年06月20日 作者：admin
+        </div>
+        <div class="activity-main-content">
+            {% autoescape off %}
+            {{ activity.html }}
+            {% endautoescape %}
+        </div>
     </div>
 </div>
-{% endblock %}
-
-{% block rightBar %}
-    {% include 'activity/right_bar.html' %}
 {% endblock %}
