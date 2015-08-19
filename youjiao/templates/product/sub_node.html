@@ -1,0 +1,140 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'product/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-home-body">
+        <div class="product-s-slides">
+            <div class="product-s-slides-main">
+                <ul class="rslides">
+                    <li><img src="http://fakeimg.pl/976x320/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/976x320/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/976x320/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/976x320/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/976x320/" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="textbook-advice">
+            <div class="home-section-title">幼教图书分类</div>
+            <ul class="textbook-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>幼小衔接班</h5>
+                </li>
+            </ul>
+        </div>
+        <div class="good-lectures-rank">
+            <div class="lectures-rank-title">幼教教材排行榜</div>
+            <div class="rank-list">
+                <div class="rank-list-left">
+                    <div><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
+                    <div class="border-bottom-none margin-top-13"><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
+                </div>
+                <div class="rank-list-middle">
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item border-bottom-none">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank-list-right">
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                    <div class="rank-list-item border-bottom-none">
+                        <img src="" alt="">
+
+                        <div>
+                            <h5>1.xxx孩子好性格</h5>
+                            <h6>sssssssssss</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+{% endblock %}

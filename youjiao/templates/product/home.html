@@ -1,0 +1,92 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'product/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <span>产品展示</span>
+
+        <div class="product-slide">
+            <div class="product-slides-main">
+                <ul class="rslides">
+                    <li><img src="http://fakeimg.pl/731x240/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/731x240/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/731x240/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/731x240/" alt=""></li>
+                    <li><img src="http://fakeimg.pl/731x240/" alt=""></li>
+                </ul>
+            </div>
+        </div>
+        <div class="textbook-advice">
+            <div class="home-section-title">幼教教材</div>
+            <ul class="textbook-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+            </ul>
+        </div>
+        <div class="textbook-advice">
+            <div class="home-section-title">幼教教材</div>
+            <ul class="textbook-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+            </ul>
+        </div>
+        <div class="textbook-advice">
+            <div class="home-section-title">幼教教材</div>
+            <ul class="textbook-advice-list">
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+                <li>
+                    <img src="" alt="">
+                    <h5>有趣的手影</h5>
+                    <h6>幼儿园大班上册</h6>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'product/right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+{% endblock %}
