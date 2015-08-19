@@ -1,3 +1,4 @@
 flask-admin
 Flask-SQLAlchemy
 Flask-Script
+flask_security

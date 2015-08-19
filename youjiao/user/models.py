@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,26 +17,32 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
     email = db.Column(db.String(50), unique=True)
-    avatar = db.Column(db.String(200), default='default.png')
     password = db.Column(db.String(200))
+
+    phone_number = db.Column(db.String(16), unique=True)
     active = db.Column(db.Boolean, default=True)
     is_admin = db.Column(db.Boolean, default=False)
+    # TODO: use a base model to add create_time and update_time
     create_time = db.Column(db.DateTime, default=datetime.now)
     last_login = db.Column(db.DateTime, onupdate=datetime.now)
+
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    profile = db.relationship('UserProfile', backref='user', uselist=False)
 
-    def __setattr__(self, name, value):
-        # Hash password when set it.
-        if name == 'password':
-            value = generate_password_hash(value)
-        super(User, self).__setattr__(name, value)
+    def __repr(self):
+        return '<User {}>'.format(self.name)
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def __repr__(self):
-        return '<User %s>' % self.name
+
+class UserProfile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # TODO: add column describe/description
+    work_place_name = db.Column(db.String(255))
+    avatar = db.Column(db.String(200), default='default.png')
 
 
 class Role(db.Model, RoleMixin):

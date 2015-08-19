@@ -1,1 +1,0 @@
-!function(){function s(){$(".flash-message").slideDown("fast")}function e(){$(".flash-message").slideUp("fast")}setTimeout(s,200),setTimeout(e,2e3)}();
