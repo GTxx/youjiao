@@ -17,46 +17,24 @@
                 </ul>
             </div>
         </div>
-        <div class="textbook-advice">
-            <div class="home-section-title">幼教图书分类</div>
-            <ul class="textbook-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>幼小衔接班</h5>
-                </li>
+        <div class="n-v-section-b">
+            <div class="section-block-title-6">幼教图书分类</div>
+            <ul class="n-v-section-list">
+                {% for i in range(8) %}
+                    <li>
+                        <div class="nv-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+
+                            <div class="nv-image-hover-layer"></div>
+                        </div>
+                        <h5>幼小衔接班</h5>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="good-lectures-rank">
-            <div class="lectures-rank-title">幼教教材排行榜</div>
-            <div class="rank-list">
+        <div class="rank-section">
+            <div class="section-block-title-6">幼教教材排行榜</div>
+            <div class="rank-section-list">
                 <div class="rank-list-left">
                     <div><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
                     <div class="border-bottom-none margin-top-13"><img src="" alt=""><h5>1.xx幼儿英语</h5></div>

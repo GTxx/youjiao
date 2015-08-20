@@ -1,0 +1,112 @@
+@import "var"
+
+.user-login
+  width: 472px
+  height: 348px
+  margin: 10px auto 0 auto
+  border: 1px solid #CCCCCC
+  a
+    color: $font-gray
+
+  .user-login-header
+    margin: 0 auto
+    width: 452px
+    border-bottom: 1px solid #CCCCCC
+    box-sizing: border-box
+    padding: 0 80px
+    +clear-float
+    a
+      color: $font-gray
+
+  .user-login-type
+    height: 40px
+    line-height: 40px
+    color: $font-gray
+    border-bottom: 6px solid $youjiao-pink
+
+  .vip-login
+    width: 74px
+  .admin-login
+    width: 92px
+
+  .user-input-item
+    width: 354px
+    margin: 0 auto
+    line-height: 70px
+    text-align: center
+
+    label
+      display: inline-block
+      width: 62px
+      margin-right: 26px
+      text-align: center
+      font-size: 18px
+
+    input
+      +user-input(264px)
+
+  .first
+    margin-top: 15px
+
+  .user-login-submit
+    +big-button(354px)
+    margin-top: 26px
+
+  .user-login-forget
+    width: 354px
+    margin: 0 auto
+    box-sizing: border-box
+    padding-left: 88px
+    color: $font-gray
+  .user-reg-account
+    width: 354px
+    margin: 16px auto 0 auto
+    text-align: center
+    color: $font-gray
+
+.user-reg
+  width: 708px
+  margin: 42px auto 56px auto
+  border: 1px solid #ccc
+  padding-bottom: 48px
+
+  .user-reg-header
+    line-height: 32px
+    margin-top: -32px
+    +clear-float
+    .fast-register
+      width: 180px
+      height: 32px
+      color: white
+      background: $youjiao-pink
+      text-align: center
+      float: left
+    a
+      font-size: 14px
+      color: $font-gray
+
+  .user-input-item
+    margin-left: 88px
+    line-height: 60px
+    height: 60px
+
+    label
+      display: inline-block
+      width: 84px
+      text-align: right
+      margin-right: 26px
+      font-size: 18px
+    input
+      +user-input(264px)
+
+  .first
+    margin-top: 42px
+
+  .captcha
+    input
+      +user-input(150px)
+
+  .user-submit-reg
+    +big-button(264px)
+    margin-left: 198px
+    margin-top: 21px

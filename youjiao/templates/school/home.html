@@ -17,44 +17,24 @@
                 <li><img src="http://fakeimg.pl/976x549/" alt=""></li>
             </ul>
         </div>
-        <div class="good-lectures">
-            <div class="good-lectures-title">课件中心推荐</div>
-            <ul class="good-lectures-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
+        <div class="video-section-lg">
+            <div class="section-block-title-6">课件中心推荐</div>
+            <ul class="video-section-list">
+                {% for i in range(6) %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                            <div class="v-image-hover-layer"></div>
+                        </div>
+                        <h5>青花瓷</h5>
+                        <a href="" class="start-download">开始下载</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="good-lectures-rank">
-            <div class="lectures-rank-title">优秀讲座排行榜</div>
-            <div class="rank-list">
+        <div class="rank-section">
+            <div class="section-block-title-6">优秀讲座排行榜</div>
+            <div class="rank-section-list">
                 <div class="rank-list-left">
                     <div><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
                     <div class="border-bottom-none margin-top-13"><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
@@ -133,6 +113,6 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js')  }}"></script>
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
     <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
 {% endblock %}

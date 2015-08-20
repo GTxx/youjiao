@@ -17,74 +17,34 @@
                 </ul>
             </div>
         </div>
-        <div class="book-center-advice">
-            <div class="home-section-title">课件中心推荐</div>
-            <ul class="book-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
+        <div class="video-section-b">
+            <div class="section-block-title-6">课件中心推荐</div>
+            <ul class="video-section-list">
+                {% for i in range(6) %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                            <div class="v-image-hover-layer"></div>
+                        </div>
+                        <h5>青花瓷</h5>
+                        <a href="" class="start-download">开始下载</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="book-center-advice">
-            <div class="home-section-title">优秀课堂推荐</div>
-            <ul class="book-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>青花瓷</h5>
-                    <a href="" class="start-download">开始下载</a>
-                </li>
+        <div class="video-section-b">
+            <div class="section-block-title-6">优秀课堂推荐</div>
+            <ul class="video-section-list">
+                {% for i in range(6) %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                            <div class="v-image-hover-layer"></div>
+                        </div>
+                        <h5>青花瓷</h5>
+                        <a href="" class="start-download">开始下载</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
