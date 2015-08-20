@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+{% block content %}
+    <div class="user-reg">
+        <div class="user-reg-header">
+            <div class="fast-register">快速注册</div>
+            <div class="float-right">
+                <a href="/login">已有帐号</a>
+                <a href="">马上注册</a>
+            </div>
+        </div>
+        <form action="/register/" method="post">
+            <div class="user-input-item first">
+                <label for="">用户名:</label><input type="text" name="username">
+            </div>
+            <div class="user-input-item">
+                <label for="">密码:</label><input type="text" name="password">
+            </div>
+            <div class="user-input-item">
+                <label for="">确认密码:</label><input type="text" name="confirm">
+            </div>
+            <div class="user-input-item">
+                <label for="">手机号码:</label><input type="text" name="mobile">
+            </div>
+            <div class="user-input-item">
+                <label for="">邮箱:</label><input type="text" name="email">
+            </div>
+            <div class="user-input-item">
+                <label for="">单位名称:</label><input type="text" name="company">
+            </div>
+            <div class="user-input-item captcha">
+                <label for="">验证码:</label><input type="text" name="captcha">
+            </div>
+            <a href="" class="user-submit-reg">立即注册</a>
+        </form>
+    </div>
+{% endblock %}%

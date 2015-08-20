@@ -10,10 +10,10 @@ app = create_app()
 manager = Manager(app)
 
 
-@manager.command
-def run():
+@manager.option('-p', '--port', dest='port', default=5000)
+def run(port):
     """Run app."""
-    app.run(port=PORT, debug=True)
+    app.run(port=int(port), debug=True)
 
 
 @manager.command

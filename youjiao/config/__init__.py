@@ -7,10 +7,13 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE
     SQLALCHEMY_ECHO = True
 
-    # login
-    # SECURITY_LOGIN_USER_TEMPLATE = 'login.html'
     # flask security
     SECURITY_REGISTERABLE = True
+    SECURITY_PASSWORD_HASH = "pbkdf2_sha512"
+    SECURITY_PASSWORD_SALT = "W0dRBgO0Ukobw8NweLAXvqug2ZTh97HZIEMFcEsWhf7lt68"
+    SECURITY_CONFIRMABLE = False  # disable email confirm
+    SECURITY_SEND_REGISTER_EMAIL = False  # disable email confirm
+
 
 try:
     from youjiao.config.local_config import LocalConfig

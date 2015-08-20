@@ -16,7 +16,6 @@ from .content.views import content_bp
 
 
 # Flask views
-@login_required
 def index():
     return render_template('home/home.html')
 
