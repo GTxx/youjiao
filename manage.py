@@ -1,6 +1,5 @@
 # coding: utf-8
 from flask_script import Manager
-
 from youjiao.extensions import db
 from youjiao.app import create_app
 

@@ -9,6 +9,8 @@ class BaseConfig(object):
 
     # login
     # SECURITY_LOGIN_USER_TEMPLATE = 'login.html'
+    # flask security
+    SECURITY_REGISTERABLE = True
 
 try:
     from youjiao.config.local_config import LocalConfig

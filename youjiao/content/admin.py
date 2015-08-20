@@ -2,6 +2,7 @@
 from flask_admin.contrib import sqla
 from wtforms.widgets import TextArea
 from wtforms import TextAreaField
+from ..admin_utils import AuthMixin
 
 
 class CKTextAreaWidget(TextArea):
@@ -17,7 +18,8 @@ class CKTextAreaField(TextAreaField):
     widget = CKTextAreaWidget()
 
 
-class ActivityAdmin(sqla.ModelView):
+class ActivityAdmin(AuthMixin, sqla.ModelView):
+
     form_overrides = {
         'html': CKTextAreaField
     }
@@ -38,7 +40,7 @@ class ActivityAdmin(sqla.ModelView):
     }
 
 
-class PageAdmin(sqla.ModelView):
+class PageAdmin(AuthMixin, sqla.ModelView):
     form_overrides = {
         'html': CKTextAreaField
     }

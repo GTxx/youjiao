@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from flask_admin import Admin
 from flask import Flask, render_template
-from flask_security import Security
+from flask_security import Security, login_required
 
 from .config import Config
 from .content.models import Activity, Page
@@ -16,6 +16,7 @@ from .content.views import content_bp
 
 
 # Flask views
+@login_required
 def index():
     return render_template('home/home.html')
 
@@ -35,5 +36,3 @@ def create_app():
     app.register_blueprint(user_bp)
     app.add_url_rule('/', 'index', index)
     return app
-
-
