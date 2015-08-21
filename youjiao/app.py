@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from flask_admin import Admin
 from flask import Flask, render_template
 from flask_security import Security, login_required
+from flask_wtf import CsrfProtect
 
 from .config import Config
 from .content.models import Activity, Page
@@ -25,6 +26,8 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
     security = Security(app, user_datastore)
+    CsrfProtect(app)
+
 
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
