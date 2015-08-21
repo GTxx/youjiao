@@ -6,14 +6,15 @@
 
 {% block content %}
     <div id="main-school-body">
+        <div class="e-page-title">课件中心-教材配套课件-幼小衔接班</div>
         <div class="video-section-lg">
-            <span>课件中心-教材配套课件-幼小衔接班</span>
-            <h3>幼小衔接班</h3>
+            <h3 style="text-align: center;line-height: 40px;">幼小衔接班</h3>
             <ul class="video-section-list">
                 {% for i in range(12) %}
                     <li>
                         <div class="v-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+
                             <div class="v-image-hover-layer"></div>
                         </div>
                         <h5>青花瓷</h5>

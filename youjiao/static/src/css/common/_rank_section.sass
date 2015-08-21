@@ -1,60 +1,83 @@
 .rank-section
   margin-top: 26px
-  .rank-section-list
-    width: 976px
-    height: 420px
-    .margin-top-13
-      margin-top: 13px
-    .rank-list-item
-      height: 105px
-      border-bottom: 1px solid #CCCCCC
-      box-sizing: border-box
-      +clear-float
-      img
-        width: 147px
-        height: 82px
-        background: #CCCCCC
-        margin-left: 12px
-        margin-top: 13px
-      div
-        width: 160px
-        box-sizing: border-box
-        padding-top: 16px
-        padding-left: 16px
-        float: right
-        h5
-          text-align: left
-        h6
-          color: $font-gray
-          text-align: center
-    .border-bottom-none
-      border-bottom: none
-    +clear-float
-    .rank-list-left
+
+.rank-section-list
+  img
+    width: 147px
+    height: 82px
+    background: #CCCCCC
+    margin-left: 12px
+    margin-top: 13px
+  .rank-section-list-t
+    height: 204px
+    box-sizing: border-box
+    border-bottom: 1px solid #CCCCCC
+    .rank-section-list-l
       float: left
       width: 332px
       box-sizing: border-box
       text-align: center
-      div
-        height: 210px
-        box-sizing: border-box
-        border-bottom: 1px solid #CCCCCC
-        img
-          width: 284px
-          height: 160px
-          background: #CCCCCC
-        h5
-          margin-top: 13px
-
-    .rank-list-middle
+      img
+        margin: 0
+        width: 284px
+        height: 160px
+    .rank-section-list-c
       width: 322px
       border-left: 1px solid #CCCCCC
       border-right: 1px solid #CCCCCC
-
       float: left
       box-sizing: border-box
-
-    .rank-list-right
+    .rank-section-list-tct,
+    .rank-section-list-trt
+      height: 96px
+      border-bottom: 1px solid #CCCCCC
+      img
+        margin-top: 0
+    .rank-section-list-tcb,
+    .rank-section-list-trb
+      height: 108px
+    .rank-section-list-r
       width: 322px
       float: left
       box-sizing: border-box
+
+
+  .rank-section-list-b
+    box-sizing: border-box
+    height: 216px
+    .rank-section-list-l
+      float: left
+      width: 332px
+      box-sizing: border-box
+      text-align: center
+      img
+        margin: 0
+        width: 284px
+        height: 160px
+        margin-top: 13px
+    .rank-section-list-c
+      width: 322px
+      border-left: 1px solid #CCCCCC
+      border-right: 1px solid #CCCCCC
+      float: left
+      box-sizing: border-box
+    .rank-section-list-bct,
+    .rank-section-list-brt
+      height: 108px
+      border-bottom: 1px solid #CCCCCC
+    .rank-section-list-bcb,
+    .rank-section-list-brb
+      height: 108px
+    .rank-section-list-r
+      width: 322px
+      float: left
+      box-sizing: border-box
+
+
+  .rank-list-item
+    div
+      display: inline-block
+      width: 142px
+      float: right
+      margin-left: 16px
+      padding-top: 16px
