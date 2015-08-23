@@ -1,4 +1,15 @@
 {% extends "base/base.html" %}
+
+{% macro render_error(field) %}
+    {% if field.errors %}
+        <ul>
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
 {% block content %}
     <div class="user-reg">
         <div class="user-reg-header">
@@ -12,18 +23,23 @@
             {{ register_user_form.hidden_tag() }}
             <div class="user-input-item first">
                 <label for="">邮箱:</label><input type="email" name="email">
+                {{ render_error(register_user_form.email) }}
             </div>
             <div class="user-input-item">
                 <label for="">用户名:</label><input type="text" name="name">
+                {{ render_error(register_user_form.name) }}
             </div>
             <div class="user-input-item">
                 <label for="">密码:</label><input type="text" name="password">
+                {{ render_error(register_user_form.password) }}
             </div>
             <div class="user-input-item">
                 <label for="">确认密码:</label><input type="text" name="password_confirm">
+                {{ render_error(register_user_form.password_confirm) }}
             </div>
             <div class="user-input-item captcha">
                 <label for="">验证码:</label><input type="text" name="captcha_content">
+                {{ render_error(register_user_form.captcha_content) }}
                 <img src="{{ captcha_url }}">
             </div>
             <div style="display:none">

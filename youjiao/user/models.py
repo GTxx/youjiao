@@ -8,6 +8,7 @@ from youjiao.extensions import db
 from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import os
+from .utils import generate_random_number_4, generate_random_string_64
 
 
 roles_users = db.Table(
@@ -57,10 +58,8 @@ class Role(db.Model, RoleMixin, CRUDMixin):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 
-from .utils import generate_random_number_4, generate_random_string_64
 class Captcha(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
-
     key = db.Column(db.String(64), default=generate_random_string_64)
     content = db.Column(db.String(4), default=generate_random_number_4)
 
@@ -68,7 +67,7 @@ class Captcha(db.Model, CRUDMixin):
     def generate(cls):
         captcha = cls()
         captcha.save()
-        image = ImageCaptcha()
+        image = ImageCaptcha(width=160, height=80)
         # TODO: use file path config
         current_path = os.getcwd()
         image.write(captcha.content, os.path.join(current_path, 'youjiao/static/captcha', captcha.key+'.png'))

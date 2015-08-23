@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from flask_security.decorators import anonymous_user_required
 from .forms import RegisterForm
 from youjiao.extensions import db
@@ -6,7 +6,7 @@ from .models import Captcha, User
 import json
 
 user_bp = Blueprint("user_view", __name__)
-
+from flask_security.views import register
 #
 # @anonymous_user_required
 # def register():
@@ -53,16 +53,25 @@ from flask_security.utils import encrypt_password
 @user_bp.route('/register', methods=['GET', 'POST'])
 @anonymous_user_required
 def register1():
-    print(request.json)
-    print(request.form)
-    form = RegisterForm(request.form)
-    if form.validate_on_submit():
-        # TODO: register complete and jump to user profile or index page
-        data = form.to_dict()
-        data['password'] = encrypt_password(data['password'])
-        user = User(**data)
-        user = user.save()
-        return 'register success'
+    import ipdb; ipdb.set_trace()
+
+    if request.method == 'POST':
+        print(request.json)
+        print(request.form)
+        form = RegisterForm(request.form)
+        if form.validate_on_submit():
+            # TODO: register complete and jump to user profile or index page
+            data = form.to_dict()
+            data['password'] = encrypt_password(data['password'])
+            user = User(**data)
+            user = user.save()
+
+            return redirect('/')
+        else:
+            import ipdb; ipdb.set_trace()
+    elif request.method == 'GET':
+        form = RegisterForm()
+    # generate new captcha
     captcha = Captcha.generate()
     return render_template('security/register_user.html',
                            register_user_form=form, captcha_key=captcha.key,
