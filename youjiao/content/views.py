@@ -62,6 +62,26 @@ def courseware_sub():
     return render_template('courseware/sub_node.html')
 
 
+@content_bp.route('/courseware/teacher/')
+def courseware_teacher():
+    return render_template('courseware/teacher_training.html')
+
+
+@content_bp.route('/courseware/product/')
+def courseware_product():
+    return render_template('courseware/product_training.html')
+
+
+@content_bp.route('/courseware/teacher/detail/')
+def courseware_teacher_detail():
+    return render_template('courseware/t_t_detail.html')
+
+
 @content_bp.route('/research/teacher/')
 def research_teacher():
     return render_template('research/teacher.html')
+
+
+@content_bp.route('/page/about/')
+def page_about():
+    return render_template('pages/about.html')

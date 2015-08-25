@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'school/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <div class="video-section-b">
+            <div class="e-page-title">幼教网校-师资培训视频</div>
+            <ul class="video-section-list">
+                {% for i in range(12) %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                            <div class="v-image-hover-layer"></div>
+                        </div>
+                        <h5>青花瓷</h5>
+                        <a href="" class="start-download">开始下载</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'courseware/right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+{% endblock %}
