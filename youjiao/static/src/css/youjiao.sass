@@ -1,66 +1,11 @@
-ul
-  li
-    list-style: none
-
-a
-  text-decoration: none
-
-h1, h2, h3, h4, h5, h6, ul, ol, li
-  margin: 0
-  padding: 0
-
-.float-left
-  float: left
-
-.float-right
-  float: right
-
-$youjiao-pink: #fe5974
-$youjiao-pink-2: #ff7695
-$youjiao-font-pink: #ff3c4e
-$wrapper-width: 1180px
-$font-gray: gray
-$background-brown: #fefef1
-$background-brown-2: #fffdf2
-
-=main-noright
-  width: 1000px
-  box-sizing: border-box
-  padding-left: 24px
-  float: left
-  padding-bottom: 60px
-
-=clear-float
-  overflow: hidden
-  zoom: 1
-
-=list-first
-  background: $youjiao-pink-2
-  font-weight: bold
-  color: white !important
-  padding-left: 12px
-  a
-    color: white !important
-
-=user-input($width)
-  outline: none
-  box-sizing: border-box
-  height: 40px
-  border: 1px solid #ccc
-  border-radius: 4px
-  width: $width
-
-=big-button($width)
-  margin: 0 auto
-  display: block
-  width: $width
-  height: 40px
-  background: $youjiao-pink
-  border-radius: 4px
-  color: white
-  text-align: center
-  line-height: 40px
-  font-size: 20px
+@import "common/var"
+@import "common/header"
+@import "common/left_right_bar"
+@import "common/slide_banner"
+@import "common/content_section"
+@import "common/rank_section"
+@import "common/footer"
+@import "common/login_register"
 
 #youjiao-body
   height: auto
@@ -69,140 +14,11 @@ $background-brown-2: #fffdf2
 #main-noright-body
   +main-noright
 
-.header
-  +clear-float
-  box-sizing: border-box
-  height: 122px
-  border-bottom: 6px solid $youjiao-pink
-
-  .nav-wrapper
-    padding-top: 16px
-    box-sizing: border-box
-    height: 104px
-    width: $wrapper-width
-    margin: 0 auto
-
-    +clear-float
-
-  .youjiao-logo
-    height: 88px
-    width: 180px
-    text-align: center
-    margin-right: 24px
-    float: left
-    img
-      width: 88px
-
-  .youjiao-nav
-    +clear-float
-    width: 732px
-    height: 30px
-    float: left
-    margin-top: 64px
-    ul
-      +clear-float
-      padding: 0
-      margin: 0
-      width: 732px
-      height: 30px
-      text-align: center
-      li
-        width: 122px
-        height: 24px
-        line-height: 24px
-        box-sizing: border-box
-        float: left
-        font-size: 18px
-        border-right: 2px solid $youjiao-pink
-
-      .border-right-none
-        border-right: 0
-
-      a
-        color: $youjiao-pink
-      .nav-active
-        display: inline-block
-        width: 90px
-        height: 24px
-        background: $youjiao-pink
-        color: white
-        border-radius: 12px
-
-  .header-right
-    width: 220px
-    height: 104px
-    float: left
-    margin-left: 24px
-
-    .header-right-top
-      height: 14px
-      span
-        color: $font-gray
-        font-size: 14px
-      a
-        color: $font-gray
-
-      .header-login
-        float: right
-
-    .search-input
-      width: 220px
-      height: 30px
-      margin-top: 44px
-      input
-        float: left
-        width: 190px
-        height: 30px
-        box-sizing: border-box
-        outline: none
-        border: 1px solid $youjiao-pink
-        border-radius: 4px 0 0 4px
-      .search-button
-        display: inline-block
-        width: 30px
-        height: 30px
-        border-radius: 0 4px 4px 0
-        background: $youjiao-pink
-        float: left
-
 .main
   width: $wrapper-width
   margin: 26px auto 0 auto
   min-height: 462px
   +clear-float
-
-  .news-list
-    padding-left: 40px
-    li
-      list-style: disc
-    a
-      color: $font-gray
-  .news-date
-    width: 144px
-
-.left-bar
-  width: 180px
-  float: left
-  box-sizing: border-box
-  ul
-    margin: 0
-    padding: 0
-    background: $background-brown-2
-    padding-bottom: 26px
-    margin-bottom: 48px
-    li
-      height: 30px
-      line-height: 30px
-      padding-left: 16px
-    .left-list-first
-      +list-first
-  a
-    color: black
-
-  .left-adposition
-    width: 180px
-    height: 728px
-    background: #CCCCCC
 
 #main-body
   width: 756px
@@ -210,247 +26,6 @@ $background-brown-2: #fffdf2
   float: left
   padding-left: 24px
   padding-right: 24px
-
-.right-bar
-  width: 244px
-  float: left
-  box-sizing: border-box
-  ul
-    li
-      height: 30px
-      padding-left: 16px
-      color: black
-      line-height: 30px
-.right-list-first
-  +list-first
-
-  .weekly-hot
-    height: 372px
-    background: $background-brown
-    ul
-      padding: 0
-
-.footer-wrapper
-  border-top: 4px solid $youjiao-pink
-
-.footer
-  margin: 0 auto
-  width: 680px
-  background: $background-brown
-  +clear-float
-
-  div
-    +clear-float
-
-  ul
-    width: 170px
-    float: left
-
-    li
-      list-style: disc
-      margin-left: 18px
-
-    .list-style-none
-      list-style: none
-      margin-left: 0
-
-    a
-      color: $font-gray
-      font-size: 14px
-
-  .copyright
-    font-size: 14px
-    color: $font-gray
-    text-align: center
-
-.slide-banner
-  +clear-float
-  padding: 0
-
-.rslides_tabs
-  width: 160px
-  position: absolute
-  bottom: 12px
-  z-index: 2
-  right: 16px
-  text-align: center
-  a
-    display: inline-block
-    width: 22px
-    height: 22px
-    margin-left: 10px
-    background: #7a7a7a
-    box-sizing: border-box
-    border: 3px solid white
-    border-radius: 50%
-    float: left
-    color: transparent
-.rslides_here a
-  background: $youjiao-pink
-
-//.textbook-list
-//  +clear-float
-//  padding: 0
-//  width: 920px
-//  box-sizing: border-box
-//  li
-//    width: 210px
-//    height: 260px
-//    margin: 10px
-//    box-sizing: border-box
-//    background: #ccc
-//    float: left
-//
-//.textbook-rank
-//  width: 920px
-//  +clear-float
-//  .textbook-rank-1
-//    width: 220px
-//    height: 340px
-//    float: left
-//    background: #ccc
-//  ul
-//    +clear-float
-//    width: 700px
-//    float: left
-//    padding: 0
-//    margin: -5px 0 0 0
-//    li
-//      float: left
-//      width: 212px
-//      height: 106px
-//      margin: 5px 10px
-//      background: #ccc
-//      box-sizing: border-box
-//
-//.products-info
-//  +clear-float
-//
-//.products-simples
-//  width: 400px
-//  height: 458px
-//  float: left
-//  background: #ccc
-//
-//.products-text-info
-//  float: left
-
-.pink-button
-  display: inline-block
-  width: 200px
-  height: 40px
-  +list-first
-
-.user-login
-  width: 472px
-  height: 348px
-  margin: 10px auto 0 auto
-  border: 1px solid #CCCCCC
-  a
-    color: $font-gray
-
-  .user-login-header
-    margin: 0 auto
-    width: 452px
-    border-bottom: 1px solid #CCCCCC
-    box-sizing: border-box
-    padding: 0 80px
-    +clear-float
-    a
-      color: black
-
-  .user-login-type
-    height: 40px
-    line-height: 40px
-    color: $font-gray
-    border-bottom: 6px solid $youjiao-pink
-
-  .vip-login
-    width: 74px
-  .admin-login
-    width: 92px
-
-  .user-input-item
-    width: 354px
-    margin: 0 auto
-    line-height: 70px
-    text-align: center
-
-    label
-      display: inline-block
-      width: 62px
-      margin-right: 26px
-      text-align: center
-      font-size: 18px
-
-    input
-      +user-input(264px)
-
-  .first
-    margin-top: 15px
-
-  .user-login-submit
-    +big-button(354px)
-    margin-top: 26px
-
-  .user-login-forget
-    width: 354px
-    margin: 0 auto
-    box-sizing: border-box
-    padding-left: 88px
-    color: $font-gray
-  .user-reg-account
-    width: 354px
-    margin: 16px auto 0 auto
-    text-align: center
-    color: $font-gray
-
-.user-reg
-  width: 708px
-  margin: 42px auto 56px auto
-  border: 1px solid #ccc
-  padding-bottom: 48px
-
-  .user-reg-header
-    line-height: 32px
-    margin-top: -32px
-    +clear-float
-    .fast-register
-      width: 180px
-      height: 32px
-      color: white
-      background: $youjiao-pink
-      text-align: center
-      float: left
-    a
-      font-size: 14px
-      color: $font-gray
-
-  .user-input-item
-    margin-left: 88px
-    line-height: 60px
-    height: 60px
-
-    label
-      display: inline-block
-      width: 84px
-      text-align: right
-      margin-right: 26px
-      font-size: 18px
-    input
-      +user-input(264px)
-
-  .first
-    margin-top: 42px
-
-  .captcha
-    input
-      +user-input(150px)
-
-  .user-submit-reg
-    +big-button(264px)
-    margin-left: 198px
-    margin-top: 21px
 
 #main-home-body
   +main-noright
@@ -476,226 +51,55 @@ $background-brown-2: #fffdf2
         line-height: 30px
         +list-first
 
-.home-section-title
-  width: 140px
-  height: 30px
-  line-height: 30px
-  color: white
-  padding-left: 12px
-  background: $youjiao-pink-2
-  margin-bottom: 13px
-.textbook-active
-  border: 1px solid #CCCCCC
-  h5
-    color: $youjiao-font-pink !important
-
-
-.textbook-advice
-  margin-top: 26px
-  .textbook-advice-list
-    +clear-float
-    li
-      width: 243px
-      height: 296px
-      float: left
-      box-sizing: border-box
-      text-align: center
-      img
-        width: 215px
-        height: 215px
-        margin-top: 13px
-        background: #CCCCCC
-      h5
-        margin-top: 6px
-        font-size: 18px
-        color: $font-gray
-      h6
-        margin-top: 4px
-        color: $font-gray
-        font-size: 14px
-
-.book-center-advice
-  margin-top: 26px
-  .book-advice-list
-    margin: 0
-    padding: 0
-    +clear-float
-    li
-      width: 243px
-      height: 219px
-      float: left
-      box-sizing: border-box
-      text-align: center
-      img
-        width: 215px
-        height: 121px
-        margin-top: 13px
-        background: #CCCCCC
-      h5
-        margin-top: 6px
-        color: $font-gray
-        font-size: 18px
-      .start-download
-        display: block
-        width: 92px
-        height: 28px
-        margin: 8px auto 0 auto
-        background: white
-        color: $font-gray
-        border-radius: 4px
-        line-height: 28px
-        box-sizing: border-box
-        border: 1px solid #CCCCCC
-.book-active
-  border: 1px solid #CCCCCC
-  h5
-    color: $youjiao-font-pink !important
-  .start-download
-    border: 1px solid $youjiao-font-pink
-    background: $youjiao-font-pink !important
-    color: white !important
-
 #main-school-body
   +main-noright
-  .school-slides
-    width: 976px
-    height: 549px
-    background: #CCCCCC
-    position: relative
-
-  .good-lectures
-    margin-top: 26px
-    .good-lectures-title
-      width: 140px
-      height: 30px
-      line-height: 30px
-      color: white
-      padding-left: 12px
-      background: $youjiao-pink-2
-      margin-bottom: 13px
-    .good-lectures-list
-      margin: 0
-      padding: 0
-      +clear-float
-      li
-        width: 324px
-        height: 266px
-        float: left
-        box-sizing: border-box
-        text-align: center
-        img
-          width: 284px
-          height: 160px
-          margin-top: 13px
-          background: #CCCCCC
-        h5
-          margin-top: 6px
-          color: $font-gray
-          font-size: 18px
-        .start-download
-          display: block
-          width: 92px
-          height: 28px
-          margin: 8px auto 0 auto
-          background: white
-          color: $font-gray
-          border-radius: 4px
-          line-height: 28px
-          border: 1px solid #CCCCCC
-      .lectures-active
-        border: 1px solid #CCCCCC
-        h5
-          color: $youjiao-font-pink !important
-        .start-download
-          border: 1px solid $youjiao-font-pink
-          background: $youjiao-font-pink !important
-          color: white !important
-
-.good-lectures-rank
-  .lectures-rank-title
-    width: 140px
-    height: 30px
-    line-height: 30px
-    color: white
-    padding-left: 12px
-    background: $youjiao-pink-2
-    margin-bottom: 13px
-  .rank-list
-    width: 976px
-    height: 420px
-    .margin-top-13
-      margin-top: 13px
-    .rank-list-item
-      height: 105px
-      border-bottom: 1px solid #CCCCCC
-      box-sizing: border-box
-      +clear-float
-      img
-        width: 147px
-        height: 82px
-        background: #CCCCCC
-        margin-left: 12px
-        margin-top: 13px
-      div
-        width: 160px
-        box-sizing: border-box
-        padding-top: 16px
-        padding-left: 16px
-        float: right
-        h5
-          text-align: left
-        h6
-          color: $font-gray
-          text-align: center
-    .border-bottom-none
-      border-bottom: none
-    +clear-float
-    .rank-list-left
-      float: left
-      width: 332px
-      box-sizing: border-box
-      text-align: center
-      div
-        height: 210px
-        box-sizing: border-box
-        border-bottom: 1px solid #CCCCCC
-        img
-          width: 284px
-          height: 160px
-          background: #CCCCCC
-        h5
-          margin-top: 13px
-
-    .rank-list-middle
-      width: 322px
-      border-left: 1px solid #CCCCCC
-      border-right: 1px solid #CCCCCC
-
-      float: left
-      box-sizing: border-box
-
-    .rank-list-right
-      width: 322px
-      float: left
-      box-sizing: border-box
-
-.textbook-advice-list li
-  cursor: pointer
-
-.book-advice-list li
-  cursor: pointer
-
-.good-lectures-list li
-  cursor: pointer
-
 
 //activity
+.news-page-t
+  line-height: 34px
+  color: $font-gray
+  font-size: 18px
+.news-list
+  box-sizing: border-box
+  border: 1px solid #CCCCCC
+  min-height: 948px
+  margin-bottom: 56px
+  padding-left: 40px
+  li
+    list-style: disc
+    line-height: 48px
+  a
+    color: $font-gray
+.news-date
+  width: 144px
 
+.e-page-title
+  line-height: 34px
+  color: $font-gray
+  font-size: 18px
 .activity-content
   box-sizing: border-box
-  border: 1px solid $font-gray
+  border: 1px solid #CCCCCC
   padding: 80px 140px 0
   min-height: 1000px
+  .activity-title
+    text-align: center
+  .activity-author
+    text-align: center
+    line-height: 56px
+.weekly-hot
+  box-sizing: border-box
+  height: 372px
+  margin-bottom: 30px
+.right-list
+  li
+    padding-left: 16px
+    box-sizing: border-box
+    overflow: hidden
+    line-height: 30px
+    a
+      color: $font-gray
+      font-size: 14px
 
 
 #main-big-body
@@ -714,12 +118,14 @@ $background-brown-2: #fffdf2
     li
       height: 30px
       padding-left: 16px
-      color: black
+      color: $font-gray
       line-height: 30px
     a
      color: $font-gray
 
+
 //product
+
 .product-slides-main
   position: relative
   overflow: hidden
@@ -821,6 +227,7 @@ $background-brown-2: #fffdf2
       width: 422px
       height: 240px
       background: #CCCCCC
+
 .other-associate-courseware
   box-sizing: border-box
   padding: 30px 20px
@@ -835,4 +242,3 @@ $background-brown-2: #fffdf2
     width: 422px
     height: 240px
     background: #CCCCCC
-

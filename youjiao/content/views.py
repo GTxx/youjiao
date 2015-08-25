@@ -60,3 +60,8 @@ def courseware_list():
 @content_bp.route('/courseware/sub/')
 def courseware_sub():
     return render_template('courseware/sub_node.html')
+
+
+@content_bp.route('/research/teacher/')
+def research_teacher():
+    return render_template('research/teacher.html')

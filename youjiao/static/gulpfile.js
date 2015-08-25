@@ -22,7 +22,7 @@ gulp.task('uglify', function(){
 });
 
 gulp.task('file:watch', function () {
-    gulp.watch('src/css/*.sass', ['sass']);
+    gulp.watch('src/css/**/*.sass', ['sass']);
     gulp.watch('src/js/*.js', ['uglify']);
 });
 

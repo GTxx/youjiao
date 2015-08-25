@@ -6,7 +6,7 @@
 
 {% block content %}
     <div id="main-big-body">
-        <span>产品展示</span>
+        <div class="e-page-title">产品展示</div>
 
         <div class="product-slide">
             <div class="product-slides-main">
@@ -19,64 +19,52 @@
                 </ul>
             </div>
         </div>
-        <div class="textbook-advice">
-            <div class="home-section-title">幼教教材</div>
-            <ul class="textbook-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
+        <div class="n-v-section-b">
+            <div class="section-block-title-4">幼教教材</div>
+            <ul class="n-v-section-list">
+                {% for i in range(3) %}
+                    <li>
+                        <div class="nv-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+
+                            <div class="nv-image-hover-layer"></div>
+                        </div>
+                        <h5>有趣的手影</h5>
+                        <h6>幼儿园大班上册</h6>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="textbook-advice">
-            <div class="home-section-title">幼教教材</div>
-            <ul class="textbook-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
+        <div class="n-v-section-b">
+            <div class="section-block-title-4">幼教教材</div>
+            <ul class="n-v-section-list">
+                {% for i in range(3) %}
+                    <li>
+                        <div class="nv-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+
+                            <div class="nv-image-hover-layer"></div>
+                        </div>
+                        <h5>有趣的手影</h5>
+                        <h6>幼儿园大班上册</h6>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="textbook-advice">
-            <div class="home-section-title">幼教教材</div>
-            <ul class="textbook-advice-list">
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <h5>有趣的手影</h5>
-                    <h6>幼儿园大班上册</h6>
-                </li>
+        <div class="n-v-section-b">
+            <div class="section-block-title-4">幼教教材</div>
+            <ul class="n-v-section-list">
+                {% for i in range(3) %}
+                    <li>
+                        <div class="nv-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+
+                            <div class="nv-image-hover-layer"></div>
+                        </div>
+                        <h5>有趣的手影</h5>
+                        <h6>幼儿园大班上册</h6>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

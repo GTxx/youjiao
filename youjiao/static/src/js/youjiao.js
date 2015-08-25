@@ -5,15 +5,17 @@ $(function () {
     });
 
     function mouseOverAndOut(target, activeClass) {
-        $(target).mouseover(function () {
+        $(target).mouseenter(function () {
             $(this).addClass(activeClass);
-        }).mouseout(function () {
+            $(this).find(".v-image-hover-layer").animate({'opacity': 0.5});
+            $(this).find(".nv-image-hover-layer").animate({'opacity': 0.9});
+        }).mouseleave(function () {
             $(this).removeClass(activeClass);
+            $(this).find(".v-image-hover-layer").animate({'opacity': 0});
+            $(this).find(".nv-image-hover-layer").animate({'opacity': 0});
         });
     }
 
-    mouseOverAndOut(".textbook-advice-list li", "textbook-active");
-    mouseOverAndOut(".book-advice-list li", "book-active");
-    mouseOverAndOut(".good-lectures-list li", "lectures-active");
-
+    mouseOverAndOut(".video-section-list li", "video-s-active");
+    mouseOverAndOut(".n-v-section-list li", "n-v-active");
 });
