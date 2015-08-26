@@ -6,6 +6,7 @@
 
 {% block content %}
     <div id="main-home-body">
+        <div class="e-page-title">产品展示-幼教教材</div>
         <div class="product-s-slides">
             <div class="product-s-slides-main">
                 <ul class="rslides">
@@ -22,12 +23,14 @@
             <ul class="n-v-section-list">
                 {% for i in range(8) %}
                     <li>
-                        <div class="nv-image-wrapper">
-                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+                        <a href="/product/detail/">
+                            <div class="nv-image-wrapper">
+                                <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
 
-                            <div class="nv-image-hover-layer"></div>
-                        </div>
-                        <h5>幼小衔接班</h5>
+                                <div class="nv-image-hover-layer"></div>
+                            </div>
+                            <h5>幼小衔接班</h5>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
@@ -35,75 +38,103 @@
         <div class="rank-section">
             <div class="section-block-title-7">幼教教材排行榜</div>
             <div class="rank-section-list">
-                <div class="rank-list-left">
-                    <div><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
-                    <div class="border-bottom-none margin-top-13"><img src="" alt=""><h5>1.xx幼儿英语</h5></div>
+                <div class="rank-section-list-t">
+                    <div class="rank-section-list-l">
+                        <img src="" alt="">
+                        <h5>1.xx幼儿英语</h5>
+                    </div>
+                    <div class="rank-section-list-c">
+                        <div class="rank-section-list-tct">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
+
+                                <div>
+                                    <h5>3.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rank-section-list-tcb">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
+
+                                <div>
+                                    <h5>4.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-section-list-r">
+                        <div class="rank-section-list-trt">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
+
+                                <div>
+                                    <h5>7.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rank-section-list-trb">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
+
+                                <div>
+                                    <h5>8.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="rank-list-middle">
-                    <div class="rank-list-item">
+                <div class="rank-section-list-b">
+                    <div class="rank-section-list-l">
                         <img src="" alt="">
+                        <h5>2.xx幼儿英语</h5>
+                    </div>
+                    <div class="rank-section-list-c">
+                        <div class="rank-section-list-bct">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
 
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
+                                <div>
+                                    <h5>5.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rank-section-list-bcb">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
+
+                                <div>
+                                    <h5>6.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="rank-list-item">
-                        <img src="" alt="">
+                    <div class="rank-section-list-r">
+                        <div class="rank-section-list-brt">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
 
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
+                                <div>
+                                    <h5>9.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="rank-list-item">
-                        <img src="" alt="">
+                        <div class="rank-section-list-brb">
+                            <div class="rank-list-item">
+                                <img src="" alt="">
 
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
-                        </div>
-                    </div>
-                    <div class="rank-list-item border-bottom-none">
-                        <img src="" alt="">
-
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="rank-list-right">
-                    <div class="rank-list-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
-                        </div>
-                    </div>
-                    <div class="rank-list-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
-                        </div>
-                    </div>
-                    <div class="rank-list-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
-                        </div>
-                    </div>
-                    <div class="rank-list-item border-bottom-none">
-                        <img src="" alt="">
-
-                        <div>
-                            <h5>1.xxx孩子好性格</h5>
-                            <h6>sssssssssss</h6>
+                                <div>
+                                    <h5>10.xxx孩子好性格</h5>
+                                    <h6>sssssssssss</h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

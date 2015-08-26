@@ -12,13 +12,15 @@
             <ul class="video-section-list">
                 {% for i in range(12) %}
                     <li>
-                        <div class="v-image-wrapper">
-                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                        <a href="/school/product/detail/">
+                            <div class="v-image-wrapper">
+                                <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
-                            <div class="v-image-hover-layer"></div>
-                        </div>
-                        <h5>青花瓷</h5>
-                        <a href="" class="start-download">开始下载</a>
+                                <div class="v-image-hover-layer"></div>
+                            </div>
+                            <h5>青花瓷</h5>
+                            <a href="" class="start-download">开始下载</a>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>

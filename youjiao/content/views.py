@@ -21,6 +21,21 @@ def school_sub():
     return render_template('school/home.html')
 
 
+@content_bp.route('/school/teacher/')
+def school_teacher():
+    return render_template('school/teacher_training.html')
+
+
+@content_bp.route('/school/product/')
+def school_product():
+    return render_template('school/product_training.html')
+
+
+@content_bp.route('/school/product/detail/')
+def school_teacher_detail():
+    return render_template('school/t_t_detail.html')
+
+
 @content_bp.route('/category/<category>/')
 def category(category):
     posts = Activity.query.filter_by(category=category).filter_by(status=2).all()
@@ -62,24 +77,14 @@ def courseware_sub():
     return render_template('courseware/sub_node.html')
 
 
-@content_bp.route('/courseware/teacher/')
-def courseware_teacher():
-    return render_template('courseware/teacher_training.html')
-
-
-@content_bp.route('/courseware/product/')
-def courseware_product():
-    return render_template('courseware/product_training.html')
-
-
-@content_bp.route('/courseware/teacher/detail/')
-def courseware_teacher_detail():
-    return render_template('courseware/t_t_detail.html')
-
-
 @content_bp.route('/research/teacher/')
 def research_teacher():
     return render_template('research/teacher.html')
+
+
+@content_bp.route('/research/activity/')
+def research_activity():
+    return render_template('research/research_activity.html')
 
 
 @content_bp.route('/page/about/')
