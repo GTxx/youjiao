@@ -63,11 +63,24 @@
   box-sizing: border-box
   border: 1px solid #CCCCCC
   min-height: 890px
-  margin-bottom: 56px
-  padding-left: 40px
+  margin-bottom: 38px
   li
-    list-style: disc
+    position: relative
+    padding-left: 28px
     line-height: 48px
+    box-sizing: border-box
+    &:nth-child(odd)
+      background: $background-brown-2
+    &:before
+      position: absolute
+      content: ' '
+      display: inline-block
+      width: 4px
+      height: 4px
+      background: $font-gray
+      border-radius: 50%
+      margin-top: 20px
+      margin-left: -8px
   a
     color: $font-gray
 .news-date
@@ -75,7 +88,7 @@
 
 .e-page-title
   line-height: 34px
-  color: $font-gray
+  color: $font-gray-heavy
   font-size: 18px
 .activity-content
   box-sizing: border-box
@@ -285,3 +298,34 @@
   .training-detail-video-t
     text-align: center
     margin-top: 13px
+
+.about-content
+  p
+    color: $font-gray-light
+    font-size: 14px
+    text-indent: 30px
+
+.activity-pagination
+  display: table
+  margin: 0 auto 56px
+  +clear-float
+  li
+    text-align: center
+    box-sizing: border-box
+    border: 1px solid $gray-a3
+    color: $gray-a3
+    width: 20px
+    height: 20px
+    line-height: 20px
+    border-radius: 4px
+    float: left
+    margin: 0 8px
+    a
+      display: inline-block
+      width: 100%
+      color: $gray-a3
+    &:hover
+      border: 1px solid $youjiao-font-pink
+      background: $youjiao-font-pink
+      a
+        color: white

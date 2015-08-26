@@ -5,7 +5,7 @@ ul
 a
   text-decoration: none
 
-h1, h2, h3, h4, h5, h6, ul, ol, li
+h1, h2, h3, h4, h5, h6, ul, ol, li, p
   margin: 0
   padding: 0
 
@@ -20,6 +20,9 @@ $youjiao-pink-2: #ff7695
 $youjiao-font-pink: #ff3c4e
 $wrapper-width: 1180px
 $font-gray: #7a7a7a
+$font-gray-heavy: #3e3e3e
+$font-gray-light: #6c6c6c
+$gray-a3: #a3a3a3
 $background-brown: #fefef1
 $background-brown-2: #fffdf2
 
@@ -39,8 +42,10 @@ $background-brown-2: #fffdf2
   background: $youjiao-pink-2
   font-weight: bold
   color: white !important
-  padding-left: 12px
-  line-height: 30px
+  padding-left: 12px !important
+  line-height: 30px !important
+  &:before
+    display: none !important
   a
     color: white !important
 
@@ -70,3 +75,14 @@ $background-brown-2: #fffdf2
   width: 200px
   height: 40px
   +list-first
+
+.classes-select-wrapper
+  float: right
+  margin-top: -38px
+  padding-right: 26px
+  color: $font-gray
+  .classes-select
+    width: 180px
+    background: transparent
+    border: 1px solid #ccc
+    outline: none
