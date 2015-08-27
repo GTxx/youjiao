@@ -17,7 +17,7 @@ gulp.task('minify-css', ['sass'], function () {
 });
 
 gulp.task('babel', function () {
-    return gulp.src('src/js/**/*.js')
+    return gulp.src('src/js/*.js')
                 .pipe(babel())
                 .pipe(gulp.dest('build/js'));
 });
