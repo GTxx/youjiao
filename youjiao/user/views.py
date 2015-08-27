@@ -49,26 +49,27 @@ from flask_security.views import register
 #                                      **_ctx('register'))
 #
 from flask_security.utils import user_registered
-from flask_security.utils import encrypt_password
+from flask_login import login_user
 @user_bp.route('/register', methods=['GET', 'POST'])
 @anonymous_user_required
-def register1():
-    import ipdb; ipdb.set_trace()
+def register():
 
     if request.method == 'POST':
         print(request.json)
         print(request.form)
         form = RegisterForm(request.form)
+        import ipdb; ipdb.set_trace()
         if form.validate_on_submit():
             # TODO: register complete and jump to user profile or index page
             data = form.to_dict()
+            from .utils import encrypt_password
             data['password'] = encrypt_password(data['password'])
             user = User(**data)
             user = user.save()
-
+            login_user(user, force=True)
             return redirect('/')
-        else:
-            import ipdb; ipdb.set_trace()
+        # else:
+        #     import ipdb; ipdb.set_trace()
     elif request.method == 'GET':
         form = RegisterForm()
     # generate new captcha
@@ -76,6 +77,16 @@ def register1():
     return render_template('security/register_user.html',
                            register_user_form=form, captcha_key=captcha.key,
                            captcha_url=captcha.img_url)
+
+
+@user_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    pass
+
+
+@user_bp.route('/logout')
+def logout():
+    pass
 
 
 @user_bp.route('/refresh_captcha/<captcha_key>')
@@ -90,3 +101,8 @@ def refresh_captcha(captcha_key):
     db.session.add(captcha)
     db.session.commit()
     return json.dumps({'captcha_key': captcha.key, 'url': captcha.key})
+
+
+@user_bp.route('/login')
+def login():
+    return 'test'

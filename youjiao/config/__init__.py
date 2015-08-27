@@ -7,19 +7,16 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE
     SQLALCHEMY_ECHO = True
 
-    # flask security
-    SECURITY_REGISTERABLE = False # overide flask_security register with custom register
-    SECURITY_PASSWORD_HASH = "pbkdf2_sha512"
-    SECURITY_PASSWORD_SALT = "W0dRBgO0Ukobw8NweLAXvqug2ZTh97HZIEMFcEsWhf7lt68"
-    SECURITY_CONFIRMABLE = False  # disable email confirm
-    SECURITY_SEND_REGISTER_EMAIL = False  # disable email confirm
+    # for user register and login security
+    # SECURITY_REGISTERABLE = False # overide flask_security register with custom register
+    PASSWORD_HASH = "pbkdf2_sha512"
+    PASSWORD_SALT = "W0dRBgO0Ukobw8NweLAXvqug2ZTh97HZIEMFcEsWhf7lt68"
+    # SECURITY_CONFIRMABLE = False  # disable email confirm
+    # SECURITY_SEND_REGISTER_EMAIL = False  # disable email confirm
 
-    # flask_wtf
-    RECAPTCHA_PARAMETERS = {'hl': 'zh', 'render': 'explicit'}
-    RECAPTCHA_DATA_ATTRS = {'theme': 'dark'}
-    RECAPTCHA_PUBLIC_KEY = '6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J'
-    RECAPTCHA_PRIVATE_KEY = '6LeYIbsSAAAAAJezaIq3Ft_hSTo0YtyeFG-JgRtu'
 
+    # flask_babel
+    BABEL_DEFAULT_LOCALE = 'zh'
 
 try:
     from youjiao.config.local_config import LocalConfig

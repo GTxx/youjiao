@@ -4,10 +4,13 @@ from flask_admin import Admin
 from flask import Flask, render_template
 from flask_security import Security, login_required
 from flask_wtf import CsrfProtect
+from flask_babel import Babel
+from flask_login import LoginManager
 
 from .config import Config
 from .content.models import Activity, Page
 from .user.models import user_datastore,User
+from .user.utils import load_user
 from .extensions import db
 
 from .user.admin import UserAdmin
@@ -25,16 +28,24 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
-    security = Security(app, user_datastore)
+    # security = Security(app, user_datastore)
+    # flask_login
+    login_manager = LoginManager(app)
+    login_manager.user_loader(load_user)
+    # flask csrf
     CsrfProtect(app)
+    # flask_babel
+    Babel(app)
 
-
+    # flask_admin
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
     admin.add_view(UserAdmin(User, db.session))
     admin.add_view(PageAdmin(Page, db.session))
     # import ipdb; ipdb.set_trace()
+    # register blueprint
     app.register_blueprint(content_bp)
     app.register_blueprint(user_bp)
+
     app.add_url_rule('/', 'index', index)
     return app
