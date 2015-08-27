@@ -85,11 +85,12 @@ class LoginForm(Form):
 
     def validate_email_or_name(self, field):
         from sqlalchemy import or_
-        users = User.query.filter(or_(email=field.data, name=field.data))
-        if not users:
+        if not User.query.filter(or_(User.email==field.data, User.name==field.data)).first():
             raise ValidationError('email/name of password error')
 
     def validate(self):
+        if not super(LoginForm, self).validate():
+            return False
         from sqlalchemy import or_
         email_or_name = self.email_or_name.data
         password = self.password.data
@@ -97,6 +98,9 @@ class LoginForm(Form):
         user = users[0]
         from .utils import verify_and_update_password
         if not verify_and_update_password(password, user):
-            raise ValidationError('email/name or password error')
+            self.email_or_name.errors.append('email/name or password error')
+            self.password.errors.append('email/name or password error')
+            import ipdb; ipdb.set_trace()
+            return False
         self.user = user
         return True
