@@ -37,6 +37,14 @@ def encrypt_password(password):
     signed = get_hmac(password).decode('ascii')
     return password_context.encrypt(signed)
 
+def verify_and_update_password(password, user):
+    signed = get_hmac(password).decode('ascii')
+    verified, new_password = password_context.verify_and_update(signed, user.password)
+    if verified and new_password:
+        user.password = new_password
+        user.save()
+    return verified
+
 
 def get_hmac(password):
     import hashlib

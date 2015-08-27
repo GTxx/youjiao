@@ -1,5 +1,7 @@
 from flask_security.forms import RegisterForm, NewPasswordFormMixin, PasswordConfirmFormMixin
 import inspect
+from flask import flash
+from wtforms import HiddenField
 from flask_security.forms import RegisterFormMixin
 from wtforms import StringField, PasswordField, Field
 from wtforms.validators import DataRequired, Email, Length, EqualTo
@@ -36,7 +38,7 @@ class RegisterForm(Form):
     email = StringField(u'email', validators=email_validators)
     password = PasswordField(u'password', validators=password_validators)
     password_confirm = PasswordField(u'password_confirm', validators=password_confirm_validators)
-    captcha_key = StringField(u'captcha_key', validators=[Length(min=64, max=64)])
+    captcha_key = HiddenField(u'captcha_key', validators=[Length(min=64, max=64)])
     captcha_content = StringField(u'captcha_content', validators=[Length(min=4, max=4)])
 
     def validate(self):
@@ -67,3 +69,34 @@ class RegisterForm(Form):
 
         fields = inspect.getmembers(self, is_field_and_user_attr)
         return dict((key, value.data) for key, value in fields)
+
+
+class LoginForm(Form):
+    email_or_name = StringField('email_or_name', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=6, max=30)])
+    next = HiddenField()
+
+    def validate_next(self, field):
+        from flask_security.utils import validate_redirect_url
+        if field.data and not validate_redirect_url(field.data):
+            field.data = ''
+            flash('INVALID_REDIRECT')
+            raise ValidationError('INVALID_REDIRECT')
+
+    def validate_email_or_name(self, field):
+        from sqlalchemy import or_
+        users = User.query.filter(or_(email=field.data, name=field.data))
+        if not users:
+            raise ValidationError('email/name of password error')
+
+    def validate(self):
+        from sqlalchemy import or_
+        email_or_name = self.email_or_name.data
+        password = self.password.data
+        users = User.query.filter((User.email==email_or_name)|(User.name==email_or_name))
+        user = users[0]
+        from .utils import verify_and_update_password
+        if not verify_and_update_password(password, user):
+            raise ValidationError('email/name or password error')
+        self.user = user
+        return True

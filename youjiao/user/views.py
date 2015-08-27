@@ -81,12 +81,25 @@ def register():
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    from .forms import LoginForm
+    if request.method == 'POST':
+        form = LoginForm(request.form)
+        if form.validate_on_submit():
+            user = form.user
+            login_user(user, force=True)
+            return redirect('/')
+    elif request.method == 'GET':
+        form = LoginForm()
+    return render_template('security/login.html', form=form)
 
 
 @user_bp.route('/logout')
 def logout():
-    pass
+    from flask_login import logout_user, current_user
+    if current_user.is_authenticated():
+        logout_user()
+    return redirect(request.args.get('next', None) or '/')
+
 
 
 @user_bp.route('/refresh_captcha/<captcha_key>')
@@ -101,8 +114,3 @@ def refresh_captcha(captcha_key):
     db.session.add(captcha)
     db.session.commit()
     return json.dumps({'captcha_key': captcha.key, 'url': captcha.key})
-
-
-@user_bp.route('/login')
-def login():
-    return 'test'
