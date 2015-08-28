@@ -60,12 +60,16 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 class Captcha(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
-    key = db.Column(db.String(64), default=generate_random_string_64)
+    key = db.Column(db.String(64))
     content = db.Column(db.String(4), default=generate_random_number_4)
 
     @classmethod
-    def generate(cls):
+    def generate(cls, key):
+        captcha = cls.query.filter_by(key=key).first()
+        if captcha:
+            captcha.delete()
         captcha = cls()
+        captcha.key = key
         captcha.save()
         image = ImageCaptcha(width=160, height=80)
         # TODO: use file path config
@@ -81,5 +85,7 @@ class Captcha(db.Model, CRUDMixin):
     def delete(self):
         file_name = os.path.join(os.getcwd(), 'youjiao/static/captcha', self.key+'.png')
         super(Captcha, self).delete()
-        os.remove(file_name)
-
+        try:
+            os.remove(file_name)
+        except Exception as e:
+            print(e)

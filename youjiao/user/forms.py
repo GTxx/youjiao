@@ -1,27 +1,63 @@
-from flask_security.forms import RegisterForm, NewPasswordFormMixin, PasswordConfirmFormMixin
+# -*- coding: utf-8 -*-
+from flask_security.forms import RegisterForm
 import inspect
-from flask import flash
+from flask import flash, request, session
 from wtforms import HiddenField
-from flask_security.forms import RegisterFormMixin
 from wtforms import StringField, PasswordField, Field
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from flask_wtf import Form
 from wtforms import ValidationError
 from wtforms.validators import Regexp
-from flask_security.forms import UniqueEmailFormMixin
-from flask import current_app
-from werkzeug.local import LocalProxy
+import hashlib
+import os
+from wtforms.widgets.core import HTMLString
 from .models import User, Captcha
-from flask import after_this_request
 
 
 def unique_user_name(form, field):
     if User.query.filter_by(name=field.data).first() is not None:
         raise ValidationError('name already exists')
 
+
 def unique_email(form, field):
     if User.query.filter_by(email=field.data).first() is not None:
         raise ValidationError('email already exists')
+
+
+def check_captcha(captcha_content):
+    captcha_key = session.get('captcha_key')
+    if not captcha_key:
+        raise ValidationError('have no captcha key in session')
+    captcha = Captcha.query.filter_by(key=captcha_key).first()
+    if not captcha:
+        raise ValidationError('captcha error')
+    if captcha.content != captcha_content:
+        raise ValidationError('captcha error')
+
+
+def captcha_validator(form, field):
+    return check_captcha(field.data)
+
+
+class CaptcharWidget(object):
+    def __call__(self, field, **kwargs):
+        # generate captcha
+
+        if 'captcha_key' not in session:
+            session['captcha_key'] = hashlib.sha1(os.urandom(64)).hexdigest()
+        captcha = Captcha.generate(str(session['captcha_key']))
+        return HTMLString('<img src=%s>' % captcha.img_url)
+
+class CaptchaField(Field):
+    '''captcha在CaptchaWidget中生成，
+    captcha_key在session中，每个用户有唯一的captcha_key，通过这个captcha_key
+    做captcha匹配
+    '''
+    def __init__(self, validators=None, **kwargs):
+        validators = validators or [captcha_validator, ]
+        super(CaptchaField, self).__init__(validators=validators, **kwargs)
+
+    widget = CaptcharWidget()
 
 
 class RegisterForm(Form):
@@ -38,29 +74,18 @@ class RegisterForm(Form):
     email = StringField(u'email', validators=email_validators)
     password = PasswordField(u'password', validators=password_validators)
     password_confirm = PasswordField(u'password_confirm', validators=password_confirm_validators)
-    captcha_key = HiddenField(u'captcha_key', validators=[Length(min=64, max=64)])
-    captcha_content = StringField(u'captcha_content', validators=[Length(min=4, max=4)])
+    captcha = CaptchaField()
 
     def validate(self):
-        captcha_key = self.captcha_key.data.strip()
-        captcha_content = self.captcha_content.data.strip()
-
-        captcha = Captcha.query.filter_by(key=captcha_key, content=captcha_content.upper()).first()
-
-        # always delete captcha
-        @after_this_request
-        def delete_captcha(response):
-            if captcha:
-                captcha.delete()
-            return response
-
-        if not captcha:
-            self.captcha_content.errors += ('captcha error', )
+        captcha = self.captcha.data
+        try:
+            if not captcha:
+                raise ValidationError('captcha is required')
+            check_captcha(captcha)
+        except ValidationError as e:
+            self.captcha.errors += (str(e), )
             return False
-        if not super(RegisterForm, self).validate():
-            return False
-
-        return True
+        return super(RegisterForm, self).validate()
 
     def to_dict(self):
         def is_field_and_user_attr(member):
@@ -74,6 +99,7 @@ class RegisterForm(Form):
 class LoginForm(Form):
     email_or_name = StringField('email_or_name', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired(), Length(min=6, max=30)])
+    captcha = CaptchaField()
     next = HiddenField()
 
     def validate_next(self, field):
@@ -89,6 +115,15 @@ class LoginForm(Form):
             raise ValidationError('email/name of password error')
 
     def validate(self):
+        # always do captcha validate first
+        captcha = self.captcha.data
+        try:
+            if not captcha:
+                raise ValidationError('captcha is required')
+            check_captcha(captcha)
+        except ValidationError as e:
+            self.captcha.errors += (str(e), )
+            return False
         if not super(LoginForm, self).validate():
             return False
         from sqlalchemy import or_

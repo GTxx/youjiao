@@ -72,11 +72,11 @@ def register():
         #     import ipdb; ipdb.set_trace()
     elif request.method == 'GET':
         form = RegisterForm()
+        form.hidden_tag()
     # generate new captcha
-    captcha = Captcha.generate()
+    # captcha = Captcha.generate()
     return render_template('security/register_user.html',
-                           register_user_form=form, captcha_key=captcha.key,
-                           captcha_url=captcha.img_url)
+                           register_user_form=form)
 
 
 @user_bp.route('/login', methods=['GET', 'POST'])
@@ -102,8 +102,9 @@ def logout():
 
 
 
-@user_bp.route('/refresh_captcha/<captcha_key>')
+@user_bp.route('/refresh_captcha/')
 def refresh_captcha(captcha_key):
+
     captcha = Captcha.query.filter_by(key=captcha_key).first_or_404()
 
     # delete old one and create a new captcha
