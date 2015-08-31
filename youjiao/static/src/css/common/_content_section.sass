@@ -1,0 +1,164 @@
+=section-block-title($width)
+  width: $width
+  height: 30px
+  line-height: 30px
+  color: white
+  padding-left: 12px
+  background: $youjiao-pink-2
+  margin-bottom: 13px
+  &:after
+    content: ' '
+    display: block
+    float: right
+    margin-right: -22px
+    width: 22px
+    height: 30px
+    background: url('../../image/icons/title-tri.png') no-repeat
+    background-size: 100%
+
+.section-block-title-9
+  +section-block-title(170px)
+.section-block-title-7
+  +section-block-title(120px)
+.section-block-title-6
+  +section-block-title(100px)
+.section-block-title-4
+  +section-block-title(70px)
+
+.video-section-b
+  margin-top: 26px
+  .video-section-list
+    +clear-float
+    li
+      width: 243px
+      height: 219px
+      float: left
+      box-sizing: border-box
+      text-align: center
+      cursor: pointer
+      .v-image-wrapper
+        width: 215px
+        height: 121px
+        margin: 13px auto 0
+        position: relative
+      .v-image-hover-layer
+        position: absolute
+        top: 0
+        left: 0
+        width: 215px
+        height: 121px
+        background: rgb(204, 204, 204)
+        opacity: 0
+      img
+        width: 215px
+        height: 121px
+        background: #CCCCCC
+      h5
+        margin-top: 6px
+        color: $font-gray
+        font-size: 18px
+      .start-download
+        display: block
+        width: 92px
+        height: 28px
+        margin: 8px auto 0 auto
+        background: white
+        color: $font-gray
+        border-radius: 4px
+        line-height: 28px
+        box-sizing: border-box
+        border: 1px solid #CCCCCC
+
+.video-section-lg
+  margin-top: 26px
+  .video-section-list
+    +clear-float
+    li
+      width: 324px
+      height: 266px
+      float: left
+      box-sizing: border-box
+      text-align: center
+      cursor: pointer
+      .v-image-wrapper
+        width: 284px
+        height: 160px
+        margin: 13px auto 0
+        position: relative
+      .v-image-hover-layer
+        position: absolute
+        top: 0
+        left: 0
+        width: 284px
+        height: 160px
+        background: rgb(204, 204, 204)
+        opacity: 0
+      img
+        width: 284px
+        height: 160px
+        background: #CCCCCC
+      h5
+        margin-top: 6px
+        color: $font-gray
+        font-size: 18px
+      .start-download
+        display: block
+        width: 92px
+        height: 28px
+        margin: 8px auto 0 auto
+        background: white
+        color: $font-gray
+        border-radius: 4px
+        line-height: 28px
+        border: 1px solid #CCCCCC
+
+.video-s-active
+  border: 1px solid #CCCCCC
+  h5
+    color: $youjiao-font-pink !important
+  .start-download
+    border: 1px solid $youjiao-font-pink
+    background: $youjiao-font-pink !important
+    color: white !important
+
+.n-v-section-b
+  margin-top: 26px
+  .n-v-section-list
+    +clear-float
+    li
+      width: 243px
+      height: 296px
+      float: left
+      box-sizing: border-box
+      text-align: center
+      cursor: pointer
+      .nv-image-wrapper
+        width: 215px
+        height: 215px
+        margin: 13px auto 0
+        position: relative
+      .nv-image-hover-layer
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 215px
+        height: 30px
+        background: rgb(204, 204, 204)
+        opacity: 0
+      img
+        width: 215px
+        height: 215px
+        background: #CCCCCC
+      h5
+        margin-top: 6px
+        font-size: 18px
+        color: $font-gray
+      h6
+        margin-top: 4px
+        color: $font-gray
+        font-size: 14px
+
+.n-v-active
+  border: 1px solid #CCCCCC
+  h5
+    color: $youjiao-font-pink !important

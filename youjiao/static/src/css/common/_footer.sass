@@ -1,0 +1,53 @@
+.footer-wrapper
+  border-top: 4px solid $youjiao-pink
+
+.footer
+  padding-top: 30px
+  margin: 0 auto
+  width: 680px
+  background: $background-brown
+  +clear-float
+
+  div
+    +clear-float
+
+  ul
+    width: 120px
+    margin: 0 auto
+    margin-bottom: 20px
+
+    li
+      position: relative
+      margin-left: 10px
+      line-height: 20px
+      &:before
+        position: absolute
+        content: ' '
+        display: inline-block
+        width: 2px
+        height: 2px
+        background: $font-gray
+        border-radius: 50%
+        margin-top: 8px
+        margin-left: -8px
+
+    .list-style-none
+      list-style: none
+      margin-left: 0
+      &:before
+        display: none !important
+
+    a
+      color: $font-gray
+      font-size: 14px
+
+  .copyright
+    font-size: 14px
+    color: $font-gray
+    text-align: center
+
+.footer-sub-wrapper
+  +clear-float
+  div
+    width: 25%
+    float: left

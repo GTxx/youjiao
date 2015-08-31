@@ -1,0 +1,88 @@
+ul
+  li
+    list-style: none
+
+a
+  text-decoration: none
+
+h1, h2, h3, h4, h5, h6, ul, ol, li, p
+  margin: 0
+  padding: 0
+
+.float-left
+  float: left
+
+.float-right
+  float: right
+
+$youjiao-pink: #fe5974
+$youjiao-pink-2: #ff7695
+$youjiao-font-pink: #ff3c4e
+$wrapper-width: 1180px
+$font-gray: #7a7a7a
+$font-gray-heavy: #3e3e3e
+$font-gray-light: #6c6c6c
+$gray-a3: #a3a3a3
+$background-brown: #fefef1
+$background-brown-2: #fffdf2
+
+=main-noright
+  width: 1000px
+  box-sizing: border-box
+  padding-left: 24px
+  float: left
+  padding-bottom: 60px
+
+=clear-float
+  overflow: hidden
+  zoom: 1
+
+=list-first
+  padding: 0
+  background: $youjiao-pink-2
+  font-weight: bold
+  color: white !important
+  padding-left: 12px !important
+  line-height: 30px !important
+  &:before
+    display: none !important
+  a
+    color: white !important
+
+=user-input($width)
+  outline: none
+  box-sizing: border-box
+  height: 40px
+  border: 1px solid #ccc
+  border-radius: 4px
+  width: $width
+
+=big-button($width)
+  margin: 0 auto
+  display: block
+  width: $width
+  height: 40px
+  background: $youjiao-pink
+  border-radius: 4px
+  color: white
+  text-align: center
+  line-height: 40px
+  font-size: 20px
+
+
+.pink-button
+  display: inline-block
+  width: 200px
+  height: 40px
+  +list-first
+
+.classes-select-wrapper
+  float: right
+  margin-top: -38px
+  padding-right: 26px
+  color: $font-gray
+  .classes-select
+    width: 180px
+    background: transparent
+    border: 1px solid #ccc
+    outline: none

@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+
+{% block leftBar %}
+    {% include 'research/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <h1>test</h1>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'research/teacher_right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+{% endblock %}

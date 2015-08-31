@@ -1,0 +1,73 @@
+.left-bar
+  width: 180px
+  float: left
+  box-sizing: border-box
+  .left-bar-subul-last
+    padding-bottom: 26px
+    margin-bottom: 48px
+  ul
+    margin: 0
+    padding: 0
+    background: $background-brown-2
+    padding-bottom: 16px
+    li
+      height: 30px
+      box-sizing: border-box
+      padding-top: 13px
+      padding-left: 16px
+      line-height: 17px
+    .left-list-first
+      +list-first
+  a
+    color: $font-gray
+
+  .left-adposition
+    width: 180px
+    height: 720px
+    background: #CCCCCC
+
+.right-bar
+  width: 244px
+  float: left
+  box-sizing: border-box
+  ul
+    li
+      position: relative
+      height: 30px
+      padding-left: 16px
+      color: $font-gray
+      line-height: 30px
+      &:before
+        position: absolute
+        content: ' '
+        display: inline-block
+        width: 2px
+        height: 2px
+        background: $font-gray
+        border-radius: 50%
+        margin-top: 15px
+        margin-left: -4px
+
+.right-list-first
+  +list-first
+
+  .weekly-hot
+    height: 372px
+    background: $background-brown
+    ul
+      padding: 0
+
+.right-bar-slide
+  width: 220px
+  height: 220px
+  background: #CCCCCC
+  margin-bottom: 26px
+  position: relative
+  .rslides li
+    padding: 0 !important
+  .rslides_tabs
+    padding: 0 !important
+  .rslides_tabs li
+    height: auto !important
+  .rslides_tabs li a
+    color: transparent !important
