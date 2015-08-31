@@ -115,16 +115,18 @@ def logout():
 
 
 
+# TODO: add rate limit
 @user_bp.route('/refresh_captcha/')
-def refresh_captcha(captcha_key):
+def refresh_captcha():
+    captcha_key = session.get('captcha_key')
+    if not captcha_key:
+        return json.dumps({'error': 'not captcha key, refresh page'})
+    captcha = Captcha.query.filter_by(key=captcha_key).first()
+    if not captcha:
+        return json.dumps({'error': 'not captcha key, refresh page'})
 
     captcha = Captcha.query.filter_by(key=captcha_key).first_or_404()
 
-    # delete old one and create a new captcha
-    db.session.delete(captcha)
-    db.session.commit()
+    captcha = Captcha.generate(captcha.key)
 
-    captcha = Captcha()
-    db.session.add(captcha)
-    db.session.commit()
-    return json.dumps({'captcha_key': captcha.key, 'url': captcha.key})
+    return json.dumps({'captcha_key': captcha.key, 'url': captcha.img_url})
