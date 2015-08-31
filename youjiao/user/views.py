@@ -59,7 +59,7 @@ def register():
         print(request.json)
         print(request.form)
         form = RegisterForm(request.form)
-        import ipdb; ipdb.set_trace()
+        #import ipdb; ipdb.set_trace()
         if form.validate_on_submit():
             # TODO: register complete and jump to user profile or index page
             data = form.to_dict()

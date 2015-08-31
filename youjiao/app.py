@@ -23,8 +23,7 @@ from .content.views import content_bp
 
 # Flask views
 def index():
-    import ipdb; ipdb.set_trace()
-    return render_template('home/home.html')
+    return render_template('home/home.html', current_page='home')
 
 
 def create_app():
