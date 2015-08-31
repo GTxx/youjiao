@@ -3,11 +3,11 @@ from __future__ import absolute_import
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_security import RoleMixin, UserMixin, SQLAlchemyUserDatastore
-from flask_security import Security
 from youjiao.extensions import db
 from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import os
+import time
 from .utils import generate_random_number_4, generate_random_string_64
 
 
@@ -68,7 +68,7 @@ class Role(db.Model, RoleMixin, CRUDMixin):
 
 class Captcha(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
-    key = db.Column(db.String(64))
+    key = db.Column(db.String(64), unique=True)
     content = db.Column(db.String(4), default=generate_random_number_4)
     img_name = db.Column(db.String(128))
 
@@ -80,10 +80,11 @@ class Captcha(db.Model, CRUDMixin):
     def generate(cls, key):
         captcha = cls.query.filter_by(key=key).first()
         if captcha:
-            captcha.delete()
-        captcha = cls()
+            captcha.delete_img()
+        else:
+            captcha = cls()
         captcha.key = key
-        import time
+        captcha.content = generate_random_number_4()
         captcha.img_name = '.'.join([key, str(int(time.time())), 'png'])
         captcha.save()
         image = ImageCaptcha(width=160, height=80)
@@ -97,9 +98,11 @@ class Captcha(db.Model, CRUDMixin):
         return os.path.join('/static/captcha', self.img_name)
 
     def delete(self):
-        file_name = self.img_path
+        self.delete_img()
         super(Captcha, self).delete()
+
+    def delete_img(self):
         try:
-            os.remove(file_name)
+            os.remove(self.img_path)
         except Exception as e:
             print(e)

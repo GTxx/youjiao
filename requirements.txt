@@ -4,3 +4,4 @@ Flask-Script
 flask_security
 captcha
 Flask-Babel
+Flask-DebugToolbar

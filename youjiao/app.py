@@ -7,6 +7,8 @@ from flask_wtf import CsrfProtect
 from flask_babel import Babel
 from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
+from flask_debugtoolbar import DebugToolbarExtension
+
 
 from .config import Config
 from .content.models import Activity, Page
@@ -29,7 +31,10 @@ def index():
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.debug = True
     db.init_app(app)
+    # flask_debug
+    DebugToolbarExtension(app)
     # security = Security(app, user_datastore)
     # flask_login
     login_manager = LoginManager(app)
