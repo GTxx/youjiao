@@ -19,15 +19,15 @@
         <form action="/login" method="post" id="login-form">
             {{ form.hidden_tag() }}
             <div class="user-input-item first">
-                <label for="">帐号:</label><input type="text" name="email_or_name">
+                <label for="">帐号:</label><input placeholder="用户名或邮箱" type="text" name="email_or_name">
                 <div class="form-invalid">{{ render_error(form.email_or_name) }}</div>
             </div>
             <div class="user-input-item">
-                <label for="">密码:</label><input type="password" name="password">
+                <label for="">密码:</label><input placeholder="密码" type="password" name="password">
                 <div class="form-invalid">{{ render_error(form.password) }}</div>
             </div>
             <div class="user-input-item captcha">
-                <label for="">验证码:</label><input type="text" name="captcha">
+                <label for="">验证码:</label><input placeholder="验证码" type="text" name="captcha">
                 {{ form.captcha }}
                 <div class="form-invalid">{{ render_error(form.captcha) }}</div>
             </div>
