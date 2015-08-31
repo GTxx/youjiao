@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, redirect
-from flask_security.decorators import anonymous_user_required
+from flask import Blueprint, render_template, request, redirect, session, current_app
+from .decorators import anonymous_user_required
+from flask_principal import identity_changed, AnonymousIdentity
 from .forms import RegisterForm
 from youjiao.extensions import db
 from .models import Captcha, User
@@ -102,6 +103,14 @@ def logout():
     from flask_login import logout_user, current_user
     if current_user.is_authenticated():
         logout_user()
+
+        # Remove session keys set by Flask-Principal
+        for key in ('identity.name', 'identity.auth_type'):
+            session.pop(key, None)
+
+        # Tell Flask-Principal the user is anonymous
+        identity_changed.send(current_app._get_current_object(),
+                              identity=AnonymousIdentity())
     return redirect(request.args.get('next', None) or '/')
 
 
