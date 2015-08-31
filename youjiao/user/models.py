@@ -25,7 +25,7 @@ class User(db.Model, UserMixin, CRUDMixin):
 
     phone_number = db.Column(db.String(16), unique=True)
     active = db.Column(db.Boolean, default=True)
-    is_admin = db.Column(db.Boolean, default=False)
+    # is_admin = db.Column(db.Boolean, default=False)
     # TODO: use a base model to add create_time and update_time
     create_time = db.Column(db.DateTime, default=datetime.now)
     last_login = db.Column(db.DateTime, onupdate=datetime.now)
@@ -40,6 +40,17 @@ class User(db.Model, UserMixin, CRUDMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    @classmethod
+    def create_user(cls, name, email, password):
+        from .utils import encrypt_password
+        password = encrypt_password(password)
+        user = User()
+        user.name = name
+        user.email = email
+        user.password = password
+        user.save()
+        return user
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,9 +64,6 @@ class Role(db.Model, RoleMixin, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
-
-
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 
 class Captcha(db.Model, CRUDMixin):

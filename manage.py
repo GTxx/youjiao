@@ -28,5 +28,18 @@ def dropdb():
     db.drop_all()
 
 
+@manager.option('-p', '--password', dest='password', default='1')
+@manager.option('-e', '--email', dest='email', default='admin@1.com')
+def create_admin(password, email):
+    from youjiao.user.models import User, Role
+    user = User.create_user('admin', email, password)
+    role = Role()
+    role.name = 'admin'
+    role.description = 'admin role'
+    role.save()
+    user.roles.append(role)
+    user.save()
+
+
 if __name__ == "__main__":
     manager.run()

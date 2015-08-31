@@ -1,6 +1,8 @@
 import string
 import random
 from flask import current_app
+from flask_login import current_user
+from flask_principal import UserNeed, RoleNeed
 from werkzeug.local import LocalProxy
 
 
@@ -71,3 +73,13 @@ def get_hmac(password):
 def load_user(userid):
     from .models import User
     return User.query.filter_by(id=userid).first()
+
+
+def _on_identity_loaded(sender, identity):
+    if hasattr(current_user, 'id'):
+        identity.provides.add(UserNeed(current_user.id))
+
+    for role in current_user.roles:
+        identity.provides.add(RoleNeed(role.name))
+
+    identity.user = current_user

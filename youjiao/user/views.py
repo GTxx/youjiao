@@ -87,6 +87,10 @@ def login():
         if form.validate_on_submit():
             user = form.user
             login_user(user, force=True)
+            from flask_principal import identity_changed, Identity
+            from flask import current_app
+            identity_changed.send(current_app._get_current_object(),
+                                  identity=Identity(user.id))
             return redirect('/')
     elif request.method == 'GET':
         form = LoginForm()
