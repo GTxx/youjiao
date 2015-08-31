@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, session, curren
 from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
 from .forms import RegisterForm
-from youjiao.extensions import db
+from youjiao.extensions import limiter
 from .models import Captcha, User
 import json
 
@@ -114,9 +114,8 @@ def logout():
     return redirect(request.args.get('next', None) or '/')
 
 
-
-# TODO: add rate limit
 @user_bp.route('/refresh_captcha/')
+@limiter.limit('1 per second')
 def refresh_captcha():
     captcha_key = session.get('captcha_key')
     if not captcha_key:

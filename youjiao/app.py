@@ -8,13 +8,14 @@ from flask_babel import Babel
 from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_limiter import Limiter
 
 
 from .config import Config
 from .content.models import Activity, Page
 from .user.models import User
 from .user.utils import load_user
-from .extensions import db
+from .extensions import db, limiter
 
 from .user.admin import UserAdmin
 from .user.utils import _on_identity_loaded
@@ -25,6 +26,7 @@ from .content.views import content_bp
 
 # Flask views
 def index():
+    # import ipdb; ipdb.set_trace()
     return render_template('home/home.html', current_page='home')
 
 
@@ -48,6 +50,8 @@ def create_app():
     # flask_babel
     Babel(app)
 
+    # flask_limiter
+    limiter.init_app(app)
     # flask_admin
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
