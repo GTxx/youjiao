@@ -2,11 +2,9 @@
 
 {% macro render_error(field) %}
     {% if field.errors %}
-        <ul>
             {% for error in field.errors %}
-                <li>{{ error }}</li>
+                <span>{{ error }}</span>
             {% endfor %}
-        </ul>
     {% endif %}
 {% endmacro %}
 
@@ -19,30 +17,37 @@
                 <a href="">马上注册</a>
             </div>
         </div>
-        <form action="" method="post">
+        <form id="register-form" action="" method="post">
             {{ register_user_form.hidden_tag() }}
             <div class="user-input-item first">
                 <label for="">邮箱:</label><input type="email" name="email">
-                {{ render_error(register_user_form.email) }}
+                <span class="form-invalid">{{ render_error(register_user_form.email) }}</span>
             </div>
             <div class="user-input-item">
                 <label for="">用户名:</label><input type="text" name="name">
-                {{ render_error(register_user_form.name) }}
+                <span class="form-invalid">{{ render_error(register_user_form.name) }}</span>
             </div>
             <div class="user-input-item">
-                <label for="">密码:</label><input type="text" name="password">
-                {{ render_error(register_user_form.password) }}
+                <label for="">密码:</label><input type="password" name="password" id="password">
+                <span class="form-invalid">{{ render_error(register_user_form.password) }}</span>
             </div>
             <div class="user-input-item">
-                <label for="">确认密码:</label><input type="text" name="password_confirm">
-                {{ render_error(register_user_form.password_confirm) }}
+                <label for="">确认密码:</label><input type="password" name="password_confirm">
+                <span class="form-invalid">{{ render_error(register_user_form.password_confirm) }}</span>
             </div>
             <div class="user-input-item captcha">
                 <label for="">验证码:</label><input type="text" name="captcha">
                 {{ register_user_form.captcha }}
-                {{ render_error(register_user_form.captcha) }}
+                <span class="form-invalid">
+                    {{ render_error(register_user_form.captcha) }}
+                </span>
             </div>
             <input type="submit" class="user-submit-reg" value="立即注册">
         </form>
     </div>
-{% endblock %}%
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='vendor/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='build/js/register_login.js') }}"></script>
+{% endblock %}

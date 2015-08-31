@@ -1,6 +1,6 @@
 .user-login
   width: 472px
-  height: 348px
+  height: 396px
   margin: 10px auto 0 auto
   border: 1px solid #CCCCCC
   a
@@ -49,6 +49,8 @@
   .user-login-submit
     +big-button(354px)
     margin-top: 26px
+    border: none
+    outline: none
 
   .user-login-forget
     width: 354px
@@ -103,8 +105,43 @@
   .captcha
     input
       +user-input(150px)
+    img
+      cursor: pointer
+      width: 108px
+      height: 40px
+      vertical-align: middle
 
   .user-submit-reg
     +big-button(264px)
     margin-left: 198px
     margin-top: 21px
+    border: none
+    outline: none
+
+.user-login
+  .captcha
+    input
+      +user-input(150px)
+    img
+      cursor: pointer
+      width: 108px
+      height: 40px
+      vertical-align: middle
+
+span.form-invalid
+  margin-left: 8px
+  color: $youjiao-font-pink
+  font-size: 16px
+
+div.form-invalid
+  height: 2px
+  line-height: 2px
+  color: $youjiao-font-pink
+  font-size: 16px
+  div
+    text-align: left
+    padding-left: 88px
+
+
+span.form-valid
+  color: transparent

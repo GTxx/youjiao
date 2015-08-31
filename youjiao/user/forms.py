@@ -135,7 +135,7 @@ class LoginForm(Form):
         if not verify_and_update_password(password, user):
             self.email_or_name.errors.append('email/name or password error')
             self.password.errors.append('email/name or password error')
-            import ipdb; ipdb.set_trace()
+            #import ipdb; ipdb.set_trace()
             return False
         self.user = user
         return True
