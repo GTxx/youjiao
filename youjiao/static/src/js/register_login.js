@@ -38,9 +38,10 @@ $(function () {
             captcha: "请输入验证码"
         },
         submitHandler: function (form) {
-            form.submit()
+            form.submit();
         }
     });
+
 
     $("#login-form").validate({
         errorElement: 'div',
@@ -70,7 +71,20 @@ $(function () {
             captcha: "请输入验证码"
         },
         submitHandler: function (form) {
-            form.submit()
+            form.submit();
         }
+    });
+
+
+    $(".captcha").find('img').click(function(){
+        var self = $(this);
+        $.ajax({
+            type: 'GET',
+            url: '/refresh_captcha/',
+            success: function(data) {
+                var res = $.parseJSON(data);
+                self.attr('src', res.url);
+            }
+        });
     });
 });
