@@ -62,6 +62,11 @@ class Captcha(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(64))
     content = db.Column(db.String(4), default=generate_random_number_4)
+    img_name = db.Column(db.String(128))
+
+    @property
+    def img_path(self):
+        return os.path.join(os.getcwd(), 'youjiao/static/captcha', self.img_name)
 
     @classmethod
     def generate(cls, key):
@@ -70,20 +75,21 @@ class Captcha(db.Model, CRUDMixin):
             captcha.delete()
         captcha = cls()
         captcha.key = key
+        import time
+        captcha.img_name = '.'.join([key, str(int(time.time())), 'png'])
         captcha.save()
         image = ImageCaptcha(width=160, height=80)
         # TODO: use file path config
-        current_path = os.getcwd()
-        image.write(captcha.content, os.path.join(current_path, 'youjiao/static/captcha', captcha.key+'.png'))
+        image.write(captcha.content, captcha.img_path)
         return captcha
 
     @property
     def img_url(self):
         # TODO: use file path config
-        return os.path.join('/static/captcha', self.key+'.png')
+        return os.path.join('/static/captcha', self.img_name)
 
     def delete(self):
-        file_name = os.path.join(os.getcwd(), 'youjiao/static/captcha', self.key+'.png')
+        file_name = self.img_path
         super(Captcha, self).delete()
         try:
             os.remove(file_name)
