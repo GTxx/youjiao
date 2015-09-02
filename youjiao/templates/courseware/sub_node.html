@@ -18,7 +18,9 @@
             </div>
         </div>
         <div class="video-section-b">
-            <div class="section-block-title-4">班级分类</div>
+            <div class="section-block-wrapper">
+                <div class="section-block-title-4">班级分类</div>
+            </div>
             <ul class="video-section-list">
                 {% for i in range(4) %}
                     <li>
@@ -26,7 +28,9 @@
                             <div class="v-image-wrapper">
                                 <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
-                                <div class="v-image-hover-layer"></div>
+                                <div class="v-image-hover-layer">
+                                    <div class="v-hover-layer-icon"></div>
+                                </div>
                             </div>
                             <h5>青花瓷</h5>
                             <a href="" class="start-download">开始下载</a>
@@ -36,7 +40,9 @@
             </ul>
         </div>
         <div class="rank-section">
-            <div class="section-block-title-9">教材课件下载排行榜</div>
+            <div class="section-block-wrapper">
+                <div class="section-block-title-9">教材课件下载排行榜</div>
+            </div>
             <div class="rank-section-list">
                 <div class="rank-section-list-t">
                     <div class="rank-section-list-l">

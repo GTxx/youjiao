@@ -16,6 +16,9 @@
     background: url('../../image/icons/title-tri.png') no-repeat
     background-size: 100%
 
+.section-block-wrapper
+  background: $background-brown
+
 .section-block-title-9
   +section-block-title(170px)
 .section-block-title-7
@@ -47,8 +50,28 @@
         left: 0
         width: 215px
         height: 121px
-        background: rgb(204, 204, 204)
+        background: #000000
         opacity: 0
+        .v-hover-layer-icon
+          width: 60px
+          height: 60px
+          border-radius: 50%
+          margin: 22px auto
+          border: 8px solid #ffffff
+          &:after
+            position: absolute
+            z-index: -1
+            content: ' '
+            display: inline-block
+            width: 0
+            height: 0
+            background: #ffffff
+            margin-top: 12px
+            margin-left: -4px
+            border-width: 17px 17px
+            border-style: solid
+            border-left-color: #fff
+
       img
         width: 215px
         height: 121px
@@ -91,8 +114,27 @@
         left: 0
         width: 284px
         height: 160px
-        background: rgb(204, 204, 204)
+        background: #000000
         opacity: 0
+        .v-hover-layer-icon
+          width: 84px
+          height: 84px
+          border-radius: 50%
+          margin: 28px auto
+          border: 8px solid #ffffff
+          &:after
+            position: absolute
+            z-index: -1
+            content: ' '
+            display: inline-block
+            width: 0
+            height: 0
+            background: #ffffff
+            margin-top: 14px
+            margin-left: -8px
+            border-width: 28px 28px
+            border-style: solid
+            border-left-color: #fff
       img
         width: 284px
         height: 160px
@@ -115,11 +157,19 @@
 .video-s-active
   border: 1px solid #CCCCCC
   h5
-    color: $youjiao-font-pink !important
+    color: $youjiao-pink-2 !important
   .start-download
     border: 1px solid $youjiao-font-pink
     background: $youjiao-font-pink !important
     color: white !important
+
+=nv-hover-layer-style
+  position: absolute
+  box-sizing: border-box
+  bottom: 0
+  left: 0
+  width: 215px
+  height: 30px
 
 .n-v-section-b
   margin-top: 26px
@@ -138,13 +188,17 @@
         margin: 13px auto 0
         position: relative
       .nv-image-hover-layer
-        position: absolute
-        bottom: 0
-        left: 0
-        width: 215px
-        height: 30px
-        background: rgb(204, 204, 204)
-        opacity: 0
+        +nv-hover-layer-style
+        background: #000000
+        opacity: 0.4
+        z-index: 20
+      .nv-price
+        +nv-hover-layer-style
+        line-height: 30px
+        text-align: right
+        padding-right: 10px
+        color: white
+        z-index: 21
       img
         width: 215px
         height: 215px
@@ -152,13 +206,15 @@
       h5
         margin-top: 6px
         font-size: 18px
-        color: $font-gray
+        color: $font-gray-heavy
+        font-family: $yahei
       h6
         margin-top: 4px
         color: $font-gray
         font-size: 14px
+        font-family: $yahei
 
 .n-v-active
   border: 1px solid #CCCCCC
   h5
-    color: $youjiao-font-pink !important
+    color: $youjiao-pink-2 !important

@@ -6,25 +6,35 @@
         <div class="youjiao-nav">
             <ul>
                 <li><a class="{% if current_page == 'home' %}nav-active{% endif %}" href="/">首页</a></li>
-                <li><a class="{% if current_page == 'activity' %}nav-active{% endif %}" href="/category/policy/">幼教动态</a></li>
+                <li><a class="{% if current_page == 'activity' %}nav-active{% endif %}"
+                       href="/category/policy/">幼教动态</a></li>
                 <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="/product/">产品</a></li>
-                <li><a class="{% if current_page == 'research' %}nav-active{% endif %}" href="/research/activity/">教学教研</a></li>
-                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="/courseware/">课件中心</a></li>
-                <li class="border-right-none"><a class="{% if current_page == 'school' %}nav-active {% endif %}" href="/school/">幼教网课</a></li>
+                <li><a class="{% if current_page == 'research' %}nav-active{% endif %}"
+                       href="/research/activity/">教学教研</a></li>
+                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="/courseware/">课件中心</a>
+                </li>
+                <li class="border-right-none"><a class="{% if current_page == 'school' %}nav-active {% endif %}"
+                                                 href="/school/">幼教网课</a></li>
             </ul>
         </div>
         <div class="header-right">
             <div class="header-right-top">
                 <span>关于61幼教网</span>
+                <span class="header-login">
                 {% if current_user.is_authenticated() %}
-                    Hi {{ current_user.name }}
+                    <a class="header-login-name" href="">{{ current_user.name }}</a>
+                    | <a href="/logout">退出</a>
                 {% else %}
-                <span class="header-login"><a href="/login">登陆</a> / <a href="/register">注册</a></span>
+                    <a href="/login">登陆</a> / <a href="/register">注册</a>
                 {% endif %}
+                </span>
             </div>
             <div class="search-input">
                 <input type="text">
-                <a class="search-button" href="javascript:;"></a>
+                <a class="search-button" href="javascript:;">
+                    <img src="{{ url_for('static', filename='image/icons/iconfont-search.png') }}"
+                         style="width: 18px;height: 18px;margin-top: 6px;" alt="">
+                </a>
             </div>
         </div>
     </div>
