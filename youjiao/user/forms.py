@@ -130,7 +130,7 @@ class LoginForm(Form):
         password = self.password.data
         users = User.query.filter((User.email==email_or_name)|(User.name==email_or_name))
         user = users[0]
-        if user.verify_and_update_password(password, user):
+        if user.verify_and_update_password(password):
             self.email_or_name.errors.append('email/name or password error')
             self.password.errors.append('email/name or password error')
             return False
