@@ -8,7 +8,7 @@ from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import os
 import time
-from .utils import generate_random_number_4, generate_random_string_64
+from .utils import generate_random_number_4, encrypt_password
 
 
 roles_users = db.Table(
@@ -50,6 +50,10 @@ class User(db.Model, UserMixin, CRUDMixin):
         user.password = password
         user.save()
         return user
+
+    def set_password(self, new_password):
+        self.password = encrypt_password(new_password)
+        self.save()
 
 
 class UserProfile(db.Model, CRUDMixin):

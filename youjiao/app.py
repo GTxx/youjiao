@@ -20,6 +20,7 @@ from .extensions import db, limiter
 from .user.admin import UserAdmin
 from .user.utils import _on_identity_loaded
 from .user.views import user_bp
+from .user.api import user_api_bp
 from .content.admin import ActivityAdmin, PageAdmin
 from .content.views import content_bp
 
@@ -52,6 +53,7 @@ def create_app():
 
     # flask_limiter
     limiter.init_app(app)
+
     # flask_admin
     admin = Admin(app)
     admin.add_view(ActivityAdmin(Activity, db.session))
@@ -61,6 +63,6 @@ def create_app():
     # register blueprint
     app.register_blueprint(content_bp)
     app.register_blueprint(user_bp)
-
+    app.register_blueprint(user_api_bp)
     app.add_url_rule('/', 'index', index)
     return app

@@ -28,7 +28,7 @@ def dropdb():
     db.drop_all()
 
 
-@manager.option('-p', '--password', dest='password', default='1')
+@manager.option('-p', '--password', dest='password', default='123456')
 @manager.option('-e', '--email', dest='email', default='admin@1.com')
 def create_admin(password, email):
     from youjiao.user.models import User, Role

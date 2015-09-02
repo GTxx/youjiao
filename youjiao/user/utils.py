@@ -4,6 +4,7 @@ from flask import current_app
 from flask_login import current_user
 from flask_principal import UserNeed, RoleNeed
 from werkzeug.local import LocalProxy
+from flask_security.utils import encrypt_password
 
 
 def generate_random_string_64():
@@ -46,6 +47,11 @@ def verify_and_update_password(password, user):
         user.password = new_password
         user.save()
     return verified
+
+
+def verify_password(password, hashed_password):
+    signed = get_hmac(password).decode('ascii')
+    return password_context.verify(signed, hashed_password)
 
 
 def get_hmac(password):
