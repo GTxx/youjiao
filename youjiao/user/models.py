@@ -8,7 +8,8 @@ from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import os
 import time
-from .utils import generate_random_number_4, encrypt_password
+from .utils import generate_random_number_4, encrypt_password, \
+    verify_password, get_hmac, password_context
 
 
 roles_users = db.Table(
@@ -55,9 +56,22 @@ class User(db.Model, UserMixin, CRUDMixin):
         self.password = encrypt_password(new_password)
         self.save()
 
+    def verify_password(self, password):
+        return verify_password(password, self.password)
+
+    def verify_and_update_password(self, password):
+        """used in login user"""
+        signed = get_hmac(password).decode('ascii')
+        verified, new_password = password_context.verify_and_update(signed, self.password)
+        if verified and new_password:
+            self.password = new_password
+            self.save()
+        return verified
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
+    # TODO: one to one relation
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     # TODO: add column describe/description
     work_place_name = db.Column(db.String(255))

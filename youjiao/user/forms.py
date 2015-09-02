@@ -126,16 +126,13 @@ class LoginForm(Form):
             return False
         if not super(LoginForm, self).validate():
             return False
-        from sqlalchemy import or_
         email_or_name = self.email_or_name.data
         password = self.password.data
         users = User.query.filter((User.email==email_or_name)|(User.name==email_or_name))
         user = users[0]
-        from .utils import verify_and_update_password
-        if not verify_and_update_password(password, user):
+        if user.verify_and_update_password(password, user):
             self.email_or_name.errors.append('email/name or password error')
             self.password.errors.append('email/name or password error')
-            #import ipdb; ipdb.set_trace()
             return False
         self.user = user
         return True

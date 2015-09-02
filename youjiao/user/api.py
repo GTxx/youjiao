@@ -52,7 +52,7 @@ class ResetPasswordSchema(Schema):
     @validates_schema
     @check_fields_exist('password', 'password_confirm')
     def validate_password_and_confirm(self, data, password, password_confirm):
-        if not password == password_confirm:
+        if password != password_confirm:
             raise ValidationError('password != password_confirm')
 
 
