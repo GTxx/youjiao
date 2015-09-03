@@ -27,6 +27,9 @@ def dropdb():
     """Create database."""
     db.drop_all()
 
+@manager.shell
+def make_shell_context():
+    return dict(app=app, db=db)
 
 @manager.option('-p', '--password', dest='password', default='123456')
 @manager.option('-e', '--email', dest='email', default='admin@1.com')

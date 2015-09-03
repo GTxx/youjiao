@@ -6,3 +6,4 @@ captcha
 Flask-Babel
 Flask-DebugToolbar
 marshmallow
+flask-restful
