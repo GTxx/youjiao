@@ -14,6 +14,7 @@ from .content.models import Activity, Page
 from .user.models import User
 from .user.utils import load_user
 from .extensions import db, limiter
+from .utils.csrf import check_csrf
 
 from .user.admin import UserAdmin
 from .user.utils import _on_identity_loaded
@@ -48,7 +49,9 @@ def create_app():
     identity_loaded.connect_via(app)(_on_identity_loaded)
 
     # flask_wtf csrf
-    CsrfProtect(app)
+    csrf = CsrfProtect()
+    csrf.init_app(app)
+    app.before_request(check_csrf(csrf))
 
     # flask_babel
     Babel(app)

@@ -14,6 +14,8 @@ class BaseConfig(object):
     # SECURITY_CONFIRMABLE = False  # disable email confirm
     # SECURITY_SEND_REGISTER_EMAIL = False  # disable email confirm
 
+    # flask_wtf
+    WTF_CSRF_CHECK_DEFAULT = False
 
     # flask_babel
     BABEL_DEFAULT_LOCALE = 'zh'
