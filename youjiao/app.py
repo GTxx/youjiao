@@ -13,7 +13,7 @@ from .config import Config
 from .content.models import Activity, Page
 from .user.models import User
 from .user.utils import load_user
-from .extensions import db, limiter
+from .extensions import db, limiter, admin
 from .utils.csrf import check_csrf
 
 from .user.admin import UserAdmin
@@ -60,10 +60,7 @@ def create_app():
     limiter.init_app(app)
 
     # flask_admin
-    admin = Admin(app)
-    admin.add_view(ActivityAdmin(Activity, db.session))
-    admin.add_view(UserAdmin(User, db.session))
-    admin.add_view(PageAdmin(Page, db.session))
+    admin.init_app(app)
 
     # register blueprint
     app.register_blueprint(content_bp)

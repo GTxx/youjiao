@@ -16,7 +16,9 @@ from .utils import generate_random_number_4, encrypt_password, \
 roles_users = db.Table(
     'roles_users',
     db.Column('user_id', sqla.Integer(), db.ForeignKey('user.id')),
-    db.Column('role_id', sqla.Integer(), db.ForeignKey('role.id')))
+    db.Column('role_id', sqla.Integer(), db.ForeignKey('role.id')),
+    sqla.UniqueConstraint('user_id', 'role_id')
+)
 
 
 class User(db.Model, UserMixin, CRUDMixin):
@@ -37,7 +39,7 @@ class User(db.Model, UserMixin, CRUDMixin):
                             backref=db.backref('users', lazy='dynamic'))
     profile = db.relationship('UserProfile', backref='user', uselist=False)
 
-    def __repr(self):
+    def __repr__(self):
         return '<User {}>'.format(self.name)
 
     def check_password(self, password):
@@ -93,6 +95,9 @@ class Role(db.Model, RoleMixin, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     name = db.Column(sqla.String(80), unique=True)
     description = db.Column(sqla.String(255))
+
+    def __repr__(self):
+        return '<Role {}>'.format(self.name)
 
 
 class Captcha(db.Model, CRUDMixin):

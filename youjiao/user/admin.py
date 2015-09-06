@@ -3,6 +3,7 @@ from flask_admin.contrib import sqla
 from flask_principal import Permission, RoleNeed
 from ..admin_utils import AuthMixin
 from .permissions import admin_permission
+from .models import User, Role
 
 
 class UserAdmin(sqla.ModelView):
@@ -16,3 +17,20 @@ class UserAdmin(sqla.ModelView):
         if not admin_permission.can():
             return False
         return True
+
+
+class RoleAdmin(sqla.ModelView):
+    column_list = ('name', 'description')
+    column_searchable_list = ('name', 'description')
+
+    def is_accessible(self):
+        if not current_user.is_authenticated():
+            return False
+        if not admin_permission.can():
+            return False
+        return True
+
+
+from ..extensions import admin, db
+admin.add_view(UserAdmin(User, db.session))
+admin.add_view(RoleAdmin(Role, db.session))

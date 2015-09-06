@@ -7,3 +7,4 @@ Flask-Babel
 Flask-DebugToolbar
 marshmallow
 flask-restful
+flask_limiter

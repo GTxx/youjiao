@@ -70,3 +70,8 @@ class PageAdmin(AuthMixin, sqla.ModelView):
         if not content_edit_permission.can():
             return False
         return True
+
+from ..extensions import admin, db
+from .models import Activity, Page
+admin.add_view(ActivityAdmin(Activity, db.session))
+admin.add_view(PageAdmin(Page, db.session))

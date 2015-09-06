@@ -2,6 +2,7 @@
 from flask_script import Manager
 from youjiao.extensions import db
 from youjiao.app import create_app
+from youjiao.user.models import User, Role
 
 # Used by app debug & livereload
 PORT = 5000
@@ -31,10 +32,21 @@ def dropdb():
 def make_shell_context():
     return dict(app=app, db=db)
 
+
+@manager.command
+def init_db():
+    try:
+        role = Role(name='editor', description='editor role')
+        role.save()
+        role = Role(name='admin', description='admin role')
+        role.save()
+    except Exception as e:
+        print(e)
+
+
 @manager.option('-p', '--password', dest='password', default='123456')
 @manager.option('-e', '--email', dest='email', default='admin@1.com')
 def create_admin(password, email):
-    from youjiao.user.models import User, Role
     user = User.create_user('admin', email, password)
     role = Role()
     role.name = 'admin'
