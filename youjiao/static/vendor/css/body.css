@@ -1,590 +1,641 @@
-h1 ,h2 ,h3 ,h4, h5, h6, span, img, body, ul, li, div,input,select,option{
-    margin:0;
-    padding:0;
+h1, h2, h3, h4, h5, h6, span, img, body, ul, li, div, input, select, option {
+    margin: 0;
+    padding: 0;
     font-weight: normal;
     box-sizing: border-box;
 
 }
-span ,img,select,option{
-    display:inline-block;
+
+span, img, select, option {
+    display: inline-block;
 }
 
-a{
+a {
     text-decoration: none;
 }
-li{
+
+li {
     list-style-type: none;
 }
 
-#div1{
-   width:1180px;
-    height:700px;
-    margin:auto;
+#div1 {
+    width: 1180px;
+    height: 700px;
+    margin: auto;
     box-sizing: border-box;
 
 }
-#left{
-    float:left;
-    background-color:#e0e0e0;
-    width:180px;
-    height:628px;
+
+#left {
+    float: left;
+    background-color: #e0e0e0;
+    width: 180px;
+    height: 628px;
     border-top: 1px solid gray;
     border-left: 1px solid gray;
     border-bottom: 1px solid gray;
 }
-#left img{
-    width:88px;
-    height:88px;
-    background-color:silver;
-    float:left;
-    margin-left:46px;
-    margin-top:25px;
+
+#left img {
+    width: 88px;
+    height: 88px;
+    background-color: silver;
+    float: left;
+    margin-left: 46px;
+    margin-top: 25px;
 }
-#left span{
-    width:180px;
-    margin-top:16px;
+
+#left span {
+    width: 180px;
+    margin-top: 16px;
     font-size: 18px;
-    color:#3e3e3e;
-    text-align:center;
+    color: #3e3e3e;
+    text-align: center;
 }
-#left h4{
-     width:180px;
-    margin-top:4px;
+
+#left h4 {
+    width: 180px;
+    margin-top: 4px;
     font-size: 14px;
-    color:#6c6c6c;
-    text-align:center;
+    color: #6c6c6c;
+    text-align: center;
     margin-bottom: 20px;
 }
-#left ul{
-    float:left;
-    width:180px;
-    height:628px;
- }
-#left ul li{
-    margin-left:20px;
-     width:160px;
-    height:50px;
+
+#left ul {
+    float: left;
+    width: 180px;
+    height: 628px;
+}
+
+#left ul li {
+    margin-left: 20px;
+    width: 160px;
+    height: 50px;
 
 }
-#left ul li span{
-    cursor:pointer;
-    margin:12px 20px;
-    width:100px;
-    height:20px;
+
+#left ul li span {
+    cursor: pointer;
+    margin: 12px 20px;
+    width: 100px;
+    height: 20px;
     font-size: 18px;
-  color:#3e3e3e;
+    color: #3e3e3e;
 }
-.right{
+
+.right {
     border-top: 1px solid gray;
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
-    float:left;
-    width:1000px;
-    height:628px;
-  }
-.right_top{
-    height:50px;
+    float: left;
+    width: 1000px;
+    height: 628px;
+}
+
+.right_top {
+    height: 50px;
 
     overflow: hidden;
 }
-.right_top_module{
+
+.right_top_module {
     float: left;
-    width:80px;
-    height:30px;
-    margin:20px 0 0 0;
-    border-top:1px solid gray;
-     border-left:1px solid gray;
-     border-right:1px solid gray;
+    width: 80px;
+    height: 30px;
+    margin: 20px 0 0 0;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 }
-.right_top_module2{
+
+.right_top_module2 {
     float: left;
-    height:30px;
+    height: 30px;
     margin-top: 20px;
-   width:55px;
-    border-bottom: 1px solid gray;
-}
-.right_top_module3{
-    float: left;
-    height:30px;
-    margin-top: 20px;
-    width:864px;
+    width: 55px;
     border-bottom: 1px solid gray;
 }
 
-.right_top_module span{
-     width:80px;
-    height:30px;
+.right_top_module3 {
+    float: left;
+    height: 30px;
+    margin-top: 20px;
+    width: 864px;
+    border-bottom: 1px solid gray;
+}
+
+.right_top_module span {
+    width: 80px;
+    height: 30px;
     line-height: 29px;
     font-size: 16px;
-    color:#3e3e3e;
+    color: #3e3e3e;
     text-align: center;
 
 }
-.right_second{
-     height:50px;
-    border-bottom:1px solid gray;
+
+.right_second {
+    height: 50px;
+    border-bottom: 1px solid gray;
     overflow: hidden;
 }
-.right_second span{
-    cursor:pointer;
-    float:left;
-    margin-left:55px;
-    height:50px;
-      width:80px;
+
+.right_second span {
+    cursor: pointer;
+    float: left;
+    margin-left: 55px;
+    height: 50px;
+    width: 80px;
     line-height: 50px;
-    text-align:center;
-   font-size: 16px;
-    color:#6c6c6c;
+    text-align: center;
+    font-size: 16px;
+    color: #6c6c6c;
     border-bottom: 4px solid deeppink;
 
 }
-.right_second h4{
-    cursor:pointer;
-    float:left;
-    margin-left:10px;
+
+.right_second h4 {
+    cursor: pointer;
+    float: left;
+    margin-left: 10px;
     font-weight: normal;
-    height:50px;
-      width:80px;
+    height: 50px;
+    width: 80px;
     line-height: 50px;
-    text-align:center;
-   font-size: 16px;
-    color:#6c6c6c;
+    text-align: center;
+    font-size: 16px;
+    color: #6c6c6c;
 }
-#right_body{
-    height:500px;
+
+#right_body {
+    height: 500px;
     overflow: hidden;
     display: block;
 }
-#right_body ul{
-    float:left;
-    width:1000px;
-    margin-top:42px;
-    height:450px;
+
+#right_body ul {
+    float: left;
+    width: 1000px;
+    margin-top: 42px;
+    height: 450px;
 }
-#right_body ul li{
-    float:left;
-    width:1000px;
-    height:40px;
+
+#right_body ul li {
+    float: left;
+    width: 1000px;
+    height: 40px;
     margin-bottom: 10px;
 }
-#right_body ul li span{
-    float:left;
-    width:75px;
-    text-align:left;
-    margin-left:60px;
+
+#right_body ul li span {
+    float: left;
+    width: 75px;
+    text-align: left;
+    margin-left: 60px;
     line-height: 32px;
-    font-size:16px;
-     height:28px;
-    color:#6c6c6c;
+    font-size: 16px;
+    height: 28px;
+    color: #6c6c6c;
     letter-spacing: 2px;
 
 }
-#right_body ul li h6{
-  display:inline;
-    color:#6c6c6c;
-    font-size:16px;
+
+#right_body ul li h6 {
+    display: inline;
+    color: #6c6c6c;
+    font-size: 16px;
     line-height: 30px;
 
+}
 
+#right_body ul li input {
+    width: 290px;
+    height: 28px;
+    border: 1px solid gray;
+    color: red;
 
 }
-#right_body ul li input{
-     width:290px;
-    height:28px;
-border:1px solid gray;
-  color:red;
 
-}
-#right_body ul li select{
+#right_body ul li select {
     display: inline-block;
-    width:90px;
-    height:28px;
-    float:left;
-    margin-right:10px;
+    width: 90px;
+    height: 28px;
+    float: left;
+    margin-right: 10px;
 }
-#right_body ul li select option{
-     text-align: center;
-    color:red;
+
+#right_body ul li select option {
+    text-align: center;
+    color: red;
 }
-#button{
-    float:left;
-    width:100px;
-    height:30px;
-    background-color:#fe5974;
+
+#button {
+    float: left;
+    width: 100px;
+    height: 30px;
+    background-color: #fe5974;
 }
-#button h5{
+
+#button h5 {
     margin: 0;
-    text-align:center;
-    color:white;
+    text-align: center;
+    color: white;
     font-size: 18px;
     line-height: 30px;
 }
-#right_body2{
-    height:500px;
+
+#right_body2 {
+    height: 500px;
     overflow: hidden;
 }
-#right_body_image{
-    display:none;
+
+#right_body_image {
+    display: none;
 }
 
-#right_body_image1{
-    height:86px;
+#right_body_image1 {
+    height: 86px;
 }
-#right_body_image1 span{
-  font-size:18px;
-    color:#6c6c6c;
-    margin:42px 0 0 100px ;
-    width:200px;
-    height:20px;
+
+#right_body_image1 span {
+    font-size: 18px;
+    color: #6c6c6c;
+    margin: 42px 0 0 100px;
+    width: 200px;
+    height: 20px;
 }
-#right_body_image2{
-    width:282px;
-    height:282px;
-    margin:0 0 0 100px;
+
+#right_body_image2 {
+    width: 282px;
+    height: 282px;
+    margin: 0 0 0 100px;
     overflow: hidden;
 }
-#right_body_image3{
-    width:140px;
-    height:140px;
-    margin:56px 0 0 71px;
-    position:absolute;
+
+#right_body_image3 {
+    width: 140px;
+    height: 140px;
+    margin: 56px 0 0 71px;
+    position: absolute;
 
 }
-#button2{
-     background-color:silver;
-    padding:70px 70px;
-    border-radius:100px;
-    position:absolute;
+
+#button2 {
+    background-color: silver;
+    padding: 70px 70px;
+    border-radius: 100px;
+    position: absolute;
 }
-#square1{
-    top:57px;
-    left:15px;
-    position:absolute;
+
+#square1 {
+    top: 57px;
+    left: 15px;
+    position: absolute;
     border-radius: 10px;
-    width:110px;
-    height:25px;
-    background-color:white;
+    width: 110px;
+    height: 25px;
+    background-color: white;
 }
-#square2{
-    top:15px;
-    left:57px;
-    position:absolute;
+
+#square2 {
+    top: 15px;
+    left: 57px;
+    position: absolute;
     border-radius: 10px;
-    width:25px;
-    height:110px;
-    background-color:white;
+    width: 25px;
+    height: 110px;
+    background-color: white;
 }
-#right_body_image2 span{
-    margin-top:160px;
-    width:140px;
+
+#right_body_image2 span {
+    margin-top: 160px;
+    width: 140px;
     font-size: 15px;
-    color:#3e3e3e;
+    color: #3e3e3e;
     text-align: center;
 }
-#right_body_image h4{
-    width:282px;
+
+#right_body_image h4 {
+    width: 282px;
     text-align: center;
-    color:#7a7a7a;
-    margin:16px 0 0 100px;
+    color: #7a7a7a;
+    margin: 16px 0 0 100px;
 }
-#right_body_password{
-    height:500px;
+
+#right_body_password {
+    height: 500px;
     overflow: hidden;
-    padding:60px 0 0 60px;
-    display:none;
+    padding: 60px 0 0 60px;
+    display: none;
 }
-#right_body_password ul{
-    float:left;
+
+#right_body_password ul {
+    float: left;
 }
-#right_body_password ul li{
-    float:left;
-    width:1000px;
+
+#right_body_password ul li {
+    float: left;
+    width: 1000px;
     margin-bottom: 20px;
 
 }
-#right_body_password ul li span{
-    width:75px;
-    height:28px;
-    color:#3e3e3e;
+
+#right_body_password ul li span {
+    width: 75px;
+    height: 28px;
+    color: #3e3e3e;
     text-align: left;
     line-height: 30px;
 }
-#right_body_password ul li input{
+
+#right_body_password ul li input {
     box-sizing: border-box;
-    border:1px solid gray;
-    width:290px;
-    height:28px;
+    border: 1px solid gray;
+    width: 290px;
+    height: 28px;
     border-radius: 4px;
 }
-#alert h4{
-   color:white;
+
+#alert h4 {
+    color: white;
     text-align: center;
-      line-height: 31px;
+    line-height: 31px;
 }
-#alert{
-    float:left;
+
+#alert {
+    float: left;
     line-height: 30px;
-    margin:20px 0 0 80px;
-    width:100px;
-    height:30px;
-    background-color:#fe5974;
-  }
-.study_record{
-    width:1000px;
-    padding:30px 0 0 28px;
-    height:628px;
+    margin: 20px 0 0 80px;
+    width: 100px;
+    height: 30px;
+    background-color: #fe5974;
+}
+
+.study_record {
+    width: 1000px;
+    padding: 30px 0 0 28px;
+    height: 628px;
 
 }
-.study_record ul{
-    float:left
+
+.study_record ul {
+    float: left
 }
-.study_record ul li{
-    float:left;
-    width:215px;
-    height:164px;
-    margin-right:28px;
+
+.study_record ul li {
+    float: left;
+    width: 215px;
+    height: 164px;
+    margin-right: 28px;
 }
-.study_record ul li img{
-     width:215px;
-    height:121px;
-    background-color:silver;
+
+.study_record ul li img {
+    width: 215px;
+    height: 121px;
+    background-color: silver;
 }
-.study_record ul li h4{
-    color:#7a7a7a;
-    text-align:center;
+
+.study_record ul li h4 {
+    color: #7a7a7a;
+    text-align: center;
     font-size: 14px;
     margin-top: 4px;
     cursor: pointer;
 }
 
-.study_record ul li span{
+.study_record ul li span {
     line-height: 20px;
     font-size: 17px;
-   color:#3e3e3e;
-   width:215px;
-    height:17px;
-    margin-top:10px;
+    color: #3e3e3e;
+    width: 215px;
+    height: 17px;
+    margin-top: 10px;
     text-align: center;
-}
-.research{
-    width:1000px;
-    padding:30px 0 0 60px;
-    height:628px;
-}
-.keyword{
-    float: left;
-     width:1000px;
-    height:60px;
-}
-.keyword span{
-    float:left;
-    width:70px;
-    height:28px;
-    font-size: 16px;
-    color:#3e3e3e;
-    line-height: 30px;
-}
-.keyword select{
-    float: left;
-    width:90px;
-    height:28px;
-    margin-left:10px;
 }
 
-.keyword  input{
-    float:left;
-     box-sizing: border-box;
-    border:1px solid gray;
-    width:290px;
-    height:28px;
+.research {
+    width: 1000px;
+    padding: 30px 0 0 60px;
+    height: 628px;
 }
-#button3{
+
+.keyword {
+    float: left;
+    width: 1000px;
+    height: 60px;
+}
+
+.keyword span {
+    float: left;
+    width: 70px;
+    height: 28px;
+    font-size: 16px;
+    color: #3e3e3e;
+    line-height: 30px;
+}
+
+.keyword select {
+    float: left;
+    width: 90px;
+    height: 28px;
+    margin-left: 10px;
+}
+
+.keyword input {
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    width: 290px;
+    height: 28px;
+}
+
+#button3 {
     cursor: pointer;
-    float:left;
+    float: left;
     background: #fe5974;
-    width:80px;
-    height:28px;
+    width: 80px;
+    height: 28px;
     margin-left: 20px;
 }
-#button3 h4{
-    color:white;
+
+#button3 h4 {
+    color: white;
     text-align: center;
     line-height: 29px;
 }
-.titleName{
+
+.titleName {
     clear: both;
-    width:1000px;
-    height:40px;
+    width: 1000px;
+    height: 40px;
 }
-.titleName span{
-    width:95px;
-    height:20px;
-    margin-left:75px;
-    color:#3e3e3e;
+
+.titleName span {
+    width: 95px;
+    height: 20px;
+    margin-left: 75px;
+    color: #3e3e3e;
 }
-.research ul{
-    float:left;
+
+.research ul {
+    float: left;
 }
-.research ul li{
-    float:left;
-     width:1000px;
-    height:40px;
+
+.research ul li {
+    float: left;
+    width: 1000px;
+    height: 40px;
 }
-.research ul li span{
-    float:left;
-    height:20px;
-    margin-right:180px;
-    color:#3e3e3e;
+
+.research ul li span {
+    float: left;
+    height: 20px;
+    margin-right: 180px;
+    color: #3e3e3e;
 }
-.button4{
-    cursor:pointer;
-     float:left;
-     margin-left:-50px;
-    background: #a3a3a3;
-    width:80px;
-    height:28px;
-}
-.button4 h4{
-    color:white;
-    text-align: center;
-    line-height: 29px;
-}
-.button5{
+
+.button4 {
     cursor: pointer;
-     float:left;
-     margin-left:-50px;
-    background: #fe5974;
-    width:80px;
-    height:28px;
+    float: left;
+    margin-left: -50px;
+    background: #a3a3a3;
+    width: 80px;
+    height: 28px;
 }
-.button5 h4{
-    color:white;
+
+.button4 h4 {
+    color: white;
     text-align: center;
     line-height: 29px;
 }
-#Mycollection2{
-     width:1000px;
-    height:600px;
+
+.button5 {
+    cursor: pointer;
+    float: left;
+    margin-left: -50px;
+    background: #fe5974;
+    width: 80px;
+    height: 28px;
+}
+
+.button5 h4 {
+    color: white;
+    text-align: center;
+    line-height: 29px;
+}
+
+#Mycollection2 {
+    width: 1000px;
+    height: 600px;
     overflow: hidden;
 }
 
-#MyCollection{
-    padding:20px 0 0 28px;
-    width:1030px;
-    height:500px;
-    overflow:scroll;
+#MyCollection {
+    padding: 20px 0 0 28px;
+    width: 1030px;
+    height: 500px;
+    overflow: scroll;
     box-sizing: border-box;
 }
-#MyCollection ul{
+
+#MyCollection ul {
     float: left;
 }
-#MyCollection ul li{
+
+#MyCollection ul li {
     margin-right: 28px;
     width: 215px;
-    height:275px;
+    height: 275px;
     float: left;
 }
-#price_image{
+
+#price_image {
     width: 215px;
-    height:215px;
+    height: 215px;
 }
 
-#price_image  img{
+#price_image img {
     background: silver;
     width: 215px;
-    height:215px;
+    height: 215px;
 }
-#MyCollection ul li span{
+
+#MyCollection ul li span {
     position: relative;
 
-    background-color:black;
+    background-color: black;
     opacity: 0.6;
-    width:  215px;
-    height:32px;
-    top:-36px;
-   color:whitesmoke;
+    width: 215px;
+    height: 32px;
+    top: -36px;
+    color: whitesmoke;
     font-weight: bold;
     text-indent: 124px;
     line-height: 34px;
 }
-#MyCollection ul li h4{
+
+#MyCollection ul li h4 {
     font-size: 18px;
-  color:#3e3e3e;
+    color: #3e3e3e;
     text-align: center;
-     margin-top: 4px;
+    margin-top: 4px;
 }
-#MyCollection ul li h6{
-  color:#7a7a7a;
+
+#MyCollection ul li h6 {
+    color: #7a7a7a;
     text-align: center;
     margin-top: 4px;
     cursor: pointer;
 }
-#ConsumeRecord{
-    width:1000px;
-    height:550px;
-  padding:60px 0 0 60px;
+
+#ConsumeRecord {
+    width: 1000px;
+    height: 550px;
+    padding: 60px 0 0 60px;
 }
-#ConsumeTitle{
-    width:800px;
-    height:40px;
+
+#ConsumeTitle {
+    width: 800px;
+    height: 40px;
 }
-#ConsumeTitle span{
+
+#ConsumeTitle span {
     font-size: 17px;
-    color:#3e3e3e;
+    color: #3e3e3e;
     line-height: 42px;
     text-align: center;
-    width:200px;
+    width: 200px;
 }
-#ConsumeRecord ul{
-    float:left;
-}
-#ConsumeRecord ul li{
-       float:left;
-    width:1000px;
-    height:42px;
-}
-#ConsumeRecord ul li h4{
+
+#ConsumeRecord ul {
     float: left;
-     font-size: 15px;
-    color:#6c6c6c;
+}
+
+#ConsumeRecord ul li {
+    float: left;
+    width: 1000px;
+    height: 42px;
+}
+
+#ConsumeRecord ul li h4 {
+    float: left;
+    font-size: 15px;
+    color: #6c6c6c;
     line-height: 42px;
     text-align: center;
-    width:200px;
+    width: 200px;
 }
-#ConsumeRecord ul li h6{
+
+#ConsumeRecord ul li h6 {
     cursor: pointer;
- margin:8px 0 0 50px;
-    color:white;
-     float: left;
-    width:100px;
-    height:26px;
+    margin: 8px 0 0 50px;
+    color: white;
+    float: left;
+    width: 100px;
+    height: 26px;
     line-height: 26px;
     text-align: center;
-     font-size: 15px;
+    font-size: 15px;
     background: #fe5974;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
