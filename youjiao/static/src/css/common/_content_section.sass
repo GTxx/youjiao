@@ -51,7 +51,9 @@
         width: 215px
         height: 121px
         background: #000000
+        filter: alpha(opacity=0)
         opacity: 0
+        zoom: 1
         .v-hover-layer-icon
           width: 60px
           height: 60px
@@ -68,9 +70,10 @@
             background: #ffffff
             margin-top: 12px
             margin-left: -4px
+            margin-left: 11%\9
             border-width: 17px 17px
             border-style: solid
-            border-left-color: #fff
+            border-color: black black black #fff
 
       img
         width: 215px
@@ -115,7 +118,9 @@
         width: 284px
         height: 160px
         background: #000000
+        filter: alpha(opacity=0)
         opacity: 0
+        zoom: 1
         .v-hover-layer-icon
           width: 84px
           height: 84px
@@ -124,7 +129,7 @@
           border: 8px solid #ffffff
           &:after
             position: absolute
-            z-index: -1
+            z-index: -10
             content: ' '
             display: inline-block
             width: 0
@@ -132,9 +137,10 @@
             background: #ffffff
             margin-top: 14px
             margin-left: -8px
+            margin-left: 12%\9
             border-width: 28px 28px
             border-style: solid
-            border-left-color: #fff
+            border-color: black black black #fff
       img
         width: 284px
         height: 160px
@@ -169,7 +175,7 @@
   bottom: 0
   left: 0
   width: 215px
-  height: 30px
+  height: 32px
 
 .n-v-section-b
   margin-top: 26px
@@ -191,12 +197,14 @@
         +nv-hover-layer-style
         background: #000000
         opacity: 0.4
+        filter: alpha(opacity=40)
+        zoom: 1
         z-index: 20
       .nv-price
         +nv-hover-layer-style
-        line-height: 30px
+        line-height: 32px
         text-align: right
-        padding-right: 10px
+        padding-right: 12px
         color: white
         z-index: 21
       img
