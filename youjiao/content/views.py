@@ -65,3 +65,13 @@ def courseware_sub():
 @content_bp.route('/research/teacher/')
 def research_teacher():
     return render_template('research/teacher.html')
+
+
+@content_bp.route('/research/a/')
+def research_a():
+    return render_template('research/teacher2.html')
+
+@content_bp.route('/teaching/information/')
+def teaching_information():
+    return render_template('teaching/teaching.html')
+
