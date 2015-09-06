@@ -84,8 +84,10 @@ class UserProfile(db.Model, CRUDMixin):
     district = db.Column(sqla.String(16))
     street = db.Column(sqla.String(16))
 
+    @property
     def location(self):
         return '{} {} {} {}'.format(self.province, self.city, self.district, self.street)
+
 
 class Role(db.Model, RoleMixin, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)

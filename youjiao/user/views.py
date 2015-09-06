@@ -3,7 +3,7 @@ from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
 from .forms import RegisterForm
 from youjiao.extensions import limiter
-from .models import Captcha, User
+from .models import Captcha, User, UserProfile
 import json
 
 user_bp = Blueprint("user_view", __name__)
@@ -54,7 +54,6 @@ from flask_login import login_user
 @user_bp.route('/register', methods=['GET', 'POST'])
 @anonymous_user_required
 def register():
-
     if request.method == 'POST':
         print(request.json)
         print(request.form)
@@ -65,8 +64,11 @@ def register():
             data = form.to_dict()
             from .utils import encrypt_password
             data['password'] = encrypt_password(data['password'])
+            # TODO: add transaction
             user = User(**data)
             user = user.save()
+            user_profile = UserProfile(user_id=user.id)
+            user_profile.save()
             login_user(user, force=True)
             return redirect('/')
         # else:
@@ -87,6 +89,8 @@ def login():
         form = LoginForm(request.form)
         if form.validate_on_submit():
             user = form.user
+            # TODO: support token auth in @loging_required, refer to flask_security @auth_required
+            # login_required
             login_user(user, force=True)
             from flask_principal import identity_changed, Identity
             from flask import current_app

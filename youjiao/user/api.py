@@ -1,24 +1,76 @@
 # -*- coding: utf-8 -*-
 from flask_restful import Resource, Api
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from flask_login import login_required, current_user
-from marshmallow import ValidationError
-from .models import User
+from marshmallow import ValidationError, Schema, fields, validates_schema
+from marshmallow.validate import Length, Email
+from .models import User, UserProfile
 from .utils import verify_password
+from .schemas import UserSchema, UserProfileSchema
 user_api_bp = Blueprint('user_api_bp', __name__)
 user_api = Api(user_api_bp)
 
 
 class UserResource(Resource):
-    pass
+    # TODO: check permission first
+
+    def get(self, user_id):
+        import ipdb; ipdb.set_trace()
+        # TODO: replce it with permission check
+        # if current_user.id != user_id:
+        #     abort(403)
+        user = User.query.get(user_id)
+        res = UserSchema().dump(user)
+        return res.data
+
+    def patch(self, user_id):
+        # partial update
+        schema = UserSchema()
+        user = User.query.get(user_id)
+        # get data from request
+        data = request.get_json()
+        complete_data = data.copy()
+        for field_name in schema.fields.keys():
+            if not data.has_key(field_name) and getattr(user, field_name):
+                complete_data[field_name] = getattr(user, field_name)
+        res = schema.load(complete_data)
+        # update user
+        if res.errors:
+            return res.errors, 400
+        user.query.update(data)
+        user.save()
+        return schema.dump(user).data
 
 
 
-user_api.add_resource(UserResource, '/api/user')
+class UserProfileResource(Resource):
+    def get(self, profile_id):
+        user_profile = UserProfile.query.get(profile_id)
+        res = UserProfileSchema().dump(user_profile)
+        return res.data
+
+    def patch(self, profile_id):
+        schema = UserProfileSchema()
+        user_profile = UserProfile.query.get(profile_id)
+        data = request.get_json()
+        complete_data = data.copy()
+        for field_name in schema.fields.keys():
+            field_value = getattr(user_profile, field_name)
+            if not data.has_key(field_name) and field_value:
+                complete_data[field_name] = field_value
+        res = schema.load(complete_data)
+        # update user
+        if res.errors:
+            return res.errors, 400
+        import ipdb; ipdb.set_trace()
+        user_profile.query.update(res.data)
+        user_profile.save()
+        return schema.dump(user_profile).data
 
 
-from marshmallow import Schema, fields, validates_schema
-from marshmallow.validate import Length
+user_api.add_resource(UserResource, '/api/user/<int:user_id>')
+user_api.add_resource(UserProfileResource, '/api/user_profile/<int:profile_id>')
+
 
 def check_fields_exist(*fields):
     '''检查需要用到的field是否存在'''
@@ -77,3 +129,6 @@ def reset_password():
     current_user.set_password(data['password'])
     # get data
     return jsonify(data)
+
+
+

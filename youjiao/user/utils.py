@@ -85,3 +85,9 @@ def _on_identity_loaded(sender, identity):
             identity.provides.add(RoleNeed(role.name))
 
     identity.user = current_user
+
+
+# TODO: use auth_required to replace login_required
+def auth_required():
+    #TODO: auth_required support multipal auth backend
+    pass
