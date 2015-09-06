@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-   <link href="{{ url_for('static', filename='build/css/body.css') }}">
+   <link href="{{ url_for('static', filename='vendor/css/body.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block leftBar %}
@@ -9,11 +9,11 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'research/content.html' %}
+    {% include 'research/teacher2_content.html' %}
 {% endblock %}
 
 {% block rightBar %}
-    {% include 'research/teacher_right_bar.html' %}
+    {% include 'research/teacher2_right_bar.html' %}
 {% endblock %}
 
 {% block js %}

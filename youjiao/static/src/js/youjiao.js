@@ -7,12 +7,10 @@ $(function () {
     function mouseOverAndOut(target, activeClass) {
         $(target).mouseenter(function () {
             $(this).addClass(activeClass);
-            $(this).find(".v-image-hover-layer").animate({'opacity': 0.5});
-            $(this).find(".nv-image-hover-layer").animate({'opacity': 0.9});
+            $(this).find(".v-image-hover-layer").animate({'opacity': 0.3});
         }).mouseleave(function () {
             $(this).removeClass(activeClass);
             $(this).find(".v-image-hover-layer").animate({'opacity': 0});
-            $(this).find(".nv-image-hover-layer").animate({'opacity': 0});
         });
     }
 

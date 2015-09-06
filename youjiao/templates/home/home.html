@@ -9,11 +9,11 @@
         <div class="home-slides">
             <div class="home-slides-main">
                 <ul class="rslides">
-                    <li><img src="http://placekitten.com/g/732/372" alt=""></li>
-                    <li><img src="http://placekitten.com/g/732/372" alt=""></li>
-                    <li><img src="http://placekitten.com/g/732/372" alt=""></li>
-                    <li><img src="http://placekitten.com/g/732/372" alt=""></li>
-                    <li><img src="http://placekitten.com/g/732/372" alt=""></li>
+                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
+                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
+                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
+                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
+                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
                 </ul>
             </div>
             <ul class="home-slides-right">
@@ -21,13 +21,17 @@
             </ul>
         </div>
         <div class="n-v-section-b">
-            <div class="section-block-title-6">幼教教材推荐</div>
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">幼教教材推荐</div>
+            </div>
             <ul class="n-v-section-list">
                 {% for i in range(8) %}
                     <li>
                         <div class="nv-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+
                             <div class="nv-image-hover-layer"></div>
+                            <div class="nv-price">30.00/套</div>
                         </div>
                         <h5>有趣的手影</h5>
                         <h6>幼儿园大班上册</h6>
@@ -36,14 +40,18 @@
             </ul>
         </div>
         <div class="video-section-b">
-            <div class="section-block-title-6">课件中心推荐</div>
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">课件中心推荐</div>
+            </div>
             <ul class="video-section-list">
                 {% for i in range(8) %}
                     <li>
                         <div class="v-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
-                            <div class="v-image-hover-layer"></div>
+                            <div class="v-image-hover-layer">
+                                <div class="v-hover-layer-icon"></div>
+                            </div>
                         </div>
                         <h5>青花瓷</h5>
                         <a href="" class="start-download">开始下载</a>
@@ -52,14 +60,18 @@
             </ul>
         </div>
         <div class="video-section-b">
-            <div class="section-block-title-6">优秀课堂推荐</div>
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">优秀课堂推荐</div>
+            </div>
             <ul class="video-section-list">
                 {% for i in range(8) %}
                     <li>
                         <div class="v-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
-                            <div class="v-image-hover-layer"></div>
+                            <div class="v-image-hover-layer">
+                                <div class="v-hover-layer-icon"></div>
+                            </div>
                         </div>
                         <h5>青花瓷</h5>
                         <a href="" class="start-download">开始下载</a>

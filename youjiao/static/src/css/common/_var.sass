@@ -8,6 +8,7 @@ a
 h1, h2, h3, h4, h5, h6, ul, ol, li, p
   margin: 0
   padding: 0
+  font-weight: normal
 
 .float-left
   float: left
@@ -15,8 +16,11 @@ h1, h2, h3, h4, h5, h6, ul, ol, li, p
 .float-right
   float: right
 
+//confuse, so danteng,
+//you know, i also don't want do like this
 $youjiao-pink: #fe5974
 $youjiao-pink-2: #ff7695
+$youjiao-pink-3: #ff7695
 $youjiao-font-pink: #ff3c4e
 $wrapper-width: 1180px
 $font-gray: #7a7a7a
@@ -25,6 +29,7 @@ $font-gray-light: #6c6c6c
 $gray-a3: #a3a3a3
 $background-brown: #fefef1
 $background-brown-2: #fffdf2
+$yahei: "Microsoft YaHei","微软雅黑"
 
 =main-noright
   width: 1000px
@@ -39,7 +44,7 @@ $background-brown-2: #fffdf2
 
 =list-first
   padding: 0
-  background: $youjiao-pink-2
+  background: $youjiao-pink-3
   font-weight: bold
   color: white !important
   padding-left: 12px !important
@@ -47,6 +52,7 @@ $background-brown-2: #fffdf2
   &:before
     display: none !important
   a
+    font-size: 18px
     color: white !important
 
 =user-input($width)
