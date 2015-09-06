@@ -87,14 +87,14 @@ def research_activity():
     return render_template('research/research_activity.html', current_page='research')
 
 
+@content_bp.route('/research/result/')
+def research_result():
+    return render_template('research/teacher2.html', current_page='research')
+
+
 @content_bp.route('/page/about/')
 def page_about():
     return render_template('pages/about.html')
-
-
-@content_bp.route('/research/a/')
-def research_a():
-    return render_template('research/teacher2.html')
 
 
 @content_bp.route('/user/info/')
