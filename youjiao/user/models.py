@@ -2,7 +2,8 @@
 from __future__ import absolute_import
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_security import RoleMixin, UserMixin, SQLAlchemyUserDatastore
+from flask_security import RoleMixin
+from flask_login import UserMixin
 from youjiao.extensions import db
 from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
