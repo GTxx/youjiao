@@ -72,6 +72,10 @@ class User(db.Model, UserMixin, CRUDMixin):
             self.save()
         return verified
 
+    @property
+    def roles_name(self):
+        return [role.name for role in self.roles]
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
