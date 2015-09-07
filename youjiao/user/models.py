@@ -32,8 +32,8 @@ class User(db.Model, UserMixin, CRUDMixin):
     active = db.Column(sqla.Boolean, default=True)
     # is_admin = db.Column(db.Boolean, default=False)
     # TODO: use a base model to add create_time and update_time
-    create_time = db.Column(sqla.DateTime, default=datetime.now)
-    last_login = db.Column(sqla.DateTime, onupdate=datetime.now)
+    create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
+    last_login = db.Column(sqla.DateTime)
 
     # TODO: add login log field, and add field update in login view
     roles = db.relationship('Role', secondary=roles_users,

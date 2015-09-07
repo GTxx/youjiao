@@ -41,6 +41,7 @@ def register():
 
 
 @user_bp.route('/login', methods=['GET', 'POST'])
+@anonymous_user_required
 def login():
     from .forms import LoginForm
     if request.method == 'POST':
@@ -54,7 +55,12 @@ def login():
             from flask import current_app
             identity_changed.send(current_app._get_current_object(),
                                   identity=Identity(user.id))
-            return redirect('/')
+            if 'admin' in user.roles_name:
+                return redirect('/admin/')
+            elif 'editor' in user.roles_name:
+                return redirect('/admin/')
+            else:
+                return redirect('/')
     elif request.method == 'GET':
         form = LoginForm()
     return render_template('security/login.html', form=form)
@@ -96,3 +102,5 @@ def refresh_captcha():
 @user_bp.route('/user/info/')
 def teaching_information():
     return render_template('user/info.html')
+
+from .subscribers import *

@@ -19,6 +19,7 @@ def run(port):
 
 @manager.command
 def createdb():
+    # -*- coding: utf-8 -*-
     """Create database."""
     db.create_all()
 
@@ -44,17 +45,21 @@ def init_db():
         print(e)
 
 
+@manager.option('-n', '--name', dest='name', default='admin')
 @manager.option('-p', '--password', dest='password', default='123456')
 @manager.option('-e', '--email', dest='email', default='admin@1.com')
-def create_admin(password, email):
-    user = User.create_user('admin', email, password)
-    role = Role()
-    role.name = 'admin'
-    role.description = 'admin role'
-    role.save()
+def create_admin(name, password, email):
+    user = User.create_user(name, email, password)
+    role = Role.query.filter_by(name='admin').first()
+    if not role:
+        role = Role('admin', 'admin role')
+        role.save()
     user.roles.append(role)
     user.save()
 
+@manager.command
+def create_test_data():
+    pass
 
 if __name__ == "__main__":
     manager.run()

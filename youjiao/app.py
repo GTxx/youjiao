@@ -13,6 +13,7 @@ from .config import Config
 from .content.models import Activity, Page
 from .user.models import User
 from .user.utils import load_user
+from .user.subscribers import connect as user_connect
 from .extensions import db, limiter, admin
 from .utils.csrf import check_csrf
 
@@ -64,8 +65,13 @@ def create_app():
 
     # register blueprint
     app.register_blueprint(content_bp)
+
     app.register_blueprint(user_bp)
+
     app.register_blueprint(user_api_bp)
+
+    # register subscriber
+    user_connect(app)
 
     # register home page
     app.add_url_rule('/', 'index', index)

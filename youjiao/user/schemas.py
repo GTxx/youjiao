@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from marshmallow import ValidationError, Schema, fields, validates_schema
 from marshmallow.validate import Length, OneOf
 from .utils import verify_password
