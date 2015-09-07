@@ -150,13 +150,43 @@
 
 .samples-imgs
   width: 484px
-  height: 590px
+  height: 592px
   float: left
-  div
+  .s-imglist-w
     width: 484px
     height: 100px
-    margin-top: 30px
+    margin-top: 26px
+    +clear-float
+  .p-s-imglist
+    width: 100px
+    height: 100px
+    box-sizing: border-box
+    border-radius: 4px
     background: #CCCCCC
+    float: left
+    margin-right: 20px
+    cursor: pointer
+    &:nth-last-child(2)
+      margin-right: 2px
+  .s-img-active
+    border: 2px solid $youjiao-pink
+  #simple-img-next
+    display: block
+    width: 22px
+    height: 100px
+    background: $gray-a3
+    float: left
+    &:after
+      content: ' '
+      display: block
+      border-width: 10px
+      border-style: solid
+      border-left-color: white
+      border-top-color: transparent
+      border-right-color: transparent
+      border-bottom-color: transparent
+      margin-top: 36px
+      margin-left: 6px
 
 .product-info
   float: left
@@ -170,6 +200,9 @@
       font-size: 40px
     span
       float: right
+      font-size: 17px
+      line-height: 80px
+      color: $font-gray-light
   table
     margin-top: 68px
     margin-left: 50px
@@ -194,13 +227,15 @@
   .product-order
     margin-left: 50px
     margin-top: 54px
+    font-size: 18px
+    line-height: 28px
     .product-price
       color: $youjiao-pink-2
 
 .product-detail-comments
   padding-bottom: 50px
   margin-bottom: 56px
-  margin-top: 30px
+  margin-top: 28px
   border: 1px solid #CCCCCC
   .detail-comment-title
     border-bottom: 1px solid #CCCCCC
@@ -214,6 +249,16 @@
     .book-detail-button
       background: $youjiao-pink-2
       color: white
+      position: relative
+      &:after
+        content: ' '
+        display: block
+        position: absolute
+        margin-left: 71px
+        border-width: 12px
+        border-style: solid
+        border-top-color: $youjiao-pink-2
+
   .detail-comment-content
     box-sizing: border-box
     padding: 30px 20px

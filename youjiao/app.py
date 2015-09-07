@@ -44,7 +44,7 @@ def create_app():
     Babel(app)
 
     # flask_admin
-    admin = Admin(app)
+    admin = Admin(app, template_mode='bootstrap3')
     admin.add_view(ActivityAdmin(Activity, db.session))
     admin.add_view(UserAdmin(User, db.session))
     admin.add_view(PageAdmin(Page, db.session))
