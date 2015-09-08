@@ -13,7 +13,6 @@ class UserResource(Resource):
     # TODO: check permission first
 
     def get(self, user_id):
-        import ipdb; ipdb.set_trace()
         # TODO: replce it with permission check
         # if current_user.id != user_id:
         #     abort(403)
@@ -92,4 +91,9 @@ def reset_password():
     return jsonify(data)
 
 
-
+@user_api_bp.route('/api/user_info')
+@login_required
+def get_user_info():
+    # get own info
+    res = UserSchema().dump(current_user)
+    return jsonify(res.data)

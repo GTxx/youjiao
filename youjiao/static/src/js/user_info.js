@@ -1,17 +1,17 @@
-function validate_length(min, max){
-    return (str) =>{
-      if ( 5 < str.length && str.length < 15){
-        return [true, '']
-      }else{
-        return [false, `长度在${min}到${max}之间`];
-      }
-
+function validate_length(min, max) {
+  return (str) => {
+    if (5 < str.length && str.length < 15) {
+      return [true, '']
+    } else {
+      return [false, `长度在${min}到${max}之间`];
     }
+
+  }
 }
 
 class ResetPassword extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       old_password: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
@@ -22,22 +22,22 @@ class ResetPassword extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  validate () {
+  validate() {
     // validate all fields
-    if (this.state.old_password.valid && this.state.password.valid && this.state.password_confirm.valid){
+    if (this.state.old_password.valid && this.state.password.valid && this.state.password_confirm.valid) {
       if (this.state.password.value != this.state.password_confirm.value) {
         this.setState({can_submit: false, 'error': '两次输入密码不一致'})
         return false
       }
-      else if (this.state.password.value == this.state.old_password.value){
-        this.setState({'can_submit':  false, error: '修改后密码跟原密码一样'})
+      else if (this.state.password.value == this.state.old_password.value) {
+        this.setState({'can_submit': false, error: '修改后密码跟原密码一样'})
         return false
       }
-      else{
-        this.setState({'can_submit':  true, error: ''})
+      else {
+        this.setState({'can_submit': true, error: ''})
         return true
       }
-    }else{
+    } else {
       console.log(1231)
       this.setState({can_submit: false, error: ''})
       return false
@@ -64,16 +64,16 @@ class ResetPassword extends React.Component {
       //  alert(errMsg)
       //}
     })
-    .done(function(msg){
+      .done(function (msg) {
         // TODO: add a success info
         alert('密码修改成功，下次登陆请使用新的密码')
       }.bind(this))
-    .fail(function(jqXHR){
+      .fail(function (jqXHR) {
         this.setState({error: jqXHR.responseJSON._schema[0]})
       }.bind(this))
   }
 
-  changed(field){
+  changed(field) {
     return (evt) => {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer
       // computed property names(ES6)
@@ -90,13 +90,16 @@ class ResetPassword extends React.Component {
       <div>
         <ul>
           <li>
-            <span>当前密码:</span><input type="password"  value={this.state.old_password.value} onChange={this.changed('old_password')} />
+            <span>当前密码:</span><input type="password" value={this.state.old_password.value}
+                                     onChange={this.changed('old_password')}/>
             <span>{this.state.old_password.errors}</span>
           </li>
-          <li><span>新密码:</span><input type="password" value={this.state.password.value} onChange={this.changed('password') }/>
+          <li><span>新密码:</span><input type="password" value={this.state.password.value}
+                                      onChange={this.changed('password') }/>
             <span>{this.state.password.errors}</span>
           </li>
-          <li><span>确认密码:</span><input type="password" value={this.state.password_confirm.value} onChange={this.changed('password_confirm')} />
+          <li><span>确认密码:</span><input type="password" value={this.state.password_confirm.value}
+                                       onChange={this.changed('password_confirm')}/>
             <span>{this.state.password_confirm.errors}</span>
           </li>
         </ul>
@@ -107,4 +110,30 @@ class ResetPassword extends React.Component {
   }
 }
 
+class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
+      password: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
+      password_confirm: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
+      error: ''
+    }
+
+  }
+
+  render() {
+    return (
+      <div>
+        <ul>
+          <li><span>用户名:</span><input type="text" value="laura"/></li>
+          <li><span style="letter-spacing:20px;">邮箱</span><input type="text" value="laura"/></li>
+          <li><span>手机号:</span><input type="text" value="laura"/></li>
+        </ul>
+        <button disabled={this.state.error.length != 0} onClick={this.handleSubmit}>修改密码</button>
+      </div>
+    )
+  }
+}
 React.render(<ResetPassword />, document.getElementById('right_body_password'));
+React.render(<User />, document.getElementById('right_body'))
