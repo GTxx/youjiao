@@ -76,7 +76,6 @@ user_api.add_resource(UserProfileResource, '/api/user_profile/<int:profile_id>')
 def reset_password():
     # validate
     schema = ResetPasswordSchema()
-    ResetPasswordSchema.validate
     # import ipdb; ipdb.set_trace()
     # TODO: supprot json and form input, or just support json
     # if request.content_type == 'application/json':
@@ -84,7 +83,7 @@ def reset_password():
     # if request.content_type == 'form...'
     #   get data from form
 
-    data, error = schema.load(request.form)
+    data, error = schema.load(request.get_json())
     # data, error = schema.load({'password': '1234'})
     if error:
         return jsonify(error), 400

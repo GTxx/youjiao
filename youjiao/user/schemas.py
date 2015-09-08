@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from marshmallow import ValidationError, Schema, fields, validates_schema
 from marshmallow.validate import Length, OneOf
+from flask_login import current_user
 from .utils import verify_password
 
 
@@ -51,10 +52,10 @@ class ResetPasswordSchema(Schema):
     def validate_oldpassword(self, data, old_password):
         # TODO: if all fields is valid,  then execute this validate func
         if not verify_password(old_password, current_user.password):
-            raise ValidationError('password error')
+            raise ValidationError(u'原始密码错误')
 
     @validates_schema
     @check_fields_exist('password', 'password_confirm')
     def validate_password_and_confirm(self, data, password, password_confirm):
         if password != password_confirm:
-            raise ValidationError('password != password_confirm')
+            raise ValidationError(u'两次输入的密码不一致')
