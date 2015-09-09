@@ -33,13 +33,13 @@ def index():
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.debug = True
 
     # flask_sqlalchemy
     db.init_app(app)
 
     # flask_debug
-    DebugToolbarExtension(app)
+    if app.config.get('DEBUG'):
+        DebugToolbarExtension(app)
 
     # flask_login
     login_manager = LoginManager(app)

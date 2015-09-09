@@ -14,7 +14,7 @@ manager = Manager(app)
 @manager.option('-p', '--port', dest='port', default=5000)
 def run(port):
     """Run app."""
-    app.run(host='0.0.0.0', port=int(port), debug=True)
+    app.run(host='0.0.0.0', port=int(port))
 
 
 @manager.command
