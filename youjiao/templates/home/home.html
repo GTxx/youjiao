@@ -9,11 +9,11 @@
         <div class="home-slides">
             <div class="home-slides-main">
                 <ul class="rslides">
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg" style="width: 732px;height: 372px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg" style="width: 732px;height: 372px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg" style="width: 732px;height: 372px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg" style="width: 732px;height: 372px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" style="width: 732px;height: 372px;" alt=""></li>
                 </ul>
             </div>
             <ul class="home-slides-right">
@@ -25,11 +25,11 @@
                 <div class="section-block-title-6">幼教教材推荐</div>
             </div>
             <ul class="n-v-section-list">
-                {% for i in range(8) %}
+                {% for i in range(1, 9) %}
                     <li>
                         <a href="/product/detail/">
                             <div class="nv-image-wrapper">
-                                <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+                                <img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">
 
                                 <div class="nv-image-hover-layer"></div>
                                 <div class="nv-price">30.00/套</div>
