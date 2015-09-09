@@ -14,11 +14,17 @@
                 <div class="samples-imgs">
                     <img src="" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
 
-                    <div></div>
+                    <div class="s-imglist-w">
+                        <div class="p-s-imglist s-img-active"><img src="" alt=""></div>
+                        <div class="p-s-imglist"><img src="" alt=""></div>
+                        <div class="p-s-imglist"><img src="" alt=""></div>
+                        <div class="p-s-imglist"><img src="" alt=""></div>
+                        <a href="javascript:;" id="simple-img-next"></a>
+                    </div>
                 </div>
                 <div class="product-info">
                     <div class="product-title">
-                        <h3>清凉一夏</h3><span>幼儿园大班上册 1-5</span>
+                        <h3>清凉一夏<span>幼儿园大班上册 1-5</span></h3>
                     </div>
                     <table>
                         <tr>
@@ -69,4 +75,8 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
 {% endblock %}
