@@ -9,11 +9,11 @@
         <div class="home-slides">
             <div class="home-slides-main">
                 <ul class="rslides">
-                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
-                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
-                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
-                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
-                    <li><img src="http://fakeimg.pl/732x372" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg" style="width: 732px;height: 372px;" alt=""></li>
+                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg" style="width: 732px;height: 372px;" alt=""></li>
                 </ul>
             </div>
             <ul class="home-slides-right">
@@ -27,14 +27,16 @@
             <ul class="n-v-section-list">
                 {% for i in range(8) %}
                     <li>
-                        <div class="nv-image-wrapper">
-                            <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
+                        <a href="/product/detail/">
+                            <div class="nv-image-wrapper">
+                                <img src="{{ url_for('static', filename='image/icons/al.jpg') }}" alt="">
 
-                            <div class="nv-image-hover-layer"></div>
-                            <div class="nv-price">30.00/套</div>
-                        </div>
-                        <h5>有趣的手影</h5>
-                        <h6>幼儿园大班上册</h6>
+                                <div class="nv-image-hover-layer"></div>
+                                <div class="nv-price">30.00/套</div>
+                            </div>
+                            <h5>有趣的手影</h5>
+                            <h6>幼儿园大班上册</h6>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
