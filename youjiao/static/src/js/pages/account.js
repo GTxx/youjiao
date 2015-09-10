@@ -1,3 +1,6 @@
+import 'maincss';
+import 'jquery-validation';
+
 $(function () {
     $("#register-form").validate({
         errorElement: 'span',
@@ -5,7 +8,7 @@ $(function () {
             label.parent().empty();
         },
         errorPlacement: function (error, element) {
-            var container = element.nextAll('span')[0];
+            let container = element.nextAll('span')[0];
             $(container).text('');
             error.appendTo(container);
         },
@@ -49,7 +52,7 @@ $(function () {
             label.parent().empty();
         },
         errorPlacement: function (error, element) {
-            var container = element.nextAll('div')[0];
+            let container = element.nextAll('div')[0];
             $(container).text('');
             error.appendTo(container);
         },
@@ -75,14 +78,13 @@ $(function () {
         }
     });
 
-
     $(".captcha").find('img').click(function(){
-        var self = $(this);
+        let self = $(this);
         $.ajax({
             type: 'GET',
             url: '/refresh_captcha/',
             success: function(data) {
-                var res = $.parseJSON(data);
+                let res = $.parseJSON(data);
                 self.attr('src', res.url);
             }
         });
