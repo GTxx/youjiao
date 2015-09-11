@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var entry = require('./entry');
 var resolve = require('./resolve.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var AssetsPlugin = require('assets-webpack-plugin');
 
 var plugins = [
     new webpack.ProvidePlugin({
@@ -11,7 +12,9 @@ var plugins = [
         "window.jQuery": "jquery",
         "root.jQuery": "jquery"
     }),
-    new ExtractTextPlugin('../css/[name].css'),
+    new ExtractTextPlugin('../css/[name].[hash].css'),
+    new webpack.optimize.DedupePlugin(),
+    new AssetsPlugin({filename: 'assets.json.py'}),
     new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
@@ -26,7 +29,7 @@ module.exports = {
     resolve: resolve,
     output: {
         path: path.resolve(__dirname, 'build/js'),
-        filename: '[name].js'
+        filename: '[name].[hash].js'
     },
     module: {
         loaders: [

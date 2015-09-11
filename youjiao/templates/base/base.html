@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='vendor/css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='build/css/youjiao.css') }}">
     {% block css %}
     {% endblock %}
 </head>
@@ -68,7 +66,6 @@
     </div>
 </div>
 
-<script src="{{ url_for('static',filename='vendor/js/jquery-1.11.3.min.js') }}"></script>
 {% block js %}
 {% endblock %}
 </body>

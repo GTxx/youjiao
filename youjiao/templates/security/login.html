@@ -1,5 +1,9 @@
 {% extends 'base/base.html' %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ ['security','css'] | asset }}">
+{% endblock %}
+
 {% macro render_error(field) %}
     {% if field.errors %}
         <ul>
@@ -44,6 +48,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='vendor/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='build/js/register_login.js') }}"></script>
+       <script src="{{ ['security','js'] | asset }}"></script>
 {% endblock %}
