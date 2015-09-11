@@ -3,11 +3,12 @@
 python manage.py createdb
 ```
 
-## gulp
+## webpack
 
 ```
-gulp
-gulp file:watch
+npm run build
+npm run dev
+npm run deploy
 ```
 
 ## run
