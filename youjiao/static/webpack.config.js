@@ -12,8 +12,8 @@ var plugins = [
         "window.jQuery": "jquery",
         "root.jQuery": "jquery"
     }),
-    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.[hash].js'),
-    new ExtractTextPlugin('../css/[name].[hash].css'),
+    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js'),
+    new ExtractTextPlugin('../css/[name].css'),
     new webpack.optimize.DedupePlugin(),
     new AssetsPlugin({filename: 'assets.json.py'})
 ];
@@ -24,7 +24,7 @@ module.exports = {
     plugins: plugins,
     output: {
         path: path.resolve(__dirname, 'build/js'),
-        filename: '[name].[hash].js'
+        filename: '[name].js'
     },
     module: {
         loaders: [
@@ -42,4 +42,3 @@ module.exports = {
         ]
     }
 };
-
