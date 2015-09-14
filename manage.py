@@ -66,16 +66,16 @@ def create_test_data():
 
 
 @app.template_filter('asset')
-def asset_filter(file_array):
+def asset_filter(file_string):
     try:
         static_path = '/static/build'
-        filename = file_array[0]
-        filetype = file_array[1]
+        filename = '.'.join(file_string.split('.')[:-1])
+        filetype = file_string.split('.').pop()
         file_resolve_name = app.assets[filename][filetype]
         file_path = os.path.join(static_path, filetype + '/' + file_resolve_name)
         return file_path
     except:
-        return 'file not found'
+        return file_string+' not found'
 
 
 if __name__ == "__main__":

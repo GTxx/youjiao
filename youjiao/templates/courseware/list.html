@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='build/css/courseware.css') }}">
+    <link rel="stylesheet" href="{{ 'courseware.css' | asset }}">
 {% endblock %}
 
 {% block leftBar %}
@@ -31,5 +31,5 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ url_for('static', filename='build/js/courseware.js') }}"></script>
+       <script src="{{ 'courseware.js' | asset }}"></script>
 {% endblock %}

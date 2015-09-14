@@ -1,11 +1,14 @@
 var path = require('path');
-var dirname = path.resolve(__dirname, 'vendor/js');
+var vendorjs = path.resolve(__dirname, 'vendor/js');
+var vendorcss = path.resolve(__dirname, 'vendor/css');
 var cssdir = path.resolve(__dirname, 'src/css');
 
 var resolve = {
     alias: {
         maincss: path.resolve(cssdir, 'main.sass'),
-        slides: path.resolve(dirname, 'responsiveslides.js')
+        normalize: path.resolve(vendorcss, 'normalize.css'),
+        slides: path.resolve(vendorjs, 'responsiveslides.js'),
+        body: path.resolve(vendorcss, 'body.css')
     }
 };
 

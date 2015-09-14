@@ -9,7 +9,8 @@ var entry = {
     pages: path.resolve(dirname, 'pages.js'),
     product: path.resolve(dirname, 'product.js'),
     research: path.resolve(dirname, 'research.js'),
-    school: path.resolve(dirname, 'school.js')
+    school: path.resolve(dirname, 'school.js'),
+    userinfo: path.resolve(dirname, 'userinfo.js')
 };
 
 module.exports = entry;

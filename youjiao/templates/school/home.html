@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='build/css/school.css') }}">
+    <link rel="stylesheet" href="{{ 'school.css' | asset }}">
 {% endblock %}
 
 {% block leftBar %}
@@ -91,7 +91,7 @@
 
                                 <div>
                                     <h5>7.xxx孩子好性格</h5>
-                                    <h6>sssssssssss</h6>
+                                    <h6>sssssssssss</h6>url_for('static', filename='build/css/
                                 </div>
                             </div>
                         </div>
@@ -163,5 +163,5 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ url_for('static', filename='build/js/school.js') }}"></script>
+       <script src="{{ 'school.js' | asset }}"></script>
 {% endblock %}

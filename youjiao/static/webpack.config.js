@@ -12,6 +12,7 @@ var plugins = [
         "window.jQuery": "jquery",
         "root.jQuery": "jquery"
     }),
+    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.[hash].js'),
     new ExtractTextPlugin('../css/[name].[hash].css'),
     new webpack.optimize.DedupePlugin(),
     new AssetsPlugin({filename: 'assets.json.py'})
@@ -30,6 +31,10 @@ module.exports = {
             {
                 test: /\.sass$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?indentedSyntax')
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
             },
             {test: /\.js$/, loader: 'babel'},
             {test: /\.png$/, loader: "url-loader"},
