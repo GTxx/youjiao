@@ -1,3 +1,6 @@
+import 'normalize';
+import 'maincss';
+import 'body';
 
 $(function() {
     personal('.right_second:eq(0) h4:eq(0)','.right_second:eq(0) h4:eq(0)','.right_second:eq(0) h4:eq(1)','.right_second:eq(0) span','#right_body_image','#right_body','#right_body_password');
@@ -20,6 +23,7 @@ $(function() {
         $(this).attr('class', 'button4'); //改变class名字
     });
 });
+
 function personal(classname,childname1,childname2,childname3,childname4,childname5,childname6){
         $(classname).click(function(){
         $(childname3).css("borderBottom", 'none');
@@ -30,6 +34,7 @@ function personal(classname,childname1,childname2,childname3,childname4,childnam
         $(childname6).css('display', 'none');
     });
 }
+
 function dj(classname,childname1,childname2,childname3,childname4,childname5,childname6){
          $(classname).click(function(){
         $(childname6).css('background', 'none');
@@ -42,4 +47,3 @@ function dj(classname,childname1,childname2,childname3,childname4,childname5,chi
     });
 
 }
-

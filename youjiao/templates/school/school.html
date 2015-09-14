@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ 'school.css' | asset }}">
+{% endblock %}
+
 {% block leftBar %}
     {% include 'school/left_bar.html' %}
 {% endblock %}
@@ -129,6 +133,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
-    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+       <script src="{{ 'school.js' | asset }}"></script>
 {% endblock %}

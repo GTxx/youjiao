@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ 'courseware.css' | asset }}">
+{% endblock %}
+
 {% block leftBar %}
     {% include 'courseware/left_bar.html' %}
 {% endblock %}
@@ -59,4 +63,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+       <script src="{{ 'courseware.js' | asset }}"></script>
 {% endblock %}

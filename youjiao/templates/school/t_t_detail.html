@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ 'school.css' | asset }}">
+{% endblock %}
+
 {% block leftBar %}
     {% include 'school/left_bar.html' %}
 {% endblock %}
@@ -28,4 +32,8 @@
 
 {% block rightBar %}
     {% include 'school/training_right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+       <script src="{{ 'school.js' | asset }}"></script>
 {% endblock %}

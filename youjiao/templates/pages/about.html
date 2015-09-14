@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ 'pages.css' | asset }}">
+{% endblock %}
+
 {% block content %}
     <div id="main-page-body">
         <div class="e-page-title" style="margin-top: -4px;margin-bottom: 4px;">关于我们</div>
@@ -35,6 +39,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='vendor/js/responsiveslides.js') }}"></script>
-    <script src="{{ url_for('static', filename='build/js/youjiao.js') }}"></script>
+       <script src="{{ 'pages.js' | asset }}"></script>
 {% endblock %}
