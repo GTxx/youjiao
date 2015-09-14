@@ -1,5 +1,9 @@
 {% extends "base/base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ 'activity.css' | asset }}">
+{% endblock %}
+
 {% block leftBar %}
     {% include 'activity/left_bar.html' %}
 {% endblock %}
@@ -21,4 +25,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'activity.js' | asset }}"></script>
 {% endblock %}

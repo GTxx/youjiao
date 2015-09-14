@@ -8,7 +8,6 @@ from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
 
-
 from .config import Config
 from .content.models import Activity, Page
 from .user.models import User
@@ -23,6 +22,7 @@ from .user.views import user_bp
 from .user.api import user_api_bp
 from .content.admin import ActivityAdmin, PageAdmin
 from .content.views import content_bp
+import os, json
 
 
 # Flask views
@@ -78,5 +78,8 @@ def create_app():
 
     # register home page
     app.add_url_rule('/', 'index', index)
+
+    with open(os.path.join(os.getcwd(), 'youjiao/static/assets.json.py'), 'r') as assets:
+        app.assets = json.load(assets)
 
     return app

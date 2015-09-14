@@ -3,6 +3,7 @@ from flask_script import Manager
 from youjiao.extensions import db
 from youjiao.app import create_app
 from youjiao.user.models import User, Role
+import os, json
 
 # Used by app debug & livereload
 PORT = 5000
@@ -28,6 +29,7 @@ def createdb():
 def dropdb():
     """Create database."""
     db.drop_all()
+
 
 @manager.shell
 def make_shell_context():
@@ -57,9 +59,24 @@ def create_admin(name, password, email):
     user.roles.append(role)
     user.save()
 
+
 @manager.command
 def create_test_data():
     pass
+
+
+@app.template_filter('asset')
+def asset_filter(file_string):
+    try:
+        static_path = '/static/build'
+        filename = '.'.join(file_string.split('.')[:-1])
+        filetype = file_string.split('.').pop()
+        file_resolve_name = app.assets[filename][filetype]
+        file_path = os.path.join(static_path, filetype + '/' + file_resolve_name)
+        return file_path
+    except:
+        return file_string+' not found'
+
 
 if __name__ == "__main__":
     manager.run()
