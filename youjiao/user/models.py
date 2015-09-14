@@ -81,6 +81,7 @@ class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     user_id = db.Column(sqla.Integer, db.ForeignKey('user.id'))
     # TODO: add column describe/description
+    nickname = db.Column(sqla.String(16), unique=True)
     work_place_name = db.Column(sqla.String(255))
     avatar_qiniu_key = db.Column(sqla.String(200), default='default_avatar.png')
     birthday = db.Column(sqla.Date)
@@ -105,6 +106,7 @@ class Role(db.Model, RoleMixin, CRUDMixin):
         return '<Role {}>'.format(self.name)
 
 
+# TODO: use redis expire
 class Captcha(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     key = db.Column(sqla.String(64), unique=True)

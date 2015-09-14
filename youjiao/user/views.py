@@ -4,7 +4,7 @@ from flask_principal import identity_changed, AnonymousIdentity
 from .forms import RegisterForm
 from youjiao.extensions import limiter
 from .models import Captcha, User, UserProfile
-from flask_login import login_user
+from flask_login import login_user, login_required
 import json
 
 user_bp = Blueprint("user_view", __name__)
@@ -100,7 +100,6 @@ def refresh_captcha():
 
 
 @user_bp.route('/user/info/')
-def teaching_information():
+@login_required
+def user_info():
     return render_template('user/info.html')
-
-from .subscribers import *

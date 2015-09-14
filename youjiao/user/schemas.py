@@ -5,14 +5,6 @@ from flask_login import current_user
 from .utils import verify_password
 
 
-class UserSchema(Schema):
-    # TODO: complete schema condition
-    id = fields.Integer()
-    name = fields.String(required=True, validate=Length(5, 30))
-    email = fields.Email()
-    phone_number = fields.String()
-
-
 class UserProfileSchema(Schema):
     work_place_name = fields.String(validate=Length(0, 30))
     # avatar_qiniu_key = db.Column(sqla.String(200), default='default_avatar.png')
@@ -23,6 +15,15 @@ class UserProfileSchema(Schema):
     city = fields.String(validate=Length(1, 16))
     district = fields.String(validate=Length(1, 16))
     street = fields.String(validate=Length(1, 16))
+
+
+class UserSchema(Schema):
+    # TODO: complete schema condition
+    id = fields.Integer()
+    name = fields.String(required=True, validate=Length(5, 30))
+    email = fields.Email()
+    phone_number = fields.String()
+    profile = fields.Nested(UserProfileSchema)
 
 
 def check_fields_exist(*fields):
