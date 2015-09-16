@@ -1,3 +1,3 @@
 import 'normalize';
 import 'maincss';
-import '../modules/common';
+import '../modules/add_slides_itemhover';

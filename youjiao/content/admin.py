@@ -10,7 +10,7 @@ from ..admin_utils import AuthMixin
 class CKTextAreaWidget(TextArea):
     def __call__(self, field, **kwargs):
         if kwargs.get('class'):
-            kwargs['class'] += 'ckeditor'
+            kwargs['class'] = 'ckeditor'
         else:
             kwargs.setdefault('class', 'ckeditor')
         return super(CKTextAreaWidget, self).__call__(field, **kwargs)
@@ -21,7 +21,6 @@ class CKTextAreaField(TextAreaField):
 
 
 class ActivityAdmin(AuthMixin, sqla.ModelView):
-
     form_overrides = {
         'html': CKTextAreaField
     }
@@ -34,6 +33,9 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
         'category': [
             ('policy', u'幼教政策'),
             ('news', u'幼教新闻'),
+            ('events', u'幼教事件'),
+            ('research', u'理论研究'),
+            ('activity', u'实践活动')
         ],
         'status': [
             ('1', u'草稿'),
@@ -47,6 +49,7 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
         if not content_edit_permission.can():
             return False
         return True
+
 
 class PageAdmin(AuthMixin, sqla.ModelView):
     form_overrides = {
@@ -71,7 +74,9 @@ class PageAdmin(AuthMixin, sqla.ModelView):
             return False
         return True
 
+
 from ..extensions import admin, db
 from .models import Activity, Page
+
 admin.add_view(ActivityAdmin(Activity, db.session))
 admin.add_view(PageAdmin(Page, db.session))

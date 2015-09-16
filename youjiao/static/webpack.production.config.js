@@ -6,13 +6,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
 
 var plugins = [
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery",
-        "root.jQuery": "jquery"
+    //new webpack.ProvidePlugin({
+    //    $: "jquery",
+    //    jQuery: "jquery",
+    //    "window.jQuery": "jquery",
+    //    "root.jQuery": "jquery"
+    //}),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'commons',
+        filename: 'commons.[hash].js',
+        chunks: ['home', 'security', 'pages', 'activity', 'courseware', 'product', 'research', 'school', 'userinfo']
     }),
-    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.[hash].js'),
     new ExtractTextPlugin('../css/[name].[hash].css'),
     new webpack.optimize.DedupePlugin(),
     new AssetsPlugin({filename: 'assets.json.py'}),

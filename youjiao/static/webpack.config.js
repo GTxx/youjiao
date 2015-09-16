@@ -4,15 +4,18 @@ var entry = require('./entry');
 var resolve = require('./resolve.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
-
 var plugins = [
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery",
-        "root.jQuery": "jquery"
+    //new webpack.ProvidePlugin({
+    //    $: "jquery",
+    //    jQuery: "jquery",
+    //    "window.jQuery": "jquery",
+    //    "root.jQuery": "jquery"
+    //}),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'commons',
+        filename: 'commons.js',
+        chunks: ['home','security','pages','activity','courseware','product','research','school','userinfo']
     }),
-    new webpack.optimize.CommonsChunkPlugin('commons', 'commons.js'),
     new ExtractTextPlugin('../css/[name].css'),
     new webpack.optimize.DedupePlugin(),
     new AssetsPlugin({filename: 'assets.json.py'})

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "es5-shim": "^4.1.13",
     "extract-text-webpack-plugin": "^0.8.2",
     "jquery": "^1.11.3",
     "jquery-validation": "^1.14.0",
