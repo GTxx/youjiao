@@ -28,10 +28,10 @@
                 <span><a href="/page/about/">关于61幼教网</a></span>
                 <span class="header-login">
                 {% if current_user.is_authenticated() %}
-                    <a class="header-login-name" href="/user/info/">{{ current_user.name }}</a>
+                    <a class="header-login-name" href="{{ url_for('user_view.user_profile') }}">{{ current_user.name }}</a>
                     | <a href="/logout">退出</a>
                 {% else %}
-                    <a href="/login">登陆</a> / <a href="/register">注册</a>
+                    <a href="{{ url_for('user_view.login') }}">登陆</a> / <a href="{{ url_for('user_view.register') }}">注册</a>
                 {% endif %}
                 </span>
             </div>

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_security import RoleMixin
 from flask_login import UserMixin
 from youjiao.extensions import db
@@ -43,8 +42,6 @@ class User(db.Model, UserMixin, CRUDMixin):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
 
     @classmethod
     def create_user(cls, name, email, password):

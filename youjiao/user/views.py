@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, session, curren
 from flask.views import MethodView
 from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
-from .forms import RegisterForm, UserProfileForm
+from .forms import RegisterForm, UserProfileForm, ModifyPasswordForm
 from youjiao.extensions import limiter
 from .models import Captcha, User, UserProfile
 from flask_login import login_user, login_required, current_user
@@ -114,10 +114,10 @@ class UserProfileView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
-        user_profile = current_user.profile
-        form = UserProfileForm(obj=user_profile)
+        profile = current_user.profile
+        form = UserProfileForm(obj=profile)
         # import ipdb; ipdb.set_trace()
-        return render_template('user/info.html', form=form)
+        return render_template('user/profile.html', form=form)
 
     def post(self):
         # import ipdb; ipdb.set_trace()
@@ -127,7 +127,7 @@ class UserProfileView(MethodView):
             user_profile = current_user.profile
             form.populate_obj(user_profile)
             user_profile.save()
-        return render_template('user/info.html', form=form)
+        return render_template('user/profile.html', form=form)
 
 
 class UserPasswordModifyView(MethodView):
@@ -135,10 +135,17 @@ class UserPasswordModifyView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
-        return render_template('user/modify_password.html')
+        form = ModifyPasswordForm()
+
+        return render_template('user/modify_password.html', form=form)
 
     def post(self):
-        return render_template('user/modify_password.html')
+        form = ModifyPasswordForm(formdata=request.form)
+        if form.validate_on_submit():
+            current_user.set_password(form.data['password'])
+            return render_template('user/modify_password.html', modify_success=True, form=form)
+        return render_template('user/modify_password.html', form=form)
 
 
-user_bp.add_url_rule('/user_profile', view_func=UserProfileView.as_view('user_profile'))
+user_bp.add_url_rule('/user/profile', view_func=UserProfileView.as_view('user_profile'), endpoint='user_profile')
+user_bp.add_url_rule('/user/modify_password', view_func=UserPasswordModifyView.as_view('modify_password'), endpoint='modify_password')
