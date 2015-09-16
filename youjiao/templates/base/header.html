@@ -7,29 +7,52 @@
             <ul class="youjiao-nav-list">
                 <li><a class="{% if current_page == 'home' %}nav-active{% endif %}" href="/">首页</a></li>
                 <li><a class="{% if current_page == 'activity' %}nav-active{% endif %}"
-                       href="/category/policy/">幼教动态</a></li>
-                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="/product/">产品</a>
+                       href="/category/policy/">幼教动态</a>
                     <ul class="youjiao-nav-sub">
-                        <li><a href="#">幼儿园小班</a></li>
-                        <li><a href="#">幼儿园中班</a></li>
-                        <li><a href="#">幼儿园大班</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='policy') }}">幼教政策</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='news') }}">幼教新闻</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='events') }}">幼教事件</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='research') }}">理论研究</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='activity') }}">实践活动</a></li>
+                    </ul>
+                </li>
+                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="{{ url_for('activity_content.product') }}">产品</a>
+                    <ul class="youjiao-nav-sub">
+                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教教材</a></li>
+                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>
                     </ul>
                 </li>
                 <li><a class="{% if current_page == 'research' %}nav-active{% endif %}"
-                       href="/research/activity/">教学教研</a></li>
-                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="/courseware/">课件中心</a>
+                       href="{{ url_for('activity_content.research_home') }}">教学教研</a>
+                    <ul class="youjiao-nav-sub">
+                        <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
+                        <li><a href="{{ url_for('activity_content.research_activity') }}">教研活动</a></li>
+                        <li><a href="{{ url_for('activity_content.research_result') }}">教研成果</a></li>
+                    </ul>
+                </li>
+                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="{{ url_for('activity_content.courseware') }}">课件中心</a>
+                    <ul class="youjiao-nav-sub">
+                        <li><a href="{{ url_for('activity_content.courseware_sub') }}">教材配套课件</a></li>
+                        <li><a href="{{ url_for('activity_content.courseware_sub') }}">其他课件资源</a></li>
+                    </ul>
                 </li>
                 <li class="border-right-none"><a class="{% if current_page == 'school' %}nav-active {% endif %}"
-                                                 href="/school/">幼教网课</a></li>
+                                                 href="{{ url_for('activity_content.school') }}">幼教网课</a>
+                    <ul class="youjiao-nav-sub">
+                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀课堂</a></li>
+                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀讲座</a></li>
+                        <li><a href="{{ url_for('activity_content.school_sub') }}">其他视频</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div class="header-right">
             <div class="header-right-top">
-                <span><a href="/page/about/">关于61幼教网</a></span>
+                <span><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a></span>
                 <span class="header-login">
                 {% if current_user.is_authenticated() %}
                     <a class="header-login-name" href="{{ url_for('user_view.user_profile') }}">{{ current_user.name }}</a>
-                    | <a href="/logout">退出</a>
+                    | <a href="{{ url_for('user_view.logout') }}">退出</a>
                 {% else %}
                     <a href="{{ url_for('user_view.login') }}">登陆</a> / <a href="{{ url_for('user_view.register') }}">注册</a>
                 {% endif %}

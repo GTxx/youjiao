@@ -7,4 +7,4 @@ db = SQLAlchemy()
 
 limiter = Limiter()
 
-admin = Admin()
+admin = Admin(template_mode='bootstrap3')

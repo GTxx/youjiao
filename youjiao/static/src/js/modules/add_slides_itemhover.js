@@ -1,10 +1,9 @@
 $(function () {
-    try {
-        $(".rslides").responsiveSlides({
-            auto: true,
-            pager: true
-        });
-    } catch(e){}
+
+    $(".rslides").responsiveSlides({
+        auto: true,
+        pager: true
+    });
 
     function mouseOverAndOut(target, activeClass) {
         $(target).mouseenter(function () {

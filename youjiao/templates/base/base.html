@@ -29,7 +29,7 @@
             <div class="footer-sub-wrapper">
                 <div>
                     <ul>
-                        <li class="list-style-none"><a href="/page/about/">关于61幼教网</a></li>
+                        <li class="list-style-none"><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a></li>
                         <li><a href="">了解61幼教网</a></li>
                         <li><a href="">加入61幼教网</a></li>
                         <li><a href="">联系我们</a></li>
@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.12/es5-shim.min.js"></script>-->
+<script src="http://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
 <script src="{{ 'commons.js' | asset }}"></script>
 
 {% block js %}

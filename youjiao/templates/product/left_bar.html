@@ -1,11 +1,11 @@
 <div class="left-bar">
     <ul class="left-bar-subul-last">
         <li class="left-list-first"><a href="/product/">产品展示</a></li>
-        <li><a href="/product/sub/">幼教教材</a></li>
-        <li><a href="/product/sub/">幼教读物</a></li>
-        <li><a href="/product/sub/">幼教玩具</a></li>
-        <li><a href="/product/sub/">教学设备展示</a></li>
-        <li><a href="/product/sub/">其他婴幼儿产品</a></li>
+        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教教材</a></li>
+        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>
+        {#        <li><a href="/product/sub/">幼教玩具</a></li>#}
+        {#        <li><a href="/product/sub/">教学设备展示</a></li>#}
+        {#        <li><a href="/product/sub/">其他婴幼儿产品</a></li>#}
     </ul>
     <div class="left-adposition">
         <img src="{{ url_for('static', filename='image/a-d.png') }}" alt="" style="width: 180px;height: 720px;">

@@ -46,5 +46,6 @@ class RoleAdmin(sqla.ModelView):
 
 
 from ..extensions import admin, db
+
 admin.add_view(UserAdmin(User, db.session))
 admin.add_view(RoleAdmin(Role, db.session))

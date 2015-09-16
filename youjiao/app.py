@@ -61,10 +61,12 @@ def create_app():
     limiter.init_app(app)
 
     # flask_admin
-    admin = Admin(app, template_mode='bootstrap3')
-    admin.add_view(ActivityAdmin(Activity, db.session))
-    admin.add_view(UserAdmin(User, db.session))
-    admin.add_view(PageAdmin(Page, db.session))
+    # admin = Admin(app, template_mode='bootstrap3')
+    # admin.add_view(ActivityAdmin(Activity, db.session))
+    # admin.add_view(UserAdmin(User, db.session))
+    # admin.add_view(PageAdmin(Page, db.session))
+    from .extensions import  admin
+    admin.init_app(app)
 
     # register blueprint
     app.register_blueprint(content_bp)
