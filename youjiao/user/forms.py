@@ -11,7 +11,7 @@ from wtforms.validators import Regexp
 import hashlib
 import os
 from wtforms.widgets.core import HTMLString
-from .models import User, Captcha
+from .models import User, Captcha, UserProfile
 
 
 def unique_user_name(form, field):
@@ -136,3 +136,11 @@ class LoginForm(Form):
             return False
         self.user = user
         return True
+
+
+from wtforms_alchemy import ModelForm
+from flask_wtf import Form as csrf_form
+class UserProfileForm(csrf_form, ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['avatar_qiniu_key']

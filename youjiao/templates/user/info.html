@@ -1,8 +1,18 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-   <link href="{{ url_for('static', filename='vendor/css/body.css') }}" rel="stylesheet">
+   <link href="{{ 'user_info.css' | asset }}" rel="stylesheet">
 {% endblock %}
+
+{% macro render_error(field) %}
+    {% if field.errors %}
+        <ul>
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
 
 {% block content %}
    <div id="div1">
@@ -36,7 +46,17 @@
            </div>
        <div id="right_body">
            <ul>
-               <li><span>用户名:</span><input type="text" value="laura"></li>
+               <form action="" method="post" id="user-profile-form">
+
+                   {{ form.hidden_tag() }}
+                   <!--<div class="user-input-item first">-->
+                       <!--<label for="">昵称:</label><input placeholder="用户名或邮箱" type="text" name="nickname">-->
+                       <!--<div class="form-invalid">{{ render_error(form.nickname) }}</div>-->
+                   <!--</div>-->
+               <li>
+                   <span>昵称:</span><input type="text" value="" name="nickname" />
+                   <div class="form-invalid">{{ render_error(form.nickname) }}</div>
+               </li>
                <li><span style="letter-spacing:20px;">邮箱</span><input type="text" value="laura"></li>
                <li><span>手机号:</span><input type="text" value="laura"></li>
                <li><span style="letter-spacing:20px;">生日</span><select><option >1990</select><select><option >01</select><select><option >01</select></li>
@@ -44,7 +64,16 @@
                <li><span style="letter-spacing:20px;">职业</span><select style="width:220px"><option >-教师-</select></li>
                <li><span style="letter-spacing:0px;" >所在单位:</span><input type="text" value="laura"></li>
                <li><span style="letter-spacing:0px;">所在地区:</span><select><option >-省份-</select><select><option >-城市-</select><select><option >-县区-</select></li>
-               <li style="margin-top:6px;"><span></span><div id="button"><h5>编辑资料</h5></div></li>
+                   <input type="submit" class="user-profile-submit" value="修改">
+               </form>
+               <!--<form method="POST" action="">-->
+                   <!--{% for field in form %}-->
+                   <!--<li>-->
+                       <!--<span>{{ field.label }}:</span>-->
+                       <!--<td>{{ field }}</td>-->
+                   <!--</li>-->
+                   <!--{% endfor %}-->
+               <!--</form>-->
            </ul>
        </div>
        <div id="right_body_image">
@@ -179,9 +208,5 @@
 {% endblock %}
 
 {% block js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.12/es5-shim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-<script src="{{ url_for('static', filename='vendor/js/jquery-1.11.3.min.js') }}"></script>
-<script src="{{ url_for('static', filename='src/js/body.js') }}"></script>
-<script src="{{ url_for('static', filename='build/js/user_info.js') }}"></script>
+<script src="{{ 'user_info.js' | asset }}"></script>
 {% endblock %}

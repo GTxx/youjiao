@@ -74,8 +74,8 @@ def asset_filter(file_string):
         file_resolve_name = app.assets[filename][filetype]
         file_path = os.path.join(static_path, filetype + '/' + file_resolve_name)
         return file_path
-    except:
-        return file_string+' not found'
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
