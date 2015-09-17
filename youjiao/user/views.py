@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, session, current_app
+from flask.views import MethodView
 from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
-from .forms import RegisterForm
+from .forms import RegisterForm, UserProfileForm, ModifyPasswordForm
 from youjiao.extensions import limiter
 from .models import Captcha, User, UserProfile
-from flask_login import login_user
+from flask_login import login_user, login_required, current_user
 import json
 
 user_bp = Blueprint("user_view", __name__)
@@ -12,6 +13,7 @@ user_bp = Blueprint("user_view", __name__)
 @user_bp.route('/register', methods=['GET', 'POST'])
 @anonymous_user_required
 def register():
+    # TODO: use method view to refactor
     if request.method == 'POST':
         print(request.json)
         print(request.form)
@@ -99,8 +101,51 @@ def refresh_captcha():
     return json.dumps({'captcha_key': captcha.key, 'url': captcha.img_url})
 
 
-@user_bp.route('/user/info/')
-def teaching_information():
+@user_bp.route('/user/info/profile')
+@login_required
+def user_info():
+
     return render_template('user/info.html')
 
-from .subscribers import *
+
+class UserProfileView(MethodView):
+    """ user profile edit """
+    methods = ['GET', 'POST']
+    decorators = [login_required, ]
+
+    def get(self):
+        profile = current_user.profile
+        form = UserProfileForm(obj=profile)
+        # import ipdb; ipdb.set_trace()
+        return render_template('user/profile.html', form=form)
+
+    def post(self):
+        # import ipdb; ipdb.set_trace()
+        form = UserProfileForm(formdata=request.form)
+        if form.validate_on_submit():
+            data = form.data
+            user_profile = current_user.profile
+            form.populate_obj(user_profile)
+            user_profile.save()
+        return render_template('user/profile.html', form=form)
+
+
+class UserPasswordModifyView(MethodView):
+    methods = ['GET', 'POST']
+    decorators = [login_required, ]
+
+    def get(self):
+        form = ModifyPasswordForm()
+
+        return render_template('user/modify_password.html', form=form)
+
+    def post(self):
+        form = ModifyPasswordForm(formdata=request.form)
+        if form.validate_on_submit():
+            current_user.set_password(form.data['password'])
+            return render_template('user/modify_password.html', modify_success=True, form=form)
+        return render_template('user/modify_password.html', form=form)
+
+
+user_bp.add_url_rule('/user/profile', view_func=UserProfileView.as_view('user_profile'), endpoint='user_profile')
+user_bp.add_url_rule('/user/modify_password', view_func=UserPasswordModifyView.as_view('modify_password'), endpoint='modify_password')

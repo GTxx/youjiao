@@ -57,12 +57,6 @@ class ResetPassword extends React.Component {
       data: JSON.stringify({old_password: old_password, password: password, password_confirm: password_confirm}),
       dataType: 'json',
       contentType: 'application/json'
-      //success: (data)=>{
-      //  console.log(data)
-      //},
-      //failure: (errMsg)=>{
-      //  alert(errMsg)
-      //}
     })
       .done(function (msg) {
         // TODO: add a success info
@@ -110,25 +104,35 @@ class ResetPassword extends React.Component {
   }
 }
 
-class User extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      profile: {},
       name: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
       password: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
       password_confirm: {valid: false, validate_fn: validate_length(5, 15), errors: '', value: ''},
       error: ''
     }
-
   }
-
+  componentDidMount(){
+    $.ajax({
+      url: '/api/user_info'
+    })
+      .done((res) => {
+        console.log(res)
+        console.log(this)
+        this.setState({profile: res.profile})
+      })
+  }
   render() {
     return (
       <div>
         <ul>
-          <li><span>用户名:</span><input type="text" value="laura"/></li>
-          <li><span style="letter-spacing:20px;">邮箱</span><input type="text" value="laura"/></li>
-          <li><span>手机号:</span><input type="text" value="laura"/></li>
+          <li><span>生日:</span><input type="text" value={this.state.profile.birthday}/></li>
+          <li><span>职业:</span><input type="text" value={this.state.profile.career}/></li>
+          <li><span>工作单位:</span><input type="text" value={this.state.profile.work_place_name}/></li>
+          <li><span>性别:</span><input type="text" value={this.state.profile.gender}/></li>
         </ul>
         <button disabled={this.state.error.length != 0} onClick={this.handleSubmit}>修改密码</button>
       </div>
@@ -136,4 +140,4 @@ class User extends React.Component {
   }
 }
 React.render(<ResetPassword />, document.getElementById('right_body_password'));
-React.render(<User />, document.getElementById('right_body'))
+React.render(<UserProfile />, document.getElementById('right_body'))

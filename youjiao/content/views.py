@@ -100,8 +100,3 @@ def research_teacher():
 @content_bp.route('/page/about/')
 def page_about():
     return render_template('pages/about.html')
-
-
-@content_bp.route('/user/info/')
-def teaching_information():
-    return render_template('teaching/teaching.html')

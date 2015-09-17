@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_security import RoleMixin
 from flask_login import UserMixin
 from youjiao.extensions import db
@@ -43,8 +42,6 @@ class User(db.Model, UserMixin, CRUDMixin):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
 
     @classmethod
     def create_user(cls, name, email, password):
@@ -81,6 +78,7 @@ class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     user_id = db.Column(sqla.Integer, db.ForeignKey('user.id'))
     # TODO: add column describe/description
+    nickname = db.Column(sqla.String(16), unique=True)
     work_place_name = db.Column(sqla.String(255))
     avatar_qiniu_key = db.Column(sqla.String(200), default='default_avatar.png')
     birthday = db.Column(sqla.Date)
@@ -105,6 +103,7 @@ class Role(db.Model, RoleMixin, CRUDMixin):
         return '<Role {}>'.format(self.name)
 
 
+# TODO: use redis expire
 class Captcha(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     key = db.Column(sqla.String(64), unique=True)

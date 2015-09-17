@@ -1,15 +1,32 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-   <link href="{{ 'userinfo.css' | asset }}" rel="stylesheet">
+   <link href="{{ 'user_info.css' | asset }}" rel="stylesheet">
 {% endblock %}
+
+{% macro render_error(field) %}
+    {% if field.errors %}
+        <ul>
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
 
 {% block content %}
    <div id="div1">
    <div id="left">   <!--左边部分-->
         <img src="">
-       <span>Laura</span>
+       <span>{{ current_user.name }}</span>
+       {% if 'admin' in current_user.roles_name %}
+       <h4>管理员</h4>
+       {% elif 'editor' in current_user.roles_name %}
+       <h4>编辑</h4>
+       {% else %}
        <h4>普通会员</h4>
+       {% endif %}
        <ul>
            <li style="background:white"><span>个人资料</span></li>
            <li><span>学习记录</span></li>
@@ -24,47 +41,14 @@
            <div class="right_top_module2"></div><div class="right_top_module"><span>个人资料</span></div> <div class="right_top_module3"></div>
        </div>
        <div class="right_second">
-           <span>基本资料</span>
-           <h4 >头像设置</h4>
-           <h4>密码修改</h4>
+           <span><a href="{{ url_for('user_view.user_profile') }}">基本资料</a></span>
+           <h4 ><a href="{{ 123}}">头像设置</a></h4>
+           <h4><a href="{{ url_for('user_view.modify_password') }}">密码修改</a></h4>
            </div>
        <div id="right_body">
-           <ul>
-               <li><span>用户名:</span><input type="text" value="laura"></li>
-               <li><span style="letter-spacing:20px;">邮箱</span><input type="text" value="laura"></li>
-               <li><span>手机号:</span><input type="text" value="laura"></li>
-               <li><span style="letter-spacing:20px;">生日</span><select><option >1990</select><select><option >01</select><select><option >01</select></li>
-               <li><span style="letter-spacing:20px;">性别</span><input style="width:20px;" name="aaa"type="radio"><h6>男</h6> <input style="width:20px;margin-left:20px" name="aaa" type="radio"><h6>女</h6></li>
-               <li><span style="letter-spacing:20px;">职业</span><select style="width:220px"><option >-教师-</select></li>
-               <li><span style="letter-spacing:0px;" >所在单位:</span><input type="text" value="laura"></li>
-               <li><span style="letter-spacing:0px;">所在地区:</span><select><option >-省份-</select><select><option >-城市-</select><select><option >-县区-</select></li>
-               <li style="margin-top:6px;"><span></span><div id="button"><h5>编辑资料</h5></div></li>
-           </ul>
+           {% block profile_avatar_modify_password %}{% endblock %}
        </div>
-       <div id="right_body_image">
-          <div id="right_body_image1">
-              <span >上传本地照</span>
-              <span style="margin-left:0;" >摄像头拍照</span>
-          </div>
-           <div id="right_body_image2">
-               <div id="right_body_image3">
-                  <div id="button2">
-                      <div id="square1"></div>
-                      <div id="square2"></div>
-                  </div>
-                   <span>请点击按钮选择图片</span>
-                   </div>
-               </div>
-             <h4>仅支持JPG、JPGE、GIF、PNG的图片格式文件不能大于</h4>
-           </div>
-       <div id="right_body_password">
-           <ul>
-               <li><span>当前密码:</span><input type="text"></li>
-               <li><span>新密码:</span><input type="text"></li>
-               <li><span>确认密码:</span><input type="text"></li>
-           </ul>
-           <div id="alert"><h4>编辑资料</h4></div>
-    </div>
+
    </div>
 
    <div   class="right" style="display:none"> <!--右边第二部分-->
@@ -180,5 +164,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ 'userinfo.js' | asset }}"></script>
+<script src="{{ 'user_info.js' | asset }}"></script>
 {% endblock %}

@@ -10,7 +10,7 @@ var entry = {
     product: path.resolve(dirname, 'product.js'),
     research: path.resolve(dirname, 'research.js'),
     school: path.resolve(dirname, 'school.js'),
-    userinfo: path.resolve(dirname, 'userinfo.js')
+    user_info: path.resolve(dirname, 'user_info.js')
 };
 
 module.exports = entry;

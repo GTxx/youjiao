@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask_security.forms import RegisterForm
+from flask_login import current_user
 import inspect
 from flask import flash, request, session
 from wtforms import HiddenField
@@ -11,7 +11,8 @@ from wtforms.validators import Regexp
 import hashlib
 import os
 from wtforms.widgets.core import HTMLString
-from .models import User, Captcha
+from .models import User, Captcha, UserProfile
+from .utils import verify_password
 
 
 def unique_user_name(form, field):
@@ -136,3 +137,39 @@ class LoginForm(Form):
             return False
         self.user = user
         return True
+
+
+from wtforms_alchemy import ModelForm
+from flask_wtf import Form as csrf_form
+class UserProfileForm(csrf_form, ModelForm):
+    nickname_validators = [DataRequired(), Length(min=4, max=15)]
+    nickname = StringField(u'nickname', validators=nickname_validators)
+
+    def validate_nickname(self, field):
+        if not field.data == current_user.profile.nickname:
+            if UserProfile.query.filter_by(nickname=field.data).first() is not None:
+                raise ValidationError('nickname already exists')
+
+    class Meta:
+        model = UserProfile
+        exclude = ['avatar_qiniu_key']
+
+
+class ModifyPasswordForm(Form):
+    old_password_validators = [DataRequired(), Length(min=6, max=15)]
+    password_validators = [DataRequired(), Length(min=6, max=15)]
+    password_confirm_validators = password_validators + [EqualTo('password', 'retry password mismatch')]
+
+    old_password = StringField(u'old_password', validators=old_password_validators)
+    password = StringField(u'password', validators=password_validators)
+    password_confirm = StringField(u'password_confirm', validators=password_confirm_validators)
+
+    def validate(self):
+        super(ModifyPasswordForm, self).validate()
+
+        # validate old password
+        if not verify_password(self.old_password.data, current_user.password):
+            self.old_password.errors.append(u'密码错误')
+            return False
+        return True
+

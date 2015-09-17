@@ -2,7 +2,7 @@
 from flask_script import Manager
 from youjiao.extensions import db
 from youjiao.app import create_app
-from youjiao.user.models import User, Role
+from youjiao.user.models import User, Role, UserProfile
 import os, json
 
 # Used by app debug & livereload
@@ -52,6 +52,9 @@ def init_db():
 @manager.option('-e', '--email', dest='email', default='admin@1.com')
 def create_admin(name, password, email):
     user = User.create_user(name, email, password)
+    profile = UserProfile()
+    profile.save()
+    user.profile = profile
     role = Role.query.filter_by(name='admin').first()
     if not role:
         role = Role('admin', 'admin role')
@@ -74,8 +77,8 @@ def asset_filter(file_string):
         file_resolve_name = app.assets[filename][filetype]
         file_path = os.path.join(static_path, filetype + '/' + file_resolve_name)
         return file_path
-    except:
-        return file_string+' not found'
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
