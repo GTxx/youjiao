@@ -1,10 +1,10 @@
 <div class="left-bar">
     <ul>
         <li class="left-list-first"><a href="javascript:;">幼教教材以及课件</a></li>
-        <li><a href="/courseware/sub/">幼小衔接班</a></li>
-        <li><a href="/courseware/sub/">幼儿园大班</a></li>
-        <li><a href="/courseware/sub/">幼儿园中班</a></li>
-        <li><a href="/courseware/sub/">幼儿园小班</a></li>
+        <li><a href="{{ url_for('activity_content.courseware_sub') }}">幼小衔接班</a></li>
+        <li><a href="{{ url_for('activity_content.courseware_sub') }}">幼儿园大班</a></li>
+        <li><a href="{{ url_for('activity_content.courseware_sub') }}">幼儿园中班</a></li>
+        <li><a href="{{ url_for('activity_content.courseware_sub') }}">幼儿园小班</a></li>
     </ul>
     <ul>
         <li class="left-list-first"><a href="javascript:;">低幼读物</a></li>
@@ -15,9 +15,9 @@
     </ul>
     <ul class="left-bar-subul-last">
         <li class="left-list-first"><a href="javascript:;">名师视频</a></li>
-        <li><a href="/school/lectures/">优秀课堂</a></li>
-        <li><a href="/school/lectures/">优秀讲座</a></li>
-        <li><a href="/school/lectures/">其他视频</a></li>
+        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀课堂</a></li>
+        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀讲座</a></li>
+        <li><a href="{{ url_for('activity_content.school_sub') }}">其他视频</a></li>
     </ul>
     <div class="left-adposition">
         <img src="{{ url_for('static', filename='image/a-d.png') }}" alt="" style="width: 180px;height: 720px;">
