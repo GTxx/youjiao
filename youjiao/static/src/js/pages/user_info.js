@@ -1,9 +1,6 @@
 import 'normalize';
 import 'maincss';
 import 'body';
-require('es5-shim/es5-shim');
-require('es5-shim/es5-sham');
-//import React from "react";
 
 $(function() {
     personal('.right_second:eq(0) h4:eq(0)','.right_second:eq(0) h4:eq(0)','.right_second:eq(0) h4:eq(1)','.right_second:eq(0) span','#right_body_image','#right_body','#right_body_password');
