@@ -79,7 +79,7 @@ def courseware_sub():
 
 @content_bp.route('/research/home/')
 def research_home():
-    return render_template('research/teacher.html', current_page='research')
+    return render_template('research/home.html', current_page='research')
 
 
 @content_bp.route('/research/activity/')
@@ -94,7 +94,7 @@ def research_result():
 
 @content_bp.route('/research/teacher/')
 def research_teacher():
-    return render_template('research/teacher2.html', current_page='research')
+    return render_template('research/teacher.html', current_page='research')
 
 
 @content_bp.route('/page/about/')

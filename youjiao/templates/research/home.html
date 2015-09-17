@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link href="{{ 'research.css' | asset }}" rel="stylesheet">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'research/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="main-big-body">
+        <div class="section-block-title-4">名师名园</div>
+        <div id="content_img">
+            <ul>
+                <li style="margin-left:13px;"><img src=""><span>边霞教授</span><h4>博士生导师</h4></li>
+                <li><img src=""><span>边霞教授</span><h4>博士生导师</h4></li>
+                <li><img src=""><span>边霞教授</span><h4>博士生导师</h4></li>
+            </ul>
+        </div>
+        <div class="body_content">
+            <div class="section-block-title-4">教研活动</div>
+            <ul class="research-home-list">
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+            </ul>
+        </div>
+        <div class="body_content">
+            <div class="section-block-title-4">教研成果</div>
+            <ul class="research-home-list">
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'research/home_right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'research.js' | asset }}"></script>
+{% endblock %}

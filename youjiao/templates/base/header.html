@@ -16,7 +16,8 @@
                         <li><a href="{{ url_for('activity_content.category', category='activity') }}">实践活动</a></li>
                     </ul>
                 </li>
-                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="{{ url_for('activity_content.product') }}">产品</a>
+                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}"
+                       href="{{ url_for('activity_content.product') }}">产品展示</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.product_sub') }}">幼教教材</a></li>
                         <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>
@@ -30,7 +31,8 @@
                         <li><a href="{{ url_for('activity_content.research_result') }}">教研成果</a></li>
                     </ul>
                 </li>
-                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="{{ url_for('activity_content.courseware') }}">课件中心</a>
+                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}"
+                       href="{{ url_for('activity_content.courseware') }}">课件中心</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.courseware_sub') }}">教材配套课件</a></li>
                         <li><a href="{{ url_for('activity_content.courseware_sub') }}">其他课件资源</a></li>
