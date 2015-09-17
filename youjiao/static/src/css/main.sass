@@ -353,6 +353,11 @@
   display: table
   margin: 0 auto 56px
   +clear-float
+  =active
+    border: 1px solid $youjiao-font-pink
+    background: $youjiao-font-pink
+    a
+      color: white
   li
     text-align: center
     box-sizing: border-box
@@ -369,11 +374,20 @@
       width: 100%
       color: $gray-a3
     &:hover
-      border: 1px solid $youjiao-font-pink
-      background: $youjiao-font-pink
-      a
-        color: white
+      +active
+  .pagination-active
+    +active
 
-
-
-
+.research-home-list
+  li
+    padding-left: 20px
+    &:before
+      position: absolute
+      content: ' '
+      display: inline-block
+      width: 4px
+      height: 4px
+      background: $font-gray
+      border-radius: 50%
+      margin-top: 8px
+      margin-left: -8px

@@ -21,25 +21,23 @@
         <div class="body_content">
             <div class="section-block-title-4">教研活动</div>
             <ul class="research-home-list">
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                {% for activity in data.research_events %}
+                    <li>
+                        <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }}</a>
+                        <span>[{{ activity.create_time.date() }}]</span>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="body_content">
             <div class="section-block-title-4">教研成果</div>
             <ul class="research-home-list">
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
-                <li><a href="">教育部要求做好暑期安全学生工作</a><span>[2015-06-29]</span></li>
+                {% for activity in data.research_result %}
+                    <li>
+                        <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }}</a>
+                        <span>[{{ activity.create_time.date() }}]</span>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

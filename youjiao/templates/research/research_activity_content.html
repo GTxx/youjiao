@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'research.css' | asset }}">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'research/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-noright-body">
+
+        <div class="e-page-title">教学教研-{{ category_name }}-{{ activity.title }}</div>
+        <div class="activity-content">
+            <h2 class="activity-title">{{ activity.title }}</h2>
+
+            <div class="activity-author">
+                来源： 中国学前教育研究会 2015年06月20日 作者：admin
+            </div>
+            <div class="activity-main-content">
+                {% autoescape off %}
+                {{ activity.html }}
+                {% endautoescape %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'research.js' | asset }}"></script>
+{% endblock %}
