@@ -9,19 +9,28 @@ from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
 
 from .config import Config
-from .content.models import Activity, Page
-from .user.models import User
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
 from .extensions import db, limiter, admin
 from .utils.csrf import check_csrf
 
+# user
+from .user.models import User
 from .user.admin import UserAdmin
 from .user.utils import _on_identity_loaded
 from .user.views import user_bp
 from .user.api import user_api_bp
-from .content.admin import ActivityAdmin, PageAdmin
+
+# content
+from .content.admin import ActivityAdmin
+from .content.models import Activity
 from .content.views import content_bp
+
+# book
+from .book.admin import BookAdmin
+from .book.models import Book
+from .book.views import book_bp
+
 import os, json
 
 
@@ -35,6 +44,7 @@ def create_app():
     app.config.from_object(Config)
 
     # flask_sqlalchemy
+    # import ipdb; ipdb.set_trace()
     db.init_app(app)
 
     # flask_debug
@@ -65,7 +75,7 @@ def create_app():
     # admin.add_view(ActivityAdmin(Activity, db.session))
     # admin.add_view(UserAdmin(User, db.session))
     # admin.add_view(PageAdmin(Page, db.session))
-    from .extensions import  admin
+    from .extensions import admin
     admin.init_app(app)
 
     # register blueprint
@@ -74,6 +84,9 @@ def create_app():
     app.register_blueprint(user_bp)
 
     app.register_blueprint(user_api_bp)
+
+    # import ipdb; ipdb.set_trace()
+    app.register_blueprint(book_bp)
 
     # register subscriber
     user_connect(app)

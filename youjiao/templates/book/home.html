@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'product/left_bar.html' %}
+    {% include 'book/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -28,17 +28,17 @@
                 <div class="section-block-title-4">幼教教材</div>
             </div>
             <ul class="n-v-section-list">
-                {% for i in range(1, 4) %}
+                {% for book in teach_book_list %}
                     <li>
-                        <a href="/product/detail/">
+                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
                             <div class="nv-image-wrapper">
-                                <img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">
-
+                                <!--<img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">-->
+                                <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
                                 <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">30.00/套</div>
+                                <div class="nv-price">{{ book.price }}/套</div>
                             </div>
-                            <h5>有趣的手影</h5>
-                            <h6>幼儿园大班上册</h6>
+                            <h5>{{ book.name }}</h5>
+                            <h6>{{ book.level }}</h6>
                         </a>
                     </li>
                 {% endfor %}
@@ -49,38 +49,16 @@
                 <div class="section-block-title-4">幼教教材</div>
             </div>
             <ul class="n-v-section-list">
-                {% for i in range(4, 7) %}
+                {% for book in read_book_list %}
                     <li>
-                        <a href="/product/detail/">
+                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
                             <div class="nv-image-wrapper">
-                                <img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">
-
+                                <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
                                 <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">30.00/套</div>
+                                <div class="nv-price">{{ book.price }}/套</div>
                             </div>
-                            <h5>有趣的手影</h5>
-                            <h6>幼儿园大班上册</h6>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="n-v-section-b">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-4">幼教教材</div>
-            </div>
-            <ul class="n-v-section-list">
-                {% for i in range(7, 10) %}
-                    <li>
-                        <a href="/product/detail/">
-                            <div class="nv-image-wrapper">
-                                <img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">
-
-                                <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">30.00/套</div>
-                            </div>
-                            <h5>有趣的手影</h5>
-                            <h6>幼儿园大班上册</h6>
+                            <h5>{{ book.name }}</h5>
+                            <h6>{{ book.level }}</h6>
                         </a>
                     </li>
                 {% endfor %}
@@ -90,7 +68,7 @@
 {% endblock %}
 
 {% block rightBar %}
-    {% include 'product/right_bar.html' %}
+    {% include 'book/right_bar.html' %}
 {% endblock %}
 
 {% block js %}

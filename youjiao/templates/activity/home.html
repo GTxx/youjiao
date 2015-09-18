@@ -10,7 +10,7 @@
 
 {% block content %}
     <div id="main-body">
-        <div class="e-page-title">幼教动态-{{ category_name }}</div>
+        <div class="e-page-title">幼教动态 {{ category_name }}</div>
 
         <ul class="news-list">
             {% for activity in activity_list.items %}
@@ -29,7 +29,7 @@
                 {% if page %}
                     {% if page != activity_list.page %}
                         <li>
-                            <a href="{{ url_for('activity_content.category', category=category_url, page=page) }}">{{ page }}</a>
+                            <a href="{{ url_for('activity_content.category', category=category_url) }}/?page={{page}}">{{ page }}</a>
                         </li>
                     {% else %}
                         <li class="pagination-active"><a href="javascript:;">{{ page }}</a></li>

@@ -1,19 +1,30 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from .models import Activity
 
 content_bp = Blueprint("activity_content", __name__)
 
 
-@content_bp.route('/category/<category>/<page>/')
-def category(category, page):
+
+@content_bp.route('/activity')
+def activity():
     try:
-        page = int(page)
-    except ValueError:
+        page = int(request.args.get('page'))
+    except Exception as e:
+        page = 1
+    pagination = Activity.query.filter_by(status=True).paginate(page, per_page=20)
+    return render_template('activity/home.html', activity_list=pagination,
+                           category_url=category, current_page='activity')
+
+@content_bp.route('/activity/<category>')
+def category(category):
+    try:
+        page = int(request.args.get('page'))
+    except Exception as e:
         page = 1
 
-    pagination = Activity.query.filter_by(category=category).filter_by(status=2).paginate(page, per_page=20)
+    pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)
     category_dict = {
         'policy': u'幼教政策',
         'news': u'幼教新闻',
@@ -66,21 +77,6 @@ def school_teacher_detail():
     return render_template('school/t_t_detail.html', current_page='school')
 
 
-@content_bp.route('/product/')
-def product():
-    return render_template('product/home.html', current_page='product')
-
-
-@content_bp.route('/product/detail/')
-def product_detail():
-    return render_template('product/detail.html', current_page='product')
-
-
-@content_bp.route('/product/sub/')
-def product_sub():
-    return render_template('product/sub_node.html', current_page='product')
-
-
 @content_bp.route('/courseware/')
 def courseware():
     return render_template('courseware/home.html', current_page='courseware')
@@ -103,7 +99,7 @@ def courseware_sub():
 
 @content_bp.route('/research/home/')
 def research_home():
-    research_events = Activity.query.filter_by(category='researchevents').filter_by(status=2).limit(7).all()
+    research_events = Activity.query.filter_by(category='research').filter_by(status=2).limit(7).all()
     research_result = Activity.query.filter_by(category='researchresult').filter_by(status=2).limit(7).all()
     data = {
         'research_events': research_events,
