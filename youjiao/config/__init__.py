@@ -6,8 +6,7 @@ class BaseConfig(object):
     DEBUG = True
 
     # Create in-memory database
-    DATABASE_FILE = 'sample_db.sqlite'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE
+    SQLALCHEMY_DATABASE_URI = 'postgresql://youjiao:123@localhost/youjiao'
     SQLALCHEMY_ECHO = True
 
     # for user register and login security

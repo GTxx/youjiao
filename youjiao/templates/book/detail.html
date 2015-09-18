@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'product/left_bar.html' %}
+    {% include 'book/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -19,25 +19,25 @@
                     <img src="" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
 
                     <div class="s-imglist-w">
-                        <div class="p-s-imglist s-img-active"><img src="" alt=""></div>
-                        <div class="p-s-imglist"><img src="" alt=""></div>
-                        <div class="p-s-imglist"><img src="" alt=""></div>
-                        <div class="p-s-imglist"><img src="" alt=""></div>
+                        <!--<div class="p-s-imglist s-img-active"><img src="" alt=""></div>-->
+                        {% for img_url in book.image_array %}
+                        <div class="p-s-imglist"><img src="{{img_url}}" style="width: 100px; height: 100px" alt=""></div>
+                        {% endfor %}
                         <a href="javascript:;" id="simple-img-next"></a>
                     </div>
                 </div>
                 <div class="product-info">
                     <div class="product-title">
-                        <h3>清凉一夏<span>幼儿园大班上册 1-5</span></h3>
+                        <h3>{{ book.name }}<span>幼儿园大班上册 1-5</span></h3>
                     </div>
                     <table>
                         <tr>
                             <td class="product-info-detail">主编：</td>
-                            <td>xxx</td>
+                            <td>{{ book.chief_editor }}</td>
                         </tr>
                         <tr>
                             <td class="product-info-detail">责任编辑：</td>
-                            <td>xxx</td>
+                            <td>{{ book.executive_editor }}</td>
                         </tr>
                         <tr>
                             <td class="product-info-detail">出版社：</td>

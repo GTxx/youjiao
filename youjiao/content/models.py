@@ -11,8 +11,12 @@ class Activity(db.Model):
     update_time = db.Column(sqla.DateTime, onupdate=datetime.now)
     title = db.Column(db.String(255))
     html = db.Column(db.Text)
-    status = db.Column(db.String(2), default='1')
-    category = db.Column(db.String(200), default='policy')
+    status = db.Column(sqla.Boolean, default=False)
+    category = db.Column(
+        sqla.Enum('policy', 'news', 'events', 'research', 'activity',
+                  name='category'),
+        default='policy')
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User')
 

@@ -37,10 +37,6 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
             ('research', u'理论研究'),
             ('activity', u'实践活动')
         ],
-        'status': [
-            ('1', u'草稿'),
-            ('2', u'发布'),
-        ]
     }
 
     def is_accessible(self):
@@ -62,8 +58,8 @@ class PageAdmin(AuthMixin, sqla.ModelView):
     form_excluded_columns = ('create_time', 'update_time')
     form_choices = {
         'status': [
-            ('1', u'草稿'),
-            ('2', u'发布'),
+            (False, u'草稿'),
+            (True, u'发布'),
         ]
     }
 

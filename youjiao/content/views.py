@@ -7,7 +7,7 @@ content_bp = Blueprint("activity_content", __name__)
 
 @content_bp.route('/category/<category>/')
 def category(category):
-    posts = Activity.query.filter_by(category=category).filter_by(status=2).all()
+    posts = Activity.query.filter_by(category=category, status=True)
     return render_template('activity/home.html', activity_list=posts, current_page='activity')
 
 
@@ -40,21 +40,6 @@ def school_product():
 @content_bp.route('/school/product/detail/')
 def school_teacher_detail():
     return render_template('school/t_t_detail.html', current_page='school')
-
-
-@content_bp.route('/product/')
-def product():
-    return render_template('product/home.html', current_page='product')
-
-
-@content_bp.route('/product/detail/')
-def product_detail():
-    return render_template('product/detail.html', current_page='product')
-
-
-@content_bp.route('/product/sub/')
-def product_sub():
-    return render_template('product/sub_node.html', current_page='product')
 
 
 @content_bp.route('/courseware/')

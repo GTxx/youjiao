@@ -20,7 +20,6 @@ roles_users = db.Table(
     sqla.UniqueConstraint('user_id', 'role_id')
 )
 
-
 class User(db.Model, UserMixin, CRUDMixin):
     id = sqla.Column(sqla.Integer, primary_key=True)
     name = db.Column(sqla.String(50), unique=True)
@@ -38,10 +37,10 @@ class User(db.Model, UserMixin, CRUDMixin):
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
     profile = db.relationship('UserProfile', backref='user', uselist=False)
+    # comment = db.relationship('')
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
-
 
     @classmethod
     def create_user(cls, name, email, password):
@@ -82,7 +81,7 @@ class UserProfile(db.Model, CRUDMixin):
     work_place_name = db.Column(sqla.String(255))
     avatar_qiniu_key = db.Column(sqla.String(200), default='default_avatar.png')
     birthday = db.Column(sqla.Date)
-    gender = db.Column(sqla.Enum('male', 'female'))
+    gender = db.Column(sqla.Enum('male', 'female', name='gender'))
     career = db.Column(sqla.String(16))
     province = db.Column(sqla.String(16))
     city = db.Column(sqla.String(16))

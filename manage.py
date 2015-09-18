@@ -26,6 +26,24 @@ def createdb():
 
 
 @manager.command
+def create_init_db():
+    try:
+        db.create_all()
+        role = Role(name='editor', description='editor role')
+        role.save()
+        role = Role(name='admin', description='admin role')
+        role.save()
+        create_admin('admin', 'admin@1.com', '111111')
+        from youjiao.test_data import book_list
+        from youjiao.book.models import Book
+        for book in book_list:
+            b = Book(**book._asdict())
+            b.save()
+    except Exception as e:
+        print(e)
+
+
+@manager.command
 def dropdb():
     """Create database."""
     db.drop_all()
