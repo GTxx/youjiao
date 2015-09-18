@@ -9,14 +9,14 @@
                 <li><a class="{% if current_page == 'activity' %}nav-active{% endif %}"
                        href="/category/policy/">幼教动态</a>
                     <ul class="youjiao-nav-sub">
-                        <li><a href="{{ url_for('activity_content.category', category='policy') }}">幼教政策</a></li>
-                        <li><a href="{{ url_for('activity_content.category', category='news') }}">幼教新闻</a></li>
-                        <li><a href="{{ url_for('activity_content.category', category='events') }}">幼教事件</a></li>
-                        <li><a href="{{ url_for('activity_content.category', category='research') }}">理论研究</a></li>
-                        <li><a href="{{ url_for('activity_content.category', category='activity') }}">实践活动</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='policy', page=1) }}">幼教政策</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='news', page=1) }}">幼教新闻</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='events', page=1) }}">幼教事件</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='research', page=1) }}">理论研究</a></li>
+                        <li><a href="{{ url_for('activity_content.category', category='activity', page=1) }}">实践活动</a></li>
                     </ul>
                 </li>
-                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="{{ url_for('book_view.book') }}">产品</a>
+                <li><a class="{% if current_page == 'product' %}nav-active{% endif %}" href="{{ url_for('book_view.book') }}">产品展示</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('book_view.book_category', category='teach_book') }}">幼教教材</a></li>
                         <li><a href="{{ url_for('book_view.book_category', category='read_book') }}">幼教读物</a></li>
@@ -26,11 +26,12 @@
                        href="{{ url_for('activity_content.research_home') }}">教学教研</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
-                        <li><a href="{{ url_for('activity_content.research_activity') }}">教研活动</a></li>
-                        <li><a href="{{ url_for('activity_content.research_result') }}">教研成果</a></li>
+                        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>
+                        <li><a href="{{ url_for('activity_content.research_activity', category='researchresult', page=1 ) }}">教研成果</a></li>
                     </ul>
                 </li>
-                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}" href="{{ url_for('activity_content.courseware') }}">课件中心</a>
+                <li><a class="{% if current_page == 'courseware' %}nav-active{% endif %}"
+                       href="{{ url_for('activity_content.courseware') }}">课件中心</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.courseware_sub') }}">教材配套课件</a></li>
                         <li><a href="{{ url_for('activity_content.courseware_sub') }}">其他课件资源</a></li>

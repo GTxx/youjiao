@@ -35,7 +35,9 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
             ('news', u'幼教新闻'),
             ('events', u'幼教事件'),
             ('research', u'理论研究'),
-            ('activity', u'实践活动')
+            ('activity', u'实践活动'),
+            ('researchevents', u'教研活动'),
+            ('researchresult', u'教研成果')
         ],
     }
 
