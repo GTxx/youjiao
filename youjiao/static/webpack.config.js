@@ -14,7 +14,7 @@ var plugins = [
     new webpack.optimize.CommonsChunkPlugin({
         name: 'commons',
         filename: 'commons.js',
-        chunks: ['home','security','pages','activity','courseware','product','research','school','userinfo']
+        chunks: ['home','security','pages','activity','courseware','product','research','school','user_info']
     }),
     new ExtractTextPlugin('../css/[name].css'),
     new webpack.optimize.DedupePlugin(),

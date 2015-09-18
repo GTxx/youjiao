@@ -10,14 +10,35 @@
 
 {% block content %}
     <div id="main-big-body">
-        <div class="e-page-title">教学教研-教研活动</div>
+        <div class="e-page-title">教学教研-{{ category_name }}</div>
         <ul class="news-list">
-            {% for activity in activity_list %}
+            {% for activity in activity_list.items %}
                 <li>
-                    <a href="/activity/{{ activity.id }}">{{ activity.title }} <span
-                            class="news-date float-right">[2015-06-29]</span></a>
+                    <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }} <span
+                            class="news-date float-right">[{{ activity.create_time.date() }}]</span></a>
                 </li>
             {% endfor %}
+        </ul>
+        <ul class="activity-pagination">
+            {#                        {% if activity_list.has_prev %}#}
+            {#                            <li><a class="pagination-first"><<</a></li>#}
+            {#                        {% endif %}#}
+            {% for page in activity_list.iter_pages() %}
+                {% if page %}
+                    {% if page != activity_list.page %}
+                        <li>
+                            <a href="{{ url_for('activity_content.category', category=category_url, page=page) }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="pagination-active"><a href="javascript:;">{{ page }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {% endfor %}
+            {#            {% if activity_list.has_next %}#}
+            {#                <li class="pagination-last"></li>#}
+            {#            {% endif %}#}
         </ul>
     </div>
 {% endblock %}
@@ -27,5 +48,5 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ 'research.js' | asset }}"></script>
+    <script src="{{ 'research.js' | asset }}"></script>
 {% endblock %}
