@@ -28,6 +28,7 @@ def book_category(category):
     else:
         abort(404)
 
+
 @book_bp.route('/book/<int:book_id>')
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)

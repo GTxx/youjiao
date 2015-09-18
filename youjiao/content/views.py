@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from .models import Activity
 
@@ -7,11 +7,21 @@ content_bp = Blueprint("activity_content", __name__)
 
 
 
-@content_bp.route('/category/<category>/<page>/')
-def category(category, page):
+@content_bp.route('/activity')
+def activity():
     try:
-        page = int(page)
-    except ValueError:
+        page = int(request.args.get('page'))
+    except Exception as e:
+        page = 1
+    pagination = Activity.query.filter_by(status=True).paginate(page, per_page=20)
+    return render_template('activity/home.html', activity_list=pagination,
+                           category_url=category, current_page='activity')
+
+@content_bp.route('/activity/<category>')
+def category(category):
+    try:
+        page = int(request.args.get('page'))
+    except Exception as e:
         page = 1
 
     pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)

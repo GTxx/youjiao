@@ -7,7 +7,7 @@
             <ul class="youjiao-nav-list">
                 <li><a class="{% if request.path == '/' %}nav-active{% endif %}" href="/">首页</a></li>
                 <li><a class="{% if request.path.startswith('/activity') %}nav-active{% endif %}"
-                       href="/category/policy/">幼教动态</a>
+                       href="/activity">幼教动态</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.category', category='policy', page=1) }}">幼教政策</a></li>
                         <li><a href="{{ url_for('activity_content.category', category='news', page=1) }}">幼教新闻</a></li>
