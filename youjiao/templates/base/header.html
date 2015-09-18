@@ -20,14 +20,14 @@
                        href="{{ url_for('activity_content.product') }}">产品展示</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.product_sub') }}">幼教教材</a></li>
-                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>
+{#                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>#}
                     </ul>
                 </li>
                 <li><a class="{% if current_page == 'research' %}nav-active{% endif %}"
                        href="{{ url_for('activity_content.research_home') }}">教学教研</a>
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
-                        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>
+{#                        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>#}
                         <li><a href="{{ url_for('activity_content.research_activity', category='researchresult', page=1 ) }}">教研成果</a></li>
                     </ul>
                 </li>
@@ -41,7 +41,7 @@
                 <li class="border-right-none"><a class="{% if current_page == 'school' %}nav-active {% endif %}"
                                                  href="{{ url_for('activity_content.school') }}">幼教网课</a>
                     <ul class="youjiao-nav-sub">
-                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀课堂</a></li>
+{#                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀课堂</a></li>#}
                         <li><a href="{{ url_for('activity_content.school_sub') }}">优秀讲座</a></li>
                         <li><a href="{{ url_for('activity_content.school_sub') }}">其他视频</a></li>
                     </ul>

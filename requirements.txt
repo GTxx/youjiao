@@ -9,4 +9,3 @@ marshmallow
 flask-restful
 flask_limiter
 wtforms_alchemy
-flask-paginate
