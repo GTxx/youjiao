@@ -37,7 +37,9 @@ class User(db.Model, UserMixin, CRUDMixin):
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
     profile = db.relationship('UserProfile', backref='user', uselist=False)
-    # comment = db.relationship('')
+    from youjiao.user_util.models import Comment, Favor
+    comments = db.relationship('Comment', backref='user')
+    favors = db.relationship('Favor', backref='user')
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
@@ -71,6 +73,10 @@ class User(db.Model, UserMixin, CRUDMixin):
     @property
     def roles_name(self):
         return [role.name for role in self.roles]
+
+    def favor(self, obj_type):
+        from youjiao.user_util.models import Favor
+        pass
 
 
 class UserProfile(db.Model, CRUDMixin):

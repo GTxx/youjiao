@@ -104,8 +104,19 @@ def refresh_captcha():
 @user_bp.route('/user/info/profile')
 @login_required
 def user_info():
-
     return render_template('user/info.html')
+
+
+@user_bp.route('/user/favor')
+@login_required
+def user_favor():
+    from youjiao.user_util.models import Favor
+    from youjiao.book.models import Book
+    from sqlalchemy import and_
+    favor_book = Favor.query.filter(and_(Favor.user_id==current_user.id, Favor.obj_type=='book')).with_entities(Favor.obj_id).all()
+    book_list = Book.query.filter(Book.id.in_(favor_book))
+    return render_template('user/user_favor.html', book_list=book_list )
+
 
 
 class UserProfileView(MethodView):
@@ -145,6 +156,8 @@ class UserPasswordModifyView(MethodView):
             current_user.set_password(form.data['password'])
             return render_template('user/modify_password.html', modify_success=True, form=form)
         return render_template('user/modify_password.html', form=form)
+
+
 
 
 user_bp.add_url_rule('/user/profile', view_func=UserProfileView.as_view('user_profile'), endpoint='user_profile')

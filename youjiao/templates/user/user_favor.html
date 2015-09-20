@@ -1,0 +1,11 @@
+{% extends 'user/info_base.html' %}
+{% block user_favor %}
+<ul>
+    {% for book in book_list %}
+    <li>
+        <div id="price_image"><img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}"><span>{{book.price}}元/套</span></div>
+        <h4>{{ book.name }}</h4><h6 id="{{ '%s-unfavor-book'|format(book.id) }}">取消收藏</h6></li>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

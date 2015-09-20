@@ -31,6 +31,10 @@ from .book.admin import BookAdmin
 from .book.models import Book
 from .book.views import book_bp
 
+# user util
+from .user_util.models import Favor
+from .user_util.api import user_util_api_bp
+
 import os, json
 
 
@@ -87,6 +91,7 @@ def create_app():
 
     # import ipdb; ipdb.set_trace()
     app.register_blueprint(book_bp)
+    app.register_blueprint(user_util_api_bp)
 
     # register subscriber
     user_connect(app)

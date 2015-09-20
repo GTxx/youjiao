@@ -53,7 +53,9 @@
                         </tr>
                     </table>
                     <div class="product-button">
-                        <div class="product-collection">添加收藏</div>
+                        {% if current_user.is_authenticated() %}
+                            <div class="product-collection">添加收藏</div>
+                        {% endif %}
                         <div class="product-associate">关联课件</div>
                     </div>
                     <div class="product-order">
