@@ -10,3 +10,4 @@ flask-restful
 flask_limiter
 wtforms_alchemy
 psycopg2
+flask-migrate

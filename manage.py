@@ -1,5 +1,6 @@
 # coding: utf-8
 from flask_script import Manager
+from flask_migrate import MigrateCommand
 from youjiao.extensions import db
 from youjiao.app import create_app
 from youjiao.user.models import User, Role, UserProfile
@@ -26,14 +27,14 @@ def createdb():
 
 
 @manager.command
-def create_init_db():
+def create_table_init_db():
     try:
         db.create_all()
         role = Role(name='editor', description='editor role')
         role.save()
         role = Role(name='admin', description='admin role')
         role.save()
-        create_admin('admin', 'admin@1.com', '111111')
+        create_admin('admin', '111111', 'admin@1.com')
         from youjiao.test_data import book_list
         from youjiao.book.models import Book
         for book in book_list:
@@ -44,7 +45,7 @@ def create_init_db():
 
 
 @manager.command
-def dropdb():
+def drop_table():
     """Create database."""
     db.drop_all()
 
@@ -98,6 +99,8 @@ def asset_filter(file_string):
     except Exception as e:
         print(e)
 
+
+manager.add_command('db', MigrateCommand)
 
 if __name__ == "__main__":
     manager.run()

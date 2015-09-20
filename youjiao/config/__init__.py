@@ -6,7 +6,7 @@ class BaseConfig(object):
     DEBUG = True
 
     # Create in-memory database
-    SQLALCHEMY_DATABASE_URI = 'postgresql://youjiao:123@localhost/youjiao'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://youjiao_db_admin:123@localhost/youjiao_db'
     SQLALCHEMY_ECHO = True
 
     # for user register and login security
