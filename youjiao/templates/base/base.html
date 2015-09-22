@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ 'commons.css' | asset }}">
     {% block css %}
     {% endblock %}
+    <!--[if lt IE 9]>
+        <script src="{{ url_for('static', filename='node_modules/html5shiv/dist/html5shiv.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='node_modules/html5shiv/dist/html5shiv-printshiv.min.js') }}"></script>
+    <![endif]-->
 </head>
 <body>
 <div id="youjiao-body">
@@ -29,7 +33,8 @@
             <div class="footer-sub-wrapper">
                 <div>
                     <ul>
-                        <li class="list-style-none"><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a></li>
+                        <li class="list-style-none"><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a>
+                        </li>
                         <li><a href="">了解61幼教网</a></li>
                         <li><a href="">加入61幼教网</a></li>
                         <li><a href="">联系我们</a></li>
@@ -68,7 +73,6 @@
 </div>
 <script src="http://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
 <script src="{{ 'commons.js' | asset }}"></script>
-
 {% block js %}
 {% endblock %}
 </body>

@@ -152,41 +152,46 @@
   width: 484px
   height: 592px
   float: left
-  .s-imglist-w
+  .s-imglist-container
     width: 484px
     height: 100px
     margin-top: 26px
+    overflow: hidden
+  .s-imglist-w
+    position: relative
     +clear-float
   .p-s-imglist
-    width: 100px
-    height: 100px
+    width: 90px
+    height: 90px
     box-sizing: border-box
     border-radius: 4px
     background: #CCCCCC
     float: left
-    margin-right: 20px
+    margin-right: 6px
     cursor: pointer
-    &:nth-last-child(2)
-      margin-right: 2px
+    img
+      width: 100%
+      height: 100%
   .s-img-active
     border: 2px solid $youjiao-pink
-  #simple-img-next
-    display: block
-    width: 22px
-    height: 100px
-    background: $gray-a3
-    float: left
-    &:after
-      content: ' '
-      display: block
-      border-width: 10px
-      border-style: solid
-      border-left-color: white
-      border-top-color: transparent
-      border-right-color: transparent
-      border-bottom-color: transparent
-      margin-top: 36px
-      margin-left: 6px
+  //#simple-img-next
+  //  display: block
+  //  width: 22px
+  //  height: 100px
+  //  background: $gray-a3
+  //  position: absolute
+  //  right: 0
+  //  &:after
+  //    content: ' '
+  //    display: block
+  //    border-width: 10px
+  //    border-style: solid
+  //    border-left-color: white
+  //    border-top-color: transparent
+  //    border-right-color: transparent
+  //    border-bottom-color: transparent
+  //    margin-top: 36px
+  //    margin-left: 6px
 
 .product-info
   float: left
@@ -315,31 +320,31 @@
   .about-contact-list
     color: $font-gray
 
-.training-detail
+.video-detail
   box-sizing: border-box
   border: 1px solid #CCCCCC
   min-height: 846px
   margin-bottom: 56px
   padding: 80px 80px 46px 80px
 
-  .training-title
+  .video-title
     line-height: 34px
     color: $font-gray
     font-size: 24px
     text-align: center
     margin-bottom: 46px
 
-  .training-main-content
+  .video-main-content
     text-align: justify
 
-  .training-detail-video
+  .video-detail-v
     width: 572px
     height: 322px
     margin: 0 auto
     margin-top: 60px
     background: #CCCCCC
 
-  .training-detail-video-t
+  .video-detail-v-t
     text-align: center
     margin-top: 13px
 
@@ -391,3 +396,11 @@
       border-radius: 50%
       margin-top: 8px
       margin-left: -8px
+
+
+.vjs-big-play-button
+  left: 42% !important
+  top: 36% !important
+  border-radius: 50% !important
+  height: 80px !important
+  width: 80px !important

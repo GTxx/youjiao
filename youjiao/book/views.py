@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from flask import Blueprint, render_template, abort
 from .models import Book
 
-
 book_bp = Blueprint("book_view", __name__)
+
 
 @book_bp.route('/book')
 def book():
