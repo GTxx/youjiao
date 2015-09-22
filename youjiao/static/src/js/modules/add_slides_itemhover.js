@@ -17,17 +17,4 @@ $(function () {
 
     mouseOverAndOut(".video-section-list li", "video-s-active");
     mouseOverAndOut(".n-v-section-list li", "n-v-active");
-
-
-    $(".p-s-imglist").click(function () {
-        $(".s-img-active").removeClass("s-img-active");
-        $(this).addClass("s-img-active");
-    });
-
-    $("#simple-img-next").click(function(){
-        let current = $(".s-img-active").index();
-        $(".s-img-active").removeClass("s-img-active");
-        let next = current < $(".p-s-imglist").length-1 ? current + 1 : 0;
-        $(".p-s-imglist").eq(next).addClass("s-img-active");
-    });
 });

@@ -16,14 +16,16 @@
         <div>
             <div class="product-container">
                 <div class="samples-imgs">
-                    <img src="" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
+                    <img id="samples-imgs-active" src="" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
 
-                    <div class="s-imglist-w">
-                        <!--<div class="p-s-imglist s-img-active"><img src="" alt=""></div>-->
-                        {% for img_url in book.image_array %}
-                        <div class="p-s-imglist"><img src="{{img_url}}" style="width: 100px; height: 100px" alt=""></div>
-                        {% endfor %}
-                        <a href="javascript:;" id="simple-img-next"></a>
+                    <div class="s-imglist-container">
+                        <div class="s-imglist-w">
+                            <!--<div class="p-s-imglist s-img-active"><img src="" alt=""></div>-->
+                            {% for img_url in book.image_array %}
+                                <div class="p-s-imglist"><img src="{{ img_url }}" alt=""></div>
+                            {% endfor %}
+{#                            <a href="javascript:;" id="simple-img-next"></a>#}
+                        </div>
                     </div>
                 </div>
                 <div class="product-info">
@@ -84,5 +86,5 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ 'product.js' | asset }}"></script>
+    <script src="{{ 'product.js' | asset }}"></script>
 {% endblock %}

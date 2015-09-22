@@ -3,9 +3,10 @@ from __future__ import absolute_import
 from datetime import datetime
 import sqlalchemy as sqla
 from youjiao.extensions import db
+from youjiao.utils.database import CRUDMixin
 
 
-class Activity(db.Model):
+class Activity(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     create_time = db.Column(sqla.DateTime, default=datetime.now)
     update_time = db.Column(sqla.DateTime, onupdate=datetime.now)
