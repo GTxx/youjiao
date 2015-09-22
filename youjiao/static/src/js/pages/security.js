@@ -86,7 +86,7 @@ $(function () {
             url: '/refresh_captcha/',
             success: function(data) {
                 let res = $.parseJSON(data);
-                self.attr('src', res.url);
+                self.attr('src', res.b64_captcha);
             }
         });
     });

@@ -98,7 +98,8 @@ def refresh_captcha():
 
     captcha = Captcha.generate(captcha.key)
 
-    return json.dumps({'captcha_key': captcha.key, 'url': captcha.img_url})
+    # return json.dumps({'captcha_key': captcha.key, 'url': captcha.img_url})
+    return json.dumps({'captcha_key': captcha.key, 'b64_captcha': Captcha.get_b64_img(captcha.img_string)})
 
 
 @user_bp.route('/user/info/profile')
