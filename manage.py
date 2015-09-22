@@ -34,11 +34,15 @@ def create_init_db():
         role = Role(name='admin', description='admin role')
         role.save()
         create_admin('admin', 'admin@1.com', '111111')
-        from youjiao.test_data import book_list
+        from youjiao.test_data import book_list, activity_list
         from youjiao.book.models import Book
+        from youjiao.content.models import Activity
         for book in book_list:
             b = Book(**book._asdict())
             b.save()
+        for activity in activity_list:
+            a = Activity(**activity._asdict())
+            a.save()
     except Exception as e:
         print(e)
 

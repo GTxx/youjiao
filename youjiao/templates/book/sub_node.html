@@ -38,6 +38,7 @@
                             <div class="nv-image-wrapper">
                                 <!--<img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">-->
                                 <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
+
                                 <div class="nv-image-hover-layer"></div>
                                 <div class="nv-price">{{ book.price }}/套</div>
                             </div>
@@ -59,180 +60,41 @@
                     <h5>xxxxxxxxxx</h5>
                 </div>
                 <div class="product-rank-list">
-                    <div class="product-rank-item">
-                        <img src="" alt="">
+                    {% for i in range(3) %}
+                        <div class="product-rank-item">
+                            <img src="" alt="">
 
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
+                            <div>
+                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
+                                <h5>ssssffffffffffsssssss</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-rank-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
-                        </div>
-                    </div>
-                    <div class="product-rank-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="product-rank-list">
-                    <div class="product-rank-item">
-                        <img src="" alt="">
+                    {% for i in range(3) %}
+                        <div class="product-rank-item">
+                            <img src="" alt="">
 
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
+                            <div>
+                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
+                                <h5>ssssffffffffffsssssss</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-rank-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
-                        </div>
-                    </div>
-                    <div class="product-rank-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="product-rank-list">
-                    <div class="product-rank-item">
-                        <img src="" alt="">
+                    {% for i in range(3) %}
+                        <div class="product-rank-item">
+                            <img src="" alt="">
 
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
+                            <div>
+                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
+                                <h5>ssssffffffffffsssssss</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-rank-item">
-                        <img src="" alt="">
-
-                        <div>
-                            <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                            <h5>ssssffffffffffsssssss</h5>
-                        </div>
-                    </div>
-                    <div class="product-rank-item">
-
-                    </div>
+                    {% endfor %}
                 </div>
-
-
-                {#                <div class="rank-section-list-t">#}
-                {#                    <div class="rank-section-list-l">#}
-                {#                        <img src="" alt="">#}
-                {#                        <h5>1.xx幼儿英语</h5>#}
-                {#                    </div>#}
-                {#                    <div class="rank-section-list-c">#}
-                {#                        <div class="rank-section-list-tct">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>3.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                        <div class="rank-section-list-tcb">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>4.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                    <div class="rank-section-list-r">#}
-                {#                        <div class="rank-section-list-trt">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>7.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                        <div class="rank-section-list-trb">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>8.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
-                {#                <div class="rank-section-list-b">#}
-                {#                    <div class="rank-section-list-l">#}
-                {#                        <img src="" alt="">#}
-                {#                        <h5>2.xx幼儿英语</h5>#}
-                {#                    </div>#}
-                {#                    <div class="rank-section-list-c">#}
-                {#                        <div class="rank-section-list-bct">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>5.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                        <div class="rank-section-list-bcb">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>6.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                    <div class="rank-section-list-r">#}
-                {#                        <div class="rank-section-list-brt">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>9.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                        <div class="rank-section-list-brb">#}
-                {#                            <div class="rank-list-item">#}
-                {#                                <img src="" alt="">#}
-                {##}
-                {#                                <div>#}
-                {#                                    <h5>10.xxx孩子好性格</h5>#}
-                {#                                    <h6>sssssssssss</h6>#}
-                {#                                </div>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
             </div>
         </div>
     </div>

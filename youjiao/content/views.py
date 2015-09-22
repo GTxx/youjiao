@@ -6,7 +6,6 @@ from .models import Activity
 content_bp = Blueprint("activity_content", __name__)
 
 
-
 @content_bp.route('/activity')
 def activity():
     try:
@@ -16,6 +15,7 @@ def activity():
     pagination = Activity.query.filter_by(status=True).paginate(page, per_page=20)
     return render_template('activity/home.html', activity_list=pagination,
                            category_url=category, current_page='activity')
+
 
 @content_bp.route('/activity/<category>')
 def category(category):
@@ -74,7 +74,7 @@ def school_product():
 
 @content_bp.route('/school/product/detail/')
 def school_teacher_detail():
-    return render_template('school/t_t_detail.html', current_page='school')
+    return render_template('school/video_detail.html', current_page='school')
 
 
 @content_bp.route('/courseware/')
@@ -99,8 +99,8 @@ def courseware_sub():
 
 @content_bp.route('/research/home/')
 def research_home():
-    research_events = Activity.query.filter_by(category='research').filter_by(status=2).limit(7).all()
-    research_result = Activity.query.filter_by(category='researchresult').filter_by(status=2).limit(7).all()
+    research_events = Activity.query.filter_by(category='research').filter_by(status=True).limit(7).all()
+    research_result = Activity.query.filter_by(category='researchresult').filter_by(status=True).limit(7).all()
     data = {
         'research_events': research_events,
         'research_result': research_result
@@ -115,7 +115,7 @@ def research_activity(category, page):
     except ValueError:
         page = 1
 
-    pagination = Activity.query.filter_by(category=category).filter_by(status=2).paginate(page, per_page=20)
+    pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)
     category_dict = {
         'researchevents': u'教研活动',
         'researchresult': u'教研成果'
@@ -145,3 +145,8 @@ def research_teacher():
 @content_bp.route('/page/about/')
 def page_about():
     return render_template('pages/about.html')
+
+
+@content_bp.route('/video')
+def video():
+    return render_template('school/video_detail.html')

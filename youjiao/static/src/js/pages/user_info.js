@@ -1,6 +1,6 @@
-import 'normalize';
-import 'maincss';
-import 'body';
+import 'normalize_css';
+import 'main_css';
+import 'body_css';
 var $ = require('jquery');
 
 $(function() {

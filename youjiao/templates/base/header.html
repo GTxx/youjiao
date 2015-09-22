@@ -18,8 +18,8 @@
                 </li>
                 <li><a class="{% if request.path.startswith('/book') %}nav-active{% endif %}" href="{{ url_for('book_view.book') }}">产品展示</a>
                     <ul class="youjiao-nav-sub">
-                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教教材</a></li>
-{#                        <li><a href="{{ url_for('activity_content.product_sub') }}">幼教读物</a></li>#}
+                        <li><a href="{{ url_for('book_view.book_category', category='teach_book') }}">幼教教材</a></li>
+{#                        <li><a href="{{ url_for('book_view.book_category', category='read_book') }}">幼教读物</a></li>#}
                     </ul>
                 </li>
                 <li><a class="{% if request.path.startswith('/research') %}nav-active{% endif %}"
