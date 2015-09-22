@@ -41,7 +41,8 @@ import os, json
 
 # Flask views
 def index():
-    return render_template('home/home.html', current_page='home')
+    return render_template('home/home.html', current_page='home',
+                           Book=Book)
 
 
 def create_app():
