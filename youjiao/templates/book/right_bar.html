@@ -3,13 +3,13 @@
         <ul>
             <li class="right-list-first">最受关注产品排行榜</li>
             {% for book in Book.top10() %}
-            <li><a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">{{loop.index}}.{{ book.name }}</a></li>
+            <li><a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">{{loop.index}}.{{ book.name }}({{book.level}})</a></li>
             {% endfor %}
         </ul>
     </div>
-    <div class="topics">
-        <ul>
-            <li class="right-list-first">其他婴幼儿产品</li>
-        </ul>
-    </div>
+    <!--<div class="topics">-->
+        <!--<ul>-->
+            <!--<li class="right-list-first">其他婴幼儿产品</li>-->
+        <!--</ul>-->
+    <!--</div>-->
 </div>

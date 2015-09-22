@@ -20,6 +20,7 @@ class Book(db.Model, CRUDMixin):
     price = db.Column(sqla.Numeric(10, 2), default=30)
     publish = db.Column(sqla.Boolean, default=False)
     image_array = db.Column(ARRAY(sqla.String(255)))
+    preview_array = db.Column(ARRAY(sqla.String(255)))
 
     @classmethod
     def read_book_top10(cls):

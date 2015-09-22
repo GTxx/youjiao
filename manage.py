@@ -28,24 +28,21 @@ def createdb():
 
 @manager.command
 def create_table_init_db():
-    try:
-        db.create_all()
-        role = Role(name='editor', description='editor role')
-        role.save()
-        role = Role(name='admin', description='admin role')
-        role.save()
-        create_admin('admin', '111111', 'admin@1.com')
-        from youjiao.test_data import book_list, activity_list
-        from youjiao.book.models import Book
-        from youjiao.content.models import Activity
-        for book in book_list:
-            b = Book(**book._asdict())
-            b.save()
-        for activity in activity_list:
-            a = Activity(**activity._asdict())
-            a.save()
-    except Exception as e:
-        print(e)
+    db.create_all()
+    role = Role(name='editor', description='editor role')
+    role.save()
+    role = Role(name='admin', description='admin role')
+    role.save()
+    create_admin('admin', '111111', 'admin@1.com')
+    from youjiao.test_data import book_list, activity_list
+    from youjiao.book.models import Book
+    from youjiao.content.models import Activity
+    for book in book_list:
+        b = Book(**book._asdict())
+        b.save()
+    for activity in activity_list:
+        a = Activity(**activity._asdict())
+        a.save()
 
 
 @manager.command

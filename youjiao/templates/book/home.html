@@ -1,76 +1,106 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ 'product.css' | asset }}">
+<link rel="stylesheet" href="{{ 'product.css' | asset }}">
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'book/left_bar.html' %}
+{% include 'book/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
-    <div id="main-big-body">
-        <div class="e-page-title">产品展示</div>
+<div id="main-big-body">
+    <div class="e-page-title">产品展示</div>
 
-        <div class="product-slide">
-            <div class="product-slides-main">
-                <ul class="rslides">
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" style="width: 731px;height: 240px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" style="width: 731px;height: 240px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" style="width: 731px;height: 240px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" style="width: 731px;height: 240px;" alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" style="width: 731px;height: 240px;" alt=""></li>
-                </ul>
-            </div>
-        </div>
-        <div class="n-v-section-b">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-4">幼教教材</div>
-            </div>
-            <ul class="n-v-section-list">
-                {% for book in teach_book_list %}
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
-                            <div class="nv-image-wrapper">
-                                <!--<img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">-->
-                                <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
-                                <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">{{ book.price }}/套</div>
-                            </div>
-                            <h5>{{ book.name }}</h5>
-                            <h6>{{ book.level }}</h6>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="n-v-section-b">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-4">幼教教材</div>
-            </div>
-            <ul class="n-v-section-list">
-                {% for book in read_book_list %}
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
-                            <div class="nv-image-wrapper">
-                                <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
-                                <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">{{ book.price }}/套</div>
-                            </div>
-                            <h5>{{ book.name }}</h5>
-                            <h6>{{ book.level }}</h6>
-                        </a>
-                    </li>
-                {% endfor %}
+    <div class="product-slide">
+        <div class="product-slides-main">
+            <ul class="rslides">
+                <li>
+                    <a href="{{ url_for('book_view.book_detail', book_id=1)}}">
+                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000"
+                             style="width: 731px;height: 240px;" alt=""/>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('book_view.book_detail', book_id=2)}}">
+                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000"
+                             style="width: 731px;height: 240px;" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('book_view.book_detail', book_id=3)}}">
+                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000"
+                             style="width: 731px;height: 240px;" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('book_view.book_detail', book_id=4)}}">
+                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000"
+                             style="width: 731px;height: 240px;" alt="">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('book_view.book_detail', book_id=4)}}">
+                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000"
+                             style="width: 731px;height: 240px;" alt="">
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
+    <div class="n-v-section-b">
+        <div class="section-block-wrapper">
+            <div class="section-block-title-4">幼教教材</div>
+        </div>
+        <ul class="n-v-section-list">
+            {% for book in teach_book_list %}
+            <li>
+                <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
+                    <div class="nv-image-wrapper">
+                        <!--<img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">-->
+                        <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}"
+                             alt="">
+
+                        <div class="nv-image-hover-layer"></div>
+                        <div class="nv-price">{{ book.price }}/套</div>
+                    </div>
+                    <h5>{{ book.name }}</h5>
+                    <h6>{{ book.level }}</h6>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!--<div class="n-v-section-b">-->
+        <!--<div class="section-block-wrapper">-->
+            <!--<div class="section-block-title-4">幼教教材</div>-->
+        <!--</div>-->
+        <!--<ul class="n-v-section-list">-->
+            <!--{% for book in read_book_list %}-->
+            <!--<li>-->
+                <!--<a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">-->
+                    <!--<div class="nv-image-wrapper">-->
+                        <!--<img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}"-->
+                             <!--alt="">-->
+
+                        <!--<div class="nv-image-hover-layer"></div>-->
+                        <!--<div class="nv-price">{{ book.price }}/套</div>-->
+                    <!--</div>-->
+                    <!--<h5>{{ book.name }}</h5>-->
+                    <!--<h6>{{ book.level }}</h6>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
+    <!--</div>-->
+</div>
 {% endblock %}
 
 {% block rightBar %}
-    {% include 'book/right_bar.html' %}
+{% include 'book/right_bar.html' %}
 {% endblock %}
 
 {% block js %}
-       <script src="{{ 'product.js' | asset }}"></script>
+<script src="{{ 'product.js' | asset }}"></script>
 {% endblock %}

@@ -55,42 +55,42 @@
             </div>
             <div class="rank-section-list">
                 <div class="product-rank-list product-rank-list-1">
-                    <img src="" alt="">
-                    <h4>1.xx幼儿英语</h4>
-                    <h5>xxxxxxxxxx</h5>
+                    <img src="{{ top10[0].cover }}" alt="">
+                    <h4>1.{{ top10[0].name }}</h4>
+                    <h5>{{ top10[0].level}}</h5>
                 </div>
                 <div class="product-rank-list">
-                    {% for i in range(3) %}
+                    {% for i in range(2, 5) %}
                         <div class="product-rank-item">
-                            <img src="" alt="">
+                            <img src="{{ top10[i].cover }}" alt="">
 
                             <div>
-                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                                <h5>ssssffffffffffsssssss</h5>
+                                <h4>{{i}}.{{ top10[i].name }}</h4>
+                                <h5>{{ top10[i].level }}</h5>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="product-rank-list">
-                    {% for i in range(3) %}
+                    {% for i in range(5, 8) %}
                         <div class="product-rank-item">
-                            <img src="" alt="">
+                            <img src="{{ top10[i].cover }}" alt="">
 
                             <div>
-                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                                <h5>ssssffffffffffsssssss</h5>
+                                <h4>{{i}}.{{ top10[i].name }}</h4>
+                                <h5>{{ top10[i].level }}</h5>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="product-rank-list">
-                    {% for i in range(3) %}
+                    {% for i in range(8, 10) %}
                         <div class="product-rank-item">
-                            <img src="" alt="">
+                            <img src="{{ top10[i].cover }}" alt="">
 
                             <div>
-                                <h4>3.xxx孩子好性fffffffffffffffff格</h4>
-                                <h5>ssssffffffffffsssssss</h5>
+                                <h4>{{i}}.{{ top10[i].name }}</h4>
+                                <h5>{{ top10[i].level }}</h5>
                             </div>
                         </div>
                     {% endfor %}

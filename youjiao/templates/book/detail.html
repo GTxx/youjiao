@@ -11,7 +11,7 @@
 {% block content %}
     <div id="main-noright-body">
 
-        <div class="e-page-title">产品展示-幼教教材-幼教图书分类-幼儿园大班-清凉一夏</div>
+        <div class="e-page-title">产品展示-幼教教材-幼教图书分类-{{book.level}}-{{book.name}}</div>
 
         <div>
             <div class="product-container">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="product-info">
                     <div class="product-title">
-                        <h3>{{ book.name }}<span>幼儿园大班上册 1-5</span></h3>
+                        <h3>{{ book.name }}<span>{{book.level}} 1-5</span></h3>
                     </div>
                     <table>
                         <tr>
@@ -43,11 +43,11 @@
                         </tr>
                         <tr>
                             <td class="product-info-detail">出版社：</td>
-                            <td>xxx出版社</td>
+                            <td>{{ book.publisher }}</td>
                         </tr>
                         <tr>
                             <td class="product-info-detail">开本：</td>
-                            <td>16开</td>
+                            <td>{{ book.size }}</td>
                         </tr>
                         <tr>
                             <td class="product-info-detail">版号：</td>
@@ -61,7 +61,7 @@
                         <div class="product-associate">关联课件</div>
                     </div>
                     <div class="product-order">
-                        <p>定价：<span class="product-price">30.00元</span></p>
+                        <p>定价：<span class="product-price">{{ book.price }}元</span></p>
 
                         <p>如需购买请联系：0512-6917 3537</p>
                     </div>
@@ -73,11 +73,9 @@
                     <div>图书评论</div>
                 </div>
                 <div class="detail-comment-content">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+                    {% for preview in book.preview_array %}
+                    <img src="{{ preview }}?imageView2/2/w/400" alt="">
+                    {% endfor %}
                 </div>
             </div>
         </div>
