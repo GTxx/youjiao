@@ -100,7 +100,7 @@ def courseware_sub():
 @content_bp.route('/research/home/')
 def research_home():
     research_events = Activity.query.filter_by(category='research').filter_by(status=True).limit(7).all()
-    research_result = Activity.query.filter_by(category='researchresult').filter_by(status=True).limit(7).all()
+    research_result = Activity.query.filter_by(category='achievement').filter_by(status=True).limit(7).all()
     data = {
         'research_events': research_events,
         'research_result': research_result
@@ -117,8 +117,8 @@ def research_activity(category, page):
 
     pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)
     category_dict = {
-        'researchevents': u'教研活动',
-        'researchresult': u'教研成果'
+        'event': u'教研活动',
+        'achievement': u'教研成果'
     }
     category_name = category_dict[category]
     return render_template('research/research_activity.html', category_name=category_name, activity_list=pagination,

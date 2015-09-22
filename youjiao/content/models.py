@@ -15,7 +15,7 @@ class Activity(db.Model, CRUDMixin):
     status = db.Column(sqla.Boolean, default=False)
     category = db.Column(
         sqla.Enum('policy', 'news', 'events', 'research', 'activity',
-                  name='category'),
+                  'achievement', name='category'),
         default='policy')
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

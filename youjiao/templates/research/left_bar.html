@@ -2,8 +2,8 @@
     <ul class="left-bar-subul-last">
         <li class="left-list-first"><a href="{{ url_for('activity_content.research_home') }}">教学科研</a></li>
         <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
-{#        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>#}
-        <li><a href="{{ url_for('activity_content.research_activity', category='researchresult', page=1 ) }}">教研成果</a></li>
+{#        <li><a href="{{ url_for('activity_content.research_activity', category='event', page=1 ) }}">教研活动</a></li>#}
+        <li><a href="{{ url_for('activity_content.research_activity', category='achievement', page=1 ) }}">教研成果</a></li>
     </ul>
     <div class="left-adposition">
         <img src="{{ url_for('static', filename='image/a-d.png') }}" alt="" style="width: 180px;height: 720px;">
