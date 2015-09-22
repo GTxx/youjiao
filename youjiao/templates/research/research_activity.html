@@ -12,12 +12,16 @@
     <div id="main-big-body">
         <div class="e-page-title">教学教研-{{ category_name }}</div>
         <ul class="news-list">
+            {% if activity_list.items %}
             {% for activity in activity_list.items %}
                 <li>
                     <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }} <span
                             class="news-date float-right">[{{ activity.create_time.date() }}]</span></a>
                 </li>
             {% endfor %}
+            {% else %}
+            <h2>内容更新中</h2>
+            {% endif %}
         </ul>
         <ul class="activity-pagination">
             {#                        {% if activity_list.has_prev %}#}

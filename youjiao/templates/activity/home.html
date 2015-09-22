@@ -13,12 +13,16 @@
         <div class="e-page-title">幼教动态 {{ category_name }}</div>
 
         <ul class="news-list">
+            {% if activity_list.items %}
             {% for activity in activity_list.items %}
                 <li>
                     <a href="{{ url_for('activity_content.activity_view', id=activity.id) }}">{{ activity.title }} <span
                             class="news-date float-right">[{{ activity.create_time.date() }}]</span></a>
                 </li>
             {% endfor %}
+            {% else %}
+            <h3>内容更新中</h3>
+            {% endif %}
         </ul>
 
         <ul class="activity-pagination">
