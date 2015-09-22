@@ -13,8 +13,9 @@ def activity():
     except Exception as e:
         page = 1
     pagination = Activity.query.filter_by(status=True).paginate(page, per_page=20)
+    weekly_popular_top10 = Activity.weekly_popular_top10()
     return render_template('activity/home.html', activity_list=pagination,
-                           category_url=category, current_page='activity')
+                           category_url=category, current_page='activity', weekly_popular_top10=weekly_popular_top10)
 
 
 @content_bp.route('/activity/<category>')
@@ -33,8 +34,9 @@ def category(category):
         'activity': u'实践活动'
     }
     category_name = category_dict[category]
+    weekly_popular_top10 = Activity.weekly_popular_top10()
     return render_template('activity/home.html', activity_list=pagination, category_name=category_name,
-                           category_url=category, current_page='activity')
+                           category_url=category, current_page='activity', weekly_popular_top10=weekly_popular_top10)
 
 
 @content_bp.route('/activity/<id>/')

@@ -2,13 +2,21 @@
     <div class="weekly-hot">
         <ul class="right-list">
             <li class="right-list-first">本周热点</li>
-            <li><a href="">晚一年上学给孩dddddddddddddddddddddddddddddddddddddddd</a></li>
-            <li><a href="">晚一年上学给孩子最好的礼物</a></li>
+            {% for activity in weekly_popular_top10 %}
+                <li>
+                    <a href="{{ url_for('activity_content.activity_view', id=activity.id) }}">{{ activity.title }}</a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="topics">
-        <ul>
+        <ul class="right-list">
             <li class="right-list-first">专题推荐</li>
+            {% for activity in weekly_popular_top10 %}
+                <li>
+                    <a href="{{ url_for('activity_content.activity_view', id=activity.id) }}">{{ activity.title }}</a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
