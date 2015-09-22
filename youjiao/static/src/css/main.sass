@@ -46,6 +46,27 @@
       height: 372px
       background: $background-brown
       margin-left: 24px
+      li
+        position: relative
+        overflow: hidden
+        height: 30px
+        padding-left: 16px
+        color: $font-gray
+        line-height: 30px
+        white-space: nowrap
+        text-overflow: ellipsis
+        &:before
+          position: absolute
+          content: ' '
+          display: inline-block
+          width: 2px
+          height: 2px
+          background: $font-gray
+          border-radius: 50%
+          margin-top: 15px
+          margin-left: -4px
+        a
+          color: $font-gray
       .right-list-first
         height: 30px
         line-height: 30px

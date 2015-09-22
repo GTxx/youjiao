@@ -28,21 +28,30 @@ def createdb():
 
 @manager.command
 def create_table_init_db():
-    db.create_all()
-    role = Role(name='editor', description='editor role')
-    role.save()
-    role = Role(name='admin', description='admin role')
-    role.save()
-    create_admin('admin', '111111', 'admin@1.com')
-    from youjiao.test_data import book_list, activity_list
-    from youjiao.book.models import Book
-    from youjiao.content.models import Activity
-    for book in book_list:
-        b = Book(**book._asdict())
-        b.save()
-    for activity in activity_list:
-        a = Activity(**activity._asdict())
-        a.save()
+    try:
+        db.create_all()
+        role = Role(name='editor', description='editor role')
+        role.save()
+        role = Role(name='admin', description='admin role')
+        role.save()
+        create_admin('admin', '111111', 'admin@1.com')
+        create_editor('editor1', '111111', 'editor1@1.com')
+        create_editor('editor2', '111111', 'editor2@1.com')
+        create_common_user('wangbin', '111111', 'wangbin@1.com')
+        create_common_user('xx', '111111', 'xx@1.com')
+        create_common_user('jiyu', '111111', 'jiyu@1.com')
+        create_common_user('quwenyu', '111111', 'quwenyu@1.com')
+        from youjiao.test_data import book_list, activity_list
+        from youjiao.book.models import Book
+        from youjiao.content.models import Activity
+        for book in book_list:
+            b = Book(**book._asdict())
+            b.save()
+        for activity in activity_list:
+            a = Activity(**activity._asdict())
+            a.save()
+    except Exception as e:
+        print(e)
 
 
 @manager.command
@@ -80,6 +89,27 @@ def create_admin(name, password, email):
         role = Role('admin', 'admin role')
         role.save()
     user.roles.append(role)
+    user.save()
+
+
+def create_editor(name, password, email):
+    user = User.create_user(name, email, password)
+    profile = UserProfile()
+    profile.save()
+    user.profile = profile
+    role = Role.query.filter_by(name='editor').first()
+    if not role:
+        role = Role('editor', 'editor role')
+        role.save()
+    user.roles.append(role)
+    user.save()
+
+
+def create_common_user(name, password, email):
+    user = User.create_user(name, email, password)
+    profile = UserProfile()
+    profile.save()
+    user.profile = profile
     user.save()
 
 
