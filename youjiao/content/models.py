@@ -21,6 +21,10 @@ class Activity(db.Model, CRUDMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User')
 
+    @classmethod
+    def weekly_popular_top10(cls):
+        return cls.query.limit(10).all()
+
 
 class Page(db.Model):
     id = db.Column(db.Integer, primary_key=True)
