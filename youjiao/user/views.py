@@ -4,7 +4,7 @@ from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
 from .forms import RegisterForm, UserProfileForm, ModifyPasswordForm
 from youjiao.extensions import limiter
-from .models import Captcha, User, UserProfile
+from .models import User, UserProfile, RedisCaptcha
 from flask_login import login_user, login_required, current_user
 import json
 
@@ -90,16 +90,8 @@ def refresh_captcha():
     captcha_key = session.get('captcha_key')
     if not captcha_key:
         return json.dumps({'error': 'not captcha key, refresh page'})
-    captcha = Captcha.query.filter_by(key=captcha_key).first()
-    if not captcha:
-        return json.dumps({'error': 'not captcha key, refresh page'})
-
-    captcha = Captcha.query.filter_by(key=captcha_key).first_or_404()
-
-    captcha = Captcha.generate(captcha.key)
-
-    # return json.dumps({'captcha_key': captcha.key, 'url': captcha.img_url})
-    return json.dumps({'captcha_key': captcha.key, 'b64_captcha': Captcha.get_b64_img(captcha.img_string)})
+    captcha = RedisCaptcha(captcha_key)
+    return json.dumps({'captcha_key': captcha.key, 'b64_captcha': captcha.b64_img})
 
 
 @user_bp.route('/user/info/profile')

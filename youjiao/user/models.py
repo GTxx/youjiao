@@ -3,13 +3,13 @@ from __future__ import absolute_import
 from datetime import datetime
 from flask_security import RoleMixin
 from flask_login import UserMixin
-from youjiao.extensions import db
+from youjiao.extensions import db, redis_cli
 from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import sqlalchemy as sqla
 import os
 import time
-from .utils import generate_random_number_4, encrypt_password, \
+from .utils import generate_random_number_4, generate_random_string_4, encrypt_password, \
     verify_password, get_hmac, password_context
 
 
@@ -108,29 +108,30 @@ class Role(db.Model, RoleMixin, CRUDMixin):
         return '<Role {}>'.format(self.name)
 
 
-# TODO: use redis expire
-class Captcha(db.Model, CRUDMixin):
-    id = db.Column(sqla.Integer, primary_key=True)
-    key = db.Column(sqla.String(64), unique=True)
-    content = db.Column(sqla.String(4), default=generate_random_number_4)
-    img_name = db.Column(sqla.String(128))
+class RedisCaptcha(object):
 
-    @classmethod
-    def generate(cls, key):
-        captcha = cls.query.filter_by(key=key).first()
-        if not captcha:
-            captcha = cls()
-        captcha.key = key
-        captcha.content = generate_random_number_4()
-        captcha.save()
-        image = ImageCaptcha(width=160, height=80)
-        img_buffer = image.generate(captcha.content)
-        captcha.img_string = img_buffer.read()
-        return captcha
+    def __init__(self, key):
+        self.key = key
+        self.content = generate_random_number_4()
+        redis_cli.setex(key, self.content, 15*60)
+        self.img_string = self.generate_image(self.content)
 
-    @classmethod
-    def get_b64_img(cls, img_string):
-        # NOTE: ie8 not support image > 32k
+    @property
+    def b64_img(self):
         import base64
-        b64_string = base64.b64encode(img_string)
+        b64_string = base64.b64encode(self.img_string)
         return "data:image/png;base64,{}".format(b64_string)
+
+    @classmethod
+    def generate_image(cls, content):
+        from captcha.image import WheezyCaptcha
+        image = WheezyCaptcha(width=160, height=80)
+        img_buffer = image.generate(content, format='jpeg')
+        return img_buffer.read()
+
+    @classmethod
+    def check(cls, key, content):
+        real_content = redis_cli.get(key)
+        if real_content and real_content == content:
+            return True
+        return False

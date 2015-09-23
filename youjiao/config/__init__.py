@@ -22,6 +22,9 @@ class BaseConfig(object):
     # flask_babel
     BABEL_DEFAULT_LOCALE = 'zh'
 
+    # flask_redis
+    REDIS_URL = 'redis://localhost:6379/0'
+
 try:
     from youjiao.config.local_config import LocalConfig
 

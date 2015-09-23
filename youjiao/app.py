@@ -12,7 +12,7 @@ from flask_migrate import Migrate, MigrateCommand
 from .config import Config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
-from .extensions import db, limiter, admin
+from .extensions import db, limiter, admin, redis_cli
 from .utils.csrf import check_csrf
 
 # user
@@ -52,6 +52,9 @@ def create_app():
     # flask_sqlalchemy
     # import ipdb; ipdb.set_trace()
     db.init_app(app)
+
+    # flask_redis
+    redis_cli.init_app(app)
 
     # flask_migrate
     Migrate(app, db)

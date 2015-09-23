@@ -11,7 +11,7 @@ from wtforms.validators import Regexp
 import hashlib
 import os
 from wtforms.widgets.core import HTMLString
-from .models import User, Captcha, UserProfile
+from .models import User, UserProfile, RedisCaptcha
 from .utils import verify_password
 
 
@@ -27,12 +27,7 @@ def unique_email(form, field):
 
 def check_captcha(captcha_content):
     captcha_key = session.get('captcha_key')
-    if not captcha_key:
-        raise ValidationError('have no captcha key in session')
-    captcha = Captcha.query.filter_by(key=captcha_key).first()
-    if not captcha:
-        raise ValidationError('captcha error')
-    if captcha.content != captcha_content:
+    if not RedisCaptcha.check(captcha_key, captcha_content):
         raise ValidationError('captcha error')
 
 
@@ -42,12 +37,10 @@ def captcha_validator(form, field):
 
 class CaptcharWidget(object):
     def __call__(self, field, **kwargs):
-        # generate captcha
-
         if 'captcha_key' not in session:
             session['captcha_key'] = hashlib.sha1(os.urandom(64)).hexdigest()
-        captcha = Captcha.generate(str(session['captcha_key']))
-        return HTMLString('<img src="{}">'.format(Captcha.get_b64_img(captcha.img_string)))
+        captcha = RedisCaptcha(str(session['captcha_key']))
+        return HTMLString('<img src="{}">'.format(captcha.b64_img))
 
 
 class CaptchaField(Field):
