@@ -5,6 +5,8 @@ from flask_restful import Api
 from flask_redis import FlaskRedis
 
 db = SQLAlchemy()
+USER_TABLE_NAME = 'youjiao_user' # table name 'user' is used in postgresql
+USER_TABLE_USER_ID = '{}.id'.format(USER_TABLE_NAME)
 
 limiter = Limiter()
 

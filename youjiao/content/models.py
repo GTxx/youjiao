@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from datetime import datetime
 import sqlalchemy as sqla
-from youjiao.extensions import db
+from youjiao.extensions import db, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
 
 
@@ -17,9 +17,7 @@ class Activity(db.Model, CRUDMixin):
         sqla.Enum('policy', 'news', 'events', 'research', 'activity',
                   'achievement', name='category'),
         default='policy')
-
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User')
+    user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
 
     @classmethod
     def weekly_popular_top10(cls):
@@ -33,5 +31,4 @@ class Page(db.Model):
     title = db.Column(db.String(255))
     html = db.Column(db.Text)
     status = db.Column(db.String(2), default='1')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User')
+    user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))

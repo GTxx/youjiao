@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from youjiao.extensions import db
+from youjiao.extensions import db, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
 from sqlalchemy import UniqueConstraint
@@ -10,7 +10,7 @@ from datetime import datetime
 class Comment(db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
-    user_id = db.Column(sqla.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
     # 评论对象id
     comment_obj_id = db.Column(sqla.Integer)
     # 评论对象类型
@@ -22,7 +22,7 @@ class Favor(CRUDMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
 
-    user_id = db.Column(sqla.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
     # 喜爱对象id
     obj_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     # 喜爱对象类型

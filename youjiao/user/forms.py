@@ -160,7 +160,6 @@ class ModifyPasswordForm(Form):
 
     def validate(self):
         super(ModifyPasswordForm, self).validate()
-
         # validate old password
         if not verify_password(self.old_password.data, current_user.password):
             self.old_password.errors.append(u'密码错误')

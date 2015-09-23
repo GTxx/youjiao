@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from datetime import datetime
 from flask_security import RoleMixin
 from flask_login import UserMixin
-from youjiao.extensions import db, redis_cli
+from youjiao.extensions import db, redis_cli, USER_TABLE_NAME, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
 from captcha.image import ImageCaptcha
 import sqlalchemy as sqla
@@ -15,12 +15,13 @@ from .utils import generate_random_number_4, generate_random_string_4, encrypt_p
 
 roles_users = db.Table(
     'roles_users',
-    db.Column('user_id', sqla.Integer(), db.ForeignKey('user.id')),
+    db.Column('user_id', sqla.Integer(), db.ForeignKey('youjiao_user.id')),
     db.Column('role_id', sqla.Integer(), db.ForeignKey('role.id')),
     sqla.UniqueConstraint('user_id', 'role_id')
 )
 
 class User(db.Model, UserMixin, CRUDMixin):
+    __tablename__ = USER_TABLE_NAME
     id = sqla.Column(sqla.Integer, primary_key=True)
     name = db.Column(sqla.String(50), unique=True)
     email = db.Column(sqla.String(50), unique=True)
@@ -81,7 +82,7 @@ class User(db.Model, UserMixin, CRUDMixin):
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
-    user_id = db.Column(sqla.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
     # TODO: add column describe/description
     nickname = db.Column(sqla.String(16), unique=True)
     work_place_name = db.Column(sqla.String(255))
