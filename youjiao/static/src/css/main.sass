@@ -256,14 +256,14 @@
   border: 1px solid #CCCCCC
   .detail-comment-title
     border-bottom: 1px solid #CCCCCC
-    div
+    a
       display: inline-block
       width: 166px
       height: 60px
       color: black
       line-height: 60px
       text-align: center
-    .book-detail-button
+    .active
       background: $youjiao-pink-2
       color: white
       position: relative
@@ -284,6 +284,39 @@
       width: 422px
       height: 422px
       background: #CCCCCC
+    li
+      min-height: 60px
+      padding-top: 10px
+      line-height: 30px
+      border-top: 1px solid #CCCCCC
+      +clear-float
+      div
+        width: 80px
+        float: left
+        text-align: center
+        img
+          margin: 0
+          width: 50px
+          height: 50px
+          border-radius: 50%
+          background: #CCCCCC
+        h6
+          line-height: 16px
+          white-space: pre
+          word-wrap: break-word
+      span
+        display: inline-block
+        width: 843px
+        float: left
+#comment-textarea
+  max-width: 918px
+  min-width: 918px
+  min-height: 80px
+  margin-top: 40px
+#book-publish-comment
+  +big-button(80px)
+  float: right
+  margin-right: 10px
 
 .product-s-slides-main
   +clear-float

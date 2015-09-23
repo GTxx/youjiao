@@ -27,7 +27,15 @@ $(function () {
     var obj_id = location.href.split('/').slice(-1)[0];
     var obj_type = 'book';
     favor(obj_id, obj_type);
-  })
+  });
+
+  $('.book-switch').click(function(){
+    let index = $(this).index();
+    $('.active').removeClass('active');
+    $(this).addClass('active');
+    $('.detail-comment-content').addClass('display-none');
+    $('.detail-comment-content').eq(index).removeClass('display-none');
+  });
 });
 
 
