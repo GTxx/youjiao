@@ -7,7 +7,7 @@ from sqlalchemy import UniqueConstraint
 from datetime import datetime
 
 
-class Comment(db.Model):
+class Comment(CRUDMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
     user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))

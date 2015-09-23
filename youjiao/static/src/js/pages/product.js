@@ -28,14 +28,6 @@ $(function () {
     var obj_type = 'book';
     favor(obj_id, obj_type);
   });
-
-  $('.book-switch').click(function(){
-    let index = $(this).index();
-    $('.active').removeClass('active');
-    $(this).addClass('active');
-    $('.detail-comment-content').addClass('display-none');
-    $('.detail-comment-content').eq(index).removeClass('display-none');
-  });
 });
 
 

@@ -80,13 +80,13 @@
                     </div>
                     <div class="detail-comment-content display-none">
                         <ul>
-                            {% for i in range(10) %}
+                            {% for comment in page_comment.items %}
                                 <li>
                                     <div>
-                                        <img src="" alt="">
-                                        <h6>testfffffffffffffff</h6>
+                                        <img src="{{ comment.user.avatar }}" alt="">
+                                        <h6>{{ comment.user.nickname or comment.user.name }}</h6>
                                     </div>
-                                    <span>图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论图书评论</span>
+                                    <span>{{ comment.content }}</span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -103,5 +103,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ 'product.js' | asset }}"></script>
+    <script src="{{ 'book_detail.js' | asset }}"></script>
 {% endblock %}

@@ -27,6 +27,7 @@ module.exports = {
     plugins: plugins,
     output: {
         path: path.resolve(__dirname, 'build/js'),
+        // TODO: add dir
         filename: '[name].js'
     },
     module: {
