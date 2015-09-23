@@ -11,3 +11,5 @@ flask_limiter
 wtforms_alchemy
 psycopg2
 flask-migrate
+wheezy.captcha
+Flask-Redis
