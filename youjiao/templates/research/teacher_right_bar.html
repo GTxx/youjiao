@@ -1,19 +1,41 @@
-<div class="right-bar-list">
-    <div id="teacher2_right_img"><img src=""></div>
-    <div class="teacher2_right_list">
-        <span>热点名校</span>
-        <ul>
-            <li><img src=""><h4>XXX幼儿园</h4><h6>ssss</h6></li>
-            <li><img src=""><h4>XXX幼儿园</h4><h6>ssss</h6></li>
-            <li><img src=""><h4>XXX幼儿园</h4><h6>ssss</h6></li>
+<div class="right-bar-small">
+    <div class="right-bar-slide">
+        <ul class="rslides">
+            <li><img src="{{ url_for('static', filename='image/icons/al.jpg') }}" style="width: 220px;height: 220px;"
+                     alt=""></li>
+            <li><img src="{{ url_for('static', filename='image/icons/al.jpg') }}" style="width: 220px;height: 220px;"
+                     alt=""></li>
+            <li><img src="{{ url_for('static', filename='image/icons/al.jpg') }}" style="width: 220px;height: 220px;"
+                     alt=""></li>
         </ul>
     </div>
-    <div class="teacher2_right_list">
-        <span>热点名师</span>
+    <div class="research-right-hot">
+        <h4>热点名园</h4>
         <ul>
-            <li><img src=""><h4>边霞教授</h4><h6>ssss</h6></li>
-            <li><img src=""><h4>边霞教授</h4><h6>ssss</h6></li>
-            <li><img src=""><h4>边霞教授</h4><h6>ssss</h6></li>
+            {% for i in range(3) %}
+                <li>
+                    <img src="">
+
+                    <div>
+                        <h5>XXX幼儿园</h5>
+                        <h6>ssss</h6>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="research-right-hot">
+        <h4>热点名师</h4>
+        <ul>
+            {% for i in range(3) %}
+                <li>
+                    <img src="">
+                    <div>
+                        <h5>边霞教授</h5>
+                        <h6>ssss</h6>
+                    </div>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </div>

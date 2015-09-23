@@ -27,7 +27,7 @@
                     <ul class="youjiao-nav-sub">
                         <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
 {#                        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>#}
-                        <li><a href="{{ url_for('activity_content.research_activity', category='researchresult', page=1 ) }}">教研成果</a></li>
+                        <li><a href="{{ url_for('activity_content.research_activity', category='achievement', page=1 ) }}">教研成果</a></li>
                     </ul>
                 </li>
                 <li><a class="{% if request.path.startswith('/courseware') %}nav-active{% endif %}"

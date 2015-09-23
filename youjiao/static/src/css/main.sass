@@ -81,6 +81,7 @@
   line-height: 34px
   color: $font-gray
   font-size: 18px
+
 .news-list
   box-sizing: border-box
   border: 1px solid #CCCCCC
@@ -105,6 +106,7 @@
       margin-left: -8px
   a
     color: $font-gray
+
 .news-date
   width: 144px
 
@@ -112,6 +114,7 @@
   line-height: 34px
   color: $font-gray-heavy
   font-size: 18px
+
 .activity-content
   box-sizing: border-box
   border: 1px solid #CCCCCC
@@ -122,10 +125,12 @@
   .activity-author
     text-align: center
     line-height: 56px
+
 .weekly-hot
   box-sizing: border-box
   height: 372px
   margin-bottom: 30px
+
 .right-list
   li
     padding-left: 16px
@@ -136,28 +141,13 @@
       color: $font-gray
       font-size: 14px
 
-
 #main-big-body
   width: 780px
   box-sizing: border-box
   float: left
   padding: 0 24px 56px
+  min-height: 930px
   +clear-float
-
-.right-bar-small
-  width: 220px
-  float: left
-  box-sizing: border-box
-  ul
-    padding-bottom: 26px
-    li
-      height: 30px
-      padding-left: 16px
-      color: $font-gray
-      line-height: 30px
-    a
-     color: $font-gray
-
 
 //product
 
@@ -196,24 +186,24 @@
       height: 100%
   .s-img-active
     border: 2px solid $youjiao-pink
-  //#simple-img-next
-  //  display: block
-  //  width: 22px
-  //  height: 100px
-  //  background: $gray-a3
-  //  position: absolute
-  //  right: 0
-  //  &:after
-  //    content: ' '
-  //    display: block
-  //    border-width: 10px
-  //    border-style: solid
-  //    border-left-color: white
-  //    border-top-color: transparent
-  //    border-right-color: transparent
-  //    border-bottom-color: transparent
-  //    margin-top: 36px
-  //    margin-left: 6px
+//#simple-img-next
+//  display: block
+//  width: 22px
+//  height: 100px
+//  background: $gray-a3
+//  position: absolute
+//  right: 0
+//  &:after
+//    content: ' '
+//    display: block
+//    border-width: 10px
+//    border-style: solid
+//    border-left-color: white
+//    border-top-color: transparent
+//    border-right-color: transparent
+//    border-bottom-color: transparent
+//    margin-top: 36px
+//    margin-left: 6px
 
 .product-info
   float: left
@@ -305,13 +295,13 @@
   position: relative
 
 .courseware-comment-content
-    box-sizing: border-box
-    padding: 30px 20px
-    img
-      margin: 20px 20px
-      width: 422px
-      height: 240px
-      background: #CCCCCC
+  box-sizing: border-box
+  padding: 30px 20px
+  img
+    margin: 20px 20px
+    width: 422px
+    height: 240px
+    background: #CCCCCC
 
 .other-associate-courseware
   box-sizing: border-box
@@ -332,6 +322,7 @@
   width: 732px
   margin: 0 auto
   margin-bottom: 56px
+
 .page-banner
   width: 732px
   height: 280px
@@ -419,10 +410,117 @@
       margin-top: 8px
       margin-left: -8px
 
-
 .vjs-big-play-button
   left: 42% !important
   top: 36% !important
   border-radius: 50% !important
   height: 80px !important
   width: 80px !important
+
+//research
+.research-home-teachers
+  margin-top: 26px
+  margin-bottom: 40px
+  +clear-float
+  li
+    float: left
+    width: 215px
+    margin: 0 15px
+    text-align: center
+    &:nth-child(3)
+      margin-right: 0
+    img
+      width: 215px
+      height: 215px
+      background: #CCCCCC
+    h4
+      color: $font-gray-heavy
+      font-size: 18px
+      margin-top: 6px
+    span
+      margin-top: 4px
+      color: $font-gray-light
+
+.research-home-news
+  .news-list
+    border: none
+    min-height: 0px
+    margin-bottom: 0px
+    li
+      line-height: 36px
+      &:before
+        margin-top: 15px
+  .news-date
+    color: $font-gray-light
+
+.research-introduce-switch
+  margin-top: 10px
+  +clear-float
+  a
+    display: inline-block
+    width: 90px
+    height: 26px
+    background: $background-brown
+    float: left
+    text-align: center
+    line-height: 26px
+    color: $font-gray-light
+  .active
+    background: $youjiao-pink
+    color: white
+
+.research-introduce-teachers
+  li
+    margin-top: 26px
+    +clear-float
+    img
+      width: 140px
+      height: 140px
+      float: left
+      background: #CCCCCC
+    div
+      width: 540px
+      height: 140px
+      box-sizing: border-box
+      border: 1px solid $gray-a3
+      float: left
+      margin-left: 40px
+      padding: 20px
+      h4
+        color: $font-gray-heavy
+        font-size: 22px
+        margin-bottom: 10px
+        span
+          font-size: 16px
+          color: $font-gray-light
+          text-indent: 20px
+          padding-left: 18px
+      span
+        font-size: 14px
+        color: $font-gray-light
+
+.research-right-hot
+  margin-top: 26px
+  background: $background-brown
+  li
+    padding-top: 13px
+    height: 60px !important
+  img
+    width: 60px
+    height: 60px
+    float: left
+    background: #CCCCCC
+  div
+    float: left
+    padding-left: 16px
+    padding-top: 10px
+    overflow: hidden
+    line-height: 20px !important
+  h4
+    +list-first
+  h5
+    font-size: 16px
+    color: $font-gray-heavy
+  h6
+    text-align: center
+    color: $font-gray-light
