@@ -33,15 +33,15 @@
   .userinfo-left-tab
     width: 100%
     float: right
-    font-size: 22px
-    text-indent: 26px
+    font-size: 20px
+    text-indent: 30px
     line-height: 60px
     a
       display: inline-block
       float: right
       width: 160px
       height: 60px
-      color: $font-gray-heavy
+      color: $font-gray-light
     .active
       background: white
 
@@ -55,15 +55,15 @@
     width: 100%
     height: 50px
     box-sizing: border-box
-    border-top: 1px solid $gray-a3
-    border-bottom: 1px solid $gray-a3
+    border-top: 1px solid #CABCBC
+    border-bottom: 1px solid #CABCBC
     margin-top: 50px
     div
       width: 80px
       height: 30px
       border-width: 1px 1px 0
       border-style: solid
-      border-color: $gray-a3
+      border-color: #CABCBC
       margin-top: -31px
       margin-left: 55px
       background: white
@@ -161,11 +161,9 @@
   display: inline-block
   width: 80px
   height: 28px
-  float: left
   background: $youjiao-pink
   color: white
   text-align: center
-  margin-left: 20px
   line-height: 28px
 .school-search
   +clear-float
@@ -188,8 +186,33 @@
     outline: none
   a
     +button-a
-.school-table
+    float: left
+    margin-left: 20px
+.userinfo-table
+  margin-top: 30px
+  th
+    color: $font-gray-light
   tr
     height: 40px
+    &:nth-child(even)
+      background: $background-brown-2
+  td
+    color: $font-gray-light
   a
     +button-a
+.school-table
+  .userinfo-table-1
+    width: 20%
+  .userinfo-table-2
+    width: 10%
+  .userinfo-table-3
+    width: 30%
+  .userinfo-table-4
+    width: 10%
+.consumption-table
+  text-align: center
+  th
+    width: 200px
+
+.userinfo-collection-list
+  padding-left: 16px

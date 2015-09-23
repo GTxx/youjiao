@@ -8,20 +8,22 @@
 {% endblock %}
 
 {% block userinfo_content %}
-    <table class="school-table">
-        <tr>
-            <th>商品名称</th>
-            <th>购买时间</th>
-            <th>到期时间</th>
-            <th>购买方式</th>
-        </tr>
-        {% for i in range(7) %}
+    <div class="userinfo-content">
+        <table class="userinfo-table consumption-table">
             <tr>
-                <td>VIP会员</td>
-                <td>2014-07-30</td>
-                <td>2014-10-30</td>
-                <td><a href="javascript:;">立即激活</a></td>
+                <th>商品名称</th>
+                <th>购买时间</th>
+                <th>到期时间</th>
+                <th>购买方式</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for i in range(7) %}
+                <tr>
+                    <td>VIP会员</td>
+                    <td>2014-07-30</td>
+                    <td>2014-10-30</td>
+                    <td><a href="javascript:;">立即激活</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
