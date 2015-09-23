@@ -149,6 +149,11 @@ class UserProfileForm(csrf_form, ModelForm):
         exclude = ['avatar_qiniu_key']
 
 
+from wtforms.fields import FileField
+class UserAvatarForm(csrf_form):
+    avatar = FileField()
+
+
 class ModifyPasswordForm(Form):
     old_password_validators = [DataRequired(), Length(min=6, max=15)]
     password_validators = [DataRequired(), Length(min=6, max=15)]
@@ -159,7 +164,8 @@ class ModifyPasswordForm(Form):
     password_confirm = StringField(u'password_confirm', validators=password_confirm_validators)
 
     def validate(self):
-        super(ModifyPasswordForm, self).validate()
+        if not super(ModifyPasswordForm, self).validate():
+            return False
         # validate old password
         if not verify_password(self.old_password.data, current_user.password):
             self.old_password.errors.append(u'密码错误')

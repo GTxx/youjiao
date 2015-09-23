@@ -3,10 +3,11 @@
 {% block userinfo_right_top %}
     <div>个人资料</div>
     <ul>
-        <li><a class="{% if current_page.sub == 'info' %} active {% endif %}"
+        <li><a class="active"
                href="{{ url_for('user_view.user_profile') }}">基本资料</a></li>
-        <li><a href="#">头像设置</a></li>
-        <li><a class="{% if current_page.sub == 'password' %} active {% endif %}"
+        <li><a class=""
+               href="{{ url_for('user_view.user_avatar') }}">头像设置</a></li>
+        <li><a class=""
                href="{{ url_for('user_view.modify_password') }}">密码修改</a></li>
     </ul>
 {% endblock %}
@@ -22,7 +23,7 @@
 
                     <div class="form-invalid">{{ render_error(form.nickname) }}</div>
                 </li>
-                <li><span>生日:</span><input type="text" value="{{ form.birthday.data }}" name="birthday">
+                <li><span>生日:</span><input id='birthday' type="text" value="{{ form.birthday.data or '' }}" name="birthday">
 
                     <div class="form-invalid">{{ render_error(form.birthday) }}</div>
                 </li>
@@ -31,25 +32,20 @@
                     <div class="form-invalid">{{ render_error(form.gender) }}</div>
                 </li>
                 <li><span>职业:</span>
-                    <input type="text" value="{{ form.career.data }}" name="career">
+                    <input type="text" value="{{ form.career.data or ''}}" name="career">
 
                     <div class="form-invalid">{{ render_error(form.career) }}</div>
                 </li>
-                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data }}" name="work_place_name">
+                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data or ''}}" name="work_place_name">
 
                     <div class="form-invalid">{{ render_error(form.work_place_name) }}</div>
                 </li>
                 <li>
                     <span>所在地区:</span>
-                    <select>
-                        <option>-省份-</option>
-                    </select>
-                    <select>
-                        <option>-城市-</option>
-                    </select>
-                    <select>
-                        <option>-县区-</option>
-                    </select>
+                        <input type="text" name="province" value="{{ form.province.data or '' }}" placeholder="省份"/>
+                        <input type="text" name="city" value="{{ form.city.data or '' }}" placeholder="城市"/>
+                        <input type="text" name="district" value="{{ form.district.data or '' }}" placeholder="地区"/>
+                        <input type="text" name="street" value="{{ form.street.data or '' }}" placeholder="街道"/>
                 </li>
                 <input type="submit" class="user-profile-submit" value="编辑资料">
             </form>

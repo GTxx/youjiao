@@ -39,3 +39,8 @@ class Favor(CRUDMixin, db.Model):
             return Book
         else:
             return None
+
+    @property
+    def real_obj(self):
+        model = self.favor_model
+        return model.query.get(self.obj_id)

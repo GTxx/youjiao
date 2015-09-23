@@ -32,15 +32,15 @@
                 {% endif %}
             </div>
             <ul class="userinfo-left-tab">
-                <li><a class="{% if current_page.parent == 'profile' %} active {% endif %}"
+                <li><a class="{% if 'info' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_profile') }}">个人资料</a></li>
-                <li><a class="{% if current_page.parent == 'learnrecord' %} active {% endif %}"
+                <li><a class="{% if 'learnrecord' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_learnrecord') }}">学习记录</a></li>
-                <li><a class="{% if current_page.parent == 'schools' %} active {% endif %}"
+                <li><a class="{% if 'schools' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_schools') }}">我的园所</a></li>
-                <li><a class="{% if current_page.parent == 'collections' %} active {% endif %}"
+                <li><a class="{% if 'collections' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_collections') }}">我的收藏</a></li>
-                <li><a class="{% if current_page.parent == 'consumption' %} active {% endif %}"
+                <li><a class="{% if 'consumption' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_consumption') }}">消费记录</a></li>
             </ul>
         </div>

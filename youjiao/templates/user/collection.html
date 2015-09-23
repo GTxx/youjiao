@@ -14,18 +14,18 @@
         <div class="userinfo-content-tab">
             <div class="n-v-section-b">
                 <ul class="n-v-section-list">
-                    {% for i in range(4) %}
+                    {% for favor in favor_book_list %}
                         <li>
-                            <a href="#">
+                            <a href="{{ favor.real_obj.link }}">
                                 <div class="nv-image-wrapper">
-                                    <img src="#"
+                                    <img src="{{ favor.real_obj.cover }}"
                                          alt="">
 
                                     <div class="nv-image-hover-layer"></div>
-                                    <div class="nv-price">30/套</div>
+                                    <div class="nv-price">{{ favor.real_obj.price }}/套</div>
                                 </div>
-                                <h5>有趣的手影</h5>
-                                <h6>大班</h6>
+                                <h5>{{ favor.real_obj.name }}</h5>
+                                <h6>{{ favor.real_obj.level }}</h6>
                             </a>
                         </li>
                     {% endfor %}

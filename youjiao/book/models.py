@@ -6,6 +6,7 @@ from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
 from sqlalchemy.dialects.postgresql import ARRAY
 from youjiao.user_util.models import Comment
+from flask import url_for
 
 
 class Book(db.Model, CRUDMixin):
@@ -41,6 +42,11 @@ class Book(db.Model, CRUDMixin):
         else:
             return self.image_array[0]
 
+    @property
+    def link(self):
+        return url_for('book_view.book_detail', book_id=self.id)
+
     def comment(self, page=0):
         return Comment.query.filter_by(comment_obj_type='book').filter_by(comment_obj_id=self.id)
+
 

@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, request, redirect, session, current_app
 from flask.views import MethodView
 from .decorators import anonymous_user_required
 from flask_principal import identity_changed, AnonymousIdentity
-from .forms import RegisterForm, UserProfileForm, ModifyPasswordForm
+from .forms import RegisterForm, UserProfileForm, ModifyPasswordForm, UserAvatarForm
 from youjiao.extensions import limiter
 from .models import User, UserProfile, RedisCaptcha
 from flask_login import login_user, login_required, current_user
 import json
+from youjiao.user_util.models import Favor
+from sqlalchemy import and_
 
 user_bp = Blueprint("user_view", __name__)
 
@@ -94,12 +97,6 @@ def refresh_captcha():
     return json.dumps({'captcha_key': captcha.key, 'b64_captcha': captcha.b64_img})
 
 
-@user_bp.route('/user/info/profile')
-@login_required
-def user_info():
-    return render_template('user/info.html')
-
-
 @user_bp.route('/user/favor')
 @login_required
 def user_favor():
@@ -135,7 +132,10 @@ def user_collections():
     current_page = {
         'parent': 'collections'
     }
-    return render_template('user/collection.html', current_page=current_page)
+    favor_book_list = Favor.query.filter(
+        and_(Favor.obj_type=='book', Favor.user_id==current_user.id))
+    return render_template('user/collection.html', current_page=current_page,
+                           favor_book_list=favor_book_list)
 
 
 @user_bp.route('/user/consumption')
@@ -153,28 +153,39 @@ class UserProfileView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
-        current_page = {
-            'parent': 'profile',
-            'sub': 'info'
-        }
         profile = current_user.profile
         form = UserProfileForm(obj=profile)
         # import ipdb; ipdb.set_trace()
-        return render_template('user/profile.html', form=form, current_page=current_page)
+        return render_template('user/profile.html', form=form)
 
     def post(self):
         # import ipdb; ipdb.set_trace()
-        current_page = {
-            'parent': 'profile',
-            'sub': 'info'
-        }
         form = UserProfileForm(formdata=request.form)
         if form.validate_on_submit():
             data = form.data
             user_profile = current_user.profile
             form.populate_obj(user_profile)
             user_profile.save()
-        return render_template('user/profile.html', form=form, current_page=current_page)
+        return render_template('user/profile.html', form=form)
+
+
+class UserAvatarView(MethodView):
+    methods = ['GET', 'POST']
+    decorators = [login_required, ]
+
+    def get(self):
+        form = UserAvatarForm()
+        return render_template('user/avatar.html', form=form)
+
+    def post(self):
+        form = ModifyPasswordForm(formdata=request.form)
+        if form.validate_on_submit():
+            pass
+            # 生成qiniu_key
+
+            # 上传qiniu
+            # 保存对象
+        return render_template('user/avatar.html', form=form)
 
 
 class UserPasswordModifyView(MethodView):
@@ -182,27 +193,18 @@ class UserPasswordModifyView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
-        current_page = {
-            'parent': 'profile',
-            'sub': 'password'
-        }
         form = ModifyPasswordForm()
 
-        return render_template('user/modify_password.html', form=form, current_page=current_page)
+        return render_template('user/modify_password.html', form=form)
 
     def post(self):
-        current_page = {
-            'parent': 'profile',
-            'sub': 'password'
-        }
         form = ModifyPasswordForm(formdata=request.form)
         if form.validate_on_submit():
             current_user.set_password(form.data['password'])
             return render_template('user/modify_password.html', modify_success=True, form=form)
-        return render_template('user/modify_password.html', form=form, current_page=current_page)
+        return render_template('user/modify_password.html', form=form)
 
 
-
-
-user_bp.add_url_rule('/user/profile', view_func=UserProfileView.as_view('user_profile'), endpoint='user_profile')
-user_bp.add_url_rule('/user/modify_password', view_func=UserPasswordModifyView.as_view('modify_password'), endpoint='modify_password')
+user_bp.add_url_rule('/user/info/profile', view_func=UserProfileView.as_view('user_profile'), endpoint='user_profile')
+user_bp.add_url_rule('/user/info/avatar', view_func=UserAvatarView.as_view('user_avatar'), endpoint='user_avatar')
+user_bp.add_url_rule('/user/info/modify_password', view_func=UserPasswordModifyView.as_view('modify_password'), endpoint='modify_password')
