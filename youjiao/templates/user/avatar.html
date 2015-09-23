@@ -13,19 +13,20 @@
 {% endblock %}
 
 {% block userinfo_content %}
-<div id="right_body_image">
-    <div id="right_body_image1">
-        <span>上传本地照</span>
-    </div>
-    <div id="right_body_image2">
-        <div id="right_body_image3">
-            <div id="button2">
-                <div id="square1"></div>
-                <div id="square2"></div>
-            </div>
+    <div class="userinfo-content">
+        <div class="userinfo-upload-style">
+            <span>上传本地照片</span>
+        </div>
+        <div id="userinfo-upload-avator">
+            <form action="">
+                <div class="fileupload">
+                    <div></div>
+                    <input type="file" id='userinfo-upload-input'/>
+                </div>
+{#                <input type="submit" value="上传">#}
+            </form>
             <span>请点击按钮选择图片</span>
         </div>
+        <h4 class="userinfo-upload-tip">仅支持JPG、JPGE、GIF、PNG的图片格式文件不能大于2M</h4>
     </div>
-    <h4>仅支持JPG、JPGE、GIF、PNG的图片格式文件不能大于2M</h4>
-</div>
 {% endblock %}

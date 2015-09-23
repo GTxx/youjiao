@@ -9,31 +9,33 @@
 {% endblock %}
 
 {% block content %}
-    <div class="main-big-body">
-        <div class="section-block-title-4">名师名园</div>
-        <div id="content_img">
-            <ul>
-                <li style="margin-left:13px;"><img src=""><span>边霞教授</span><h4>博士生导师</h4></li>
-            </ul>
+    <div id="main-big-body">
+        <div class="section-block-wrapper">
+            <div class="section-block-title-4">名师名园</div>
         </div>
+        <ul class="research-home-teachers">
+            <li><img src=""><h4>边霞教授</h4><span>博士生导师</span></li>
+        </ul>
         <!--<div class="body_content">-->
-            <!--<div class="section-block-title-4">教研活动</div>-->
-            <!--<ul class="research-home-list">-->
-                <!--{% for activity in data.research_events %}-->
-                    <!--<li>-->
-                        <!--<a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }}</a>-->
-                        <!--<span>[{{ activity.create_time.date() }}]</span>-->
-                    <!--</li>-->
-                <!--{% endfor %}-->
-            <!--</ul>-->
+        <!--<div class="section-block-title-4">教研活动</div>-->
+        <!--<ul class="research-home-list">-->
+        <!--{% for activity in data.research_events %}-->
+            <!--<li>-->
+            <!--<a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }}</a>-->
+            <!--<span>[{{ activity.create_time.date() }}]</span>-->
+            <!--</li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
         <!--</div>-->
-        <div class="body_content">
-            <div class="section-block-title-4">教研成果</div>
-            <ul class="research-home-list">
+        <div class="research-home-news">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-4">教研成果</div>
+            </div>
+            <ul class="news-list">
                 {% for activity in data.research_result %}
                     <li>
                         <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }}</a>
-                        <span>[{{ activity.create_time.date() }}]</span>
+                        <span class="news-date float-right">[{{ activity.create_time.date() }}]</span>
                     </li>
                 {% endfor %}
             </ul>
