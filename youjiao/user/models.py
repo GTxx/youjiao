@@ -115,37 +115,22 @@ class Captcha(db.Model, CRUDMixin):
     content = db.Column(sqla.String(4), default=generate_random_number_4)
     img_name = db.Column(sqla.String(128))
 
-    @property
-    def img_path(self):
-        return os.path.join(os.getcwd(), 'youjiao/static/captcha', self.img_name)
-
     @classmethod
     def generate(cls, key):
         captcha = cls.query.filter_by(key=key).first()
-        if captcha:
-            captcha.delete_img()
-        else:
+        if not captcha:
             captcha = cls()
         captcha.key = key
         captcha.content = generate_random_number_4()
-        captcha.img_name = '.'.join([key, str(int(time.time())), 'png'])
         captcha.save()
         image = ImageCaptcha(width=160, height=80)
-        # TODO: use file path config
-        image.write(captcha.content, captcha.img_path)
+        img_buffer = image.generate(captcha.content)
+        captcha.img_string = img_buffer.read()
         return captcha
 
-    @property
-    def img_url(self):
-        # TODO: use file path config
-        return os.path.join('/static/captcha', self.img_name)
-
-    def delete(self):
-        self.delete_img()
-        super(Captcha, self).delete()
-
-    def delete_img(self):
-        try:
-            os.remove(self.img_path)
-        except Exception as e:
-            print(e)
+    @classmethod
+    def get_b64_img(cls, img_string):
+        # NOTE: ie8 not support image > 32k
+        import base64
+        b64_string = base64.b64encode(img_string)
+        return "data:image/png;base64,{}".format(b64_string)

@@ -47,7 +47,8 @@ class CaptcharWidget(object):
         if 'captcha_key' not in session:
             session['captcha_key'] = hashlib.sha1(os.urandom(64)).hexdigest()
         captcha = Captcha.generate(str(session['captcha_key']))
-        return HTMLString('<img src=%s>' % captcha.img_url)
+        return HTMLString('<img src="{}">'.format(Captcha.get_b64_img(captcha.img_string)))
+
 
 class CaptchaField(Field):
     '''captcha在CaptchaWidget中生成，
