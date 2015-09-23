@@ -55,19 +55,22 @@
             </div>
             <div class="rank-section-list">
                 <div class="product-rank-list product-rank-list-1">
+                    <a href="{{ top10[0].link }}">
                     <img src="{{ top10[0].cover }}" alt="">
+                    </a>
                     <h4>1.{{ top10[0].name }}</h4>
                     <h5>{{ top10[0].level}}</h5>
                 </div>
                 <div class="product-rank-list">
                     {% for i in range(2, 5) %}
                         <div class="product-rank-item">
+                            <a href="{{ top10[i].link }}">
                             <img src="{{ top10[i].cover }}" alt="">
-
                             <div>
                                 <h4>{{i}}.{{ top10[i].name }}</h4>
                                 <h5>{{ top10[i].level }}</h5>
                             </div>
+                                </a>
                         </div>
                     {% endfor %}
                 </div>

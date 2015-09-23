@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 from flask import Blueprint, render_template, abort
+from youjiao.user_util.models import Comment
 from .models import Book
 
 book_bp = Blueprint("book_view", __name__)
@@ -33,4 +34,6 @@ def book_category(category):
 @book_bp.route('/book/<int:book_id>')
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
-    return render_template('book/detail.html', book=book)
+    page_comment = Comment.query.filter(comment_obj_type='book').paginate(1)
+    return render_template('book/detail.html', book=book,
+                           page_comment=page_comment)
