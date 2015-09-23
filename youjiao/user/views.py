@@ -111,6 +111,41 @@ def user_favor():
     return render_template('user/user_favor.html', book_list=book_list )
 
 
+@user_bp.route('/user/learnrecord')
+@login_required
+def user_learnrecord():
+    current_page = {
+        'parent': 'learnrecord'
+    }
+    return render_template('user/learnrecord.html', current_page=current_page)
+
+
+@user_bp.route('/user/schools')
+@login_required
+def user_schools():
+    current_page = {
+        'parent': 'schools'
+    }
+    return render_template('user/myschool.html', current_page=current_page)
+
+
+@user_bp.route('/user/collections')
+@login_required
+def user_collections():
+    current_page = {
+        'parent': 'collections'
+    }
+    return render_template('user/collection.html', current_page=current_page)
+
+
+@user_bp.route('/user/consumption')
+@login_required
+def user_consumption():
+    current_page = {
+        'parent': 'consumption'
+    }
+    return render_template('user/consumption.html', current_page=current_page)
+
 
 class UserProfileView(MethodView):
     """ user profile edit """
@@ -118,20 +153,28 @@ class UserProfileView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
+        current_page = {
+            'parent': 'profile',
+            'sub': 'info'
+        }
         profile = current_user.profile
         form = UserProfileForm(obj=profile)
         # import ipdb; ipdb.set_trace()
-        return render_template('user/profile.html', form=form)
+        return render_template('user/profile.html', form=form, current_page=current_page)
 
     def post(self):
         # import ipdb; ipdb.set_trace()
+        current_page = {
+            'parent': 'profile',
+            'sub': 'info'
+        }
         form = UserProfileForm(formdata=request.form)
         if form.validate_on_submit():
             data = form.data
             user_profile = current_user.profile
             form.populate_obj(user_profile)
             user_profile.save()
-        return render_template('user/profile.html', form=form)
+        return render_template('user/profile.html', form=form, current_page=current_page)
 
 
 class UserPasswordModifyView(MethodView):
@@ -139,16 +182,24 @@ class UserPasswordModifyView(MethodView):
     decorators = [login_required, ]
 
     def get(self):
+        current_page = {
+            'parent': 'profile',
+            'sub': 'password'
+        }
         form = ModifyPasswordForm()
 
-        return render_template('user/modify_password.html', form=form)
+        return render_template('user/modify_password.html', form=form, current_page=current_page)
 
     def post(self):
+        current_page = {
+            'parent': 'profile',
+            'sub': 'password'
+        }
         form = ModifyPasswordForm(formdata=request.form)
         if form.validate_on_submit():
             current_user.set_password(form.data['password'])
             return render_template('user/modify_password.html', modify_success=True, form=form)
-        return render_template('user/modify_password.html', form=form)
+        return render_template('user/modify_password.html', form=form, current_page=current_page)
 
 
 

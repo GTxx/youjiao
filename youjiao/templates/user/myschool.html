@@ -1,0 +1,68 @@
+{% extends 'user/info_base.html' %}
+
+{% block userinfo_right_top %}
+    <div>我的园所</div>
+    <ul>
+        <li><a class="active" href="javascript:;">关键词查找</a></li>
+        <li><a href="javascript:;">按地区查找</a></li>
+    </ul>
+{% endblock %}
+
+{% block userinfo_content %}
+    <div class="userinfo-content">
+        <div class="userinfo-content-tab">
+            <div class="school-search">
+                <span>关键词：</span>
+                <input type="text">
+                <a href="javascript:;">搜索</a>
+            </div>
+            <table class="userinfo-table school-table">
+                <tr>
+                    <th class="userinfo-table-1">名称</th>
+                    <th class="userinfo-table-2">创始人</th>
+                    <th class="userinfo-table-3">地址</th>
+                    <th class="userinfo-table-4"></th>
+                </tr>
+                {% for i in range(7) %}
+                    <tr>
+                        <td>xx幼儿园</td>
+                        <td>用户名</td>
+                        <td>江西省南昌市洪都北大道</td>
+                        <td><a href="javascript:;">加入</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="userinfo-content-tab display-none">
+            <div class="school-search">
+                <span>关键词：</span>
+                <select>
+                    <option>-省份-</option>
+                </select>
+                <select>
+                    <option>-城市-</option>
+                </select>
+                <select>
+                    <option>-县区-</option>
+                </select>
+                <a href="javascript:;">搜索</a>
+            </div>
+            <table class="userinfo-table school-table">
+                <tr>
+                    <th class="userinfo-table-1">名称</th>
+                    <th class="userinfo-table-2">创始人</th>
+                    <th class="userinfo-table-3">地址</th>
+                    <th class="userinfo-table-4"></th>
+                </tr>
+                {% for i in range(7) %}
+                    <tr>
+                        <td>xx幼儿园</td>
+                        <td>用户名</td>
+                        <td>江西省南昌市洪都北大道</td>
+                        <td><a href="javascript:;">加入</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'user/info_base.html' %}
+
+{% block userinfo_right_top %}
+    <div>消费记录</div>
+    <ul>
+        <li><a class="active" href="javascript:;">消费记录</a></li>
+    </ul>
+{% endblock %}
+
+{% block userinfo_content %}
+    <div class="userinfo-content">
+        <table class="userinfo-table consumption-table">
+            <tr>
+                <th>商品名称</th>
+                <th>购买时间</th>
+                <th>到期时间</th>
+                <th>购买方式</th>
+            </tr>
+            {% for i in range(7) %}
+                <tr>
+                    <td>VIP会员</td>
+                    <td>2014-07-30</td>
+                    <td>2014-10-30</td>
+                    <td><a href="javascript:;">立即激活</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

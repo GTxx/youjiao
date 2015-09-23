@@ -1,0 +1,77 @@
+{% extends 'user/info_base.html' %}
+
+{% block userinfo_right_top %}
+    <div>我的收藏</div>
+    <ul>
+        <li><a class="active" href="javascript:;">教材收藏</a></li>
+        <li><a href="javascript:;">产品收藏</a></li>
+        <li><a href="javascript:;">课件收藏</a></li>
+    </ul>
+{% endblock %}
+
+{% block userinfo_content %}
+    <div class="userinfo-collection-list">
+        <div class="userinfo-content-tab">
+            <div class="n-v-section-b">
+                <ul class="n-v-section-list">
+                    {% for i in range(4) %}
+                        <li>
+                            <a href="#">
+                                <div class="nv-image-wrapper">
+                                    <img src="#"
+                                         alt="">
+
+                                    <div class="nv-image-hover-layer"></div>
+                                    <div class="nv-price">30/套</div>
+                                </div>
+                                <h5>有趣的手影</h5>
+                                <h6>大班</h6>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="userinfo-content-tab display-none">
+            <div class="n-v-section-b">
+                <ul class="n-v-section-list">
+                    {% for i in range(4) %}
+                        <li>
+                            <a href="#">
+                                <div class="nv-image-wrapper">
+                                    <img src="#"
+                                         alt="">
+
+                                    <div class="nv-image-hover-layer"></div>
+                                    <div class="nv-price">30/套</div>
+                                </div>
+                                <h5>有趣的手影</h5>
+                                <h6>大班</h6>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="userinfo-content-tab display-none">
+            <div class="video-section-b">
+                <ul class="video-section-list">
+                    {% for i in range(8) %}
+                        <li>
+                            <div class="v-image-wrapper">
+                                <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}"
+                                     alt="">
+
+                                <div class="v-image-hover-layer">
+                                    <div class="v-hover-layer-icon"></div>
+                                </div>
+                            </div>
+                            <h5>青花瓷</h5>
+                            <a href="" class="start-download">取消收藏</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

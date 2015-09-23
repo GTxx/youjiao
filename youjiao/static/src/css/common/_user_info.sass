@@ -1,0 +1,218 @@
+#userinfo-wrapper
+  width: 1180px
+  height: 628px
+  margin-top: 30px
+  margin-bottom: 56px
+  box-sizing: border-box
+  border: 1px solid #CABCBC
+  .userinfo-left
+    width: 178px
+    height: 100%
+    box-sizing: border-box
+    float: left
+    background: #e0e0e0
+  .userinfo-avatar
+    width: 88px
+    height: 88px
+    margin: 20px auto 16px
+    border-radius: 50%
+    background: #cccccc
+    img
+      width: 100%
+      height: 100%
+  .userinfo-role
+    text-align: center
+    height: 68px
+    span
+      font-size: 22px
+      color: $font-gray-heavy
+    h4
+      font-size: 14pt
+      color: $font-gray-light
+
+  .userinfo-left-tab
+    width: 100%
+    float: right
+    font-size: 20px
+    text-indent: 30px
+    line-height: 60px
+    a
+      display: inline-block
+      float: right
+      width: 160px
+      height: 60px
+      color: $font-gray-light
+    .active
+      background: white
+
+  .userinfo-right
+    width: 1000px
+    height: 100%
+    box-sizing: border-box
+    float: left
+
+  .userinfo-right-top
+    width: 100%
+    height: 50px
+    box-sizing: border-box
+    border-top: 1px solid #CABCBC
+    border-bottom: 1px solid #CABCBC
+    margin-top: 50px
+    div
+      width: 80px
+      height: 30px
+      border-width: 1px 1px 0
+      border-style: solid
+      border-color: #CABCBC
+      margin-top: -31px
+      margin-left: 55px
+      background: white
+      color: $font-gray-heavy
+      text-align: center
+      line-height: 30px
+    ul
+      +clear-float
+      margin-left: 55px
+    li
+      float: left
+      min-width: 88px
+      margin-left: 8px
+      text-align: center
+    a
+      font-size: 18px
+      display: inline-block
+      color: $font-gray-light
+      height: 45px
+      line-height: 45px
+    .active
+      border-bottom: 4px solid $youjiao-pink
+
+  .userinfo-content
+    margin-top: 42px
+    margin-left: 55px
+
+#user-profile-form
+  li
+    +clear-float
+    margin-bottom: 10px
+  span
+    width: 70px
+    display: inline-block
+    text-align: justify
+    float: left
+    color: $font-gray-light
+    &:after
+      content: ""
+      width: 100%
+      display: inline-block
+  input
+    float: left
+    margin-left: 8px
+    width: 290px
+    height: 28px
+    box-sizing: border-box
+    outline: none
+    border: 1px solid #ccc
+  select
+    margin-left: 8px
+    background: transparent
+    border: 1px solid #ccc
+    outline: none
+  =button
+    display: block
+    width: 100px
+    height: 30px
+    background: $youjiao-pink
+    color: white
+    text-align: center
+    line-height: 30px
+    font-size: 14pt
+    margin-top: 10px
+    margin-left: 76px
+    border: none
+    outline: none
+  .user-profile-submit
+    +button
+  .modify-password-submit
+    +button
+  .form-invalid
+    line-height: 26px
+
+.learn_record
+  margin-top: 30px
+  ul
+    +clear-float
+    li
+      width: 215px
+      box-sizing: border-box
+      float: left
+      margin-left: 28px
+      margin-bottom: 13px
+      text-align: center
+    img
+      width: 100%
+      height: 121px
+      background: #CCCCCC
+    span
+      margin-top: 6px
+      display: inline-block
+
+=button-a
+  display: inline-block
+  width: 80px
+  height: 28px
+  background: $youjiao-pink
+  color: white
+  text-align: center
+  line-height: 28px
+.school-search
+  +clear-float
+  span
+    width: 75px
+    color: $font-gray-light
+    float: left
+  input
+    width: 290px
+    height: 28px
+    float: left
+    box-sizing: border-box
+    outline: none
+    border: 1px solid #ccc
+  select
+    float: left
+    margin-left: 8px
+    background: transparent
+    border: 1px solid #ccc
+    outline: none
+  a
+    +button-a
+    float: left
+    margin-left: 20px
+.userinfo-table
+  margin-top: 30px
+  th
+    color: $font-gray-light
+  tr
+    height: 40px
+    &:nth-child(even)
+      background: $background-brown-2
+  td
+    color: $font-gray-light
+  a
+    +button-a
+.school-table
+  .userinfo-table-1
+    width: 20%
+  .userinfo-table-2
+    width: 10%
+  .userinfo-table-3
+    width: 30%
+  .userinfo-table-4
+    width: 10%
+.consumption-table
+  text-align: center
+  th
+    width: 200px
+
+.userinfo-collection-list
+  padding-left: 16px

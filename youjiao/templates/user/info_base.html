@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-   <link href="{{ 'user_info.css' | asset }}" rel="stylesheet">
+    <link href="{{ 'user_info.css' | asset }}" rel="stylesheet">
 {% endblock %}
 
 {% macro render_error(field) %}
@@ -16,141 +16,45 @@
 
 
 {% block content %}
-   <div id="div1">
-   <div id="left">   <!--左边部分-->
-        <img src="">
-       <span>{{ current_user.name }}</span>
-       {% if 'admin' in current_user.roles_name %}
-       <h4>管理员</h4>
-       {% elif 'editor' in current_user.roles_name %}
-       <h4>编辑</h4>
-       {% else %}
-       <h4>普通会员</h4>
-       {% endif %}
-       <ul>
-           <li style="background:white"><span>个人资料</span></li>
-           <li><span>学习记录</span></li>
-           <li><span>我的院所</span></li>
-           <li><span>我的收藏</span></li>
-           <li><span>消费记录</span></li>
-       </ul>
-   </div>
+    <div id="userinfo-wrapper">
+        <div class="userinfo-left">
+            <div class="userinfo-avatar">
 
-   <div class="right" >   <!--右边第一部分-->
-       <div class="right_top">
-           <div class="right_top_module2"></div><div class="right_top_module"><span>个人资料</span></div> <div class="right_top_module3"></div>
-       </div>
-       <div class="right_second">
-           <span><a href="{{ url_for('user_view.user_profile') }}">基本资料</a></span>
-           <h4 ><a href="{{ 123}}">头像设置</a></h4>
-           <h4><a href="{{ url_for('user_view.modify_password') }}">密码修改</a></h4>
-           </div>
-       <div id="right_body">
-           {% block profile_avatar_modify_password %}{% endblock %}
-       </div>
-
-   </div>
-
-   <div   class="right" style="display:none"> <!--右边第二部分-->
-        <div class="right_top">
-            <div class="right_top_module2"></div><div class="right_top_module"><span>学习记录</span></div> <div class="right_top_module3"></div>
-       </div>
-       <div class="right_second">
-           <span style="width:100px">课件学习记录</span>
-       </div>
-       <div class="study_record">
-           <ul>
-               <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-                <li><img src=""><span>青花瓷</span></li>
-           </ul>
-       </div>
-   </div >
-
-   <div class="right" style="display: none"> <!--右边第三部分-->
-       <div class="right_top">
-            <div class="right_top_module2"></div><div class="right_top_module"><span>我的园所</span></div> <div class="right_top_module3"></div>
-       </div>
-       <div class="right_second">
-           <span style="width:100px">关键词查找</span>
-           <h4 >按地区查找</h4>
-       </div>
-       <div class="research" >
-         <div class="keyword">
-            <span>关键词:</span> <input type="text"><div id="button3"><h4>搜索</h4></div>
-         </div>
-           <div class="keyword" style="display: none">
-                 <span>所在地区:</span> <select><option >-省份-</select><select><option >-城市-</select><select><option >-县区-</select><div id="button3"><h4>搜索</h4></div>
-           </div>
-           <div class="titleName">
-            <span>名称</span> <span>创始人</span> <span>地址</span>
-           </div>
-           <ul>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button4"><h4>审核中</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-               <li><span>xx幼儿园</span><span style="margin-right: 120px">用户名</span><span>江西省南昌市洪都北大道</span><div class="button5"><h4>加入</h4></div></li>
-           </ul>
-       </div>
-   </div>
-
-   <div class="right" style="display: none"><!--右边第四部分-->
-       <div class="right_top">
-            <div class="right_top_module2"></div><div class="right_top_module"><span>我的收藏</span></div> <div class="right_top_module3"></div>
-       </div>
-       <div class="right_second">
-           <span>教材收藏</span>
-           <h4 >产品收藏</h4>
-           <h4>课件收藏</h4>
-           </div>
-       <div id="MyCollection2">
-           <div id="MyCollection">
-               {% block user_favor %}{% endblock %}
-           </div>
-       </div>
-       <div class="study_record" style="display: none">
-           <ul>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-               <li style="height:195px"><img src=""><span>青花瓷</span><h4>取消收藏</h4></li>
-           </ul>
-       </div>
-   </div>
-
-   <div class="right" style="display: none"><!--右边第五部分-->
-       <div class="right_top">
-            <div class="right_top_module2"></div><div class="right_top_module"><span>消费记录</span></div> <div class="right_top_module3"></div>
-       </div>
-       <div id="ConsumeRecord">
-        <div id="ConsumeTitle">
-      <span>商品名称</span><span>购买时间</span><span>到期时间</span><span>购买方式</span>
+            </div>
+            <div class="userinfo-role">
+                <span>{{ current_user.name }}</span>
+                {% if 'admin' in current_user.roles_name %}
+                    <h4>管理员</h4>
+                {% elif 'editor' in current_user.roles_name %}
+                    <h4>编辑</h4>
+                {% else %}
+                    <h4>普通会员</h4>
+                {% endif %}
+            </div>
+            <ul class="userinfo-left-tab">
+                <li><a class="{% if current_page.parent == 'profile' %} active {% endif %}"
+                       href="{{ url_for('user_view.user_profile') }}">个人资料</a></li>
+                <li><a class="{% if current_page.parent == 'learnrecord' %} active {% endif %}"
+                       href="{{ url_for('user_view.user_learnrecord') }}">学习记录</a></li>
+                <li><a class="{% if current_page.parent == 'schools' %} active {% endif %}"
+                       href="{{ url_for('user_view.user_schools') }}">我的园所</a></li>
+                <li><a class="{% if current_page.parent == 'collections' %} active {% endif %}"
+                       href="{{ url_for('user_view.user_collections') }}">我的收藏</a></li>
+                <li><a class="{% if current_page.parent == 'consumption' %} active {% endif %}"
+                       href="{{ url_for('user_view.user_consumption') }}">消费记录</a></li>
+            </ul>
         </div>
-           <ul>
-               <li> <h4>vip会员</h4><h4>2014-7-30</h4><h4>2014-10-30</h4><h6>立即激活</h6></li>
-               <li> <h4>vip会员</h4><h4>2014-7-30</h4><h4>2014-10-30</h4><h6>立即激活</h6></li>
-               <li> <h4>vip会员</h4><h4>2014-7-30</h4><h4>2014-10-30</h4><h6>立即激活</h6></li>
-               <li> <h4>vip会员</h4><h4>2014-7-30</h4><h4>2014-10-30</h4><h6>立即激活</h6></li>
-               </ul>
-       </div>
-   </div>
-
+        <div class="userinfo-right">
+            <div class="userinfo-right-top">
+                {% block userinfo_right_top %}
+                {% endblock %}
+            </div>
+            {% block userinfo_content %}
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}
 
 {% block js %}
-<script src="{{ 'user_info.js' | asset }}"></script>
+    <script src="{{ 'user_info.js' | asset }}"></script>
 {% endblock %}

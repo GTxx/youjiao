@@ -1,36 +1,58 @@
 {% extends 'user/info_base.html' %}
-{% block profile_avatar_modify_password %}
-<ul>
-    <form action="" method="post" id="user-profile-form">
-        {{ form.hidden_tag() }}
-        <li>
-            <span>昵称:</span><input type="text" value="{{ form.nickname.data or '' }}"
-                                   name="nickname"/>
-            <div class="form-invalid">{{ render_error(form.nickname) }}</div>
-        </li>
-        <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data }}" name="work_place_name">
-            <div class="form-invalid">{{ render_error(form.work_place_name) }}</div>
-        </li>
-        <li><span>生日:</span><input type="text" value="{{ form.birthday.data }}" name="birthday">
-            <div class="form-invalid">{{ render_error(form.birthday) }}</div>
-        </li>
-        <li><span style="letter-spacing:20px;">性别</span>
-            {{ form.gender }}
-            <div class="form-invalid">{{ render_error(form.gender) }}</div>
-        </li>
-        <li><span style="letter-spacing:20px;">职业</span>
-            <input type="text" value="{{ form.career.data }}" name="career">
-            <div class="form-invalid">{{ render_error(form.career) }}</div>
-        </li>
-        <li><span style="letter-spacing:0px;">所在地区:</span><select>
-            <option>-省份-
-        </select><select>
-            <option>-城市-
-        </select><select>
-        <oiceselect></li>
-            <option>-县区-
-        </select></li>
-        <input type="submit" class="user-profile-submit" value="修改">
-    </form>
-</ul>
+
+{% block userinfo_right_top %}
+    <div>个人资料</div>
+    <ul>
+        <li><a class="{% if current_page.sub == 'info' %} active {% endif %}"
+               href="{{ url_for('user_view.user_profile') }}">基本资料</a></li>
+        <li><a href="#">头像设置</a></li>
+        <li><a class="{% if current_page.sub == 'password' %} active {% endif %}"
+               href="{{ url_for('user_view.modify_password') }}">密码修改</a></li>
+    </ul>
+{% endblock %}
+
+{% block userinfo_content %}
+    <div class="userinfo-content">
+        <ul>
+            <form action="" method="post" id="user-profile-form">
+                {{ form.hidden_tag() }}
+                <li>
+                    <span>昵称:</span><input type="text" value="{{ form.nickname.data or '' }}"
+                                           name="nickname"/>
+
+                    <div class="form-invalid">{{ render_error(form.nickname) }}</div>
+                </li>
+                <li><span>生日:</span><input type="text" value="{{ form.birthday.data }}" name="birthday">
+
+                    <div class="form-invalid">{{ render_error(form.birthday) }}</div>
+                </li>
+                <li><span>性别:</span>
+                    {{ form.gender }}
+                    <div class="form-invalid">{{ render_error(form.gender) }}</div>
+                </li>
+                <li><span>职业:</span>
+                    <input type="text" value="{{ form.career.data }}" name="career">
+
+                    <div class="form-invalid">{{ render_error(form.career) }}</div>
+                </li>
+                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data }}" name="work_place_name">
+
+                    <div class="form-invalid">{{ render_error(form.work_place_name) }}</div>
+                </li>
+                <li>
+                    <span>所在地区:</span>
+                    <select>
+                        <option>-省份-</option>
+                    </select>
+                    <select>
+                        <option>-城市-</option>
+                    </select>
+                    <select>
+                        <option>-县区-</option>
+                    </select>
+                </li>
+                <input type="submit" class="user-profile-submit" value="编辑资料">
+            </form>
+        </ul>
+    </div>
 {% endblock %}
