@@ -3,15 +3,22 @@ import 'main_css';
 import favor from '../../modules/favor.js';
 
 $(function () {
+    $('.product-collection').click(function () {
+        var obj_id = location.href.split('/').slice(-1)[0];
+        var obj_type = 'book';
+        favor(obj_id, obj_type);
+    });
+
     $(".p-s-imglist").click(function () {
         $(".s-img-active").removeClass("s-img-active");
         $(this).addClass("s-img-active");
         $('#samples-imgs-active').attr('src', $(this).children('img').attr('src'));
     });
 
-    var firstImg = $('.p-s-imglist').eq(0).children('img').attr('src');
+    let firstImg = $('.p-s-imglist').eq(0).children('img').attr('src');
     $('#samples-imgs-active').attr('src', firstImg);
     $(".p-s-imglist").eq(0).addClass("s-img-active");
+
     $('.book-switch').click(function () {
         let index = $(this).index();
         $('.active').removeClass('active');
@@ -40,12 +47,20 @@ $(function () {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({content: content}),
                 success: (data) => {
-                    console.log(data)
-                    alert(data)
+                    let username = $('.header-login-name').eq(0).text();
+                    let content = data.content;
+                    let commentString = '<li>' +
+                        '<div>' +
+                        '<img src="" alt="">' +
+                        '<h6>' + username + '</h6>' +
+                        '</div>' +
+                        '<span>' + content + '</span>' +
+                        '</li>';
+                    $('#book-content-list').append(commentString);
+                    $('#comment-textarea').val('');
                 },
                 fail: (data) => {
-                    console.log(data)
-                    alert(data)
+                    alert('评论失败，请稍候再试');
                 }
             })
         }

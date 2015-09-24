@@ -2,6 +2,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ 'courseware.css' | asset }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video-js.css') }}">
 {% endblock %}
 
 {% block leftBar %}
@@ -40,24 +41,69 @@
             </div>
             <div class="product-detail-comments">
                 <div class="detail-comment-title">
-                    <div class="book-detail-button">图书详情</div>
-                    <div>图书评论</div>
+                    <a href="javascript:;" class="book-switch active">课件详情</a>
+                    <a href="javascript:;" class="book-switch">课件评论</a>
                 </div>
-                <div class="courseware-comment-content">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+                <div>
+                    <div class="detail-comment-content courseware-detail-content">
+                        <img src="" alt="" id="courseware-simple-mainimg">
+
+                        <p>青花瓷PPT</p>
+
+                        <div class="courseware-audio">
+                            <h4>青花舞曲</h4>
+                            <audio src="http://7xlydq.com1.z0.glb.clouddn.com/test.mp3"></audio>
+                        </div>
+                        <div class="courseware-audio">
+                            <h4>青花舞曲</h4>
+                            <audio src="http://7xlydq.com1.z0.glb.clouddn.com/test.mp3"></audio>
+                        </div>
+                        <div class="video-detail-course">
+                            <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
+                                   width="760"
+                                   height="400" data-setup='{}'>
+                                <source src='http://7xlydq.com1.z0.glb.clouddn.com/qinghuaci.ogg' type='video/ogg'/>
+                            </video>
+                        </div>
+                        <p>新制作过程</p>
+                    </div>
+                    <div class="detail-comment-content display-none">
+                        <ul id="book-content-list">
+                            <li>
+                                <div>
+                                    <img src="#" alt="">
+                                    <h6>test</h6>
+                                </div>
+                                <span>fffffffff</span>
+                            </li>
+                        </ul>
+                        <ul class="comment-pagination">
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                        </ul>
+                        <textarea name="" id="comment-textarea" {% if not current_user.is_authenticated() %}
+                                  disabled {% endif %}>
+
+                        </textarea>
+                        <a href="javascript:;"
+                                {% if current_user.is_authenticated() %} id='book-publish-comment' {% endif %}
+                           class="book-publish-comment">发布</a>
+                    </div>
                 </div>
+
             </div>
             <div class="other-associate-courseware">
                 <p>其他课件相关</p>
+
                 <div>
                     <img src="" alt="">
+
                     <p>xxxxxxxxx</p>
                 </div>
                 <div>
                     <img src="" alt="">
+
                     <p>xxxxxxxxx</p>
                 </div>
             </div>
@@ -66,5 +112,13 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ 'courseware.js' | asset }}"></script>
+    <script src="{{ url_for('static', filename='vendor/js/audiojs/audio.min.js') }}"></script>
+    <script>
+        audiojs.events.ready(function () {
+            var as = audiojs.createAll();
+        });
+    </script>
+    <script src="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/videojs-ie8/dist/videojs-ie8.min.js') }}"></script>
+    <script src="{{ 'courseware.js' | asset }}"></script>
 {% endblock %}

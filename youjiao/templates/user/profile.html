@@ -23,7 +23,8 @@
 
                     <div class="form-invalid">{{ render_error(form.nickname) }}</div>
                 </li>
-                <li><span>生日:</span><input id='birthday' type="text" value="{{ form.birthday.data or '' }}" name="birthday">
+                <li><span>生日:</span><input id='birthday' type="text" value="{{ form.birthday.data or '' }}"
+                                           name="birthday">
 
                     <div class="form-invalid">{{ render_error(form.birthday) }}</div>
                 </li>
@@ -32,20 +33,27 @@
                     <div class="form-invalid">{{ render_error(form.gender) }}</div>
                 </li>
                 <li><span>职业:</span>
-                    <input type="text" value="{{ form.career.data or ''}}" name="career">
+                    <input type="text" value="{{ form.career.data or '' }}" name="career">
 
                     <div class="form-invalid">{{ render_error(form.career) }}</div>
                 </li>
-                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data or ''}}" name="work_place_name">
+                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data or '' }}"
+                                             name="work_place_name">
 
                     <div class="form-invalid">{{ render_error(form.work_place_name) }}</div>
                 </li>
                 <li>
                     <span>所在地区:</span>
-                        <input type="text" name="province" value="{{ form.province.data or '' }}" placeholder="省份"/>
-                        <input type="text" name="city" value="{{ form.city.data or '' }}" placeholder="城市"/>
-                        <input type="text" name="district" value="{{ form.district.data or '' }}" placeholder="地区"/>
-                        <input type="text" name="street" value="{{ form.street.data or '' }}" placeholder="街道"/>
+                    <select style="float: left;" id="select-state" name="province">
+                        <option>{{ form.province.data or '-省份-' }}</option>
+                    </select>
+                    <select style="float: left;" id="select-city" name="district">
+                        <option>{{ form.district.data or '-城市-' }}</option>
+                    </select>
+                    <select style="float: left;" id="select-area" name="street">
+                        <option>{{ form.street.data or '-县区-' }}</option>
+                    </select>
+                    <input style="float: left;" type="text" name="street" value="{{ form.street.data or '' }}" placeholder="街道"/>
                 </li>
                 <input type="submit" class="user-profile-submit" value="编辑资料">
             </form>
