@@ -10,6 +10,7 @@ from wtforms.widgets import TextArea
 from flask import Markup, url_for, flash
 from ..extensions import admin, db
 from .models import Book, Courseware
+import json
 
 
 
@@ -60,11 +61,30 @@ class BookAdmin(AuthMixin, sqla.ModelView):
 
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
-class ContentField(TextAreaField):
+
+class JsonField(TextAreaField):
     widget = TextArea()
+
+    def _value(self):
+        if self.data:
+            return json.dumps(self.data)
+        else:
+            return u''
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            try:
+                import ipdb; ipdb.set_trace()
+                self.data = json.loads(valuelist[0].replace('\r\n', ''))
+            except Exception as e:
+                raise ValueError(str(e))
+        else:
+            self.data = {}
 
 
 class CoursewareAdmin(AuthMixin, sqla.ModelView):
+
+    column_default_sort = 'id'
 
     def is_accessible(self):
         if not current_user.is_authenticated():
@@ -75,7 +95,7 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
 
     def scaffold_form(self):
         form_class = super(CoursewareAdmin, self).scaffold_form()
-        form_class.content = TextAreaField('content')
+        form_class.content = JsonField('content')
         return form_class
 
 

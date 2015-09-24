@@ -17,11 +17,11 @@
         <div>
             <div class="product-container">
                 <div class="samples-imgs">
-                    <img src="" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
+                    <img src="{{ courseware.book.cover }}" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
                 </div>
                 <div class="product-info">
                     <div class="product-title">
-                        <h3>清凉一夏</h3><span>幼儿园大班上册 1-5</span>
+                        <h3>{{ courseware.book.name }}</h3><span>{{ courseware.book.level }}</span>
                     </div>
                     <table>
                         <tr>
@@ -35,7 +35,7 @@
                     </table>
                     <div class="product-button">
                         <div class="product-collection">点击下载</div>
-                        <div class="product-associate">关联教材</div>
+                        <a href="{{ courseware.book.link }}"><div class="product-associate">关联教材</div></a>
                     </div>
                 </div>
             </div>
@@ -49,23 +49,23 @@
                         <img src="" alt="" id="courseware-simple-mainimg">
 
                         <p>青花瓷PPT</p>
+                        {% for audio in courseware.content.get('audio_list') %}
+                        <div class="courseware-audio">
+                            <h4>{{ audio.name }}</h4>
+                            <audio src="{{ audio.url }}"></audio>
+                        </div>
+                        {% endfor %}
 
-                        <div class="courseware-audio">
-                            <h4>青花舞曲</h4>
-                            <audio src="http://7xlydq.com1.z0.glb.clouddn.com/test.mp3"></audio>
-                        </div>
-                        <div class="courseware-audio">
-                            <h4>青花舞曲</h4>
-                            <audio src="http://7xlydq.com1.z0.glb.clouddn.com/test.mp3"></audio>
-                        </div>
+                        {% for video in courseware.content.get('video_list') %}
                         <div class="video-detail-course">
                             <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
                                    width="760"
                                    height="400" data-setup='{}'>
-                                <source src='http://7xlydq.com1.z0.glb.clouddn.com/qinghuaci.ogg' type='video/ogg'/>
+                                <source src='{{ video.url }}' type='video/ogg'/>
                             </video>
                         </div>
-                        <p>新制作过程</p>
+                        <p>{{ video.name }}</p>
+                        {% endfor %}
                     </div>
                     <div class="detail-comment-content display-none">
                         <ul id="book-content-list">

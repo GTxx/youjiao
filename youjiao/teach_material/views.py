@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from flask import Blueprint, render_template, abort
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_
-from .models import Book
+from .models import Book, Courseware
 from .permissions import book_preview_permission
 
 book_bp = Blueprint("book_view", __name__)
@@ -48,3 +48,28 @@ def book_detail(book_id):
              Comment.comment_obj_id == book.id)).paginate(1)
     return render_template('book/detail.html', book=book,
                            page_comment=page_comment)
+
+@book_bp.route('/courseware/')
+def courseware():
+    courseware_list = Courseware.query.all()
+    return render_template('courseware/home.html', current_page='courseware',
+                           courseware_list=courseware_list)
+
+
+@book_bp.route('/courseware/<int:courseware_id>/')
+def courseware_detail(courseware_id):
+    courseware = Courseware.query.get(courseware_id)
+    return render_template('courseware/detail.html', current_page='courseware',
+                           courseware=courseware)
+
+
+@book_bp.route('/courseware/list/')
+def courseware_list():
+    return render_template('courseware/list.html', current_page='courseware')
+
+
+@book_bp.route('/courseware/sub/')
+def courseware_sub():
+    top10 = Courseware.top10()
+    return render_template('courseware/sub_node.html', current_page='courseware',
+                           top10=top10)

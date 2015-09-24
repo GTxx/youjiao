@@ -79,24 +79,7 @@ def school_teacher_detail():
     return render_template('school/video_detail.html', current_page='school')
 
 
-@content_bp.route('/courseware/')
-def courseware():
-    return render_template('courseware/home.html', current_page='courseware')
 
-
-@content_bp.route('/courseware/detail/')
-def courseware_detail():
-    return render_template('courseware/detail.html', current_page='courseware')
-
-
-@content_bp.route('/courseware/list/')
-def courseware_list():
-    return render_template('courseware/list.html', current_page='courseware')
-
-
-@content_bp.route('/courseware/sub/')
-def courseware_sub():
-    return render_template('courseware/sub_node.html', current_page='courseware')
 
 
 @content_bp.route('/research/home/')

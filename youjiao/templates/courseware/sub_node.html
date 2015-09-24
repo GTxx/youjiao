@@ -49,42 +49,52 @@
             </div>
             <div class="rank-section-list">
                 <div class="rank-each-list-1">
-                    {% for i in range(2) %}
+                    {% for i in range(1, 3) %}
                         <div class="rank-each-item">
-                            <a href="">
+                            <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
-                                <h4>1.幼教英语</h4>
+                                <h4>{{i}}.{{ top10[i].book.name }}</h4>
                             </a>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="rank-each-list">
-                    {% for i in range(4) %}
+                    {% for i in range(3, 7) %}
                         <div class="rank-each-item">
-                            <a href="">
+                            <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
-
                                 <div>
-                                    <h4>2.幼教英语</h4>
-                                    <h5>xxxxxx</h5>
+                                    <h4>{{ i }}.{{ top10[i].book.name }}</h4>
+                                    <h5>{{ top10[i].book.name }}</h5>
                                 </div>
                             </a>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="rank-each-list">
-                    {% for i in range(4) %}
+                    {% for i in range(7, 10) %}
                         <div class="rank-each-item">
-                            <a href="">
+                            <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
-
                                 <div>
-                                    <h4>3.幼教英语</h4>
-                                    <h5>xxxxxx</h5>
+                                    <h4>{{ i }}.{{ top10[i].book.name }}</h4>
+                                    <h5>{{ top10[i].book.name }}</h5>
                                 </div>
                             </a>
                         </div>
                     {% endfor %}
+                    <!--{% for i in range(4) %}-->
+                        <!--<div class="rank-each-item">-->
+                            <!--<a href="">-->
+                                <!--<img src="" alt="">-->
+
+                                <!--<div>-->
+                                    <!--<h4>3.幼教英语</h4>-->
+                                    <!--<h5>xxxxxx</h5>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--{% endfor %}-->
                 </div>
             </div>
         </div>

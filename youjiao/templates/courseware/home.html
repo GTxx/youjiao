@@ -26,9 +26,9 @@
                 <div class="section-block-title-6">教材配套课件</div>
             </div>
             <ul class="video-section-list">
-                {% for i in range(6) %}
+                {% for courseware in courseware_list %}
                     <li>
-                        <a href="/courseware/detail/">
+                        <a href="{{ courseware.link }}">
                             <div class="v-image-wrapper">
                                 <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
@@ -36,35 +36,35 @@
                                     <div class="v-hover-layer-icon"></div>
                                 </div>
                             </div>
-                            <h5>青花瓷</h5>
-                            <a href="" class="start-download">开始下载</a>
+                            <h5>{{ courseware.book.name }}</h5>
+                            <a href="{{ courseware.link }}" class="start-download">开始下载</a>
                         </a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="video-section-b">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-6">其他课件资源</div>
-            </div>
-            <ul class="video-section-list">
-                {% for i in range(6) %}
-                    <li>
-                        <a href="/courseware/detail/">
-                            <div class="v-image-wrapper">
-                                <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+        <!--<div class="video-section-b">-->
+            <!--<div class="section-block-wrapper">-->
+                <!--<div class="section-block-title-6">其他课件资源</div>-->
+            <!--</div>-->
+            <!--<ul class="video-section-list">-->
+                <!--{% for i in range(6) %}-->
+                    <!--<li>-->
+                        <!--<a href="/courseware/detail/">-->
+                            <!--<div class="v-image-wrapper">-->
+                                <!--<img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">-->
 
-                                <div class="v-image-hover-layer">
-                                    <div class="v-hover-layer-icon"></div>
-                                </div>
-                            </div>
-                            <h5>青花瓷</h5>
-                            <a href="" class="start-download">开始下载</a>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+                                <!--<div class="v-image-hover-layer">-->
+                                    <!--<div class="v-hover-layer-icon"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<h5>青花瓷</h5>-->
+                            <!--<a href="" class="start-download">开始下载</a>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--{% endfor %}-->
+            <!--</ul>-->
+        <!--</div>-->
     </div>
 {% endblock %}
 

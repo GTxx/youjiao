@@ -59,3 +59,16 @@ class Courseware(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     content = db.Column(JSON)
+    # publish = db.Column(sqla.Boolean, default=True)
+
+    @classmethod
+    def top10(cls):
+        return cls.query.limit(10)
+
+    def comment(self):
+        return Comment.query.filter_by(
+            comment_obj_type='courseware').filter_by(comment_obj_id=self.id)
+
+    @property
+    def link(self):
+        return url_for('book_view.courseware_detail', courseware_id=self.id)
