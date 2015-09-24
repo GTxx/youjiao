@@ -12,7 +12,8 @@ var entry = {
     school: path.resolve(dirname, 'school.js'),
     user_info: path.resolve(dirname, 'user_info.js'),
     video_detail: path.resolve(dirname, 'video_detail.js'),
-    book_detail: path.resolve(dirname, 'book/detail.js')
+    book_detail: path.resolve(dirname, 'book/detail.js'),
+    book_upload: path.resolve(dirname, 'book/upload.js')
 };
 
 module.exports = entry;

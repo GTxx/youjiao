@@ -313,10 +313,41 @@
   min-width: 918px
   min-height: 80px
   margin-top: 40px
-#book-publish-comment
+.book-publish-comment
   +big-button(80px)
   float: right
   margin-right: 10px
+.comment-pagination
+  display: table
+  margin: 20px auto 56px
+  +clear-float
+  =active
+    border: 1px solid $youjiao-font-pink
+    background: $youjiao-font-pink
+    a
+      color: white
+  li
+    text-align: center
+    box-sizing: border-box
+    border: 1px solid $gray-a3
+    color: $gray-a3
+    width: 20px
+    height: 20px !important
+    line-height: 20px !important
+    border-radius: 4px
+    float: left
+    margin: 0 8px
+    padding-top: 0 !important
+    min-height: 20px !important
+    a
+      display: inline-block
+      width: 100%
+      color: $gray-a3
+    &:hover
+      +active
+  .pagination-active
+    +active
+
 
 .product-s-slides-main
   +clear-float
@@ -336,10 +367,23 @@
     height: 240px
     background: #CCCCCC
 
+.courseware-detail-content
+  text-align: center
+  p
+    line-height: 46px
+
+#courseware-simple-mainimg
+  width: 860px
+  height: 450px
+  background: #CCCCCC
+  margin: 0 auto
+.video-detail-course
+  width: 760px
+  margin: 40px auto 0
+
 .other-associate-courseware
   box-sizing: border-box
   padding: 30px 20px
-  border: 1px solid #CCCCCC
   +clear-float
   div
     float: left
@@ -384,8 +428,8 @@
     text-align: justify
 
   .video-detail-v
-    width: 572px
-    height: 322px
+    width: 760px
+    height: 400px
     margin: 0 auto
     margin-top: 60px
     background: #CCCCCC
@@ -557,3 +601,8 @@
   h6
     text-align: center
     color: $font-gray-light
+
+.courseware-audio
+  margin-top: 20px
+.audiojs
+  margin: 0 auto
