@@ -79,7 +79,7 @@
                         {% endfor %}
                     </div>
                     <div class="detail-comment-content display-none">
-                        <ul>
+                        <ul id="book-content-list">
                             {% for comment in page_comment.items %}
                                 <li>
                                     <div>
@@ -90,15 +90,21 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                        <textarea name="" id="comment-textarea">
+                        <ul class="comment-pagination">
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                        </ul>
+                        <textarea name="" id="comment-textarea"  {% if not current_user.is_authenticated() %} disabled {% endif %}>
 
                         </textarea>
-                        <a href="javascript:;" id='book-publish-comment'>发布</a>
+                        <a href="javascript:;"
+                                {% if current_user.is_authenticated() %} id='book-publish-comment' {% endif %}
+                           class="book-publish-comment">发布</a>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}
 

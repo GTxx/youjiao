@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'book_upload.css' | asset }}">
+{% endblock %}
+
+{% block content %}
+    <div id="main-page-body">
+        <div class="e-page-title" style="margin-top: -4px;margin-bottom: 4px;">上传</div>
+        <div id="container"></div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'book_upload.js' | asset }}"></script>
+{% endblock %}

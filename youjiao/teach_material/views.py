@@ -20,6 +20,11 @@ def book():
                            read_book_list=read_book_list, Book=Book)
 
 
+@book_bp.route('/book/upload')
+def book_upload():
+    return render_template('book/upload.html')
+
+
 @book_bp.route('/book/<category>')
 def book_category(category):
     if category == 'teach_book':
@@ -39,7 +44,7 @@ def book_category(category):
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
     page_comment = Comment.query.filter(
-        and_(Comment.comment_obj_type=='book',
-             Comment.comment_obj_id==book.id)).paginate(1)
+        and_(Comment.comment_obj_type == 'book',
+             Comment.comment_obj_id == book.id)).paginate(1)
     return render_template('book/detail.html', book=book,
                            page_comment=page_comment)
