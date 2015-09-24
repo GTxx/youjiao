@@ -1,5 +1,4 @@
 $(function () {
-
     $(".rslides").responsiveSlides({
         auto: true,
         pager: true

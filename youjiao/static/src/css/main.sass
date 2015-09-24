@@ -317,6 +317,37 @@
   +big-button(80px)
   float: right
   margin-right: 10px
+.comment-pagination
+  display: table
+  margin: 20px auto 56px
+  +clear-float
+  =active
+    border: 1px solid $youjiao-font-pink
+    background: $youjiao-font-pink
+    a
+      color: white
+  li
+    text-align: center
+    box-sizing: border-box
+    border: 1px solid $gray-a3
+    color: $gray-a3
+    width: 20px
+    height: 20px !important
+    line-height: 20px !important
+    border-radius: 4px
+    float: left
+    margin: 0 8px
+    padding-top: 0 !important
+    min-height: 20px !important
+    a
+      display: inline-block
+      width: 100%
+      color: $gray-a3
+    &:hover
+      +active
+  .pagination-active
+    +active
+
 
 .product-s-slides-main
   +clear-float
