@@ -5,13 +5,15 @@ from flask import Blueprint, render_template, abort
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_
 from .models import Book
+from .permissions import book_preview_permission
 
 book_bp = Blueprint("book_view", __name__)
 
 
 @book_bp.route('/book')
 def book():
-    teach_book_list = Book.query.filter_by(category=u'幼教教材').limit(9)
+    teach_book_list = Book.query.filter(
+        and_(Book.category==u'幼教教材', Book.publish==True)).limit(9)
     read_book_list = Book.query.filter_by(category=u'幼教读物').limit(9)
     # import ipdb; ipdb.set_trace()
     return render_template('book/home.html', teach_book_list=teach_book_list,
@@ -33,6 +35,7 @@ def book_category(category):
 
 
 @book_bp.route('/book/<int:book_id>')
+@book_preview_permission.require(http_exception=404)
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
     page_comment = Comment.query.filter(
