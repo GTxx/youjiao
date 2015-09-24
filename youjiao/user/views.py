@@ -101,7 +101,7 @@ def refresh_captcha():
 @login_required
 def user_favor():
     from youjiao.user_util.models import Favor
-    from youjiao.book.models import Book
+    from youjiao.teach_material.models import Book
     from sqlalchemy import and_
     favor_book = Favor.query.filter(and_(Favor.user_id==current_user.id, Favor.obj_type=='book')).with_entities(Favor.obj_id).all()
     book_list = Book.query.filter(Book.id.in_(favor_book))

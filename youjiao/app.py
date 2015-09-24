@@ -28,10 +28,10 @@ from .content.models import Activity
 from .content.views import content_bp
 
 # book
-from .book.admin import BookAdmin
-from .book.models import Book
-from .book.views import book_bp
-from .book.api import book_api_bp
+from .teach_material.admin import BookAdmin
+from .teach_material.models import Book, Courseware
+from .teach_material.views import book_bp
+from .teach_material.api import book_api_bp
 
 # user util
 from .user_util.models import Favor

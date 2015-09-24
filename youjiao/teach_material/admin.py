@@ -16,8 +16,17 @@ class BookAdmin(AuthMixin, sqla.ModelView):
             # return False
         return True
 
+class CoursewareAdmin(AuthMixin, sqla.ModelView):
+    def is_accessible(self):
+        if not current_user.is_authenticated():
+            return False
+        # if not book_edit_permission.can():
+            # return False
+        return True
+
 
 from ..extensions import admin, db
-from .models import Book
+from .models import Book, Courseware
 
 admin.add_view(BookAdmin(Book, db.session))
+admin.add_view(CoursewareAdmin(Courseware, db.session))

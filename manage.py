@@ -42,7 +42,7 @@ def create_table_init_db():
         create_common_user('jiyu', '111111', 'jiyu@1.com')
         create_common_user('quwenyu', '111111', 'quwenyu@1.com')
         from youjiao.test_data import book_list, activity_list
-        from youjiao.book.models import Book
+        from youjiao.teach_material.models import Book
         from youjiao.content.models import Activity
         for book in book_list:
             b = Book(**book._asdict())

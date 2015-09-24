@@ -34,7 +34,7 @@ class Favor(CRUDMixin, db.Model):
 
     @property
     def favor_model(self):
-        from youjiao.book.models import Book
+        from youjiao.teach_material.models import Book
         if self.obj_type == 'book':
             return Book
         else:

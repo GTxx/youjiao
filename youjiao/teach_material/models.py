@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from youjiao.extensions import db
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY, JSON
 from youjiao.user_util.models import Comment
 from flask import url_for
 
@@ -22,6 +22,8 @@ class Book(db.Model, CRUDMixin):
     publish = db.Column(sqla.Boolean, default=False)
     image_array = db.Column(ARRAY(sqla.String(255)))
     preview_array = db.Column(ARRAY(sqla.String(255)))
+
+    coursewares = db.relationship('Courseware', backref='book')
 
     @classmethod
     def read_book_top10(cls):
@@ -49,4 +51,11 @@ class Book(db.Model, CRUDMixin):
     def comment(self, page=0):
         return Comment.query.filter_by(comment_obj_type='book').filter_by(comment_obj_id=self.id)
 
+    def __repr__(self):
+        return u'<Book: {} {}>'.format(self.name, self.level)
 
+
+class Courseware(db.Model, CRUDMixin):
+    id = db.Column(sqla.Integer, primary_key=True)
+    book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
+    content = db.Column(JSON)
