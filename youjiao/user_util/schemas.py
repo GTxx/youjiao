@@ -18,3 +18,12 @@ class FavorSchema(Schema):
     def validate_obj_id_exist(self, data):
         # TODO: validate if obj exist
         pass
+
+
+class CommentSchema(Schema):
+    id = fields.Integer()
+    create_time = fields.DateTime()
+    user_id = fields.Integer()
+    comment_obj_id = fields.Integer()
+    comment_obj_type = fields.String()
+    content = fields.String()

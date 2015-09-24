@@ -2,6 +2,7 @@ from flask_restful import Resource, Api
 from flask import Blueprint, views, request, jsonify
 from flask_login import login_required, current_user
 from .models import Book
+from youjiao.user_util.schemas import CommentSchema
 from youjiao.user_util.models import Comment
 
 book_api_bp = Blueprint('book_api_bp', __name__)
@@ -26,8 +27,8 @@ class BookCommentView(views.MethodView):
         comment = Comment(user_id=current_user.id, comment_obj_id=book.id,
                 comment_obj_type='book', content=content)
         comment.save()
-        comment.__dict__.pop('_sa_instance_state')
-        return jsonify(**comment.__dict__), 201
+        res = CommentSchema().dump(comment)
+        return jsonify(res.data), 201
 
 
 book_api_bp.add_url_rule('/api/book/<int:id>/comment', view_func=BookCommentView.as_view('book_comment'), endpoint='book_comment')
