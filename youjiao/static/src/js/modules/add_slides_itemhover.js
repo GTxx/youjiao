@@ -4,6 +4,19 @@ $(function () {
         pager: true
     });
 
+    $(".rslides").find("img").each(function(){
+        let ratio = $(".rslides").parent().width() / $(".rslides").parent().height();
+        if ($(this).width()/$(this).height() < ratio)
+            $(this).height($(".rslides").parent().height() + 'px');
+        else
+            $(this).width($(".rslides").parent().width() + 'px');
+
+        if($(this).height() < $(".rslides").parent().height()) {
+            let marginTop = ($(".rslides").parent().height() - $(this).height()) / 2;
+            $(this).css('marginTop', marginTop);
+        }
+    });
+
     function mouseOverAndOut(target, activeClass) {
         $(target).mouseenter(function () {
             $(this).addClass(activeClass);
