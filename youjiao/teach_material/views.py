@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, abort, request
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_
 from .models import Book, Courseware
-from .permissions import book_preview_permission
+from .permissions import book_preview_permission, courseware_preview_permission
 
 book_bp = Blueprint("book_view", __name__)
 
@@ -29,10 +29,11 @@ def book_upload():
 def book_category(category):
     if category == 'teach_book':
         level = request.args.get('level')
+        # import ipdb; ipdb.set_trace()
         if not level:
             book_list = Book.query.filter(
                 and_(Book.category==u'幼教教材')).limit(9)
-        if level == u'小班':
+        elif level == u'小班':
             book_list = Book.query.filter(
                 and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
         elif level == u'中班':
@@ -54,9 +55,10 @@ def book_category(category):
 
 
 @book_bp.route('/book/<int:book_id>')
-@book_preview_permission.require(http_exception=404)
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
+    if not book.publish and not book_preview_permission.can():
+        abort(404)
     page_comment = Comment.query.filter(
         and_(Comment.comment_obj_type == 'book',
              Comment.comment_obj_id == book.id)).paginate(1)
@@ -74,6 +76,8 @@ def courseware():
 @book_bp.route('/courseware/<int:courseware_id>/')
 def courseware_detail(courseware_id):
     courseware = Courseware.query.get(courseware_id)
+    if not courseware.publish and not courseware_preview_permission.can():
+        abort(404)
     return render_template('courseware/detail.html', current_page='courseware',
                            courseware=courseware)
 

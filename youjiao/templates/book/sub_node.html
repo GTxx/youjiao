@@ -1,114 +1,127 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ 'product.css' | asset }}">
+<link rel="stylesheet" href="{{ 'product.css' | asset }}">
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'book/left_bar.html' %}
+{% include 'book/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
-    <div id="main-home-body">
-        <div class="e-page-title">产品展示-幼教教材</div>
-        <div class="product-s-slides">
-            <div class="product-s-slides-main">
-                <ul class="rslides">
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg" style="width: 976px;height: 320px;"
-                             alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg" style="width: 976px;height: 320px;"
-                             alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg" style="width: 976px;height: 320px;"
-                             alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg" style="width: 976px;height: 320px;"
-                             alt=""></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg" style="width: 976px;height: 320px;"
-                             alt=""></li>
-                </ul>
-            </div>
-        </div>
-        <div class="n-v-section-b">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-6">幼教图书分类</div>
-            </div>
-            <ul class="n-v-section-list">
-                {% for book in book_list %}
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
-                            <div class="nv-image-wrapper">
-                                <!--<img src="{{ '%s%s.jpg?imageView2/2/w/400'|format('http://7xj2zj.com2.z0.glb.qiniucdn.com/', i) }}" alt="">-->
-                                <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}" alt="">
-
-                                <div class="nv-image-hover-layer"></div>
-                                <div class="nv-price">{{ book.price }}/套</div>
-                            </div>
-                            <h5>{{ book.name }}</h5>
-                            <h6>{{ book.level }}</h6>
-                        </a>
-                    </li>
-                {% endfor %}
+<div id="main-home-body">
+    <div class="e-page-title">产品展示-幼教教材</div>
+    <div class="product-s-slides">
+        <div class="product-s-slides-main">
+            <ul class="rslides">
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg"
+                         style="width: 976px;height: 320px;"
+                         alt=""></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg"
+                         style="width: 976px;height: 320px;"
+                         alt=""></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg"
+                         style="width: 976px;height: 320px;"
+                         alt=""></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg"
+                         style="width: 976px;height: 320px;"
+                         alt=""></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg"
+                         style="width: 976px;height: 320px;"
+                         alt=""></li>
             </ul>
         </div>
-        <div class="rank-section">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-7">幼教教材排行榜</div>
+    </div>
+    <div class="n-v-section-b">
+        <div class="section-block-wrapper">
+            <div class="section-block-title-4">幼教教材</div>
+            <div class="classes-select-wrapper">
+                <select name="" id="" class="classes-select">
+                    <option value="">幼小衔接班</a></option>
+                    <option value="">小班</option>
+                    <option value="">中班</option>
+                    <option value="">大班</option>
+                </select>
             </div>
-            <div class="rank-section-list">
-                <div class="product-rank-list product-rank-list-1">
-                    <a href="{{ top10[0].link }}">
-                        <img src="{{ top10[0].cover }}" alt="">
+        </div>
+        <ul class="n-v-section-list">
+            {% for book in book_list %}
+            <li>
+                <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
+                    <div class="nv-image-wrapper">
+                        <img src="{{ '%s?imageView2/2/w/400'|format(book.cover) }}"
+                             alt="">
 
-                        <h4>1.{{ top10[0].name }}</h4>
-                        <h5>{{ top10[0].level }}</h5>
+                        <div class="nv-image-hover-layer"></div>
+                        <div class="nv-price">{{ book.price }}/套</div>
+                    </div>
+                    <h5>{{ book.name }}</h5>
+                    <h6>{{ book.level }}</h6>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="rank-section">
+        <div class="section-block-wrapper">
+            <div class="section-block-title-7">幼教教材排行榜</div>
+        </div>
+        <div class="rank-section-list">
+            <div class="product-rank-list product-rank-list-1">
+                <a href="{{ top10[0].link }}">
+                    <img src="{{ top10[0].cover }}" alt="">
+
+                    <h4>1.{{ top10[0].name }}</h4>
+                    <h5>{{ top10[0].level }}</h5>
+                </a>
+            </div>
+            <div class="product-rank-list">
+                {% for i in range(2, 5) %}
+                <div class="product-rank-item">
+                    <a href="{{ top10[i].link }}">
+                        <img src="{{ top10[i].cover }}" alt="">
+
+                        <div>
+                            <h4>{{ i }}.{{ top10[i].name }}</h4>
+                            <h5>{{ top10[i].level }}</h5>
+                        </div>
                     </a>
                 </div>
-                <div class="product-rank-list">
-                    {% for i in range(2, 5) %}
-                        <div class="product-rank-item">
-                            <a href="{{ top10[i].link }}">
-                                <img src="{{ top10[i].cover }}" alt="">
+                {% endfor %}
+            </div>
+            <div class="product-rank-list">
+                {% for i in range(5, 8) %}
+                <div class="product-rank-item">
+                    <a href="javascript:;">
+                        <img src="{{ top10[i].cover }}" alt="">
 
-                                <div>
-                                    <h4>{{ i }}.{{ top10[i].name }}</h4>
-                                    <h5>{{ top10[i].level }}</h5>
-                                </div>
-                            </a>
+                        <div>
+                            <h4>{{ i }}.{{ top10[i].name }}</h4>
+                            <h5>{{ top10[i].level }}</h5>
                         </div>
-                    {% endfor %}
+                    </a>
                 </div>
-                <div class="product-rank-list">
-                    {% for i in range(5, 8) %}
-                        <div class="product-rank-item">
-                            <a href="javascript:;">
-                                <img src="{{ top10[i].cover }}" alt="">
+                {% endfor %}
+            </div>
+            <div class="product-rank-list">
+                {% for i in range(8, 10) %}
+                <div class="product-rank-item">
+                    <a href="javascript:;">
+                        <img src="{{ top10[i].cover }}" alt="">
 
-                                <div>
-                                    <h4>{{ i }}.{{ top10[i].name }}</h4>
-                                    <h5>{{ top10[i].level }}</h5>
-                                </div>
-                            </a>
+                        <div>
+                            <h4>{{ i }}.{{ top10[i].name }}</h4>
+                            <h5>{{ top10[i].level }}</h5>
                         </div>
-                    {% endfor %}
+                    </a>
                 </div>
-                <div class="product-rank-list">
-                    {% for i in range(8, 10) %}
-                        <div class="product-rank-item">
-                            <a href="javascript:;">
-                                <img src="{{ top10[i].cover }}" alt="">
-
-                                <div>
-                                    <h4>{{ i }}.{{ top10[i].name }}</h4>
-                                    <h5>{{ top10[i].level }}</h5>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block js %}
-    <script src="{{ 'product.js' | asset }}"></script>
+<script src="{{ 'product.js' | asset }}"></script>
 {% endblock %}

@@ -74,7 +74,7 @@ class JsonField(TextAreaField):
     def process_formdata(self, valuelist):
         if valuelist:
             try:
-                import ipdb; ipdb.set_trace()
+                # import ipdb; ipdb.set_trace()
                 self.data = json.loads(valuelist[0].replace('\r\n', ''))
             except Exception as e:
                 raise ValueError(str(e))

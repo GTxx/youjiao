@@ -17,7 +17,7 @@ class Book(db.Model, CRUDMixin):
     executive_editor = db.Column(sqla.String(16))
     publisher = db.Column(sqla.String(16))
     book_size = db.Column(sqla.Enum(u'16开', name='book_size'))
-    level = db.Column(sqla.Enum(u'小班', u'中班', u'大班', name='level'))
+    level = db.Column(sqla.Enum(u'幼小衔接班', u'小班', u'中班', u'大班', name='level'))
     category = db.Column(sqla.Enum(u'幼教教材', u'幼教读物', name='book_category'))
     price = db.Column(sqla.Numeric(10, 2), default=30)
     publish = db.Column(sqla.Boolean, default=False)
@@ -60,7 +60,7 @@ class Courseware(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     content = db.Column(JSON)
-    # publish = db.Column(sqla.Boolean, default=True)
+    publish = db.Column(sqla.Boolean, default=False)
 
     @classmethod
     def top10(cls):

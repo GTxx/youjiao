@@ -17,17 +17,23 @@ import json
 
 class AlbumAdmin(AuthMixin, sqla.ModelView):
 
-    # def _preview_formatter(view, context, model, name):
-    #     return Markup(
-    #         "<a href='%s'>%s</a>" % (
-    #             url_for('book_view.book_detail', book_id=model.id),
-    #             model.name
-    #         )
-    #     ) if model.name else "book"
+    column_filters = ('name', )
 
-    # column_formatters = {
-    #     'preview': _preview_formatter
-    # }
+    def _preview_formatter(view, context, model, name):
+        img_content = ''.join(
+            ["<img src={} />".format(photo.thumbnail)
+             for photo in model.photos]
+        )
+        url_content = ''.join(
+            ["<p>{}</p>".format(photo.url)
+             for photo in model.photos]
+        )
+
+        return Markup(img_content+url_content)
+
+    column_formatters = {
+        'preview': _preview_formatter
+    }
     # column_exclude_list = ('image_array', 'preview_array')
 
     def is_accessible(self):
@@ -37,12 +43,11 @@ class AlbumAdmin(AuthMixin, sqla.ModelView):
         #     return False
         return True
 
-
-    # def scaffold_list_columns(self):
-    #     columns = super(BookAdmin, self).scaffold_list_columns()
-    #     # import ipdb; ipdb.set_trace()
-    #     columns.append('preview')
-    #     return columns
+    def scaffold_list_columns(self):
+        columns = super(AlbumAdmin, self).scaffold_list_columns()
+        # import ipdb; ipdb.set_trace()
+        columns.append('preview')
+        return columns
 
     # @action('approve', 'Approve', 'Are you sure you want to approve selected users?')
     # def action_approve(self, ids):
@@ -106,7 +111,7 @@ class QiniuImageUploadField(ImageUploadField):
         return filename
 
     def generate_name(self, obj, file_data):
-        name = super(QiniuImageUploadInput, self).generate_name(obj, file_data)
+        name = super(QiniuImageUploadField, self).generate_name(obj, file_data)
         return unicode(uuid4()) + '/' + name
 
 
@@ -126,10 +131,18 @@ class PhotoAdmin(AuthMixin, sqla.ModelView):
         'qiniu_key': QiniuImageUploadField('Image')
     }
     #
-    # def scaffold_form(self):
-    #     form_class = super(CoursewareAdmin, self).scaffold_form()
-    #     form_class.content = JsonField('content')
-    #     return form_class
+    def scaffold_list_columns(self):
+        columns = super(PhotoAdmin, self).scaffold_list_columns()
+        # import ipdb; ipdb.set_trace()
+        columns.append('preview')
+        return columns
+
+    def _preview_formatter(view, context, model, name):
+        return Markup("<img src={} /><p>{}</p>".format(model.thumbnail, model.url))
+
+    column_formatters = {
+        'preview': _preview_formatter
+    }
 
 
 admin.add_view(PhotoAdmin(Photo, db.session))
