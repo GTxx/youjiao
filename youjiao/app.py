@@ -12,7 +12,7 @@ from flask_migrate import Migrate, MigrateCommand
 from .config import Config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
-from .extensions import db, limiter, admin, redis_cli
+from .extensions import db, limiter, admin, redis_cli, qiniu
 from .utils.csrf import check_csrf
 
 # user
@@ -36,6 +36,10 @@ from .teach_material.api import book_api_bp
 # user util
 from .user_util.models import Favor
 from .user_util.api import user_util_api_bp
+
+# photo
+from .photo.models import Photo, Album
+from .photo.admin import AlbumAdmin
 
 import os
 import json
@@ -83,6 +87,9 @@ def create_app():
 
     # flask_limiter
     limiter.init_app(app)
+
+    # flask_qiniu
+    qiniu.init_app(app)
 
     # flask_admin
     # admin = Admin(app, template_mode='bootstrap3')

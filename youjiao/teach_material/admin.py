@@ -4,7 +4,7 @@ from flask_admin.actions import action
 from wtforms.widgets import TextArea
 from wtforms import TextAreaField
 from flask_login import current_user
-from .permissions import book_edit_permission
+from .permissions import book_edit_permission, courseware_edit_permission
 from ..admin_utils import AuthMixin
 from wtforms.widgets import TextArea
 from flask import Markup, url_for, flash
@@ -32,8 +32,8 @@ class BookAdmin(AuthMixin, sqla.ModelView):
     def is_accessible(self):
         if not current_user.is_authenticated():
             return False
-        # if not book_edit_permission.can():
-            # return False
+        if not book_edit_permission.can():
+            return False
         return True
 
 
@@ -89,8 +89,8 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
     def is_accessible(self):
         if not current_user.is_authenticated():
             return False
-        # if not book_edit_permission.can():
-            # return False
+        if not courseware_edit_permission.can():
+            return False
         return True
 
     def scaffold_form(self):

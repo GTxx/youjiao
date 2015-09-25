@@ -13,3 +13,4 @@ psycopg2
 flask-migrate
 wheezy.captcha
 Flask-Redis
+qiniu

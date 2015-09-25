@@ -88,6 +88,10 @@ def create_admin(name, password, email):
     if not role:
         role = Role('admin', 'admin role')
         role.save()
+    role = Role.query.filter_by(name='editor').first()
+    if not role:
+        role = Role('editor', 'editor role')
+        role.save()
     user.roles.append(role)
     user.save()
 
