@@ -18,44 +18,90 @@
             <form action="" method="post" id="user-profile-form">
                 {{ form.hidden_tag() }}
                 <li>
-                    <span>昵称:</span><input type="text" value="{{ form.nickname.data or '' }}"
-                                           name="nickname"/>
+                    <span>昵称:</span>
 
+                    <div class="userinfo-input-show">
+                        {{ form.nickname.data or '' }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        <input type="text" value="{{ form.nickname.data or '' }}"
+                               name="nickname"/>
+                    </div>
                     <div class="form-invalid">{{ render_error(form.nickname) }}</div>
                 </li>
-                <li><span>生日:</span><input id='birthday' type="text" value="{{ form.birthday.data or '' }}"
-                                           name="birthday">
+                {#                <li><span>生日:</span><input id='birthday' type="text" value="{{ form.birthday.data or '' }}"#}
+                {#                                           name="birthday">#}
+                <li><span>生日:</span>
 
+                    <div class="userinfo-input-show userinfo-input-dateshow">
+                        {{ form.birthday.data or '' }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        <div id='birthday_picker'></div>
+                    </div>
                     <div class="form-invalid">{{ render_error(form.birthday) }}</div>
                 </li>
                 <li><span>性别:</span>
-                    {{ form.gender }}
+
+                    <div class="userinfo-input-show">
+                        {{ form.gender }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        {{ form.gender }}
+                    </div>
                     <div class="form-invalid">{{ render_error(form.gender) }}</div>
                 </li>
                 <li><span>职业:</span>
-                    <input type="text" value="{{ form.career.data or '' }}" name="career">
 
+                    <div class="userinfo-input-show">
+                        {{ form.career.data or '' }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        <input type="text" value="{{ form.career.data or '' }}" name="career">
+                    </div>
                     <div class="form-invalid">{{ render_error(form.career) }}</div>
                 </li>
-                <li><span>工作单位:</span><input type="text" value="{{ form.work_place_name.data or '' }}"
-                                             name="work_place_name">
+                <li><span>工作单位:</span>
 
+                    <div class="userinfo-input-show">
+                        {{ form.work_place_name.data or '' }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        <input type="text" value="{{ form.work_place_name.data or '' }}"
+                               name="work_place_name">
+                    </div>
                     <div class="form-invalid">{{ render_error(form.work_place_name) }}</div>
                 </li>
                 <li>
                     <span>所在地区:</span>
-                    <select style="float: left;" id="select-state" name="province">
-                        <option>{{ form.province.data or '-省份-' }}</option>
-                    </select>
-                    <select style="float: left;" id="select-city" name="district">
-                        <option>{{ form.district.data or '-城市-' }}</option>
-                    </select>
-                    <select style="float: left;" id="select-area" name="street">
-                        <option>{{ form.street.data or '-县区-' }}</option>
-                    </select>
-                    <input style="float: left;" type="text" name="street" value="{{ form.street.data or '' }}" placeholder="街道"/>
+
+                    <div class="userinfo-input-show">
+                        {{ form.province.data or '' }}
+                        {{ form.district.data or '' }}
+                        {{ form.street.data or '' }}
+                        {{ form.street.data or '' }}
+                    </div>
+                    <div class="userinfo-form-input display-none">
+                        <select style="float: left;" id="select-state" name="province">
+                            <option>{{ form.province.data or '-省份-' }}</option>
+                        </select>
+                        <select style="float: left;" id="select-city" name="district">
+                            <option>{{ form.district.data or '-城市-' }}</option>
+                        </select>
+                        <select style="float: left;" id="select-area" name="street">
+                            <option>{{ form.street.data or '-县区-' }}</option>
+                        </select>
+                        <input style="float: left;" type="text" name="street" value="{{ form.street.data or '' }}"
+                               placeholder="街道"/>
+                    </div>
                 </li>
-                <input type="submit" class="user-profile-submit" value="编辑资料">
+                <div class="userinfo-input-show">
+                    <a href="javascript:;" id="click-edit-userprofile">编辑资料</a>
+                </div>
+                <div class="userinfo-form-input display-none">
+                    <input type="submit" class="user-profile-submit" value="保存">
+                    <a href="javascript:;" id="click-cancel-userprofile">取消</a>
+                </div>
             </form>
         </ul>
     </div>
