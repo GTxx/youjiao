@@ -98,6 +98,43 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
         form_class.content = JsonField('content')
         return form_class
 
+    def scaffold_list_columns(self):
+        columns = super(CoursewareAdmin, self).scaffold_list_columns()
+        # import ipdb; ipdb.set_trace()
+        columns.append('preview')
+        return columns
+
+    def _preview_formatter(view, context, model, name):
+        name = model.name if model.name else 'courseware'
+        return Markup(
+            "<a href='%s'>%s</a>" % (
+                url_for('book_view.courseware_detail', courseware_id=model.id),
+                name
+            ))
+
+
+    column_formatters = {
+        'preview': _preview_formatter
+    }
+
+    @action('approve', 'Approve', 'Are you sure you want to approve selected users?')
+    def action_approve(self, ids):
+        try:
+            query = Courseware.query.filter(Courseware.id.in_(ids))
+
+            count = 0
+            for courseware in query.all():
+                courseware.publish = True
+                courseware.save()
+                count += 1
+
+            flash('User was successfully approved. {} users were successfully approved.'.format(count))
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+
+            flash('Failed to approve users. {}'.format(str(ex)), 'error')
+
 
 admin.add_view(BookAdmin(Book, db.session))
 admin.add_view(CoursewareAdmin(Courseware, db.session))

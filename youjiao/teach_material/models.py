@@ -58,6 +58,7 @@ class Book(db.Model, CRUDMixin):
 
 class Courseware(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
+    name = db.Column(sqla.String(200))
     book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     content = db.Column(JSON)
     publish = db.Column(sqla.Boolean, default=False)
