@@ -34,8 +34,8 @@
                         </tr>
                     </table>
                     <div class="product-button">
-                        <div class="product-collection">点击下载</div>
-                        <a href="{{ courseware.book.link }}"><div class="product-associate">关联教材</div></a>
+                        <a href="javascript:;" id="click-to-download" class="product-collection">点击下载</a>
+                        <a href="{{ courseware.book.link }}" class="product-associate">关联教材</a>
                     </div>
                 </div>
             </div>
@@ -108,6 +108,22 @@
             </div>
             {% endif %}
         </div>
+    </div>
+    <div id="download-box" class="display-none">
+        <ul>
+            <li>
+                <span>青花瓷PPT</span>
+                <a href="" class="download-button-c">下载</a>
+            </li>
+            <li>
+                <span>青花瓷PPT</span>
+                <a href="" class="download-button-c">下载</a>
+            </li>
+            <li>
+                <span>青花瓷PPT</span>
+                <a href="" class="download-button-c">下载</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}
 

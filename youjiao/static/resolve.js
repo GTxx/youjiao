@@ -11,6 +11,7 @@ var resolve = {
         slides_js: path.resolve(vendorjs, 'responsiveslides.js'),
         videojs_ie8_js: path.resolve(node_module_path, 'videojs-ie8/dist/videojs-ie8.min.js'),
         area_js: path.resolve(vendorjs, 'area.js'),
+        birthday_js: path.resolve(vendorjs, 'bday-picker.min.js')
         //plupload_js: path.resolve(vendorjs, 'plupload/plupload.dev.js'),
         //moxie_js: path.resolve(vendorjs, 'plupload/moxie.js'),
         //qiniu_js: path.resolve(vendorjs, 'qiniu.js'),

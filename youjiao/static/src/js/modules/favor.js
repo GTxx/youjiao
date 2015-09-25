@@ -15,7 +15,7 @@ function favor(obj_id, obj_type, callback) {
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(data),
     success: function (msg) {
-      alert('ok');
+      alert('收藏成功');
       callback()
     }
   });

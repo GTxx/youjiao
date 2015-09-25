@@ -13,3 +13,4 @@ build
 *.sqlite
 youjiao/static/captcha/
 assets.json.py
+npm-debug.log

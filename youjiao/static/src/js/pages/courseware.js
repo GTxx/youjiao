@@ -50,4 +50,29 @@ $(function () {
             })
         }
     });
+
+    var cancelB = function (e) {
+        if (e && e.stopPropagation)
+            e.stopPropagation();
+        else
+            window.event.cancelBubble = true;
+    };
+
+    $("#click-to-download").click(function (e) {
+        cancelB(e);
+        let scrollTop = $(window).scrollTop();
+        $("#download-box").removeClass('display-none');
+        $("#download-box").css('top', -(scrollTop + $(this).height()) + 'px');
+        $("#download-box").animate({'top': scrollTop + 100 + 'px'}, 300);
+    });
+
+    $(document).click(function () {
+        $("#download-box").animate({'top': - $("#download-box").height() + 'px'}, 300, function(){
+            $("#download-box").addClass('display-none');
+        });
+    });
+
+    $("#download-box").click(function (e) {
+        cancelB(e);
+    });
 });
