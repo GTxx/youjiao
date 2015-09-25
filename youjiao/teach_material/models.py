@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from youjiao.extensions import db
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
+from sqlalchemy import not_
 from sqlalchemy.dialects.postgresql import ARRAY, JSON
 from youjiao.user_util.models import Comment
 from flask import url_for
@@ -72,3 +73,7 @@ class Courseware(db.Model, CRUDMixin):
     @property
     def link(self):
         return url_for('book_view.courseware_detail', courseware_id=self.id)
+
+    @property
+    def related_courseware(self):
+        return Courseware.query.join(Book).filter(Book.id==self.book_id).filter(not_(Courseware.id==self.id)).all()

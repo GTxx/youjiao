@@ -37,13 +37,14 @@ from .teach_material.api import book_api_bp
 from .user_util.models import Favor
 from .user_util.api import user_util_api_bp
 
-import os, json
+import os
+import json
 
 
 # Flask views
 def index():
     return render_template('home/home.html', current_page='home',
-                           Book=Book)
+                           Book=Book, Courseware=Courseware)
 
 
 def create_app():

@@ -84,15 +84,17 @@
             <div class="section-block-title-6">课件中心推荐</div>
         </div>
         <ul class="video-section-list">
-            {% for i in range(8) %}
+            {% for courseware in Courseware.top10()[0:8] %}
             <li>
                 <div class="v-image-wrapper">
-                    <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}"
+                    <a href="{{ url_for('book_view.courseware_detail', courseware_id=courseware.id) }}">
+                    <img src="{{ courseware.book.cover }}?imageView2/2/w/400"
                          alt="">
 
                     <div class="v-image-hover-layer">
                         <div class="v-hover-layer-icon"></div>
                     </div>
+                    </a>
                 </div>
                 <h5>青花瓷</h5>
                 <a href="" class="start-download">开始下载</a>

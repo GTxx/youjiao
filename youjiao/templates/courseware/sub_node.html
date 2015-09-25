@@ -31,13 +31,13 @@
                 <div class="section-block-title-4">班级分类</div>
             </div>
             <ul class="video-section-list">
-                {% for i in range(4) %}
+                {% for courseware in courseware_list %}
                     <li style="height: 180px;">
-                        <a href="/courseware/detail">
+                        <a href="{{ courseware.link }}">
                             <div class="v-image-wrapper">
-                                <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                                <img src="{{ courseware.book.cover }}" alt="">
                             </div>
-                            <h5>青花瓷</h5>
+                            <h5>{{ courseware.book.name }}</h5>
                         </a>
                     </li>
                 {% endfor %}

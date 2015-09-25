@@ -93,20 +93,20 @@
                 </div>
 
             </div>
+            {% if courseware.related_courseware %}
             <div class="other-associate-courseware">
                 <p>其他课件相关</p>
-
+                {% for courseware in courseware.related_courseware %}
+                <a href="{{ courseware.link }}">
                 <div>
-                    <img src="" alt="">
+                    <img src="{{ courseware.book.cover }}" alt="">
 
-                    <p>xxxxxxxxx</p>
+                    <p>{{ courseware.book.name }}</p>
                 </div>
-                <div>
-                    <img src="" alt="">
-
-                    <p>xxxxxxxxx</p>
-                </div>
+                    </a>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

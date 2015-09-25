@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_
 from .models import Book, Courseware
@@ -28,7 +28,21 @@ def book_upload():
 @book_bp.route('/book/<category>')
 def book_category(category):
     if category == 'teach_book':
-        book_list = Book.query.filter_by(category=u'幼教教材').limit(9)
+        level = request.args.get('level')
+        if not level:
+            book_list = Book.query.filter(
+                and_(Book.category==u'幼教教材')).limit(9)
+        if level == u'小班':
+            book_list = Book.query.filter(
+                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+        elif level == u'中班':
+            book_list = Book.query.filter(
+                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+        elif level == u'大班':
+            book_list = Book.query.filter(
+                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+        else:
+            book_list = []
         top10 = Book.top10()
         return render_template('book/sub_node.html', book_list=book_list, top10=top10)
 
@@ -53,7 +67,8 @@ def book_detail(book_id):
 def courseware():
     courseware_list = Courseware.query.all()
     return render_template('courseware/home.html', current_page='courseware',
-                           courseware_list=courseware_list)
+                           courseware_list=courseware_list,
+                           Courseware=Courseware)
 
 
 @book_bp.route('/courseware/<int:courseware_id>/')
@@ -71,5 +86,16 @@ def courseware_list():
 @book_bp.route('/courseware/sub/')
 def courseware_sub():
     top10 = Courseware.top10()
+    level = request.args.get('level')
+    if not level:
+        courseware_list = Courseware.query.limit(10).all()
+    elif level == u'小班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level==u'小班').all()
+    elif level == u'中班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level==u'中班').all()
+    elif level == u'大班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level==u'大班').all()
+    else:
+        courseware_list = []
     return render_template('courseware/sub_node.html', current_page='courseware',
-                           top10=top10)
+                           top10=top10, courseware_list=courseware_list)
