@@ -1,6 +1,7 @@
 import 'normalize_css';
 import 'main_css';
 import favor from '../../modules/favor.js';
+import '../../modules/not_login_pop.js';
 
 $(function () {
     $('.product-collection').click(function () {
