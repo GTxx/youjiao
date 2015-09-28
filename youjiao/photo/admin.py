@@ -94,7 +94,7 @@ from wtforms import Form
 class QiniuImageUploadInput(ImageUploadInput):
 
     def get_url(self, field):
-        qiniu_domain = current_app.config.get('QINIU_CDN_DOMAIN')
+        qiniu_domain = current_app.config.get('QINIU_PUBLIC_CDN_DOMAIN')
         return '{}/{}?imageView/2/w/100'.format(qiniu_domain, field.data)
 
 
@@ -105,7 +105,7 @@ class QiniuImageUploadField(ImageUploadField):
     def _save_file(self, data, filename):
         from qiniu import put_data
         data.seek(0)
-        bucket_name = current_app.config.get('QINIU_BUCKET_NAME')
+        bucket_name = current_app.config.get('QINIU_PUBLIC_BUCKET_NAME')
         up_token = qiniu.qiniu_auth.upload_token(bucket_name, filename)
         res = put_data(up_token=up_token, key=filename, data=data.read())
         return filename

@@ -4,7 +4,6 @@ from datetime import datetime
 from youjiao.utils.database import CRUDMixin
 from flask import current_app
 
-
 class Photo(db.Model, CRUDMixin):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = sqla.Column(sqla.DateTime, default=datetime.utcnow)
@@ -17,7 +16,7 @@ class Photo(db.Model, CRUDMixin):
 
     @property
     def url(self):
-        qiniu_cdn = current_app.config.get('QINIU_CDN_DOMAIN')
+        qiniu_cdn = current_app.config.get('QINIU_PUBLIC_CDN_DOMAIN')
         return u'{}/{}'.format(qiniu_cdn, self.qiniu_key)
 
     @property
