@@ -118,7 +118,7 @@
 .activity-content
   box-sizing: border-box
   border: 1px solid #CCCCCC
-  padding: 80px 140px 0
+  padding: 80px 140px 40px
   min-height: 950px
   .activity-title
     text-align: center
@@ -418,10 +418,8 @@
 
 .video-detail
   box-sizing: border-box
-  border: 1px solid #CCCCCC
   min-height: 846px
   margin-bottom: 56px
-  padding: 80px 80px 46px 80px
 
   .video-title
     line-height: 34px
@@ -434,14 +432,11 @@
     text-align: justify
 
   .video-detail-v
-    width: 760px
-    height: 400px
+    width: 100%
     margin: 0 auto
-    margin-top: 60px
-    background: #CCCCCC
+    margin-top: 10px
 
   .video-detail-v-t
-    text-align: center
     margin-top: 13px
 
 .about-content
@@ -613,7 +608,7 @@
 .audiojs
   margin: 0 auto
 
-#download-box
+=pop-box()
   width: 500px
   min-height: 360px
   position: absolute
@@ -624,6 +619,9 @@
   box-sizing: border-box
   border-radius: 4px
   box-shadow: 2px 2px 4px #CCCCCC, -2px -2px 4px #CCCCCC
+
+#download-box
+  +pop-box
   li
     height: 46px
     border-top: 1px solid #CCCCCC
@@ -633,3 +631,15 @@
   a
     +button-a
     float: right
+
+.not-login-message
+  +pop-box
+  text-align: center
+  a
+    +button-a
+    margin: 0 20px
+
+  h4
+    font-size: 26px
+    color: $font-gray-light
+    line-height: 246px

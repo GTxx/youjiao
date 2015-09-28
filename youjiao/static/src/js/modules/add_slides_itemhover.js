@@ -17,6 +17,7 @@ $(function () {
 //        }
 //    });
 
+
     function mouseOverAndOut(target, activeClass) {
         $(target).mouseenter(function () {
             $(this).addClass(activeClass);
@@ -47,4 +48,4 @@ window.onload = function(){
             }
         });
     });
-}
+};

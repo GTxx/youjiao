@@ -13,6 +13,7 @@ class Activity(db.Model, CRUDMixin):
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
     update_time = db.Column(sqla.DateTime, onupdate=datetime.utcnow)
     title = db.Column(db.String(255))
+    origin = db.Column(db.String(255), default='')
     html = db.Column(db.Text)
     status = db.Column(sqla.Boolean, default=False)
     category = db.Column(

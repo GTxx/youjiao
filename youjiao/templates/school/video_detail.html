@@ -10,29 +10,17 @@
 {% endblock %}
 
 {% block content %}
-    <div id="main-big-body">
+    <div id="main-school-body">
 
-        <div class="e-page-title">幼教动态-幼教政策-教育部要求做好暑期学生安全工作</div>
+        <div class="e-page-title">幼教网校-优秀讲座-祭奠幸福童年 杨友林</div>
         <div class="video-detail">
-            <h2 class="video-title">教育部要求做好暑期学生安全工作</h2>
-
-            <div class="video-main-content">
-                澳大利亚《新快报》8月17日文章，原题：澳大利亚华人反感主流媒体“恐华”宣传 针对澳大利亚华人的情绪
-                正在因为不断有西媒报道华人抢购房产和加大投资而有所恶化，而社区华人反感这样的报道，也无奈于所谓的“恐华”情绪。
-
-                　　亚洲传媒中心负责人Mimi
-                Chau此前在接受《澳大利亚人报》采访时表示，费法斯传媒此前在报道华人投资澳大利亚房地产的时候，曾经提出过“中国人入侵”的说法，这样报道，随着其它电视、电台和平面媒体的宣传，正在不断地增加澳大利亚本地华人社区所面临的压力。她指出：“不少华人社区成员担心主流媒体给他们塑造的形象。”
-
-                　　本报发言人Lawrence
-                Chan对此表示，“中国人对于他们投资澳大利亚房产和商业的负面报道感觉不太好。”他说：“我们从来不愿意在‘敌对的情感’包围下工作和生活。这种情绪曾经在25年前霍华德挑起反亚问题时发生。”
-            </div>
             <div class="video-detail-v">
-                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="572"
-                       height="322" data-setup='{}' poster="http://www.videojs.com/img/poster.jpg">
-                    <source src='http://7xlydq.com1.z0.glb.clouddn.com/qinghuaci.ogg' type='video/ogg'/>
+                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
+                       height="522" data-setup='{}' poster="http://www.videojs.com/img/poster.jpg">
+                    <source src='{{ video.url }}' type='video/ogg'/>
                 </video>
             </div>
-            <div class="video-detail-v-t">青花瓷</div>
+            <div class="video-detail-v-t">{{ video.name }}</div>
         </div>
     </div>
 {% endblock %}
