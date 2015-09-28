@@ -608,7 +608,7 @@
 .audiojs
   margin: 0 auto
 
-#download-box
+=pop-box()
   width: 500px
   min-height: 360px
   position: absolute
@@ -619,6 +619,9 @@
   box-sizing: border-box
   border-radius: 4px
   box-shadow: 2px 2px 4px #CCCCCC, -2px -2px 4px #CCCCCC
+
+#download-box
+  +pop-box
   li
     height: 46px
     border-top: 1px solid #CCCCCC
@@ -628,3 +631,15 @@
   a
     +button-a
     float: right
+
+.not-login-message
+  +pop-box
+  text-align: center
+  a
+    +button-a
+    margin: 0 20px
+
+  h4
+    font-size: 26px
+    color: $font-gray-light
+    line-height: 246px
