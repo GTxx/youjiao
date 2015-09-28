@@ -16,7 +16,7 @@
         <h2 class="activity-title">{{ activity.title }}</h2>
 
         <div class="activity-author">
-            来源： 中国学前教育研究会 2015年09月22日 作者：admin
+            来源： {{ activity.origin }} {{ activity.create_time.date() }} 作者：admin
         </div>
         <div class="activity-main-content">
             {% autoescape off %}

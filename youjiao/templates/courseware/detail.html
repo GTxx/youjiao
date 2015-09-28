@@ -50,7 +50,7 @@
 
                         <p>青花瓷PPT</p>
                         {% for audio in courseware.content.get('audio_list') %}
-                        <div class="courseware-audio">
+                        <div class="courseware-audio not-login">
                             <h4>{{ audio.name }}</h4>
                             {% if current_user.is_authenticated() %}
                             <audio src="{{ audio.url }}"></audio>

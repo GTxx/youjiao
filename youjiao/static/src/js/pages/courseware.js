@@ -2,6 +2,7 @@ import 'normalize_css';
 import 'main_css';
 import 'slides_js';
 import '../modules/add_slides_itemhover';
+import '../modules/not_login';
 
 $(function () {
     $('.book-switch').click(function () {
