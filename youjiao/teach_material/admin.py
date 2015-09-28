@@ -67,14 +67,14 @@ class JsonField(TextAreaField):
 
     def _value(self):
         if self.data:
-            return json.dumps(self.data)
+            return json.dumps(self.data, ensure_ascii=False)
+            # return json.dumps(self.data).encode('utf8')
         else:
             return u''
 
     def process_formdata(self, valuelist):
-        if valuelist:
+        if valuelist[0]:
             try:
-                # import ipdb; ipdb.set_trace()
                 self.data = json.loads(valuelist[0].replace('\r\n', ''))
             except Exception as e:
                 raise ValueError(str(e))
@@ -117,7 +117,7 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
-    @action('approve', 'Approve', 'Are you sure you want to approve selected users?')
+    @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
         try:
             query = Courseware.query.filter(Courseware.id.in_(ids))

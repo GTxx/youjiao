@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, abort
 
-from .models import Activity
+from .permissions import content_preview_permission
+from .models import Activity, Video
 
 content_bp = Blueprint("activity_content", __name__)
 
@@ -56,7 +57,15 @@ def activity_view(id):
 
 @content_bp.route('/school/')
 def school():
-    return render_template('school/school.html', current_page='school')
+    return render_template('school/school.html', current_page='school',
+                           Video=Video)
+
+@content_bp.route('/video/<int:video_id>')
+def video_detail(video_id):
+    video = Video.query.get_or_404(video_id)
+    if not video.publish and not content_preview_permission.can():
+        abort(404)
+    return render_template('school/video_detail.html', video=video)
 
 
 @content_bp.route('/school/lectures/')
@@ -132,6 +141,4 @@ def page_about():
     return render_template('pages/about.html')
 
 
-@content_bp.route('/video')
-def video():
-    return render_template('school/video_detail.html')
+
