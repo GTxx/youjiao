@@ -78,8 +78,12 @@ def courseware_detail(courseware_id):
     courseware = Courseware.query.get(courseware_id)
     if not courseware.publish and not courseware_preview_permission.can():
         abort(404)
+
+    page_comment = Comment.query.filter(
+        and_(Comment.comment_obj_type == 'courseware',
+             Comment.comment_obj_id == courseware.id)).paginate(1)
     return render_template('courseware/detail.html', current_page='courseware',
-                           courseware=courseware)
+                           courseware=courseware, page_comment=page_comment)
 
 
 @book_bp.route('/courseware/list/')

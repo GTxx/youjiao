@@ -69,13 +69,15 @@
                     </div>
                     <div class="detail-comment-content display-none">
                         <ul id="book-content-list">
-                            <li>
-                                <div>
-                                    <img src="#" alt="">
-                                    <h6>test</h6>
-                                </div>
-                                <span>fffffffff</span>
-                            </li>
+                            {% for comment in page_comment.items %}
+                                <li>
+                                    <div>
+                                        <img src="{{ comment.user.avatar }}" alt="">
+                                        <h6>{{ comment.user.nickname or comment.user.name }}</h6>
+                                    </div>
+                                    <span>{{ comment.content }}</span>
+                                </li>
+                            {% endfor %}
                         </ul>
                         <ul class="comment-pagination">
                             <li>
@@ -111,18 +113,24 @@
     </div>
     <div id="download-box" class="display-none">
         <ul>
+            {% for document in courseware.content.get('document_list', []) %}
             <li>
-                <span>青花瓷PPT</span>
-                <a href="" class="download-button-c">下载</a>
+                <span>{{document.get('name')}}</span>
+                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
             </li>
+            {% endfor %}
+            {% for document in courseware.content.get('audio_list', []) %}
             <li>
-                <span>青花瓷PPT</span>
-                <a href="" class="download-button-c">下载</a>
+                <span>{{document.get('name')}}音频</span>
+                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
             </li>
+            {% endfor %}
+            {% for document in courseware.content.get('video_list', []) %}
             <li>
-                <span>青花瓷PPT</span>
-                <a href="" class="download-button-c">下载</a>
+                <span>{{document.get('name')}}视频</span>
+                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
             </li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}

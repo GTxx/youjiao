@@ -14,7 +14,7 @@ class Comment(CRUDMixin, db.Model):
     # 评论对象id
     comment_obj_id = db.Column(sqla.Integer)
     # 评论对象类型
-    comment_obj_type = db.Column(sqla.Enum('book', name='comment_obj_type'))
+    comment_obj_type = db.Column(sqla.Enum('book', 'courseware', name='comment_obj_type'))
     content = db.Column(sqla.String(140))
 
 
