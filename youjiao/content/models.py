@@ -6,6 +6,7 @@ import sqlalchemy as sqla
 from sqlalchemy.dialects.postgresql import JSON
 from youjiao.extensions import db, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
+from flask import url_for
 
 
 class Activity(db.Model, CRUDMixin):
@@ -52,3 +53,7 @@ class Video(db.Model):
     @classmethod
     def get_category(cls, category):
         return cls.query.filter_by(category=category)
+
+    @property
+    def link(self):
+        return url_for('activity_content.video_detail', video_id=self.id)

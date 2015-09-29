@@ -41,8 +41,8 @@
                                                  href="{{ url_for('activity_content.school') }}">幼教网课</a>
                     <ul class="youjiao-nav-sub">
 {#                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀课堂</a></li>#}
-                        <li><a href="{{ url_for('activity_content.school_sub') }}">优秀讲座</a></li>
-                        <li><a href="{{ url_for('activity_content.school_sub') }}">其他视频</a></li>
+                        <li><a href="{{ url_for('activity_content.school_sub', category='lecture') }}">优秀讲座</a></li>
+                        <!--<li><a href="{{ url_for('activity_content.school_sub', category='other') }}">其他视频</a></li>-->
                     </ul>
                 </li>
             </ul>

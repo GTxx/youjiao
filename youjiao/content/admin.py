@@ -102,10 +102,7 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
     def _preview_formatter(view, context, model, name):
         name = model.category if model.category else '视频'
         return Markup(
-            "<a href='%s'>%s</a>" % (
-                url_for('book_view.courseware_detail', courseware_id=model.id),
-                name
-            ))
+            "<a href='%s'>%s</a>" % (model.link, model.name))
 
     column_formatters = {
         'preview': _preview_formatter

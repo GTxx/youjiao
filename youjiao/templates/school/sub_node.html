@@ -1,0 +1,93 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'school.css' | asset }}">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'school/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-school-body">
+        <div class="e-page-title">幼教网校-优秀讲座</div>
+
+        <div class="school-slides">
+            <ul class="rslides">
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="banner"></li>
+            </ul>
+        </div>
+        <div class="video-section-lg">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">{{ video_list[0].category }}推荐</div>
+            </div>
+            <ul class="video-section-list">
+                {% for video in video_list %}
+                    <a href="{{ video.link }}">
+                    <li>
+
+                        <div class="v-image-wrapper">
+                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+
+                            <div class="v-image-hover-layer">
+                                <div class="v-hover-layer-icon"></div>
+                            </div>
+                        </div>
+                        <h5>{{ video.name }} </h5>
+                        <a href="{{ video.link }}" class="start-download">开始下载</a>
+                    </li>
+                        </a>
+                {% endfor %}
+            </ul>
+        </div>
+        <!--<div class="rank-section">-->
+            <!--<div class="section-block-wrapper">-->
+                <!--<div class="section-block-title-7">优秀讲座排行榜</div>-->
+            <!--</div>-->
+            <!--<div class="rank-section-list">-->
+                <!--<div class="rank-section-list">-->
+                    <!--<div class="rank-each-list-1">-->
+                        <!--{% for i in range(2) %}-->
+                            <!--<div class="rank-each-item">-->
+                                <!--<img src="" alt="">-->
+                                <!--<h4>1.幼教英语</h4>-->
+                            <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--</div>-->
+                    <!--<div class="rank-each-list">-->
+                        <!--{% for i in range(4) %}-->
+                            <!--<div class="rank-each-item">-->
+                                <!--<img src="" alt="">-->
+
+                                <!--<div>-->
+                                    <!--<h4>2.幼教英语</h4>-->
+                                    <!--<h5>xxxxxx</h5>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--</div>-->
+                    <!--<div class="rank-each-list">-->
+                        <!--{% for i in range(4) %}-->
+                            <!--<div class="rank-each-item">-->
+                                <!--<img src="" alt="">-->
+
+                                <!--<div>-->
+                                    <!--<h4>3.幼教英语</h4>-->
+                                    <!--<h5>xxxxxx</h5>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'school.js' | asset }}"></script>
+{% endblock %}

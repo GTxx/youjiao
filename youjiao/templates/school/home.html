@@ -14,31 +14,24 @@
 
         <div class="school-slides">
             <ul class="rslides">
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg" alt="banner"></li>
+                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg" alt="banner"></li>
             </ul>
         </div>
+
+        {% for category in ['优秀课堂', '优秀讲座', '其他视频', '产品使用培训', '师资培训视频']%}
+        {% if Video.get_category(category).first() %}
         <div class="video-section-lg">
             <div class="section-block-wrapper">
-                <div class="section-block-title-6">课件中心推荐</div>
-            </div>
-            <div class="classes-select-wrapper">
-                <select name="" id="" class="classes-select">
-                    <option value="">教材的介绍和使用</option>
-                    <option value="">园所管理</option>
-                    <option value="">安全教育</option>
-                    <option value="">区角建设</option>
-                    <option value="">艺术活动</option>
-                    <option value="">游戏活动</option>
-                    <option value="">其他</option>
-                </select>
+                <div class="section-block-title-4">{{ category }}</div>
             </div>
             <ul class="video-section-list">
-                {% for i in range(6) %}
+                {% for video in Video.get_category(category)[:3] %}
                     <li>
+                        <a href="{{ url_for('activity_content.video_detail', video_id=video.id) }}">
                         <div class="v-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 
@@ -46,56 +39,19 @@
                                 <div class="v-hover-layer-icon"></div>
                             </div>
                         </div>
-                        <h5>青花瓷</h5>
+                        <h5>{{ video.name }}</h5>
                         <a href="" class="start-download">开始下载</a>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="rank-section">
-            <div class="section-block-wrapper">
-                <div class="section-block-title-7">优秀讲座排行榜</div>
-            </div>
-            <div class="rank-section-list">
-                <div class="rank-section-list">
-                    <div class="rank-each-list-1">
-                        {% for i in range(2) %}
-                            <div class="rank-each-item">
-                                <img src="" alt="">
-                                <h4>1.幼教英语</h4>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="rank-each-list">
-                        {% for i in range(4) %}
-                            <div class="rank-each-item">
-                                <img src="" alt="">
+        {% endif %}
+        {% endfor %}
 
-                                <div>
-                                    <h4>2.幼教英语</h4>
-                                    <h5>xxxxxx</h5>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="rank-each-list">
-                        {% for i in range(4) %}
-                            <div class="rank-each-item">
-                                <img src="" alt="">
-
-                                <div>
-                                    <h4>3.幼教英语</h4>
-                                    <h5>xxxxxx</h5>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}
 
 {% block js %}
-    <script src="{{ 'school.js' | asset }}"></script>
+       <script src="{{ 'school.js' | asset }}"></script>
 {% endblock %}

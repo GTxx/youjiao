@@ -57,7 +57,7 @@ def activity_view(id):
 
 @content_bp.route('/school/')
 def school():
-    return render_template('school/school.html', current_page='school',
+    return render_template('school/home.html', current_page='school',
                            Video=Video)
 
 @content_bp.route('/video/<int:video_id>')
@@ -68,9 +68,14 @@ def video_detail(video_id):
     return render_template('school/video_detail.html', video=video)
 
 
-@content_bp.route('/school/lectures/')
-def school_sub():
-    return render_template('school/home.html', current_page='school')
+@content_bp.route('/school/<category>/')
+def school_sub(category):
+    if category == 'lecture':
+        video_list = Video.query.filter(Video.category==u'优秀讲座').limit(9)
+        return render_template('school/sub_node.html', current_page='school',
+                               video_list=video_list)
+    else:
+        abort(404)
 
 
 @content_bp.route('/school/teacher/')

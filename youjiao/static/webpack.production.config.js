@@ -6,12 +6,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
 
 var plugins = [
-    //new webpack.ProvidePlugin({
-    //    $: "jquery",
-    //    jQuery: "jquery",
-    //    "window.jQuery": "jquery",
-    //    "root.jQuery": "jquery"
-    //}),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'commons',
         filename: 'commons.[hash].js',
