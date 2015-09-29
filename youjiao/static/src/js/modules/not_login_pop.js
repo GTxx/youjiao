@@ -1,47 +1,63 @@
-$(function () {
-    var cancelB = function (e) {
-        if (e && e.stopPropagation)
-            e.stopPropagation();
-        else
-            window.event.cancelBubble = true;
-    };
+(function ($) {
+    $.fn.not_login_pop = function () {
 
-    $('.not-login-pop').click(function (e) {
-        cancelB(e);
+        let cancelB = function (e) {
+            if (e && e.stopPropagation)
+                e.stopPropagation();
+            else
+                window.event.cancelBubble = true;
+        };
 
-        if ($('.not-login-message').length)
-            return false;
+        let add_mask_layer = function () {
+            $('<div />').appendTo('body')
+                .addClass('mask-layer');
+        };
 
-        let scrollTop = $(window).scrollTop();
-        $("<div />").appendTo('body')
-            .addClass('not-login-message')
-            .css('top', -(scrollTop + $(this).height()) + 'px')
-            .animate({'top': scrollTop + 100 + 'px'}, 600);
+        $(this).click(function (e) {
+            cancelB(e);
 
-        $('<h4 />').appendTo('.not-login-message')
-            .text('登陆61幼教网');
+            add_mask_layer();
 
-        $('<a />').appendTo('.not-login-message')
-            .addClass('pop-to-login')
-            .attr({'href': '/login', 'target': '_blank'})
-            .text('是');
+            if ($('.not-login-message').length)
+                return false;
 
-        $('<a />').appendTo('.not-login-message')
-            .addClass('pop-to-cancel')
-            .attr('href', 'javascript:;')
-            .text('否');
-    });
+            let scrollTop = $(window).scrollTop();
+            $("<div />").appendTo('body')
+                .addClass('not-login-message')
+                .css('top', -(scrollTop + $(this).height()) + 'px')
+                .animate({'top': scrollTop + 100 + 'px'}, 600);
 
-    function cancelPop() {
-        $('.not-login-message').animate({'top': -$('.not-login-message').height() + 'px'}, 300, function () {
-            $(".not-login-message").remove();
+            $('<h4 />').appendTo('.not-login-message')
+                .text('您还未登陆，是否现在登陆');
+
+            $('<a />').appendTo('.not-login-message')
+                .addClass('pop-to-login')
+                .attr({'href': '/login', 'target': '_blank'})
+                .text('是');
+
+            $('<a />').appendTo('.not-login-message')
+                .addClass('pop-to-cancel')
+                .attr('href', 'javascript:;')
+                .text('否');
         });
-    }
 
-    $(document).click(cancelPop);
-    $('body').delegate('.pop-to-cancel', 'click', cancelPop);
+        let cancelPop = function () {
+            $('.not-login-message').animate({'top': -$('.not-login-message').height() + 'px'}, 300, function () {
+                $(".not-login-message").remove();
+                $(".mask-layer").remove();
+            });
+        };
 
-    $('body').delegate('.not-login-message', 'click', function (e) {
-        cancelB(e);
-    });
-});
+        $(document).click(cancelPop);
+        $('body').delegate('.pop-to-cancel', 'click', cancelPop);
+
+        $('body').delegate('.not-login-message', 'click', function (e) {
+            cancelB(e);
+        });
+
+        $(window).scroll(function () {
+            let scrollTop = $(window).scrollTop();
+            $(".not-login-message").animate({'top': scrollTop + 100 + 'px'}, 100);
+        });
+    };
+})(jQuery);

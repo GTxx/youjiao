@@ -1,9 +1,13 @@
 import 'normalize_css';
 import 'main_css';
+import '../../modules/add_slides_itemhover.js';
 import favor from '../../modules/favor.js';
 import '../../modules/not_login_pop.js';
 
 $(function () {
+
+    $('.not-login-pop').not_login_pop();
+
     $('.product-collection').click(function () {
         var obj_id = location.href.split('/').slice(-1)[0];
         var obj_type = 'book';

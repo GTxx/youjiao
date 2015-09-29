@@ -13,7 +13,7 @@ book_bp = Blueprint("book_view", __name__)
 @book_bp.route('/book')
 def book():
     teach_book_list = Book.query.filter(
-        and_(Book.category==u'幼教教材', Book.publish==True)).limit(9)
+        and_(Book.category == u'幼教教材', Book.publish == True)).limit(9)
     read_book_list = Book.query.filter_by(category=u'幼教读物').limit(9)
     # import ipdb; ipdb.set_trace()
     return render_template('book/home.html', teach_book_list=teach_book_list,
@@ -32,16 +32,16 @@ def book_category(category):
         # import ipdb; ipdb.set_trace()
         if not level:
             book_list = Book.query.filter(
-                and_(Book.category==u'幼教教材')).limit(9)
+                and_(Book.category == u'幼教教材')).limit(9)
         elif level == u'小班':
             book_list = Book.query.filter(
-                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
         elif level == u'中班':
             book_list = Book.query.filter(
-                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
         elif level == u'大班':
             book_list = Book.query.filter(
-                and_(Book.category==u'幼教教材', Book.level==level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
         else:
             book_list = []
         top10 = Book.top10()
@@ -64,6 +64,12 @@ def book_detail(book_id):
              Comment.comment_obj_id == book.id)).paginate(1)
     return render_template('book/detail.html', book=book,
                            page_comment=page_comment)
+
+
+@book_bp.route('/book/associate/')
+def book_associate():
+    return render_template('book/associate.html')
+
 
 @book_bp.route('/courseware/')
 def courseware():
@@ -98,11 +104,11 @@ def courseware_sub():
     if not level:
         courseware_list = Courseware.query.limit(10).all()
     elif level == u'小班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level==u'小班').all()
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'小班').all()
     elif level == u'中班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level==u'中班').all()
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'中班').all()
     elif level == u'大班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level==u'大班').all()
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'大班').all()
     else:
         courseware_list = []
     return render_template('courseware/sub_node.html', current_page='courseware',
