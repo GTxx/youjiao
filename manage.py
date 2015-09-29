@@ -121,7 +121,7 @@ def asset_filter(file_string):
         file_path = os.path.join(static_path, filetype + '/' + file_resolve_name)
         return file_path
     except Exception as e:
-        print(e)
+        return ''
 
 
 manager.add_command('db', MigrateCommand)

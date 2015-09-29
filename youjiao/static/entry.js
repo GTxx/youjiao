@@ -7,9 +7,7 @@ var entry = {
     activity: path.resolve(dirname, 'activity.js'),
     pages: path.resolve(dirname, 'pages.js'),
     research: path.resolve(dirname, 'research.js'),
-    school: path.resolve(dirname, 'school.js'),
     user_info: path.resolve(dirname, 'user_info.js'),
-    video_detail: path.resolve(dirname, 'video_detail.js'),
 
     //  book
     'book.detail': path.resolve(dirname, 'book/detail.js'),
@@ -20,6 +18,11 @@ var entry = {
     'courseware.detail': path.resolve(dirname, 'courseware/detail.js'),
     'courseware.home': path.resolve(dirname, 'courseware/home.js'),
     'courseware.sub_node': path.resolve(dirname, 'courseware/sub_node.js'),
+
+    // school
+    'school.detail': path.resolve(dirname, 'school/detail.js'),
+    'school.home': path.resolve(dirname, 'school/home.js'),
+    'school.sub_node': path.resolve(dirname, 'school/sub_node.js'),
 };
 
 module.exports = entry;

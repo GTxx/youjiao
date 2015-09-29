@@ -19,7 +19,6 @@ $(function () {
         // TODO: put csrf_token get in a module
         let csrf_token = $('meta[name=csrf-token]').attr('content');
         let book_id = window.location.pathname.split('/').reverse()[0];
-        console.log('123123123')
         if (content.length == 0) {
             alert('请输入评论再提交');
         } else if (content.length > 140) {
