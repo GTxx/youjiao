@@ -1,8 +1,6 @@
 import 'normalize_css';
 import 'main_css';
-import 'slides_js';
-import '../modules/add_slides_itemhover';
-import '../modules/not_login_pop';
+import '../../modules/not_login_pop';
 
 $(function () {
 
@@ -55,7 +53,7 @@ $(function () {
         }
     });
 
-    var cancelB = function (e) {
+    var cancelBubble = function (e) {
         if (e && e.stopPropagation)
             e.stopPropagation();
         else
@@ -63,7 +61,7 @@ $(function () {
     };
 
     $("#click-to-download").click(function (e) {
-        cancelB(e);
+        cancelBubble(e);
         let scrollTop = $(window).scrollTop();
         $("#download-box").removeClass('display-none');
         $("#download-box").css('top', -(scrollTop + $(this).height()) + 'px');
@@ -77,6 +75,6 @@ $(function () {
     });
 
     $("#download-box").click(function (e) {
-        cancelB(e);
+        cancelBubble(e);
     });
 });

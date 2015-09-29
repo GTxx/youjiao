@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ 'courseware.css' | asset }}">
+    <link rel="stylesheet" href="{{ 'courseware.detail.css' | asset }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='vendor/video-js/video-js.min.css') }}">
 {% endblock %}
 
@@ -170,5 +170,5 @@
     <!--[if lt IE 9]>
     <script src="{{ url_for('static', filename='vendor/video-js/videojs-ie8.min.js') }}"></script>
     <![endif]-->
-    <script src="{{ 'courseware.js' | asset }}"></script>
+    <script src="{{ 'courseware.detail.js' | asset }}"></script>
 {% endblock %}
