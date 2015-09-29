@@ -34,7 +34,7 @@
                         </tr>
                     </table>
                     <div class="product-button">
-                        <a href="javascript:;" id="click-to-download" class="product-collection">点击下载</a>
+                        <a href="javascript:;" id="{% if current_user.is_authenticated() %}click-to-download{% else %}not-login-pop{% endif %}" class="product-collection">点击下载</a>
                         <a href="{{ courseware.book.link }}" class="product-associate">关联教材</a>
                     </div>
                 </div>

@@ -6,9 +6,9 @@ import '../../modules/not_login_pop.js';
 
 $(function () {
 
-    $('.not-login-pop').not_login_pop();
+    $('#not-login-pop').not_login_pop();
 
-    $('.product-collection').click(function () {
+    $('#product-collection').click(function () {
         var obj_id = location.href.split('/').slice(-1)[0];
         var obj_type = 'book';
         favor(obj_id, obj_type);

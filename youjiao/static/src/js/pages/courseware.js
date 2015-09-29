@@ -5,6 +5,9 @@ import '../modules/add_slides_itemhover';
 import '../modules/not_login_pop';
 
 $(function () {
+
+    $('#not-login-pop').not_login_pop();
+
     $('.book-switch').click(function () {
         let index = $(this).index();
         $('.active').removeClass('active');
