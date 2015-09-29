@@ -27,9 +27,8 @@ def createdb():
 
 
 @manager.command
-def create_table_init_db():
+def init_db():
     try:
-        db.create_all()
         role = Role(name='editor', description='editor role')
         role.save()
         role = Role(name='admin', description='admin role')
@@ -63,17 +62,6 @@ def drop_table():
 @manager.shell
 def make_shell_context():
     return dict(app=app, db=db)
-
-
-@manager.command
-def init_db():
-    try:
-        role = Role(name='editor', description='editor role')
-        role.save()
-        role = Role(name='admin', description='admin role')
-        role.save()
-    except Exception as e:
-        print(e)
 
 
 @manager.option('-n', '--name', dest='name', default='admin')

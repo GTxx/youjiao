@@ -5,7 +5,6 @@
 .coverage
 local_settings.py
 local_config.py
-migrations
 .idea
 node_modules
 build
