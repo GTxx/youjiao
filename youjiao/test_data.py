@@ -188,7 +188,7 @@ book_list = [
          )
 ]
 
-Activity = namedtuple('Activity', 'title, origin, html, status, category')
+Activity = namedtuple('Activity', 'title, origin, html, publish, category')
 activity_list = [
     Activity(u'发展学前教育，尚需加大公办园保障力度',
              u'中国学前教育研究会',
