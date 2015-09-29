@@ -13,7 +13,7 @@ def activity():
         page = int(request.args.get('page'))
     except Exception as e:
         page = 1
-    pagination = Activity.query.filter_by(status=True).paginate(page, per_page=20)
+    pagination = Activity.query.filter_by(publish=True).paginate(page, per_page=20)
     weekly_popular_top10 = Activity.weekly_popular_top10()
     return render_template('activity/home.html', activity_list=pagination,
                            category_url=category, current_page='activity', weekly_popular_top10=weekly_popular_top10)
@@ -26,7 +26,7 @@ def category(category):
     except Exception as e:
         page = 1
 
-    pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)
+    pagination = Activity.query.filter_by(category=category).filter_by(publish=True).paginate(page, per_page=20)
     category_dict = {
         'policy': u'幼教政策',
         'news': u'幼教新闻',
@@ -98,8 +98,8 @@ def school_teacher_detail():
 
 @content_bp.route('/research/home/')
 def research_home():
-    research_events = Activity.query.filter_by(category='research').filter_by(status=True).limit(7).all()
-    research_result = Activity.query.filter_by(category='achievement').filter_by(status=True).limit(7).all()
+    research_events = Activity.query.filter_by(category='research').filter_by(publish=True).limit(7).all()
+    research_result = Activity.query.filter_by(category='achievement').filter_by(publish=True).limit(7).all()
     data = {
         'research_events': research_events,
         'research_result': research_result
@@ -114,7 +114,7 @@ def research_activity(category, page):
     except ValueError:
         page = 1
 
-    pagination = Activity.query.filter_by(category=category).filter_by(status=True).paginate(page, per_page=20)
+    pagination = Activity.query.filter_by(category=category).filter_by(publish=True).paginate(page, per_page=20)
     category_dict = {
         'event': u'教研活动',
         'achievement': u'教研成果'
