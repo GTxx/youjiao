@@ -10,11 +10,8 @@ class BaseConfig(object):
     SQLALCHEMY_ECHO = True
 
     # for user register and login security
-    # SECURITY_REGISTERABLE = False # overide flask_security register with custom register
     PASSWORD_HASH = "pbkdf2_sha512"
     PASSWORD_SALT = "W0dRBgO0Ukobw8NweLAXvqug2ZTh97HZIEMFcEsWhf7lt68"
-    # SECURITY_CONFIRMABLE = False  # disable email confirm
-    # SECURITY_SEND_REGISTER_EMAIL = False  # disable email confirm
 
     # flask_wtf
     WTF_CSRF_CHECK_DEFAULT = False
@@ -24,6 +21,16 @@ class BaseConfig(object):
 
     # flask_redis
     REDIS_URL = 'redis://localhost:6379/0'
+
+    # flask_qiniu
+    QINIU_AK = 'ak'
+    QINIU_SK = 'sk'
+    QINIU_PUBLIC_BUCKET_NAME = 'public bucket name'
+    QINIU_PUBLIC_CDN_DOMAIN = 'public domain name'
+
+    QINIU_PRIVATE_BUCKET_NAME = 'private bucket name'
+    QINIU_PRIVATE_CDN_DOMAIN = 'private domain name'
+
 
 try:
     from youjiao.config.local_config import LocalConfig
