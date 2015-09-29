@@ -30,7 +30,7 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_list = ('title', 'create_time', 'update_time', 'status', 'category')
+    column_exclude_list = ('html', )
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
     form_choices = {
@@ -51,6 +51,38 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
         if not content_edit_permission.can():
             return False
         return True
+
+    @action('publish', 'Publish', u'确定要发布选择的资料吗?')
+    def action_approve(self, ids):
+        try:
+            query = Activity.query.filter(Activity.id.in_(ids))
+
+            count = 0
+            for courseware in query.all():
+                courseware.publish = True
+                courseware.save()
+                count += 1
+
+            flash('Activity was successfully approved. {} users were successfully approved.'.format(count))
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+
+            flash('Failed to approve users. {}'.format(str(ex)), 'error')
+
+    def scaffold_list_columns(self):
+        columns = super(ActivityAdmin, self).scaffold_list_columns()
+        columns.append('preview')
+        return columns
+
+    def _preview_formatter(view, context, model, name):
+        name = model.title if model.title else '活动'
+        return Markup(
+            "<a href='%s'>%s</a>" % (model.link, model.title))
+
+    column_formatters = {
+        'preview': _preview_formatter
+    }
 
 
 class PageAdmin(AuthMixin, sqla.ModelView):

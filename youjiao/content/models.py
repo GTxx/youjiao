@@ -16,7 +16,8 @@ class Activity(db.Model, CRUDMixin):
     title = db.Column(db.String(255))
     origin = db.Column(db.String(255), default='')
     html = db.Column(db.Text)
-    status = db.Column(sqla.Boolean, default=False)
+    # status = db.Column(sqla.Boolean, default=False)
+    publish = db.Column(sqla.Boolean, default=False)
     category = db.Column(
         sqla.Enum('policy', 'news', 'events', 'research', 'activity',
                   'achievement', name='category'),
@@ -26,6 +27,10 @@ class Activity(db.Model, CRUDMixin):
     @classmethod
     def weekly_popular_top10(cls):
         return cls.query.limit(10).all()
+
+    @property
+    def link(self):
+        return url_for('activity_content.activity_view', id=self.id)
 
 
 class Page(db.Model):
