@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'book_detail.css' | asset }}">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'book/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-noright-body">
+
+        <div class="e-page-title">产品展示-幼教教材-幼教图书分类-幼儿园大班-清凉一夏 - 关联课件</div>
+
+        <div>
+            <div class="associate-courseware">
+                <img src="" alt="">
+
+                <div class="associate-courseware-info">
+                    <h3>清凉一夏</h3>
+                    <h4>幼儿园大班上册1-5</h4>
+                </div>
+                <div class="associate-courseware-right">关联课件</div>
+            </div>
+            <div class="video-section-lg">
+                <ul class="video-section-list">
+                    {% for i in range(6) %}
+                        <li>
+                            <div class="v-image-wrapper">
+                                <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+
+                                <div class="v-image-hover-layer">
+                                    <div class="v-hover-layer-icon"></div>
+                                </div>
+                            </div>
+                            <h5>青花瓷</h5>
+                            <a href="" class="start-download">开始下载</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'book_detail.js' | asset }}"></script>
+{% endblock %}

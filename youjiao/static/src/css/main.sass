@@ -7,6 +7,7 @@
 @import "common/footer"
 @import "common/login_register"
 @import "common/_user_info"
+@import "common/pop_layer"
 
 #youjiao-body
   height: auto
@@ -608,38 +609,33 @@
 .audiojs
   margin: 0 auto
 
-=pop-box()
-  width: 500px
-  min-height: 360px
-  position: absolute
-  top: 100px
-  left: 36%
-  background: white
-  border: 1px solid #CCCCCC
+.associate-courseware
   box-sizing: border-box
-  border-radius: 4px
-  box-shadow: 2px 2px 4px #CCCCCC, -2px -2px 4px #CCCCCC
-
-#download-box
-  +pop-box
-  li
-    height: 46px
-    border-top: 1px solid #CCCCCC
-    padding: 10px 12px
-    box-sizing: border-box
-    overflow: hidden
-  a
-    +button-a
+  border-bottom: 1px solid $gray-a3
+  padding-bottom: 16px
+  margin-top: 10px
+  +clear-float
+  img
+    width: 105px
+    height: 100px
+    background: #CCCCCC
+    float: left
+  .associate-courseware-info
+    padding-bottom: 10px
+    display: inline-block
+    width: 600px
+    margin-left: 40px
+    float: left
+    h3
+      font-size: 30px
+      color: $font-gray-heavy
+      margin-top: 24px
+    h4
+      margin-top: 4px
+      font-size: 18px
+      color: $font-gray
+  .associate-courseware-right
     float: right
-
-.not-login-message
-  +pop-box
-  text-align: center
-  a
-    +button-a
-    margin: 0 20px
-
-  h4
-    font-size: 26px
-    color: $font-gray-light
-    line-height: 246px
+    font-size: 36px
+    color: $font-gray
+    padding-top: 50px

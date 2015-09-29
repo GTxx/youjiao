@@ -1,8 +1,11 @@
 $(function () {
-    $(".rslides").responsiveSlides({
-        auto: true,
-        pager: true
-    });
+    try {
+        $(".rslides").responsiveSlides({
+            auto: true,
+            pager: true
+        });
+    } catch(e){};
+
 
 //    $(".rslides").find("img").each(function(){
 //        let ratio = $(".rslides").parent().width() / $(".rslides").parent().height();

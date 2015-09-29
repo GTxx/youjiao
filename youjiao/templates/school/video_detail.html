@@ -2,7 +2,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ 'video_detail.css' | asset }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video-js.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video-js.min.css') }}">
 {% endblock %}
 
 {% block leftBar %}
@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/videojs/dist/video-js/video.min.js') }}"></script>
     <script src="{{ url_for('static', filename='node_modules/videojs-ie8/dist/videojs-ie8.min.js') }}"></script>
     <script src="{{ 'video_detail.js' | asset }}"></script>
 {% endblock %}
