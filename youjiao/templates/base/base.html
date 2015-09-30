@@ -8,8 +8,8 @@
     {% block css %}
     {% endblock %}
     <!--[if lt IE 9]>
-        <script src="{{ url_for('static', filename='vendor/js/html5shiv.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='vendor/js/html5shiv-printshiv.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='build/vendor/js/html5shiv.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='build/vendor/js/html5shiv-printshiv.min.js') }}"></script>
     <![endif]-->
     <script>
 var _hmt = _hmt || [];
@@ -80,7 +80,7 @@ var _hmt = _hmt || [];
         </div>
     </div>
 </div>
-<script src="http://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='build/vendor/js/jquery.min.js') }}"></script>
 <script src="{{ 'commons.js' | asset }}"></script>
 {% block js %}
 {% endblock %}
