@@ -6,6 +6,7 @@ from youjiao.extensions import db, qiniu
 from youjiao.app import create_app
 from youjiao.user.models import User, Role, UserProfile
 import os, json
+import urlparse
 
 # Used by app debug & livereload
 PORT = 5000
@@ -65,6 +66,16 @@ def make_shell_context():
     return dict(app=app, db=db)
 
 
+@manager.command
+def create_qiniu_conf():
+    static_dir = os.path.join(os.getcwd(), 'youjiao/static/build')
+    dest = "qiniu:access_key={}&secret_key={}&bucket={}&key_prefix={}".format(
+        qiniu.AK, qiniu.SK, qiniu.PUBLIC_BUCKET_NAME, qiniu.STATIC_CDN_PREFIX)
+    config = {"src": static_dir, "dest": dest, "debug_level": 1}
+    with open('qiniu.json', 'w') as f:
+        f.write(json.dumps(config))
+
+
 @manager.option('-n', '--name', dest='name', default='admin')
 @manager.option('-p', '--password', dest='password', default='123456')
 @manager.option('-e', '--email', dest='email', default='admin@1.com')
@@ -113,7 +124,7 @@ def asset_filter(file_string):
         if app.debug == True:
             static_path = '/static/build'
         else:
-            static_path = qiniu.PUBLIC_CDN_DOMAIN + '/static/build'
+            static_path = urlparse.urljoin(qiniu.PUBLIC_CDN_DOMAIN, qiniu.STATIC_CDN_PREFIX)
         filename = '.'.join(file_string.split('.')[:-1])
         filetype = file_string.split('.').pop()
         file_resolve_name = app.assets[filename][filetype]
@@ -131,11 +142,11 @@ def vendor_asset_filter(file_string):
         if app.debug == True:
             return url_for('static', filename=file_path)
         else:
-            res = qiniu.PUBLIC_CDN_DOMAIN + '/static/' + file_string
+            relative_path = os.path.join(qiniu.STATIC_CDN_PREFIX, file_string)
+            res = urlparse.urljoin(qiniu.PUBLIC_CDN_DOMAIN, relative_path)
             return res
     except Exception as e:
         return ''
-
 
 
 manager.add_command('db', MigrateCommand)

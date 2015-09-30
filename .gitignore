@@ -13,3 +13,4 @@ build
 youjiao/static/captcha/
 assets.json.py
 npm-debug.log
+qiniu.json
