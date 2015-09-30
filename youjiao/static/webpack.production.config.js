@@ -4,6 +4,20 @@ var entry = require('./entry');
 var resolve = require('./resolve.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
+var process = require('child_process');
+
+//copy vendor to build without package
+function Vendor2BuildPlugin() {
+};
+Vendor2BuildPlugin.prototype.apply = function (compiler) {
+    compiler.plugin('compile', function (params) {
+        process.exec('mkdir build', function () {
+            process.exec('cp -r vendor build', function () {
+                console.log('copy vendor to build');
+            });
+        });
+    });
+};
 
 var plugins = [
     new webpack.optimize.CommonsChunkPlugin({
@@ -19,7 +33,8 @@ var plugins = [
             warnings: false
         },
         sourceMap: false
-    })
+    }),
+    new Vendor2BuildPlugin()
 ];
 
 module.exports = {
