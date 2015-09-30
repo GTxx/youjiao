@@ -106,15 +106,14 @@ def create_common_user(name, password, email):
     user.save()
 
 
-@manager.command
-def create_test_data():
-    pass
-
-
 @app.template_filter('asset')
 def asset_filter(file_string):
     try:
-        static_path = '/static/build'
+        if app.debug == True:
+            static_path = '/static/build'
+        else:
+            from youjiao.extensions import qiniu
+            static_path = qiniu.PUBLIC_CDN_DOMAIN + '/static/build'
         filename = '.'.join(file_string.split('.')[:-1])
         filetype = file_string.split('.').pop()
         file_resolve_name = app.assets[filename][filetype]
