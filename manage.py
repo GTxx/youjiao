@@ -1,7 +1,8 @@
 # coding: utf-8
 from flask_script import Manager
 from flask_migrate import MigrateCommand
-from youjiao.extensions import db
+from flask import url_for
+from youjiao.extensions import db, qiniu
 from youjiao.app import create_app
 from youjiao.user.models import User, Role, UserProfile
 import os, json
@@ -112,7 +113,6 @@ def asset_filter(file_string):
         if app.debug == True:
             static_path = '/static/build'
         else:
-            from youjiao.extensions import qiniu
             static_path = qiniu.PUBLIC_CDN_DOMAIN + '/static/build'
         filename = '.'.join(file_string.split('.')[:-1])
         filetype = file_string.split('.').pop()
@@ -121,6 +121,21 @@ def asset_filter(file_string):
         return file_path
     except Exception as e:
         return ''
+
+
+@app.template_filter('vendor_asset')
+def vendor_asset_filter(file_string):
+    static_path = 'build'
+    file_path = os.path.join(static_path, file_string)
+    try:
+        if app.debug == True:
+            return url_for('static', filename=file_path)
+        else:
+            res = qiniu.PUBLIC_CDN_DOMAIN + '/static/' + file_string
+            return res
+    except Exception as e:
+        return ''
+
 
 
 manager.add_command('db', MigrateCommand)
