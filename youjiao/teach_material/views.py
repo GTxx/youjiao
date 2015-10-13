@@ -45,7 +45,8 @@ def book_category(category):
         else:
             book_list = []
         top10 = Book.top10()
-        return render_template('book/sub_node.html', book_list=book_list, top10=top10)
+        return render_template('book/sub_node.html', book_list=book_list, top10=top10,
+                               level=level)
 
     elif category == 'read_book':
         book_list = Book.query.filter_by(category=u'幼教读物').limit(9)

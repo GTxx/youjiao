@@ -35,10 +35,11 @@
             <!--</div>-->
              <div class="classes-select-wrapper">
                 <select name="" id="" class="classes-select">
-                    <option value="?level=幼小衔接班">幼小衔接班</option>
-                    <option value="?level=大班">大班</option>
-                    <option value="?level=中班">中班</option>
-                    <option value="?level=小班">小班</option>
+                    <option value="#" {% if not level %}selected="selected"{% endif %}></option>
+                    <option value="?level=幼小衔接班" {% if level == "幼小衔接班" %}selected="selected"{% endif %}>幼小衔接班</option>
+                    <option value="?level=大班"  {% if level == "大班" %}selected="selected"{% endif %}>大班</option>
+                    <option value="?level=中班"  {% if level == "中班" %}selected="selected"{% endif %}>中班</option>
+                    <option value="?level=小班"  {% if level == "小班" %}selected="selected"{% endif %}>小班</option>
                 </select>
             </div>
         </div>
