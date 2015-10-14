@@ -25,11 +25,15 @@ class BaseConfig(object):
     # flask_qiniu
     QINIU_AK = 'ak'
     QINIU_SK = 'sk'
+    QINIU_PIPELINE = 'pipeline'
+    QINIU_CALLBACK_URL = 'call back url'
     QINIU_PUBLIC_BUCKET_NAME = 'public bucket name'
     QINIU_PUBLIC_CDN_DOMAIN = 'public domain name'
 
     QINIU_PRIVATE_BUCKET_NAME = 'private bucket name'
     QINIU_PRIVATE_CDN_DOMAIN = 'private domain name'
+
+
 
 
 try:

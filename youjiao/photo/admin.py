@@ -106,5 +106,5 @@ class PhotoAdmin(AuthMixin, sqla.ModelView):
     }
 
 
-admin.add_view(PhotoAdmin(Photo, db.session))
-admin.add_view(AlbumAdmin(Album, db.session))
+admin.add_view(PhotoAdmin(Photo, db.session, name=u'图片'))
+admin.add_view(AlbumAdmin(Album, db.session, name=u'相册'))

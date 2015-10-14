@@ -5,6 +5,7 @@ from youjiao.utils.database import CRUDMixin
 from flask import current_app
 from youjiao.extensions import qiniu
 
+
 class Photo(db.Model, CRUDMixin):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = sqla.Column(sqla.DateTime, default=datetime.utcnow)

@@ -43,7 +43,7 @@ class Page(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
 
 
-class Video(db.Model):
+class OnlineCourse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     publish = db.Column(sqla.Boolean, default=False)
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
@@ -52,7 +52,7 @@ class Video(db.Model):
     url = db.Column(sqla.String(200))
     category = db.Column(
         sqla.Enum(u'优秀课堂', u'优秀讲座', u'其他视频', u'产品使用培训', u'师资培训视频',
-                  name='video_category'))
+                  name='online_course_category'))
     content = db.Column(JSON)
 
     @classmethod

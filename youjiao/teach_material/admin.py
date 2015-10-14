@@ -13,7 +13,6 @@ from .models import Book, Courseware
 import json
 
 
-
 class BookAdmin(AuthMixin, sqla.ModelView):
 
     def _preview_formatter(view, context, model, name):

@@ -6,7 +6,7 @@ from flask_login import current_user
 from flask_admin.actions import action
 from flask import Markup, url_for, flash
 from youjiao.teach_material.admin import JsonField
-from .models import Activity, Page, Video
+from .models import Activity, Page, OnlineCourse
 from .permissions import content_edit_permission
 from ..admin_utils import AuthMixin
 
@@ -109,7 +109,7 @@ class PageAdmin(AuthMixin, sqla.ModelView):
         return True
 
 
-class VideoAdmin(AuthMixin, sqla.ModelView):
+class OnlineCourseAdmin(AuthMixin, sqla.ModelView):
     column_default_sort = 'id'
     form_excluded_columns = ('create_time', 'update_time')
 
@@ -121,12 +121,12 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
         return True
 
     def scaffold_form(self):
-        form_class = super(VideoAdmin, self).scaffold_form()
+        form_class = super(OnlineCourseAdmin, self).scaffold_form()
         form_class.content = JsonField('content')
         return form_class
 
     def scaffold_list_columns(self):
-        columns = super(VideoAdmin, self).scaffold_list_columns()
+        columns = super(OnlineCourseAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
         columns.append('preview')
         return columns
@@ -140,10 +140,10 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
-    @action('publish', 'Publish', u'确定要发布选择的资料吗?')
+    @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
         try:
-            query = Video.query.filter(Video.id.in_(ids))
+            query = OnlineCourse.query.filter(OnlineCourse.id.in_(ids))
 
             count = 0
             for courseware in query.all():
@@ -160,6 +160,6 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
 
 from ..extensions import admin, db
 
-admin.add_view(ActivityAdmin(Activity, db.session))
+admin.add_view(ActivityAdmin(Activity, db.session, name=u'幼教动态'))
 admin.add_view(PageAdmin(Page, db.session))
-admin.add_view(VideoAdmin(Video, db.session))
+admin.add_view(OnlineCourseAdmin(OnlineCourse, db.session, name=u'幼教网课'))

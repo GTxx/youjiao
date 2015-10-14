@@ -41,6 +41,11 @@ from .user_util.api import user_util_api_bp
 from .photo.models import Photo, Album
 from .photo.admin import AlbumAdmin
 
+# yj_media
+from .yj_media.admin import VideoAdmin
+from .yj_media.models import Video, Audio, Document
+from .yj_media.views import media_bp
+
 import os
 import json
 
@@ -92,11 +97,6 @@ def create_app():
     qiniu.init_app(app)
 
     # flask_admin
-    # admin = Admin(app, template_mode='bootstrap3')
-    # admin.add_view(ActivityAdmin(Activity, db.session))
-    # admin.add_view(UserAdmin(User, db.session))
-    # admin.add_view(PageAdmin(Page, db.session))
-    from .extensions import admin
     admin.init_app(app)
 
     # register blueprint
@@ -110,6 +110,7 @@ def create_app():
     app.register_blueprint(book_bp)
     app.register_blueprint(book_api_bp)
     app.register_blueprint(user_util_api_bp)
+    app.register_blueprint(media_bp)
 
     # register subscriber
     user_connect(app)
