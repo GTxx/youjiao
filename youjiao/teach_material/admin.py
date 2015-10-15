@@ -135,5 +135,5 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
 
-admin.add_view(BookAdmin(Book, db.session))
-admin.add_view(CoursewareAdmin(Courseware, db.session))
+admin.add_view(BookAdmin(Book, db.session, name=u'教材'))
+admin.add_view(CoursewareAdmin(Courseware, db.session, name=u'课件'))

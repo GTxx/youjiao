@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask_login import current_user
 from flask_admin.contrib import sqla
 from flask_principal import Permission, RoleNeed
@@ -46,6 +47,12 @@ class RoleAdmin(sqla.ModelView):
 
 
 from ..extensions import admin, db
+from flask_admin.consts import ICON_TYPE_GLYPH
 
-admin.add_view(UserAdmin(User, db.session))
-admin.add_view(RoleAdmin(Role, db.session))
+
+admin.add_view(UserAdmin(User, db.session, category=u'用户管理', name=u'用户',
+                         menu_icon_type=ICON_TYPE_GLYPH,
+                         menu_icon_value='glyphicon-user'))
+admin.add_view(RoleAdmin(Role, db.session, category=u'用户管理', name=u'身份',
+                         menu_icon_type=ICON_TYPE_GLYPH,
+                         menu_icon_value='glyphicon-education'))

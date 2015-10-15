@@ -105,6 +105,8 @@ class PhotoAdmin(AuthMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
-
-admin.add_view(PhotoAdmin(Photo, db.session, name=u'图片'))
-admin.add_view(AlbumAdmin(Album, db.session, name=u'相册'))
+from flask_admin.consts import ICON_TYPE_GLYPH
+admin.add_view(PhotoAdmin(Photo, db.session, name=u'图片', category=u'资源管理',
+                          menu_icon_type=ICON_TYPE_GLYPH, menu_icon_value='glyphicon-picture'))
+admin.add_view(AlbumAdmin(Album, db.session, name=u'相册', category=u'资源管理',
+                          menu_icon_type=ICON_TYPE_GLYPH, menu_icon_value='glyphicon-folder-open'))
