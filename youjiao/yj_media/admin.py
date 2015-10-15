@@ -8,8 +8,9 @@ from flask_admin.contrib import sqla
 from flask_admin.actions import action
 from qiniu import Auth, PersistentFop, op_save
 from youjiao.extensions import admin, db
-from .views import QINIU_CALLBACK_ROUTE
+from .views import QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE
 from ..admin_utils import AuthMixin
+from youjiao.utils.admin import JsonField
 
 
 class VideoAdmin(AuthMixin, sqla.ModelView):
@@ -30,6 +31,11 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
         if model.json:
             return json.dumps(model.json, ensure_ascii=False)
         return ''
+
+    def scaffold_form(self):
+        form_class = super(VideoAdmin, self).scaffold_form()
+        form_class.json = JsonField('json')
+        return form_class
 
     column_formatters = {
         'preview': _preview_formatter
@@ -82,7 +88,7 @@ class DocumentAdmin(AuthMixin, sqla.ModelView):
 
     def _preview_formatter(view, context, model, name):
         if model.json:
-            return json.dumps(model.json, ensure_ascii=False)
+            return json.dumps(model.json, indent=2, ensure_ascii=False)
         return ''
 
     column_formatters = {
@@ -90,26 +96,23 @@ class DocumentAdmin(AuthMixin, sqla.ModelView):
     }
     column_exclude_list = ['json']
 
-    @action('convert', u'转码私密', 'Are you sure you want to convert this video?')
+    @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_approve(self, ids):
         try:
-            query = Video.query.filter(Video.id.in_(ids))
+            query = Document.query.filter(Video.id.in_(ids))
             count = 0
             src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
             dest_bucket_name = src_bucket_name
-            pipeline = current_app.qiniu.PIPELINE
-            QINIU_VIDEO_CALLBACK_URL = urljoin(
-                    current_app.qiniu.CALLBACK_URL, QINIU_CALLBACK_ROUTE)
-            pfop = PersistentFop(current_app.qiniu.qiniu_auth,
-                                 src_bucket_name, pipeline,
-                                 QINIU_VIDEO_CALLBACK_URL)
+            QINIU_DOCUMENT_CALLBACK_URL = urljoin(
+                    current_app.qiniu.CALLBACK_URL, QINIU_DOCUMENT_CALLBACK_ROUTE)
+            pfop = PersistentFop(current_app.qiniu.qiniu_auth, src_bucket_name,
+                                 notify_url=QINIU_DOCUMENT_CALLBACK_URL)
             ops = []
-            for video in query.all():
-                saved_key = video.qiniu_key + '.mp4'
-                # import ipdb; ipdb.set_trace()
-                op = op_save('avthumb/mp4', dest_bucket_name, saved_key.encode('utf-8'))
+            for document in query.all():
+                saved_key = document.qiniu_key + '.pdf'
+                op = op_save('yifangyun_preview', dest_bucket_name, saved_key.encode('utf-8'))
                 ops.append(op)
-            ret, info = pfop.execute(video.qiniu_key, ops, force=1)
+            ret, info = pfop.execute(document.qiniu_key, ops, force=1)
             if info.status_code != 200:
                 raise Exception('error {}'.format(info))
             flash('{} users were successfully approved.'.format(count))
@@ -136,7 +139,7 @@ class AudioAdmin(AuthMixin, sqla.ModelView):
 
     def _preview_formatter(view, context, model, name):
         if model.json:
-            return json.dumps(model.json, ensure_ascii=False)
+            return json.dumps(model.json, indent=2, ensure_ascii=False)
         return ''
 
     column_formatters = {
@@ -144,42 +147,16 @@ class AudioAdmin(AuthMixin, sqla.ModelView):
     }
     column_exclude_list = ['json']
 
-    @action('convert', u'转码私密', 'Are you sure you want to convert this video?')
-    def action_approve(self, ids):
-        try:
-            query = Video.query.filter(Video.id.in_(ids))
-            count = 0
-            src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
-            dest_bucket_name = src_bucket_name
-            pipeline = current_app.qiniu.PIPELINE
-            QINIU_VIDEO_CALLBACK_URL = urljoin(
-                    current_app.qiniu.CALLBACK_URL, QINIU_CALLBACK_ROUTE)
-            pfop = PersistentFop(current_app.qiniu.qiniu_auth,
-                                 src_bucket_name, pipeline,
-                                 QINIU_VIDEO_CALLBACK_URL)
-            ops = []
-            for video in query.all():
-                saved_key = video.qiniu_key + '.mp4'
-                # import ipdb; ipdb.set_trace()
-                op = op_save('avthumb/mp4', dest_bucket_name, saved_key.encode('utf-8'))
-                ops.append(op)
-            ret, info = pfop.execute(video.qiniu_key, ops, force=1)
-            if info.status_code != 200:
-                raise Exception('error {}'.format(info))
-            flash('{} users were successfully approved.'.format(count))
-        except Exception as ex:
-            if not self.handle_view_exception(ex):
-                raise
-
-            flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
 admin.add_view(VideoAdmin(Video, db.session, name=u'视频', category=u'资源管理',
                           menu_icon_type=ICON_TYPE_GLYPH,
-                          menu_icon_value='glyphicon-picture'))
+                          menu_icon_value='glyphicon-hd-video'))
+
 
 admin.add_view(DocumentAdmin(Document, db.session, name=u'文档', category=u'资源管理',
                           menu_icon_type=ICON_TYPE_GLYPH,
-                          menu_icon_value='glyphicon-hd-video'))
+                          menu_icon_value='glyphicon-file'))
+
 
 admin.add_view(AudioAdmin(Audio, db.session, name=u'音频', category=u'资源管理',
                           menu_icon_type=ICON_TYPE_GLYPH,
