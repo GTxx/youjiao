@@ -6,19 +6,22 @@ import sqlalchemy as sqla
 from sqlalchemy.dialects.postgresql import JSON
 
 
-class Video(CRUDMixin, db.Model):
-    id = sqla.Column(sqla.Integer, primary_key=True)
+class MediaMixin(object):
+    name = db.Column(sqla.String(200))
     qiniu_key = db.Column(sqla.String(200), unique=True)
-    json = db.Column(JSON)
+    # 处理结果
+    media_process = db.Column(JSON) # 不能用process和meta，因为wtform 有这两个属性
+    # 媒体资源的元信息
+    media_meta = db.Column(JSON)
 
 
-class Audio(CRUDMixin, db.Model):
+class Video(CRUDMixin, MediaMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
-    qiniu_key = db.Column(sqla.String(200), unique=True)
-    json = db.Column(JSON)
 
 
-class Document(CRUDMixin, db.Model):
+class Audio(CRUDMixin, MediaMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
-    qiniu_key = db.Column(sqla.String(200), unique=True)
-    json = db.Column(JSON)
+
+
+class Document(CRUDMixin, MediaMixin, db.Model):
+    id = sqla.Column(sqla.Integer, primary_key=True)

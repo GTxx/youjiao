@@ -24,7 +24,9 @@ def qiniu_video_callback():
         qiniu_key = item['key'][:-4]
         video = Video.query.filter_by(qiniu_key=qiniu_key).first()
         if video:
-            video.json = {'private': {'qiniu_key': item['key'], 'status': 'done'}}
+            video.media_process = {'mp4': {'key': item['key'],
+                                  'bucket': current_app.qiniu.PRIVATE_BUCKET_NAME,
+                                  'bucket_attr': 'private'}}
             video.save()
     return 'abc'
 
@@ -40,7 +42,7 @@ def qiniu_document_callback():
             from .utils import get_private_url
             url = get_private_url((item['key']+u'?odconv/jpg/info').encode('utf-8'))
             response = requests.get(url)
-            document.json = {'pdf': {'key': item['key'],
+            document.media_process = {'pdf': {'key': item['key'],
                                      'bucket': current_app.qiniu.PRIVATE_BUCKET_NAME,
                                      'bucket_attr': 'private',
                                      'page_num': response.json().get('page_num')}}

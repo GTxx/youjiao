@@ -5,14 +5,14 @@ from datetime import datetime
 import sqlalchemy as sqla
 from sqlalchemy.dialects.postgresql import JSON
 from youjiao.extensions import db, USER_TABLE_USER_ID
-from youjiao.utils.database import CRUDMixin
+from youjiao.utils.database import CRUDMixin, CreateUpdateTimeMixin
 from flask import url_for
 
 
-class Activity(db.Model, CRUDMixin):
+class Activity(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     id = db.Column(sqla.Integer, primary_key=True)
-    create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
-    update_time = db.Column(sqla.DateTime, onupdate=datetime.utcnow)
+    # create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
+    # update_time = db.Column(sqla.DateTime, onupdate=datetime.utcnow)
     title = db.Column(db.String(255))
     origin = db.Column(db.String(255), default='')
     html = db.Column(db.Text)
@@ -23,6 +23,7 @@ class Activity(db.Model, CRUDMixin):
                   'achievement', name='category'),
         default='policy')
     user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User')
 
     @classmethod
     def weekly_popular_top10(cls):
@@ -33,21 +34,21 @@ class Activity(db.Model, CRUDMixin):
         return url_for('activity_content.activity_view', id=self.id)
 
 
-class Page(db.Model):
+class Page(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    create_time = db.Column(db.DateTime, default=datetime.now)
-    update_time = db.Column(db.DateTime, onupdate=datetime.now)
+    # create_time = db.Column(db.DateTime, default=datetime.now)
+    # update_time = db.Column(db.DateTime, onupdate=datetime.now)
     title = db.Column(db.String(255))
     html = db.Column(db.Text)
     status = db.Column(db.String(2), default='1')
     user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
 
 
-class OnlineCourse(db.Model):
+class OnlineCourse(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     publish = db.Column(sqla.Boolean, default=False)
-    create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
-    update_time = db.Column(sqla.DateTime, default=datetime.utcnow)
+    # create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
+    # update_time = db.Column(sqla.DateTime, default=datetime.utcnow)
     name = db.Column(sqla.String(200))
     url = db.Column(sqla.String(200))
     category = db.Column(

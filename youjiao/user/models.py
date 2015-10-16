@@ -37,10 +37,10 @@ class User(db.Model, UserMixin, CRUDMixin):
     # TODO: add login log field, and add field update in login view
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
-    profile = db.relationship('UserProfile', backref='user', uselist=False)
-    from youjiao.user_util.models import Comment, Favor
-    comments = db.relationship('Comment', backref='user')
-    favors = db.relationship('Favor', backref='user')
+    # profile = db.relationship('UserProfile', backref='user', uselist=False)
+    # from youjiao.user_util.models import Comment, Favor
+    # comments = db.relationship('Comment', backref='user')
+    # favors = db.relationship('Favor', backref='user')
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
@@ -83,6 +83,7 @@ class User(db.Model, UserMixin, CRUDMixin):
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('profile'))
     # TODO: add column describe/description
     nickname = db.Column(sqla.String(16), unique=True)
     work_place_name = db.Column(sqla.String(255))

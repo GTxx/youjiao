@@ -11,6 +11,7 @@ class Comment(CRUDMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
     user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('comments'))
     # 评论对象id
     comment_obj_id = db.Column(sqla.Integer)
     # 评论对象类型
@@ -23,6 +24,7 @@ class Favor(CRUDMixin, db.Model):
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
 
     user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('favors'))
     # 喜爱对象id
     obj_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     # 喜爱对象类型

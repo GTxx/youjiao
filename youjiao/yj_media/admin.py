@@ -17,30 +17,30 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
 
     def is_accessible(self):
         if not super(VideoAdmin, self).is_accessible():
-            import ipdb; ipdb.set_trace()
             return False
         return True
 
     def scaffold_list_columns(self):
         columns = super(VideoAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append('preview')
+        columns.append(u'预处理')
         return columns
 
     def _preview_formatter(view, context, model, name):
-        if model.json:
-            return json.dumps(model.json, ensure_ascii=False)
+        if model.media_process:
+            return json.dumps(model.media_process, ensure_ascii=False)
         return ''
 
     def scaffold_form(self):
         form_class = super(VideoAdmin, self).scaffold_form()
-        form_class.json = JsonField('json')
+        form_class.media_meta = JsonField('media_meta')
+        form_class.media_process = JsonField('media_process')
         return form_class
 
     column_formatters = {
-        'preview': _preview_formatter
+        u'预处理': _preview_formatter
     }
-    column_exclude_list = ['json']
+    column_exclude_list = ['process']
 
     @action('convert', u'转码私密', 'Are you sure you want to convert this video?')
     def action_approve(self, ids):
@@ -83,18 +83,18 @@ class DocumentAdmin(AuthMixin, sqla.ModelView):
     def scaffold_list_columns(self):
         columns = super(DocumentAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append('preview')
+        columns.append(u'预处理')
         return columns
 
     def _preview_formatter(view, context, model, name):
-        if model.json:
-            return json.dumps(model.json, indent=2, ensure_ascii=False)
+        if model.process:
+            return json.dumps(model.process, indent=2, ensure_ascii=False)
         return ''
 
     column_formatters = {
-        'preview': _preview_formatter
+        u'预处理': _preview_formatter
     }
-    column_exclude_list = ['json']
+    column_exclude_list = ['process']
 
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_approve(self, ids):
@@ -134,18 +134,18 @@ class AudioAdmin(AuthMixin, sqla.ModelView):
     def scaffold_list_columns(self):
         columns = super(AudioAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append('preview')
+        columns.append(u'预处理')
         return columns
 
     def _preview_formatter(view, context, model, name):
-        if model.json:
-            return json.dumps(model.json, indent=2, ensure_ascii=False)
+        if model.process:
+            return json.dumps(model.process, indent=2, ensure_ascii=False)
         return ''
 
     column_formatters = {
-        'preview': _preview_formatter
+        u'预处理': _preview_formatter
     }
-    column_exclude_list = ['json']
+    column_exclude_list = ['process']
 
 
 admin.add_view(VideoAdmin(Video, db.session, name=u'视频', category=u'资源管理',
