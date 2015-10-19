@@ -84,6 +84,7 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
         columns = super(CoursewareAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
         columns.append('preview')
+        columns.append(u'内容')
         return columns
 
     def _preview_formatter(view, context, model, name):
@@ -94,10 +95,17 @@ class CoursewareAdmin(AuthMixin, sqla.ModelView):
                 name
             ))
 
+    def _content_formatter(view, context, model, name):
+        if model.content:
+            return json.dumps(model.content, ensure_ascii=False)
+        return ''
 
     column_formatters = {
-        'preview': _preview_formatter
+        'preview': _preview_formatter,
+        u'内容': _content_formatter
     }
+
+    column_exclude_list = ['content']
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):

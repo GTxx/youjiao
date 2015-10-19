@@ -40,9 +40,9 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
     column_formatters = {
         u'预处理': _preview_formatter
     }
-    column_exclude_list = ['process']
+    column_exclude_list = ['media_process']
 
-    @action('convert', u'转码私密', 'Are you sure you want to convert this video?')
+    @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
     def action_approve(self, ids):
         try:
             query = Video.query.filter(Video.id.in_(ids))
@@ -63,20 +63,19 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
                 ops.append(op)
             ret, info = pfop.execute(video.qiniu_key, ops, force=1)
             if info.status_code != 200:
-                raise Exception('error {}'.format(info))
-            flash('{} users were successfully approved.'.format(count))
+                raise Exception(u'error {}'.format(info))
+            flash(u'{} users were successfully approved.'.format(count))
         except Exception as ex:
             if not self.handle_view_exception(ex):
                 raise
 
-            flash('Failed to approve users. {}'.format(str(ex)), 'error')
+            flash(u'Failed to approve users. {}'.format(str(ex)), 'error')
 
 
 class DocumentAdmin(AuthMixin, sqla.ModelView):
 
     def is_accessible(self):
         if not super(DocumentAdmin, self).is_accessible():
-            import ipdb; ipdb.set_trace()
             return False
         return True
 
@@ -87,14 +86,14 @@ class DocumentAdmin(AuthMixin, sqla.ModelView):
         return columns
 
     def _preview_formatter(view, context, model, name):
-        if model.process:
-            return json.dumps(model.process, indent=2, ensure_ascii=False)
+        if model.media_process:
+            return json.dumps(model.media_process, ensure_ascii=False)
         return ''
 
     column_formatters = {
         u'预处理': _preview_formatter
     }
-    column_exclude_list = ['process']
+    column_exclude_list = ['media_process']
 
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_approve(self, ids):
@@ -138,14 +137,14 @@ class AudioAdmin(AuthMixin, sqla.ModelView):
         return columns
 
     def _preview_formatter(view, context, model, name):
-        if model.process:
-            return json.dumps(model.process, indent=2, ensure_ascii=False)
+        if model.media_process:
+            return json.dumps(model.media_process, indent=2, ensure_ascii=False)
         return ''
 
     column_formatters = {
         u'预处理': _preview_formatter
     }
-    column_exclude_list = ['process']
+    column_exclude_list = ['media_process']
 
 
 admin.add_view(VideoAdmin(Video, db.session, name=u'视频', category=u'资源管理',

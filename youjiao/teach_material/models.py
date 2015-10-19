@@ -59,11 +59,11 @@ class Book(db.Model, CRUDMixin):
 class Courseware(db.Model, CRUDMixin):
     """
     content = {
-        u'video_list': [
-            {u'key': u'qinghuaci.ogg', u'name': u'\u9752\u82b1\u74f7'}
+        'video_list': [
+            {'key': 'qinghuaci.ogg', 'name': u'青花瓷'}
         ],
         u'audio_list': [
-            {u'url': u'http://7xlydq.com1.z0.glb.clouddn.com/test.mp3', u'name': u'\u9752\u82b1\u74f7'}],
+            {'url': 'test.mp3', 'name': u'青花瓷'}],
         'document_list': [
             {}
         ]

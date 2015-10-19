@@ -1,4 +1,7 @@
 from qiniu import Auth
+from flask import current_app
+from urlparse import urljoin
+import urllib
 
 
 class FlaskQiniu(object):
@@ -17,3 +20,11 @@ class FlaskQiniu(object):
     def __getattr__(self, item):
         name = 'QINIU_' + item
         return self._state[name]
+
+
+def get_private_url(key):
+    q = current_app.qiniu.qiniu_auth
+    PRIVATE_DOMAIN = current_app.qiniu.PRIVATE_CDN_DOMAIN
+    url = urljoin(PRIVATE_DOMAIN, urllib.quote(key.encode('utf-8')))
+    res = q.private_download_url(url, expires=3600)
+    return res

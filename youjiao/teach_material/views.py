@@ -114,3 +114,8 @@ def courseware_sub():
         courseware_list = []
     return render_template('courseware/sub_node.html', current_page='courseware',
                            top10=top10, courseware_list=courseware_list)
+
+from youjiao.flask_qiniu import get_private_url
+@book_bp.app_template_filter('qiniu_private_url')
+def qiniu_private_url(key):
+    return get_private_url(key)

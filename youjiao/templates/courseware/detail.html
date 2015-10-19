@@ -53,7 +53,7 @@
                         <div class="courseware-audio">
                             <h4>{{ audio.name }}</h4>
                             {% if current_user.is_authenticated() %}
-                            <audio src="{{ audio.url }}"></audio>
+                            <audio src="{{ audio.key | qiniu_private_url }}"></audio>
                             {% else %}
                             <audio src="#"></audio>
                             {% endif %}
@@ -66,13 +66,13 @@
                             <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
                                    width="760"
                                    height="400" data-setup='{}'>
-                                <source src='{{ video.url }}' type='video/ogg'/>
+                                <source src='{{ video.key| qiniu_private_url }}' type='video/mp4'/>
                             </video>
                             {% else %}
                             <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
                                    width="760"
                                    height="400" data-setup='{}'>
-                                <source src='#' type='video/ogg'/>
+                                <source src='#' type='video/mp4'/>
                             </video>
                             {% endif %}
                         </div>
@@ -127,29 +127,29 @@
         <ul>
             {% for document in courseware.content.get('document_list', []) %}
             <li>
-                <span>{{document.get('name')}}</span>
+                <span><i class="glyphicon glyphicon-folder-open"></i> 文件： {{document.name}}</span>
                 {% if current_user.is_authenticated() %}
-                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
+                <a href="{{ document.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% else %}
                 <a href="#" class="download-button-c" download>下载</a>
                 {% endif %}
             </li>
             {% endfor %}
-            {% for document in courseware.content.get('audio_list', []) %}
+            {% for audio in courseware.content.get('audio_list', []) %}
             <li>
-                <span>{{document.get('name')}}音频</span>
+                <span>音频： {{audio.name}}</span>
                 {% if current_user.is_authenticated() %}
-                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
+                <a href="{{audio.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% else %}
                 <a href="#" class="download-button-c" download>下载</a>
                 {% endif %}
             </li>
             {% endfor %}
-            {% for document in courseware.content.get('video_list', []) %}
+            {% for video in courseware.content.get('video_list', []) %}
             <li>
-                <span>{{document.get('name')}}视频</span>
+                <span>视频： {{ video.name }}</span>
                 {% if current_user.is_authenticated() %}
-                <a href="{{document.get('url')}}" class="download-button-c" download>下载</a>
+                <a href="{{ video.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% else %}
                 <a href="#" class="download-button-c" download>下载</a>
                 {% endif %}
