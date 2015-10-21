@@ -2,8 +2,7 @@
 from flask import Blueprint, render_template, request, abort
 
 from .permissions import content_preview_permission
-
-from .models import Activity, OnlineCourse, Page
+from .models import Activity, OnlineCourse
 
 content_bp = Blueprint("activity_content", __name__)
 
@@ -61,7 +60,6 @@ def school():
     return render_template('school/home.html', current_page='school',
                            Video=OnlineCourse)
 
-
 @content_bp.route('/video/<int:video_id>')
 def video_detail(video_id):
     video = OnlineCourse.query.get_or_404(video_id)
@@ -93,6 +91,9 @@ def school_product():
 @content_bp.route('/school/product/detail/')
 def school_teacher_detail():
     return render_template('school/video_detail.html', current_page='school')
+
+
+
 
 
 @content_bp.route('/research/home/')
@@ -145,7 +146,4 @@ def page_about():
     return render_template('pages/about.html')
 
 
-@content_bp.route('/page/<page_title>/')
-def pages(page_title):
-    content = Page.query.filter_by(title=page_title).first()
-    return render_template('pages/tpl.html', content=content)
+
