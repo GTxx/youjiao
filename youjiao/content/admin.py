@@ -154,5 +154,5 @@ class OnlineCourseAdmin(AuthMixin, sqla.ModelView):
 
 from ..extensions import admin, db
 admin.add_view(ActivityAdmin(Activity, db.session, name=u'幼教动态'))
-# admin.add_view(PageAdmin(Page, db.session))
+admin.add_view(PageAdmin(Page, db.session, name=u'静态页面'))
 admin.add_view(OnlineCourseAdmin(OnlineCourse, db.session, name=u'幼教网课'))
