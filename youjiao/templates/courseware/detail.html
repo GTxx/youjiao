@@ -49,34 +49,36 @@
                         <img src="" alt="" id="courseware-simple-mainimg">
 
                         <p>青花瓷PPT</p>
-                        {% for audio in courseware.content.get('audio_list') %}
-                        <div class="courseware-audio">
-                            <h4>{{ audio.name }}</h4>
-                            {% if current_user.is_authenticated() %}
-                            <audio src="{{ audio.key | qiniu_private_url }}"></audio>
-                            {% else %}
-                            <audio src="#"></audio>
+                        {% for media in courseware.content %}
+                            {% if media.type == 'audio' %}
+                            <div class="courseware-{{ media.type }}">
+                            <h4>{{ media.name }}</h4>
+                                {% if current_user.is_authenticated() %}
+                                <audio src="{{ media.key | qiniu_private_url }}"></audio>
+                                {% else %}
+                                <audio src="#"></audio>
+                                {% endif %}
+                            </div>
+                            {% elif media.type == 'video' %}
+                            <div class="video-detail-course">
+                                {% if current_user.is_authenticated() %}
+                                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
+                                       width="760"
+                                       height="400" data-setup='{}'>
+                                    <source src='{{ media.key| qiniu_private_url }}' type='video/mp4'/>
+                                </video>
+                                {% else %}
+                                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
+                                       width="760"
+                                       height="400" data-setup='{}'>
+                                    <source src='#' type='video/mp4'/>
+                                </video>
+                                {% endif %}
+                            </div>
+                            <p>{{ media.name }}</p>
+                            {% elif media.type == 'document' %}
+                                <p>haha</p>
                             {% endif %}
-                        </div>
-                        {% endfor %}
-
-                        {% for video in courseware.content.get('video_list') %}
-                        <div class="video-detail-course">
-                            {% if current_user.is_authenticated() %}
-                            <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
-                                   width="760"
-                                   height="400" data-setup='{}'>
-                                <source src='{{ video.key| qiniu_private_url }}' type='video/mp4'/>
-                            </video>
-                            {% else %}
-                            <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
-                                   width="760"
-                                   height="400" data-setup='{}'>
-                                <source src='#' type='video/mp4'/>
-                            </video>
-                            {% endif %}
-                        </div>
-                        <p>{{ video.name }}</p>
                         {% endfor %}
                     </div>
                     <div class="detail-comment-content display-none">
@@ -125,31 +127,11 @@
     </div>
     <div id="download-box" class="display-none">
         <ul>
-            {% for document in courseware.content.get('document_list', []) %}
+            {% for media in courseware.content %}
             <li>
-                <span><i class="glyphicon glyphicon-folder-open"></i> 文件： {{document.name}}</span>
+                <span><i class="glyphicon glyphicon-folder-open"></i> 文件： {{media.name}}</span>
                 {% if current_user.is_authenticated() %}
-                <a href="{{ document.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                {% else %}
-                <a href="#" class="download-button-c" download>下载</a>
-                {% endif %}
-            </li>
-            {% endfor %}
-            {% for audio in courseware.content.get('audio_list', []) %}
-            <li>
-                <span>音频： {{audio.name}}</span>
-                {% if current_user.is_authenticated() %}
-                <a href="{{audio.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                {% else %}
-                <a href="#" class="download-button-c" download>下载</a>
-                {% endif %}
-            </li>
-            {% endfor %}
-            {% for video in courseware.content.get('video_list', []) %}
-            <li>
-                <span>视频： {{ video.name }}</span>
-                {% if current_user.is_authenticated() %}
-                <a href="{{ video.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
+                <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% else %}
                 <a href="#" class="download-button-c" download>下载</a>
                 {% endif %}

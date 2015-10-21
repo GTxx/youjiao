@@ -58,16 +58,11 @@ class Book(db.Model, CRUDMixin):
 
 class Courseware(db.Model, CRUDMixin):
     """
-    content = {
-        'video_list': [
-            {'key': 'qinghuaci.ogg', 'name': u'青花瓷'}
-        ],
-        u'audio_list': [
-            {'url': 'test.mp3', 'name': u'青花瓷'}],
-        'document_list': [
-            {}
-        ]
-    }
+    content = [
+        {'key': 'qinghuaci.mp4', 'name': '青花瓷i', 'type': 'video'}
+        {'key': 'qinghuaci.mp3', 'name': '青花瓷i', 'type': 'audio'}
+        {'key': 'qinghuaci.pdf', 'name': '青花瓷i', 'type': 'document'}
+    ]
     """
     id = db.Column(sqla.Integer, primary_key=True)
     name = db.Column(sqla.String(200))
