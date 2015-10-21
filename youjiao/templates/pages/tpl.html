@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'pages.css' | asset }}">
+{% endblock %}
+
+{% block content %}
+    <div id="main-page-body">
+        {% autoescape off %}
+            {{ content.html }}
+        {% endautoescape %}
+    </div>
+{% endblock %}
+
+{% block js %}
+       <script src="{{ 'pages.js' | asset }}"></script>
+{% endblock %}

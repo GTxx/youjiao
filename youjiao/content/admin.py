@@ -91,15 +91,9 @@ class PageAdmin(AuthMixin, sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_list = ('title', 'create_time', 'update_time', 'status')
+    column_list = ('title', 'create_time', 'update_time')
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
-    form_choices = {
-        'status': [
-            (False, u'草稿'),
-            (True, u'发布'),
-        ]
-    }
 
     def is_accessible(self):
         if not current_user.is_authenticated():
