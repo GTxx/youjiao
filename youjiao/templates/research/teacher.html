@@ -12,28 +12,36 @@
     <div id="main-big-body">
         <div class="e-page-title">教学教研-名师名园</div>
         <div class="research-introduce-switch">
-            <a href="#" class="research-tab-s">名园介绍</a>
-            <a href="#" class="research-tab-s active">名师风采</a>
-        </div>
-        <div class="research-introduce-tab display-none">
-            名园介绍
+            <a href="#" class="research-tab-s active">名园介绍</a>
+            <a href="#" class="research-tab-s">名师风采</a>
         </div>
         <div class="research-introduce-tab">
             <ul class="research-introduce-teachers">
                 <li>
-                    <img src="">
-
+                    <a href="{{ url_for('activity_content.pages', page_title='jxgbdsyey') }}">
+                        <img src="{{ url_for('static', filename='image/jxgbdsyey.jpg') }}">
+                    </a>
                     <div>
-                        <h4>边霞教授<span>博士生导师</span></h4>
-                        <span>学前教育学国家重点学科艺术教育方向带头人。现任南京师范大学研究院副院长，中国教育学会教育学分会美誉专业委员会副理事长。</span>
+                        <h4>
+                            <a style="color:black;" href="{{ url_for('activity_content.pages', page_title='jxgbdsyey') }}">江西广播电视艺术幼儿园</a>
+                        </h4>
+                        <span>江西广播电视艺术幼儿园成立于1999年9月，是一所全面实行0—6岁托幼一体化的早期教育联合机构。</span>
                     </div>
                 </li>
+            </ul>
+        </div>
+        <div class="research-introduce-tab display-none">
+            <ul class="research-introduce-teachers">
                 <li>
-                    <img src="">
-
+                    <a href="{{ url_for('activity_content.pages', page_title='humeizhen') }}">
+                        <img src="{{ url_for('static', filename='image/humeizhen.jpg') }}">
+                    </a>
                     <div>
-                        <h4>边霞教授<span>博士生导师</span></h4>
-                        <span>学前教育学国家重点学科艺术教育方向带头人。现任南京师范大学研究院副院长，中国教育学会教育学分会美誉专业委员会副理事长。</span>
+                        <h4>
+                            <a style="color:black;" href="{{ url_for('activity_content.pages', page_title='humeizhen') }}">胡美珍</a>
+                            <span>著名幼教专家</span>
+                        </h4>
+                        <span>中国学前教育研究委员会委员，前江西学前教育研究会常务副理事长，江西省学前教育学科带头人，江西学前教育教材首席编委、主审，国家“曾宪梓奖’、杰出师范贡献奖获得者</span>
                     </div>
                 </li>
             </ul>
