@@ -2,6 +2,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ 'pages.css' | asset }}">
+    <link rel="stylesheet" href="{{ 'vendor/video-js/video-js.min.css' | vendor_asset }}">
 {% endblock %}
 
 {% block content %}
@@ -13,5 +14,9 @@
 {% endblock %}
 
 {% block js %}
-       <script src="{{ 'pages.js' | asset }}"></script>
+    <script src="{{ 'vendor/video-js/video.js' | vendor_asset }}"></script>
+    <!--[if lt IE 9]>
+    <script src="{{ 'vendor/video-js/videojs-ie8.min.js'| vendor_asset }}"></script>
+    <![endif]-->
+    <script src="{{ 'pages.js' | asset }}"></script>
 {% endblock %}
