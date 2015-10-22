@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from flask_admin.contrib import sqla
+from flask_admin import expose, expose_plugview
 from flask_admin.actions import action
 from wtforms.widgets import TextArea
 from wtforms import TextAreaField
 from flask_admin.form import ImageUploadField, ImageUploadInput
 from flask_login import current_user
 from .permissions import photo_edit_permission, album_edit_permission
-from ..admin_utils import AuthMixin
+from ..admin_utils import AuthEditorMixin
 from wtforms.widgets import TextArea
 from youjiao.extensions import qiniu
 from flask import Markup, url_for, flash, current_app
@@ -16,7 +17,7 @@ from .models import Photo, Album
 import json
 
 
-class AlbumAdmin(AuthMixin, sqla.ModelView):
+class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_filters = ('name', )
 
@@ -36,18 +37,14 @@ class AlbumAdmin(AuthMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        # if not album_edit_permission.can():
-        #     return False
-        return True
-
     def scaffold_list_columns(self):
         columns = super(AlbumAdmin, self).scaffold_list_columns()
         columns.append('preview')
         return columns
 
+    @expose('/upload_photo/<id>', methods=('GET', ))
+    def upload_photo(self, id):
+        return 'abc'
 
 
 class QiniuImageUploadInput(ImageUploadInput):
@@ -76,16 +73,9 @@ class QiniuImageUploadField(ImageUploadField):
         return unicode(uuid4()) + '/' + name
 
 
-class PhotoAdmin(AuthMixin, sqla.ModelView):
+class PhotoAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_default_sort = 'id'
-
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        if not photo_edit_permission.can():
-            return False
-        return True
 
     # overide qiniu_key field
     form_extra_fields = {

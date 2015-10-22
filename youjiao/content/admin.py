@@ -8,7 +8,7 @@ from flask import Markup, url_for, flash
 from youjiao.teach_material.admin import JsonField
 from .models import Activity, Page, OnlineCourse
 from .permissions import content_edit_permission
-from ..admin_utils import AuthMixin
+from ..admin_utils import AuthEditorMixin
 
 
 class CKTextAreaWidget(TextArea):
@@ -24,7 +24,7 @@ class CKTextAreaField(TextAreaField):
     widget = CKTextAreaWidget()
 
 
-class ActivityAdmin(AuthMixin, sqla.ModelView):
+class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
     form_overrides = {
         'html': CKTextAreaField
     }
@@ -44,13 +44,6 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
             ('researchresult', u'教研成果')
         ],
     }
-
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        if not content_edit_permission.can():
-            return False
-        return True
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
@@ -85,7 +78,7 @@ class ActivityAdmin(AuthMixin, sqla.ModelView):
     }
 
 
-class PageAdmin(AuthMixin, sqla.ModelView):
+class PageAdmin(AuthEditorMixin, sqla.ModelView):
     form_overrides = {
         'html': CKTextAreaField
     }
@@ -103,16 +96,9 @@ class PageAdmin(AuthMixin, sqla.ModelView):
         return True
 
 
-class OnlineCourseAdmin(AuthMixin, sqla.ModelView):
+class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
     column_default_sort = 'id'
     form_excluded_columns = ('create_time', 'update_time')
-
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        if not content_edit_permission.can():
-            return False
-        return True
 
     def scaffold_form(self):
         form_class = super(OnlineCourseAdmin, self).scaffold_form()
@@ -151,6 +137,7 @@ class OnlineCourseAdmin(AuthMixin, sqla.ModelView):
                 raise
 
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
+
 
 from ..extensions import admin, db
 admin.add_view(ActivityAdmin(Activity, db.session, name=u'幼教动态'))

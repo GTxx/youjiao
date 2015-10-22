@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_login import current_user
 from flask_admin.contrib import sqla
-from flask_principal import Permission, RoleNeed
-from ..admin_utils import AuthMixin
 from .permissions import admin_permission
 from .models import User, Role
 

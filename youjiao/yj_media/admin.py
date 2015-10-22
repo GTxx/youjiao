@@ -9,11 +9,11 @@ from flask_admin.actions import action
 from qiniu import Auth, PersistentFop, op_save
 from youjiao.extensions import admin, db
 from .views import QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE
-from ..admin_utils import AuthMixin
+from ..admin_utils import AuthEditorMixin
 from youjiao.utils.admin import JsonField
 
 
-class VideoAdmin(AuthMixin, sqla.ModelView):
+class VideoAdmin(AuthEditorMixin, sqla.ModelView):
 
     def is_accessible(self):
         if not super(VideoAdmin, self).is_accessible():
@@ -72,7 +72,7 @@ class VideoAdmin(AuthMixin, sqla.ModelView):
             flash(u'Failed to approve users. {}'.format(str(ex)), 'error')
 
 
-class DocumentAdmin(AuthMixin, sqla.ModelView):
+class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 
     def is_accessible(self):
         if not super(DocumentAdmin, self).is_accessible():
@@ -122,13 +122,7 @@ class DocumentAdmin(AuthMixin, sqla.ModelView):
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
 
-class AudioAdmin(AuthMixin, sqla.ModelView):
-
-    def is_accessible(self):
-        if not super(AudioAdmin, self).is_accessible():
-            import ipdb; ipdb.set_trace()
-            return False
-        return True
+class AudioAdmin(AuthEditorMixin, sqla.ModelView):
 
     def scaffold_list_columns(self):
         columns = super(AudioAdmin, self).scaffold_list_columns()

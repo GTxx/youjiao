@@ -5,7 +5,7 @@ from wtforms.widgets import TextArea
 from wtforms import TextAreaField
 from flask_login import current_user
 from .permissions import book_edit_permission, courseware_edit_permission
-from ..admin_utils import AuthMixin
+from ..admin_utils import AuthEditorMixin
 from wtforms.widgets import TextArea
 from flask import Markup, url_for, flash
 from ..extensions import admin, db
@@ -14,7 +14,7 @@ from youjiao.utils.admin import JsonField
 import json
 
 
-class BookAdmin(AuthMixin, sqla.ModelView):
+class BookAdmin(AuthEditorMixin, sqla.ModelView):
 
     def _preview_formatter(view, context, model, name):
         return Markup(
@@ -28,14 +28,6 @@ class BookAdmin(AuthMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
     column_exclude_list = ('image_array', 'preview_array')
-
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        if not book_edit_permission.can():
-            return False
-        return True
-
 
     def scaffold_list_columns(self):
         columns = super(BookAdmin, self).scaffold_list_columns()
@@ -62,18 +54,9 @@ class BookAdmin(AuthMixin, sqla.ModelView):
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
 
-
-
-class CoursewareAdmin(AuthMixin, sqla.ModelView):
+class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_default_sort = 'id'
-
-    def is_accessible(self):
-        if not current_user.is_authenticated():
-            return False
-        if not courseware_edit_permission.can():
-            return False
-        return True
 
     def scaffold_form(self):
         form_class = super(CoursewareAdmin, self).scaffold_form()
