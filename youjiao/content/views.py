@@ -53,7 +53,7 @@ def activity_view(id):
     }
     category_name = category_dict[obj.category]
     return render_template('activity/activity.html', activity=obj, category_name=category_name,
-                           current_page='activity')
+                           current_page='activity', obj=obj)
 
 
 @content_bp.route('/school/')
@@ -148,4 +148,4 @@ def page_about():
 @content_bp.route('/page/<page_title>/')
 def pages(page_title):
     content = Page.query.filter_by(title=page_title).first()
-    return render_template('pages/tpl.html', content=content)
+    return render_template('pages/tpl.html', content=content, obj=content)

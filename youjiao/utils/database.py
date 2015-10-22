@@ -5,7 +5,7 @@ import sqlalchemy as sqla
 
 class CRUDMixin(object):
     def __repr__(self):
-        return "<{}>".format(self.__class__.__name__)
+        return "<{}: {}>".format(self.__class__.__name__, self.id)
 
     def save(self):
         """Saves the object to the database."""

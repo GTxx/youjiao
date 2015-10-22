@@ -33,6 +33,11 @@ class Activity(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     def link(self):
         return url_for('activity_content.activity_view', id=self.id)
 
+    @property
+    def edit_link(self):
+        redirect_url = url_for('activity_content.activity_view', id=self.id)
+        return '/admin/activity/edit?url={}&id={}'.format(redirect_url, self.id)
+
 
 class Page(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -42,6 +47,12 @@ class Page(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     html = db.Column(db.Text)
     status = db.Column(db.String(2), default='1')
     user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+
+    @property
+    def edit_link(self):
+        redirect_url = url_for('activity_content.pages', page_title=self.title)
+        return '/admin/page/edit?url={}&id={}'.format(redirect_url, self.id)
+
 
 
 class OnlineCourse(CRUDMixin, CreateUpdateTimeMixin, db.Model):

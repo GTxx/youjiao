@@ -52,8 +52,10 @@ class Book(db.Model, CRUDMixin):
     def comment(self, page=0):
         return Comment.query.filter_by(comment_obj_type='book').filter_by(comment_obj_id=self.id)
 
-    def __repr__(self):
-        return u'<Book: {} {}>'.format(self.name, self.level)
+    @property
+    def edit_link(self):
+        redirect_url = url_for('book_view.book_detail', book_id=self.id)
+        return '/admin/book/edit?url={}&id={}'.format(redirect_url, self.id)
 
 
 class Courseware(db.Model, CRUDMixin):
@@ -85,3 +87,8 @@ class Courseware(db.Model, CRUDMixin):
     @property
     def related_courseware(self):
         return Courseware.query.join(Book).filter(Book.id==self.book_id).filter(not_(Courseware.id==self.id)).all()
+
+    @property
+    def edit_link(self):
+        redirect_url = url_for('book_view.courseware_detail', courseware_id=self.id)
+        return '/admin/courseware/edit?url={}&id={}'.format(redirect_url, self.id)

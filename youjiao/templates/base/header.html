@@ -53,7 +53,12 @@
                 <span class="header-login">
                 {% if current_user.is_authenticated() %}
                     <a class="header-login-name" href="{{ url_for('user_view.user_profile') }}">{{ current_user.name }}</a>
-                    {% if 'editor' in current_user.roles_name or 'admin' in current_user.roles_name %}|<a class="header-login-name" href="/admin/">编辑后台</a>{% endif %}
+                    {% if 'editor' in current_user.roles_name or 'admin' in current_user.roles_name %}
+                    |<a class="header-login-name" href="/admin/">编辑后台</a>
+                        {% if obj and obj.edit_link %}
+                            |<a class="header-login-name" href="{{ obj.edit_link }}">编辑当前页面</a>
+                        {% endif %}
+                    {% endif %}
                     |<a href="{{ url_for('user_view.logout') }}">退出</a>
                 {% else %}
                     <a href="{{ url_for('user_view.login') }}">登陆</a> / <a href="{{ url_for('user_view.register') }}">注册</a>

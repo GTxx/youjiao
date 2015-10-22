@@ -63,7 +63,7 @@ def book_detail(book_id):
     page_comment = Comment.query.filter(
         and_(Comment.comment_obj_type == 'book',
              Comment.comment_obj_id == book.id)).paginate(1)
-    return render_template('book/detail.html', book=book,
+    return render_template('book/detail.html', book=book, obj=book,
                            page_comment=page_comment)
 
 
@@ -90,7 +90,8 @@ def courseware_detail(courseware_id):
         and_(Comment.comment_obj_type == 'courseware',
              Comment.comment_obj_id == courseware.id)).paginate(1)
     return render_template('courseware/detail.html', current_page='courseware',
-                           courseware=courseware, page_comment=page_comment)
+                           courseware=courseware, page_comment=page_comment,
+                           obj=courseware)
 
 
 @book_bp.route('/courseware/list/')
