@@ -83,7 +83,7 @@ class User(db.Model, UserMixin, CRUDMixin):
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
     user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
-    user = db.relationship('User', backref=db.backref('profile'))
+    user = db.relationship('User', backref=db.backref('profile', uselist=False))
     # TODO: add column describe/description
     nickname = db.Column(sqla.String(16), unique=True)
     work_place_name = db.Column(sqla.String(255))

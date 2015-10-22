@@ -20,6 +20,7 @@ import json
 class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_filters = ('name', )
+    list_template = 'yj_admin/photo.list.html'
 
     def _preview_formatter(view, context, model, name):
         img_content = ''.join(
