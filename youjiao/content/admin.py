@@ -79,6 +79,8 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 class PageAdmin(AuthEditorMixin, sqla.ModelView):
+
+    column_searchable_list = ('title', 'html')
     form_overrides = {
         'html': CKTextAreaField
     }
