@@ -4,13 +4,16 @@
 <div class="row">
     {% for row in data %}
     <div class="col-xs-6 col-md-2">
-        <a href="" class="thumbnail">
-            <img src="{{ row.thumbnail }}" alt=""
-                 style="height: 150px; width: 100%; display: block;">
-        </a>
-        <div class="caption">
-        <p>{{ row.url }}</p>
-      </div>
+        <div class="thumbnail">
+            <a href="" >
+                <img src="{{ row.thumbnail }}" alt=""
+                     style="height: 150px; width: 100%; display: block;">
+            </a>
+
+            <div class="caption">
+                <p>{{ row.url }}</p>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>

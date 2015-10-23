@@ -54,12 +54,10 @@
         {% for row in data %}
         <div class="col-xs-6 col-md-2">
             <div class="thumbnail">
-            <a href="{{ url_for('photo.index_view', flt1_0=row.id)}}">
-                <img src="{{ row.cover }}" alt=""
+                <img src="{{ row.thumbnail }}" alt=""
                      style="height: 150px; width: 100%; display: block;">
-            </a>
             <div class="caption">
-                <p>{{ row.name or '无名'}}</p>
+                <p>{{ row.url }}</p>
             {% if actions %}
             <input type="checkbox" name="rowid" class="action-checkbox"
                    value="{{ get_pk_value(row) }}"

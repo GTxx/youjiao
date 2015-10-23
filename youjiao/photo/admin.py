@@ -79,6 +79,10 @@ class PhotoAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_default_sort = 'id'
 
+    list_template = 'yj_admin/photo.list.html'
+
+    column_filters = ('album_id', )
+
     # overide qiniu_key field
     form_extra_fields = {
         'qiniu_key': QiniuImageUploadField('Image')
