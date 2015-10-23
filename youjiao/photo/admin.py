@@ -20,7 +20,7 @@ import json
 class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_filters = ('name', )
-    list_template = 'yj_admin/photo.list.html'
+    list_template = 'yj_admin/album.list.html'
 
     def _preview_formatter(view, context, model, name):
         img_content = ''.join(
@@ -43,9 +43,10 @@ class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
         columns.append('preview')
         return columns
 
-    @expose('/upload_photo/<id>', methods=('GET', ))
-    def upload_photo(self, id):
-        return 'abc'
+    @expose('/photo_preview/<id>', methods=('GET', ))
+    def photo_preview(self, id):
+        album = Album.query.get(id)
+        return self.render('yj_admin/photo_preview.html', data=album.photos)
 
 
 class QiniuImageUploadInput(ImageUploadInput):

@@ -39,5 +39,12 @@ class Album(db.Model, CRUDMixin):
     name = sqla.Column(sqla.String(200))
     photos = db.relationship('Photo', backref='album')
 
+    @property
+    def cover(self):
+        # import ipdb; ipdb.set_trace()
+        if len(self.photos) != 0:
+            return self.photos[0].thumbnail
+        return '/static/image/icons/61Logo.png'
+
     def __repr__(self):
         return u'<Album: {}>'.format(self.name)
