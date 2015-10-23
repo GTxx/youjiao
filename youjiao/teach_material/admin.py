@@ -28,6 +28,8 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
     column_exclude_list = ('image_array', 'preview_array')
+    column_filters = ('level', 'category', 'name')
+    column_searchable_list = ('name', 'executive_editor', 'chief_editor')
 
     def scaffold_list_columns(self):
         columns = super(BookAdmin, self).scaffold_list_columns()
@@ -57,6 +59,7 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
 class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_default_sort = 'id'
+    column_searchable_list = ('name', )
 
     def scaffold_form(self):
         form_class = super(CoursewareAdmin, self).scaffold_form()
