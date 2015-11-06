@@ -32,16 +32,19 @@ def book_category(category):
         # import ipdb; ipdb.set_trace()
         if not level:
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材')).limit(9)
+                and_(Book.category == u'幼教教材', Book.publish==True)).limit(9)
         elif level == u'小班':
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level,
+                     Book.publish==True)).limit(9)
         elif level == u'中班':
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level,
+                     Book.publish==True)).limit(9)
         elif level == u'大班':
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level)).limit(9)
+                and_(Book.category == u'幼教教材', Book.level == level,
+                     Book.publish==True)).limit(9)
         else:
             book_list = []
         top10 = Book.top10()
