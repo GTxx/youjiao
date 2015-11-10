@@ -98,7 +98,7 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_approve(self, ids):
         try:
-            query = Document.query.filter(Video.id.in_(ids))
+            query = Document.query.filter(Document.id.in_(ids))
             count = 0
             src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
             dest_bucket_name = src_bucket_name
