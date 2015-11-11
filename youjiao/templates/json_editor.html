@@ -10,7 +10,11 @@ $(function () {
     var DOM_json_textarea = $('.json_field');
     DOM_json_textarea.css({visibility: "hidden", display: "none"})
     $('<div id="json_editor"></div>').insertAfter(DOM_json_textarea);
-    var init_value = JSON.parse(DOM_json_textarea.text())
+    if(DOM_json_textarea.text()){
+        var init_value = JSON.parse(DOM_json_textarea.text())
+    }else{
+        var init_value = {};
+    }
     var json_editor = new JSONEditor(document.getElementById('json_editor'), {
         schema: {
             type: "array",
