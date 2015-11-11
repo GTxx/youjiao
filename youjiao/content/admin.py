@@ -14,7 +14,7 @@ from ..admin_utils import AuthEditorMixin
 class CKTextAreaWidget(TextArea):
     def __call__(self, field, **kwargs):
         if kwargs.get('class'):
-            kwargs['class'] = 'ckeditor'
+            kwargs['class'] += ' ckeditor'
         else:
             kwargs.setdefault('class', 'ckeditor')
         return super(CKTextAreaWidget, self).__call__(field, **kwargs)

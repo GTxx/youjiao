@@ -1,0 +1,40 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block tail %}
+  {{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json-editor/0.7.23/jsoneditor.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    JSONEditor.defaults.options.theme = 'bootstrap3';
+
+    var DOM_json_textarea = $('.json_field');
+    DOM_json_textarea.css({visibility: "hidden", display: "none"})
+    $('<div id="json_editor"></div>').insertAfter(DOM_json_textarea);
+    var init_value = JSON.parse(DOM_json_textarea.text())
+    var json_editor = new JSONEditor(document.getElementById('json_editor'), {
+        schema: {
+            type: "array",
+            format: "table",
+            title: "  ",
+            items: {
+                type: "object",
+                properties: {
+                    type: {type: "string", enum: ["audio", 'video', 'document']},
+                    name: {type: "string"},
+                    key: {type: "string"}
+                }
+            }
+        },
+        required_by_default: true,
+        startval: init_value,
+        disable_collapse: true
+    });
+    // set changed json data on content
+    json_editor.on('change', function () {
+                console.log(this);
+                $('#content').val(JSON.stringify(json_editor.getValue()))
+            }
+    )
+})
+</script>
+{% endblock %}

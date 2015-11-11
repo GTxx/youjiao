@@ -58,6 +58,9 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
 
 class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
 
+    create_template = 'json_editor.html'
+    edit_template = 'json_editor.html'
+    column_exclude_list = ('content', )
     column_default_sort = 'id'
     column_searchable_list = ('name', )
 
@@ -70,7 +73,6 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
         columns = super(CoursewareAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
         columns.append('preview')
-        columns.append(u'内容')
         return columns
 
     def _preview_formatter(view, context, model, name):
@@ -81,14 +83,8 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
                 name
             ))
 
-    def _content_formatter(view, context, model, name):
-        if model.content:
-            return json.dumps(model.content, ensure_ascii=False)
-        return ''
-
     column_formatters = {
         'preview': _preview_formatter,
-        u'内容': _content_formatter
     }
 
     column_exclude_list = ['content']
