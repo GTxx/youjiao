@@ -32,7 +32,7 @@
                             <div class="v-image-wrapper">
                                 <img src="{{ courseware.book.cover }}" alt="">
                             </div>
-                            <h5>{{ courseware.book.name }}</h5>
+                            <h5>{{ courseware.name }}</h5>
                         </a>
                     </li>
                 {% endfor %}
@@ -48,7 +48,7 @@
                         <div class="rank-each-item">
                             <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
-                                <h4>{{i}}.{{ top10[i].book.name }}</h4>
+                                <h4>{{i}}.{{ top10[i].name }}</h4>
                             </a>
                         </div>
                     {% endfor %}
@@ -59,8 +59,8 @@
                             <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
                                 <div>
-                                    <h4>{{ i }}.{{ top10[i].book.name }}</h4>
-                                    <h5>{{ top10[i].book.name }}</h5>
+                                    <h4>{{ i }}.{{ top10[i].name }}</h4>
+                                    <h5>{{ top10[i].name }}</h5>
                                 </div>
                             </a>
                         </div>
@@ -72,8 +72,8 @@
                             <a href="{{ top10[i].link }}">
                                 <img src="" alt="">
                                 <div>
-                                    <h4>{{ i }}.{{ top10[i].book.name }}</h4>
-                                    <h5>{{ top10[i].book.name }}</h5>
+                                    <h4>{{ i }}.{{ top10[i].name }}</h4>
+                                    <h5>{{ top10[i].name }}</h5>
                                 </div>
                             </a>
                         </div>

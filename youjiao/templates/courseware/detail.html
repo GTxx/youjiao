@@ -12,7 +12,7 @@
 {% block content %}
     <div id="main-noright-body">
 
-        <div class="e-page-title">课件中心-教材配套课件-幼儿园大班-清凉一夏</div>
+        <div class="e-page-title">课件中心-教材配套课件-{{courseware.book.level}}-{{courseware.name}}</div>
 
         <div>
             <div class="product-container">
@@ -26,11 +26,7 @@
                     <table>
                         <tr>
                             <td class="product-info-detail">课程内容：</td>
-                            <td>xxx</td>
-                        </tr>
-                        <tr>
-                            <td class="product-info-detail">清凉一夏</td>
-                            <td>PPT</td>
+                            <td>{{ courseware.name }}</td>
                         </tr>
                     </table>
                     <div class="product-button">
@@ -48,38 +44,29 @@
                     <div class="detail-comment-content courseware-detail-content">
                         <img src="" alt="" id="courseware-simple-mainimg">
 
-                        <p>青花瓷PPT</p>
+                        {% if current_user.is_authenticated() %}
                         {% for media in courseware.content %}
                             {% if media.type == 'audio' %}
                             <div class="courseware-{{ media.type }}">
                             <h4>{{ media.name }}</h4>
-                                {% if current_user.is_authenticated() %}
                                 <audio src="{{ media.key | qiniu_private_url }}"></audio>
-                                {% else %}
-                                <audio src="#"></audio>
-                                {% endif %}
                             </div>
                             {% elif media.type == 'video' %}
                             <div class="video-detail-course">
-                                {% if current_user.is_authenticated() %}
                                 <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
                                        width="760"
                                        height="400" data-setup='{}'>
                                     <source src='{{ media.key| qiniu_private_url }}' type='video/mp4'/>
                                 </video>
-                                {% else %}
-                                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
-                                       width="760"
-                                       height="400" data-setup='{}'>
-                                    <source src='#' type='video/mp4'/>
-                                </video>
-                                {% endif %}
                             </div>
                             <p>{{ media.name }}</p>
                             {% elif media.type == 'document' %}
-                                <p>haha</p>
+                                <p>{{ media.name }}</p>
                             {% endif %}
                         {% endfor %}
+                        {% else %}
+                        <p>请登陆后观看</p>
+                        {% endif %}
                     </div>
                     <div class="detail-comment-content display-none">
                         <ul id="book-content-list">

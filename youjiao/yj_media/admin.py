@@ -41,6 +41,7 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
         u'预处理': _preview_formatter
     }
     column_exclude_list = ['media_process']
+    column_searchable_list = ('name',)
 
     @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
     def action_approve(self, ids):
@@ -94,6 +95,7 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
         u'预处理': _preview_formatter
     }
     column_exclude_list = ['media_process']
+    column_searchable_list = ('name',)
 
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_approve(self, ids):
@@ -123,6 +125,8 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 class AudioAdmin(AuthEditorMixin, sqla.ModelView):
+
+    column_searchable_list = ('name',)
 
     def scaffold_list_columns(self):
         columns = super(AudioAdmin, self).scaffold_list_columns()

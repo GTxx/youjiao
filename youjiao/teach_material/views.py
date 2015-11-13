@@ -77,7 +77,7 @@ def book_associate():
 
 @book_bp.route('/courseware/')
 def courseware():
-    courseware_list = Courseware.query.all()
+    courseware_list = Courseware.query.limit(12).all()
     return render_template('courseware/home.html', current_page='courseware',
                            courseware_list=courseware_list,
                            Courseware=Courseware)
