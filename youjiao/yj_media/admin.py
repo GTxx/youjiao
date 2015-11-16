@@ -2,15 +2,33 @@
 from .models import Video, Audio, Document
 import json
 from urlparse import urljoin
-from flask import flash, current_app, url_for
+from flask import flash, current_app, url_for, Markup
 from flask_admin.consts import ICON_TYPE_GLYPH
 from flask_admin.contrib import sqla
 from flask_admin.actions import action
 from qiniu import Auth, PersistentFop, op_save
 from youjiao.extensions import admin, db
-from .views import QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE
+from .views import (QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE,
+                    QINIU_AUDIO_CALLBACK_ROUTE)
 from ..admin_utils import AuthEditorMixin
 from youjiao.utils.admin import JsonField
+
+
+def _media_process(view, context, model, name):
+    if model.media_process:
+        return Markup(
+            "<div class='json_field'>%s</div>" % (
+                json.dumps(model.media_process, ensure_ascii=False)
+            ))
+    return ''
+
+def _media_meta(view, context, model, name):
+    if model.media_meta:
+        return Markup(
+            "<div class='json_field'>%s</div>" % (
+                json.dumps(model.media_meta, ensure_ascii=False)
+            ))
+    return ''
 
 
 class VideoAdmin(AuthEditorMixin, sqla.ModelView):
@@ -23,28 +41,26 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
     def scaffold_list_columns(self):
         columns = super(VideoAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append(u'预处理')
+        columns.append(u'mp4')
         return columns
 
-    def _preview_formatter(view, context, model, name):
+    def _mp4(view, context, model, name):
         if model.media_process:
-            return json.dumps(model.media_process, ensure_ascii=False)
+            return model.media_process['mp4']['key']
         return ''
 
-    def scaffold_form(self):
-        form_class = super(VideoAdmin, self).scaffold_form()
-        form_class.media_meta = JsonField('media_meta')
-        form_class.media_process = JsonField('media_process')
-        return form_class
-
     column_formatters = {
-        u'预处理': _preview_formatter
+        u'mp4': _mp4,
+        'media_process': _media_process,
+        'media_meta': _media_meta
     }
-    column_exclude_list = ['media_process']
+    column_list = ['name', 'qiniu_key', 'mp4']
     column_searchable_list = ('name',)
+    can_view_details = True
+    details_template = 'json_detail.html'
 
     @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
-    def action_approve(self, ids):
+    def action_convert_mp4(self, ids):
         try:
             query = Video.query.filter(Video.id.in_(ids))
             count = 0
@@ -62,19 +78,21 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
                 # import ipdb; ipdb.set_trace()
                 op = op_save('avthumb/mp4', dest_bucket_name, saved_key.encode('utf-8'))
                 ops.append(op)
+                count += 1
             ret, info = pfop.execute(video.qiniu_key, ops, force=1)
             if info.status_code != 200:
                 raise Exception(u'error {}'.format(info))
-            flash(u'{} users were successfully approved.'.format(count))
+            flash(u'{} video begin to convert.'.format(count))
         except Exception as ex:
             if not self.handle_view_exception(ex):
                 raise
 
-            flash(u'Failed to approve users. {}'.format(str(ex)), 'error')
+            flash(u'Failed to convert video. {}'.format(str(ex)), 'error')
 
 
 class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 
+    can_view_details = True
     def is_accessible(self):
         if not super(DocumentAdmin, self).is_accessible():
             return False
@@ -83,22 +101,26 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
     def scaffold_list_columns(self):
         columns = super(DocumentAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append(u'预处理')
+        columns.append(u'pdf')
         return columns
 
-    def _preview_formatter(view, context, model, name):
+    def _pdf(view, context, model, name):
         if model.media_process:
-            return json.dumps(model.media_process, ensure_ascii=False)
+            return model.media_process['pdf']['key']
         return ''
 
     column_formatters = {
-        u'预处理': _preview_formatter
+        u'pdf': _pdf,
+        'media_process': _media_process,
+        'media_meta': _media_meta
     }
-    column_exclude_list = ['media_process']
+    column_list = ['name', 'qiniu_key', 'pdf']
     column_searchable_list = ('name',)
+    can_view_details = True
+    details_template = 'json_detail.html'
 
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
-    def action_approve(self, ids):
+    def action_convert_pdf(self, ids):
         try:
             query = Document.query.filter(Document.id.in_(ids))
             count = 0
@@ -127,22 +149,54 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 class AudioAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_searchable_list = ('name',)
+    can_view_details = True
+    details_template = 'json_detail.html'
 
     def scaffold_list_columns(self):
         columns = super(AudioAdmin, self).scaffold_list_columns()
         # import ipdb; ipdb.set_trace()
-        columns.append(u'预处理')
+        columns.append(u'mp3')
         return columns
 
-    def _preview_formatter(view, context, model, name):
+    def _mp3(view, context, model, name):
         if model.media_process:
-            return json.dumps(model.media_process, indent=2, ensure_ascii=False)
+            return model.media_process['mp3']['key']
         return ''
 
     column_formatters = {
-        u'预处理': _preview_formatter
+        u'mp3': _mp3,
+        'media_process': _media_process,
+        'media_meta': _media_meta
     }
-    column_exclude_list = ['media_process']
+    column_list = ['name', 'qiniu_key', 'mp3']
+
+    @action('convert', u'转mp3', u'文件会转换并另存为mp3,确定吗?')
+    def action_convert(self, ids):
+        try:
+            query = Audio.query.filter(Audio.id.in_(ids))
+            count = 0
+            src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
+            dest_bucket_name = src_bucket_name
+            QINIU_AUDIO_CALLBACK_URL = urljoin(
+                    current_app.qiniu.CALLBACK_URL, QINIU_AUDIO_CALLBACK_ROUTE)
+            pfop = PersistentFop(current_app.qiniu.qiniu_auth, src_bucket_name,
+                                 notify_url=QINIU_AUDIO_CALLBACK_URL)
+            ops = []
+            for audio in query.all():
+                saved_key = audio.qiniu_key + '.mp3'
+                op = op_save('avthumb/mp3', dest_bucket_name, saved_key.encode('utf-8'))
+                ops.append(op)
+                count += 1
+
+            ret, info = pfop.execute(audio.qiniu_key, ops, force=1)
+            if info.status_code != 200:
+                raise Exception('error {}'.format(info))
+            flash('{} audio begin to convert.'.format(count))
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+
+            flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
 
 admin.add_view(VideoAdmin(Video, db.session, name=u'视频', category=u'资源管理',

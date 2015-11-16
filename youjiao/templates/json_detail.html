@@ -1,0 +1,20 @@
+{% extends 'admin/model/details.html' %}
+
+{% block head_css %}
+    {{ super() }}
+<link href="http://7xn3in.com2.z0.glb.qiniucdn.com/json.human.css" rel="stylesheet">
+{% endblock %}
+
+{% block tail %}
+  {{ super() }}
+<script src="http://7xn3in.com2.z0.glb.qiniucdn.com/json.human.js"></script>
+<script type="text/javascript">
+$(function () {
+   $('.json_field').each(function(index, item){
+        var output = JsonHuman.format(JSON.parse(item.textContent))
+        item.textContent = ''
+        item.appendChild(output)
+   })
+})
+</script>
+{% endblock %}
