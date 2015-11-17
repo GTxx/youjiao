@@ -122,6 +122,53 @@ def create_common_user(name, password, email):
     user.profile = profile
     user.save()
 
+@manager.command
+def create_audio():
+    from youjiao.teach_material.models import Courseware
+    from youjiao.yj_media.models import Audio
+    ids = []
+    for course in Courseware.query.all():
+        if course.content:
+            try:
+                audio_list = [i for i in course.content if i['type']=='audio']
+                for audio in audio_list:
+                    if audio['key'].lower().endswith('.wav'):
+                        audio_obj = Audio(name=audio['key'], qiniu_key=audio['key'])
+                        audio_obj.save()
+                        ids.append(audio_obj)
+            except Exception as e:
+                pass
+    Audio.batch_convert_mp3([audio.id for audio in ids])
+    # begin to convert
+    # Audio.batch_convert_mp3(ids)
+
+@manager.command
+def replace_mp3():
+    from youjiao.teach_material.models import Courseware
+    from youjiao.yj_media.models import Audio
+    for course in Courseware.query.all():
+        if course.content:
+            content = []
+            modified = False
+            # if course.id == 1:
+            #     import ipdb; ipdb.set_trace()
+            try:
+                for item in course.content:
+                    if item['type'] != 'audio':
+                        content.append(item)
+                    else:
+                        key = item['key']
+                        if key.lower().endswith('.wav'):
+                            audio = Audio.query.filter_by(qiniu_key=key).first()
+                            if audio:
+                                key = key+'.mp3'
+                                modified = True
+                        content.append({'type':'audio', 'name': item['name'], 'key':key})
+                if modified:
+                    course.content = content
+                    course.save()
+            except:
+                pass
 
 @app.template_filter('asset')
 def asset_filter(file_string):

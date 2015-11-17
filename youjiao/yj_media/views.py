@@ -9,7 +9,6 @@ media_bp = Blueprint('media_bp', __name__)
 
 QINIU_CALLBACK_ROUTE = '/qiniu_video_callback'
 QINIU_DOCUMENT_CALLBACK_ROUTE = '/qiniu_document_callback'
-QINIU_AUDIO_CALLBACK_ROUTE = '/qiniu_audio_callback'
 
 QINIU_VIDEO_CALLBACK_URL = LocalProxy(lambda: _get_qiniu_video_callback_url())
 
@@ -50,7 +49,7 @@ def qiniu_document_callback():
             document.save()
     return 'abc'
 
-@media_bp.route(QINIU_AUDIO_CALLBACK_ROUTE, methods=['POST'])
+@media_bp.route(Audio.QINIU_AUDIO_CALLBACK_ROUTE, methods=['POST'])
 def qiniu_audio_callback():
     for item in request.json['items']:
         qiniu_key = item['key'][:-4]

@@ -9,7 +9,7 @@ from flask_admin.actions import action
 from qiniu import Auth, PersistentFop, op_save
 from youjiao.extensions import admin, db
 from .views import (QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE,
-                    QINIU_AUDIO_CALLBACK_ROUTE)
+                    )
 from ..admin_utils import AuthEditorMixin
 from youjiao.utils.admin import JsonField
 
@@ -173,30 +173,12 @@ class AudioAdmin(AuthEditorMixin, sqla.ModelView):
     @action('convert', u'转mp3', u'文件会转换并另存为mp3,确定吗?')
     def action_convert(self, ids):
         try:
-            query = Audio.query.filter(Audio.id.in_(ids))
-            count = 0
-            src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
-            dest_bucket_name = src_bucket_name
-            QINIU_AUDIO_CALLBACK_URL = urljoin(
-                    current_app.qiniu.CALLBACK_URL, QINIU_AUDIO_CALLBACK_ROUTE)
-            pfop = PersistentFop(current_app.qiniu.qiniu_auth, src_bucket_name,
-                                 notify_url=QINIU_AUDIO_CALLBACK_URL)
-            ops = []
-            for audio in query.all():
-                saved_key = audio.qiniu_key + '.mp3'
-                op = op_save('avthumb/mp3', dest_bucket_name, saved_key.encode('utf-8'))
-                ops.append(op)
-                count += 1
-
-            ret, info = pfop.execute(audio.qiniu_key, ops, force=1)
-            if info.status_code != 200:
-                raise Exception('error {}'.format(info))
+            count = Audio.batch_convert_mp3(ids)
             flash('{} audio begin to convert.'.format(count))
         except Exception as ex:
             if not self.handle_view_exception(ex):
                 raise
-
-            flash('Failed to approve users. {}'.format(str(ex)), 'error')
+            flash('Failed to convert mp3. {}'.format(str(ex)), 'error')
 
 
 admin.add_view(VideoAdmin(Video, db.session, name=u'视频', category=u'资源管理',
