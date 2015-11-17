@@ -43,6 +43,8 @@ class Audio(CRUDMixin, MediaMixin, db.Model):
 
     @classmethod
     def batch_convert_mp3(cls, ids):
+        if len(ids) == 0:
+            return 0
         query = cls.query.filter(Audio.id.in_(ids))
         src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
         dest_bucket_name = src_bucket_name

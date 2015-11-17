@@ -9,9 +9,13 @@ class CRUDMixin(object):
 
     def save(self):
         """Saves the object to the database."""
-        db.session.add(self)
-        db.session.commit()
-        return self
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return self
+        except Exception as e:
+            db.session.rollback()
+            raise e
 
     def delete(self):
         """Delete the object from the database."""

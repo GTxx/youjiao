@@ -137,7 +137,7 @@ def create_audio():
                         audio_obj.save()
                         ids.append(audio_obj)
             except Exception as e:
-                pass
+                print(e)
     Audio.batch_convert_mp3([audio.id for audio in ids])
     # begin to convert
     # Audio.batch_convert_mp3(ids)
