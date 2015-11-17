@@ -23,6 +23,8 @@ class FlaskQiniu(object):
 
 
 def get_private_url(key):
+    if not key:
+        return ''
     q = current_app.qiniu.qiniu_auth
     PRIVATE_DOMAIN = current_app.qiniu.PRIVATE_CDN_DOMAIN
     url = urljoin(PRIVATE_DOMAIN, urllib.quote(key.encode('utf-8')))

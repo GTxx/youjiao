@@ -17,7 +17,7 @@
         <div>
             <div class="product-container">
                 <div class="samples-imgs">
-                    <img src="{{ courseware.book.cover }}" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
+                    <img src="{{ '%s?imageView2/2/w/300'|format(courseware.book.cover) }}" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
                 </div>
                 <div class="product-info">
                     <div class="product-title">
@@ -114,16 +114,22 @@
     </div>
     <div id="download-box" class="display-none">
         <ul>
+            {% if current_user.is_authenticated() %}
             {% for media in courseware.content %}
             <li>
-                <span><i class="glyphicon glyphicon-folder-open"></i> 文件： {{media.name}}</span>
-                {% if current_user.is_authenticated() %}
+                {% if media.type == 'document' %}
+                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-319-more-items.png"> ： {{media.name}}</span>
+                <a href="{{ media.key.strip('.pdf') | qiniu_private_url }}" class="download-button-c" download>下载</a>
+                {% elif media.type == 'video' %}
+                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-392-video-hd.png"> ： {{media.name}}</span>
                 <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% else %}
-                <a href="#" class="download-button-c" download>下载</a>
+                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-77-headphones.png"> ： {{media.name}}</span>
+                <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
                 {% endif %}
             </li>
             {% endfor %}
+            {% endif %}
         </ul>
     </div>
 {% endblock %}
