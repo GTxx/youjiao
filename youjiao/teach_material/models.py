@@ -28,15 +28,17 @@ class Book(db.Model, CRUDMixin):
 
     @classmethod
     def read_book_top10(cls):
-        return cls.query.filter_by(category=u'幼教读物').limit(10)
+        return cls.query.filter(cls.category==u'幼教读物',
+                                cls.publish==True).limit(10)
 
     @classmethod
     def teach_book_tol10(cls):
-        return cls.query.filter_by(category=u'幼教教材').limit(10)
+        return cls.query.filter(cls.category==u'幼教教材',
+                                cls.publish==True).limit(10)
 
     @classmethod
     def top10(cls):
-        return cls.query.limit(10)
+        return cls.query.filter(cls.publish==True, not_(cls.name.contains(u'家园'))).limit(10)
 
     @property
     def cover(self):
@@ -74,7 +76,7 @@ class Courseware(db.Model, CRUDMixin):
 
     @classmethod
     def top10(cls):
-        return cls.query.limit(10)
+        return cls.query.filter(cls.publish==True).limit(10)
 
     def comment(self):
         return Comment.query.filter_by(
@@ -86,7 +88,9 @@ class Courseware(db.Model, CRUDMixin):
 
     @property
     def related_courseware(self):
-        return Courseware.query.join(Book).filter(Book.id==self.book_id).filter(not_(Courseware.id==self.id)).all()
+        return Courseware.query.join(Book).filter(
+            Book.id==self.book_id, Courseware.id!=self.id,
+            Courseware.publish==True).all()
 
     @property
     def edit_link(self):
