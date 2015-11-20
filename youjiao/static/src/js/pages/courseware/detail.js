@@ -1,6 +1,8 @@
 import 'normalize_css';
 import 'main_css';
 import '../../modules/not_login_pop';
+import 'lightbox_css';
+import 'lightbox_js';
 
 $(function () {
 
