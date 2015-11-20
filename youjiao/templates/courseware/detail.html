@@ -17,7 +17,7 @@
         <div>
             <div class="product-container">
                 <div class="samples-imgs">
-                    <img src="{{ '%s?imageView2/2/w/300'|format(courseware.book.cover) }}" alt=""
+                    <img src="{{ '%s?imageView2/2/w/300'|format(courseware.cover) }}" alt=""
                          style="width: 484px;height: 460px;background: #CCCCCC;">
                 </div>
                 <div class="product-info">
@@ -44,47 +44,42 @@
                     <a href="javascript:;" class="book-switch">课件评论</a>
                 </div>
                 <div>
-                    <div class="detail-comment-content courseware-detail-content">
-{#                        <img src="" alt="" id="courseware-simple-mainimg">#}
-                        {% if current_user.is_authenticated() %}
-                            {% for media in courseware.content %}
-                                {% if media.type == 'audio' %}
-                                    <audio preload></audio>
-                                    <div class="audio-list">
-                                        <p><a href="javascript:;" data-src="{{ media.key }}">{{ media.name }}</a></p>
-                                    </div>
-                                {% elif media.type == 'video' %}
-                                    <div class="video-detail-course">
-                                        <video id="video-detail-c" class="video-js vjs-default-skin" controls
-                                               preload="auto"
-                                               width="760"
-                                               height="400" data-setup='{}'>
-                                            <source src='{{ media.key| qiniu_private_url }}' type='video/mp4'/>
-                                        </video>
-                                    </div>
-                                    <p>{{ media.name }}</p>
-                                {% elif media.type == 'document' %}
-                                    <div class="document-img">
-                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner1.jpg" data-lightbox="roadtrip">
-                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner1.jpg" alt="" class="document-img-first">
-                                        </a>
-                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner2.jpg" data-lightbox="roadtrip">
-                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner2.jpg" alt="">
-                                        </a>
-                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner3.jpg" data-lightbox="roadtrip">
-                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner3.jpg" alt="">
-                                        </a>
-                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner4.jpg" data-lightbox="roadtrip">
-                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner4.jpg" alt="">
-                                        </a>
-                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner5.jpg" data-lightbox="roadtrip">
-                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner5.jpg" alt="">
-                                        </a>
-                                    </div>
+                    <p class="detail-comment-content courseware-detail-content">
 
-                                    <p>{{ media.name }}</p>
-                                {% endif %}
+                        {% if current_user.is_authenticated() %}
+
+                            {% for document in courseware.document_list %}
+                                <div class="document-img">
+                                    {% for img in document.img_list %}
+                                    <a href="{{ img | qiniu_private_url}}" data-lightbox="roadtrip">
+                                        <img src="{{ img | qiniu_private_url }}" alt="" {% if loop.index==1 %}class="document-img-first"{% endif %}>
+                                    </a>
+                                    {% endfor %}
+                                    <span>{{ document.name }}</span>
+                                </div>
                             {% endfor %}
+
+                            {% for video in courseware.video_list %}
+                            <div class="video-detail-course">
+                            <video id="video-detail-c" class="video-js vjs-default-skin" controls
+                                   preload="auto"
+                                   width="760"
+                                   height="400" data-setup='{}'>
+                                <source src='{{ video.key| qiniu_private_url }}' type='video/mp4'/>
+                            </video>
+                                <p>视频： {{ video.name }}</p>
+                            </div>
+                            {% endfor %}
+
+                            {% if courseware.audio_list| length > 0 %}
+                                <audio preload></audio>
+                                {% for audio in courseware.audio_list %}
+                                    <div class="audio-list">
+                                        <p><a href="javascript:;" data-src="{{ audio.key | qiniu_private_url }}">{{ audio.name }}</a></p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
                         {% else %}
                             <p>请登陆后观看</p>
                         {% endif %}
@@ -123,9 +118,9 @@
                     {% for courseware in courseware.related_courseware %}
                         <a href="{{ courseware.link }}">
                             <div>
-                                <img src="{{ courseware.book.cover }}" alt="">
+                                <img src="{{ courseware.cover }}" alt="">
 
-                                <p>{{ courseware.book.name }}</p>
+                                <p>{{ courseware.name }}</p>
                             </div>
                         </a>
                     {% endfor %}

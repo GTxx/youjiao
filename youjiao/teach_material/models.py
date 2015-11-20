@@ -8,6 +8,7 @@ from sqlalchemy import not_
 from sqlalchemy.dialects.postgresql import ARRAY, JSON
 from youjiao.user_util.models import Comment
 from flask import url_for
+from youjiao.yj_media.models import Document
 
 
 class Book(db.Model, CRUDMixin):
@@ -96,3 +97,33 @@ class Courseware(db.Model, CRUDMixin):
     def edit_link(self):
         redirect_url = url_for('book_view.courseware_detail', courseware_id=self.id)
         return '/admin/courseware/edit?url={}&id={}'.format(redirect_url, self.id)
+
+    def get_media_list(self, media_type):
+        if not self.content:
+            return []
+        return [media for media in self.content if media.get('type')==media_type]
+
+    @property
+    def document_list(self):
+        documents = self.get_media_list('document')
+        res = []
+        for document in documents:
+            document_obj = Document.query.filter_by(qiniu_key=document.get('key').strip('.pdf')).first()
+            img_list = document_obj.pdf_pic
+            document.update({'img_list': img_list})
+            res.append(document)
+        return res
+
+    @property
+    def audio_list(self):
+        return self.get_media_list('audio')
+
+    @property
+    def video_list(self):
+        return self.get_media_list('video')
+
+    @property
+    def cover(self):
+        if self.book:
+            return self.book.cover
+        return 'http://7xn3in.com2.z0.glb.qiniucdn.com/imgo.jpg'

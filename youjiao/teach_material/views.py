@@ -99,7 +99,19 @@ def courseware_detail(courseware_id):
 
 @book_bp.route('/courseware/list/')
 def courseware_list():
-    return render_template('courseware/list.html', current_page='courseware')
+    level = request.args.get('level')
+    if not level:
+        courseware_list = Courseware.query.limit(10).all()
+    elif level == u'小班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'小班').all()
+    elif level == u'中班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'中班').all()
+    elif level == u'大班':
+        courseware_list = Courseware.query.join(Book).filter(Book.level == u'大班').all()
+    else:
+        courseware_list = []
+    return render_template('courseware/list.html', current_page='courseware',
+                           courseware_list=courseware_list, level=level)
 
 
 @book_bp.route('/courseware/sub/')

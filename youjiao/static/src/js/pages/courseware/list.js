@@ -6,6 +6,7 @@ import '../../modules/add_slides_itemhover';
 $(function () {
     $('.classes-select').change(function () {
         let w_location = window.location;
-        w_location.href = w_location.origin + '/courseware/list/' + $('.classes-select option:selected').val();
+        w_location.href = w_location.origin + w_location.pathname + $('.classes-select option:selected').val();
     });
 });
+

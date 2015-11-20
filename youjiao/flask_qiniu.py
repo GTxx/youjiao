@@ -27,6 +27,6 @@ def get_private_url(key):
         return ''
     q = current_app.qiniu.qiniu_auth
     PRIVATE_DOMAIN = current_app.qiniu.PRIVATE_CDN_DOMAIN
-    url = urljoin(PRIVATE_DOMAIN, urllib.quote(key.encode('utf-8')))
-    res = q.private_download_url(url, expires=3600)
-    return res
+    url = urljoin(PRIVATE_DOMAIN, key)
+    res = q.private_download_url(url.encode('utf-8'), expires=3600)
+    return res.decode('utf-8')

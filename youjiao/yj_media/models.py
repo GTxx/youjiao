@@ -7,6 +7,8 @@ from sqlalchemy.dialects.postgresql import JSON
 from flask import current_app
 from qiniu import PersistentFop, op_save, BucketManager
 from urlparse import urljoin
+from youjiao.flask_qiniu import get_private_url
+
 
 class MediaMixin(object):
     name = db.Column(sqla.String(200))
@@ -71,3 +73,27 @@ class Audio(CRUDMixin, MediaMixin, db.Model):
 
 class Document(CRUDMixin, MediaMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
+
+    @property
+    def pdf_pic(self):
+        if self.media_process and self.media_process.get('pdf'):
+            pdf_info = self.media_process.get('pdf')
+            page_num = pdf_info.get('page_num')
+            key = pdf_info.get('key')
+            return [u'{}?odconv/jpg/page/{}/'.format(key, i) for i in range(1, page_num+1)]
+        return []
+
+    @property
+    def file(self):
+        return get_private_url(self.qiniu_key)
+
+    @property
+    def pdf_file(self):
+        if self.media_process and self.media_process.get('pdf'):
+            pdf_info = self.media_process.get('pdf')
+            page_num = pdf_info.get('page_num')
+            key = pdf_info.get('key')
+            return get_private_url(key)
+        return []
+
+
