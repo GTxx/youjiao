@@ -12,12 +12,13 @@
 {% block content %}
     <div id="main-noright-body">
 
-        <div class="e-page-title">课件中心-教材配套课件-{{courseware.book.level}}-{{courseware.name}}</div>
+        <div class="e-page-title">课件中心-教材配套课件-{{ courseware.book.level }}-{{ courseware.name }}</div>
 
         <div>
             <div class="product-container">
                 <div class="samples-imgs">
-                    <img src="{{ '%s?imageView2/2/w/300'|format(courseware.book.cover) }}" alt="" style="width: 484px;height: 460px;background: #CCCCCC;">
+                    <img src="{{ '%s?imageView2/2/w/300'|format(courseware.book.cover) }}" alt=""
+                         style="width: 484px;height: 460px;background: #CCCCCC;">
                 </div>
                 <div class="product-info">
                     <div class="product-title">
@@ -30,7 +31,9 @@
                         </tr>
                     </table>
                     <div class="product-button">
-                        <a href="javascript:;" id="{% if current_user.is_authenticated() %}click-to-download{% else %}not-login-pop{% endif %}" class="product-collection">点击下载</a>
+                        <a href="javascript:;"
+                           id="{% if current_user.is_authenticated() %}click-to-download{% else %}not-login-pop{% endif %}"
+                           class="product-collection">点击下载</a>
                         <a href="{{ courseware.book.link }}" class="product-associate">关联教材</a>
                     </div>
                 </div>
@@ -42,30 +45,48 @@
                 </div>
                 <div>
                     <div class="detail-comment-content courseware-detail-content">
-                        <img src="" alt="" id="courseware-simple-mainimg">
-
+{#                        <img src="" alt="" id="courseware-simple-mainimg">#}
                         {% if current_user.is_authenticated() %}
-                        {% for media in courseware.content %}
-                            {% if media.type == 'audio' %}
-                            <div class="courseware-{{ media.type }}">
-                            <h4>{{ media.name }}</h4>
-                                <audio src="{{ media.key | qiniu_private_url }}"></audio>
-                            </div>
-                            {% elif media.type == 'video' %}
-                            <div class="video-detail-course">
-                                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto"
-                                       width="760"
-                                       height="400" data-setup='{}'>
-                                    <source src='{{ media.key| qiniu_private_url }}' type='video/mp4'/>
-                                </video>
-                            </div>
-                            <p>{{ media.name }}</p>
-                            {% elif media.type == 'document' %}
-                                <p>{{ media.name }}</p>
-                            {% endif %}
-                        {% endfor %}
+                            {% for media in courseware.content %}
+                                {% if media.type == 'audio' %}
+                                    <audio preload></audio>
+                                    <div class="audio-list">
+                                        <p><a href="javascript:;" data-src="{{ media.key }}">{{ media.name }}</a></p>
+                                    </div>
+                                {% elif media.type == 'video' %}
+                                    <div class="video-detail-course">
+                                        <video id="video-detail-c" class="video-js vjs-default-skin" controls
+                                               preload="auto"
+                                               width="760"
+                                               height="400" data-setup='{}'>
+                                            <source src='{{ media.key| qiniu_private_url }}' type='video/mp4'/>
+                                        </video>
+                                    </div>
+                                    <p>{{ media.name }}</p>
+                                {% elif media.type == 'document' %}
+                                    <div class="document-img">
+                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner1.jpg" data-lightbox="roadtrip">
+                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner1.jpg" alt="" class="document-img-first">
+                                        </a>
+                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner2.jpg" data-lightbox="roadtrip">
+                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner2.jpg" alt="">
+                                        </a>
+                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner3.jpg" data-lightbox="roadtrip">
+                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner3.jpg" alt="">
+                                        </a>
+                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner4.jpg" data-lightbox="roadtrip">
+                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner4.jpg" alt="">
+                                        </a>
+                                        <a href="http://7xlydq.com1.z0.glb.clouddn.com/banner5.jpg" data-lightbox="roadtrip">
+                                            <img src="http://7xlydq.com1.z0.glb.clouddn.com/banner5.jpg" alt="">
+                                        </a>
+                                    </div>
+
+                                    <p>{{ media.name }}</p>
+                                {% endif %}
+                            {% endfor %}
                         {% else %}
-                        <p>请登陆后观看</p>
+                            <p>请登陆后观看</p>
                         {% endif %}
                     </div>
                     <div class="detail-comment-content display-none">
@@ -97,38 +118,42 @@
 
             </div>
             {% if courseware.related_courseware %}
-            <div class="other-associate-courseware">
-                <p>其他课件相关</p>
-                {% for courseware in courseware.related_courseware %}
-                <a href="{{ courseware.link }}">
-                <div>
-                    <img src="{{ courseware.book.cover }}" alt="">
+                <div class="other-associate-courseware">
+                    <p>其他课件相关</p>
+                    {% for courseware in courseware.related_courseware %}
+                        <a href="{{ courseware.link }}">
+                            <div>
+                                <img src="{{ courseware.book.cover }}" alt="">
 
-                    <p>{{ courseware.book.name }}</p>
+                                <p>{{ courseware.book.name }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </div>
-                    </a>
-                {% endfor %}
-            </div>
             {% endif %}
         </div>
     </div>
     <div id="download-box" class="display-none">
         <ul>
             {% if current_user.is_authenticated() %}
-            {% for media in courseware.content %}
-            <li>
-                {% if media.type == 'document' %}
-                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-319-more-items.png"> ： {{media.name}}</span>
-                <a href="{{ media.key.strip('.pdf') | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                {% elif media.type == 'video' %}
-                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-392-video-hd.png"> ： {{media.name}}</span>
-                <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                {% else %}
-                <span><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-77-headphones.png"> ： {{media.name}}</span>
-                <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                {% endif %}
-            </li>
-            {% endfor %}
+                {% for media in courseware.content %}
+                    <li>
+                        {% if media.type == 'document' %}
+                            <span><img
+                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-319-more-items.png"> ： {{ media.name }}</span>
+                            <a href="{{ media.key.strip('.pdf') | qiniu_private_url }}" class="download-button-c"
+                               download>下载</a>
+                        {% elif media.type == 'video' %}
+                            <span><img
+                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-392-video-hd.png"> ： {{ media.name }}</span>
+                            <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
+                        {% else %}
+                            <span><img
+                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-77-headphones.png"> ： {{ media.name }}</span>
+                            <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
             {% endif %}
         </ul>
     </div>
@@ -137,8 +162,18 @@
 {% block js %}
     <script src="{{ 'vendor/audiojs/audio.min.js' | vendor_asset }}"></script>
     <script>
-        audiojs.events.ready(function () {
+        $(function () {
             var as = audiojs.createAll();
+            var audio = as[0];
+            audio.load($('.audio-list p').children('a').attr('data-src'));
+            $('.audio-list p').click(function(e){
+                e.preventDefault();
+                $('.audiojs').css('display','block');
+                audio.load($('a', this).attr('data-src'));
+                audio.play();
+                $('.audio-playing').removeClass('audio-playing');
+                $(this).addClass('audio-playing');
+            });
         });
     </script>
     <script src="{{ 'vendor/video-js/video.js' | vendor_asset }}"></script>

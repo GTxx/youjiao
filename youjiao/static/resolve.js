@@ -10,7 +10,9 @@ var resolve = {
         normalize_css: path.resolve(vendorcss, 'normalize.css'),
         slides_js: path.resolve(vendorjs, 'responsiveslides.js'),
         area_js: path.resolve(vendorjs, 'area.js'),
-        birthday_js: path.resolve(vendorjs, 'bday-picker.min.js')
+        birthday_js: path.resolve(vendorjs, 'bday-picker.min.js'),
+        lightbox_css: path.resolve('vendor/lightbox/css/lightbox.css'),
+        lightbox_js: path.resolve('vendor/lightbox/js/lightbox.js')
         //plupload_js: path.resolve(vendorjs, 'plupload/plupload.dev.js'),
         //moxie_js: path.resolve(vendorjs, 'plupload/moxie.js'),
         //qiniu_js: path.resolve(vendorjs, 'qiniu.js'),

@@ -642,3 +642,50 @@
     font-size: 36px
     color: $font-gray
     padding-top: 50px
+
+.document-img
+  width: 80%
+  margin: 0 auto
+  img
+    display: none
+  .document-img-first
+    width: 100% !important
+    display: block !important
+
+.audio-list
+  p
+    line-height: 36px
+    width: 460px
+    text-align: left
+    margin: 0 auto
+    border-top: 1px solid #CCCCCC
+    overflow: hidden
+    &:before
+      content: '\25BA'
+      width: 14px
+      height: 14px
+      float: left
+      color: #CCCCCC
+  a
+    display: inline-block
+    width: 90%
+    float: left
+    color: #888888
+
+.audio-playing
+  background: #EFEEE6
+  &:before
+    content: '\266C' !important
+    width: 14px
+    height: 14px
+    float: left
+    color: black !important
+  a
+    color: black
+    
+.lb-outerContainer
+  width: 80% !important
+  height: 80% !important
+.lb-image
+  width: 100% !important
+  height: 100% !important
