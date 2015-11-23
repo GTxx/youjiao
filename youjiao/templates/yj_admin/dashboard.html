@@ -1,28 +1,114 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
-<a href="/admin/user/">
-    <button class="btn btn-primary" type="button">
-        <!--Messages <span class="badge">4</span>-->
-        用户数量 <span class="badge">{{ User.query.count() }}</span>
-    </button>
-</a>
-<a href="/admin/activity/">
-    <button class="btn btn-primary" type="button">
-        <!--Messages <span class="badge">4</span>-->
-        幼教动态数量 <span class="badge">{{ Activity.query.count() }}</span>
-    </button>
-</a>
-<a href="/admin/book/">
-    <button class="btn btn-primary" type="button">
-        <!--Messages <span class="badge">4</span>-->
-        教材数量 <span class="badge">{{ Book.query.count() }}</span>
-    </button>
-</a>
-<a href="/admin/courseware/">
-    <button class="btn btn-primary" type="button">
-        <!--Messages <span class="badge">4</span>-->
-        课件数量  <span class="badge">{{ Courseware.query.count() }}</span>
-    </button>
-</a>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">用户管理</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/user/">用户数量</a>
+                        <span class="badge">{{ User.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/role/">身份数量</a>
+                        <span class="badge">{{ Role.query.count() }}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">教材</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/book/">教材数量</a>
+                        <span class="badge text-right">{{ Book.query.count() }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">幼教动态</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/activity/">幼教动态数量</a>
+                        <span class="badge text-right">{{ Activity.query.count() }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">课件</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/courseware/">课件数量</a>
+                        <span class="badge text-right">{{ Courseware.query.count() }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-primary" style="margin-bottom:37px">
+            <div class="panel-heading">
+                <div class="panel-title">静态页面</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/page/">静态页面数量</a>
+                        <span class="badge text-right">{{ Page.query.count() }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="margin-bottom:37px">
+            <div class="panel-heading">
+                <div class="panel-title">幼教网课</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/onlinecourse/">幼教网课数量</a>
+                        <span class="badge text-right">{{ OnlineCourse.query.count() }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">资源管理</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/admin/photo/">图片数量</a>
+                        <span class="badge">{{ Photo.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/album/">相册数量</a>
+                        <span class="badge">{{ Album.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/video/">视频数量</a>
+                        <span class="badge">{{ Video.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/audio/">音频数量</a>
+                        <span class="badge">{{ Audio.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/document/">文档数量</a>
+                        <span class="badge">{{ Document.query.count() }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
