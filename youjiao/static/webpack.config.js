@@ -31,7 +31,7 @@ var plugins = [
     new Vendor2BuildPlugin()
 ];
 
-module.exports = {
+var config = {
     entry: entry,
     resolve: resolve,
     plugins: plugins,
@@ -60,3 +60,5 @@ module.exports = {
         ]
     }
 };
+
+module.exports = config;
