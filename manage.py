@@ -122,6 +122,7 @@ def create_common_user(name, password, email):
     user.profile = profile
     user.save()
 
+
 @manager.command
 def create_audio():
     from youjiao.teach_material.models import Courseware
@@ -130,7 +131,7 @@ def create_audio():
     for course in Courseware.query.all():
         if course.content:
             try:
-                audio_list = [i for i in course.content if i['type']=='audio']
+                audio_list = [i for i in course.content if i['type'] == 'audio']
                 for audio in audio_list:
                     if audio['key'].lower().endswith('.wav'):
                         audio_obj = Audio(name=audio['key'], qiniu_key=audio['key'])
@@ -141,6 +142,7 @@ def create_audio():
     Audio.batch_convert_mp3([audio.id for audio in ids])
     # begin to convert
     # Audio.batch_convert_mp3(ids)
+
 
 @manager.command
 def replace_mp3():
@@ -161,14 +163,15 @@ def replace_mp3():
                         if key.lower().endswith('.wav'):
                             audio = Audio.query.filter_by(qiniu_key=key).first()
                             if audio:
-                                key = key+'.mp3'
+                                key = key + '.mp3'
                                 modified = True
-                        content.append({'type':'audio', 'name': item['name'], 'key':key})
+                        content.append({'type': 'audio', 'name': item['name'], 'key': key})
                 if modified:
                     course.content = content
                     course.save()
             except:
                 pass
+
 
 @app.template_filter('asset')
 def asset_filter(file_string):
