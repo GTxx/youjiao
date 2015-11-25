@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from flask import Blueprint, render_template, abort, request
 from youjiao.user_util.models import Comment
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from .models import Book, Courseware
 from .permissions import book_preview_permission, courseware_preview_permission
 
@@ -32,19 +32,19 @@ def book_category(category):
         # import ipdb; ipdb.set_trace()
         if not level:
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.publish==True)).limit(9)
+                and_(Book.category == u'幼教教材', Book.publish == True)).limit(9)
         elif level == u'小班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         elif level == u'中班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         elif level == u'大班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         else:
             book_list = []
         top10 = Book.top10()
@@ -100,16 +100,23 @@ def courseware_detail(courseware_id):
 @book_bp.route('/courseware/list/')
 def courseware_list():
     level = request.args.get('level')
-    if not level:
-        courseware_list = Courseware.query.limit(10).all()
-    elif level == u'小班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'小班').all()
-    elif level == u'中班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'中班').all()
-    elif level == u'大班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'大班').all()
-    else:
-        courseware_list = []
+    search = request.args.get('search')
+    courseware_list = Courseware.query.join(Book)
+    if search:
+        courseware_list = courseware_list.filter(
+            or_(Courseware.name.like(u'{}%'.format(search)),
+                Book.name.like(u'{}%'.format(search)),
+                (Book.name + Courseware.name) == search)
+        )
+    if level:
+        courseware_list = courseware_list.filter(Book.level == level)
+    courseware_list = courseware_list.all()
+    # else:
+    #     if level:
+    #         courseware_list = Courseware.query.join(Book).filter(Book.level == level).all()
+    #     else:
+    #         courseware_list = Courseware.query.limit(10).all()
+
     return render_template('courseware/list.html', current_page='courseware',
                            courseware_list=courseware_list, level=level)
 
@@ -131,7 +138,10 @@ def courseware_sub():
     return render_template('courseware/sub_node.html', current_page='courseware',
                            top10=top10, courseware_list=courseware_list)
 
+
 from youjiao.flask_qiniu import get_private_url
+
+
 @book_bp.app_template_filter('qiniu_private_url')
 def qiniu_private_url(key):
     return get_private_url(key)
