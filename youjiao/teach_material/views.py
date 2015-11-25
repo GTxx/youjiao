@@ -111,12 +111,6 @@ def courseware_list():
     if level:
         courseware_list = courseware_list.filter(Book.level == level)
     courseware_list = courseware_list.all()
-    # else:
-    #     if level:
-    #         courseware_list = Courseware.query.join(Book).filter(Book.level == level).all()
-    #     else:
-    #         courseware_list = Courseware.query.limit(10).all()
-
     return render_template('courseware/list.html', current_page='courseware',
                            courseware_list=courseware_list, level=level)
 
