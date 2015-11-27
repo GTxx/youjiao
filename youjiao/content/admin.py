@@ -30,7 +30,7 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_exclude_list = ('html', )
+    column_exclude_list = ('html',)
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
     form_choices = {
@@ -44,6 +44,8 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
             ('researchresult', u'教研成果')
         ],
     }
+    column_labels = dict(user=u'用户', create_time=u'创建时间', update_time=u'更新时间', title=u'标题',
+                         origin=u'来源', category=u'类型', publish=u'是否发布', preview=u'内容')
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
@@ -79,7 +81,6 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 class PageAdmin(AuthEditorMixin, sqla.ModelView):
-
     column_searchable_list = ('title', 'html')
     form_overrides = {
         'html': CKTextAreaField
@@ -89,6 +90,7 @@ class PageAdmin(AuthEditorMixin, sqla.ModelView):
     column_list = ('title', 'create_time', 'update_time')
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
+    column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题')
 
     def is_accessible(self):
         if not current_user.is_authenticated():
@@ -122,6 +124,9 @@ class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
+    column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题', name=u'名称',
+                         url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'简介')
+
     @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
         try:
@@ -142,6 +147,7 @@ class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 from ..extensions import admin, db
+
 admin.add_view(ActivityAdmin(Activity, db.session, name=u'幼教动态'))
 admin.add_view(PageAdmin(Page, db.session, name=u'静态页面'))
 admin.add_view(OnlineCourseAdmin(OnlineCourse, db.session, name=u'幼教网课'))

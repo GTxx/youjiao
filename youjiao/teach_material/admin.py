@@ -13,9 +13,7 @@ from .models import Book, Courseware
 from youjiao.utils.admin import JsonField
 import json
 
-
 class BookAdmin(AuthEditorMixin, sqla.ModelView):
-
     def _preview_formatter(view, context, model, name):
         return Markup(
             "<a href='%s'>%s</a>" % (
@@ -30,6 +28,9 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
     column_exclude_list = ('image_array', 'preview_array')
     column_filters = ('level', 'category', 'name')
     column_searchable_list = ('name', 'executive_editor', 'chief_editor')
+    column_labels = dict(name=u'图书名', chief_editor=u'主编', executive_editor=u'责任编辑', publisher=u'出版社',
+                         book_size=u'图书大小', level=u'等级', category=u'分类', price=u'价格',
+                         publish=u'是否发布', preview=u'内容')
 
     def scaffold_list_columns(self):
         columns = super(BookAdmin, self).scaffold_list_columns()
@@ -57,12 +58,11 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
-
     create_template = 'json_editor.html'
     edit_template = 'json_editor.html'
-    column_exclude_list = ('content', )
+    column_exclude_list = ('content',)
     column_default_sort = 'id'
-    column_searchable_list = ('name', )
+    column_searchable_list = ('name',)
 
     def scaffold_form(self):
         form_class = super(CoursewareAdmin, self).scaffold_form()
@@ -88,6 +88,8 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
     }
 
     column_exclude_list = ['content']
+
+    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布', preview=u'内容')
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):

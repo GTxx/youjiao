@@ -18,9 +18,10 @@ import json
 
 
 class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
-
-    column_filters = ('name', )
+    column_filters = ('name',)
     list_template = 'yj_admin/album.list.html'
+
+    column_labels = dict(create_time=u'创建时间', name=u'相册名', preview=u'内容')
 
     def _preview_formatter(view, context, model, name):
         img_content = ''.join(
@@ -32,7 +33,7 @@ class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
              for photo in model.photos]
         )
 
-        return Markup(img_content+url_content)
+        return Markup(img_content + url_content)
 
     column_formatters = {
         'preview': _preview_formatter
@@ -43,24 +44,23 @@ class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
         columns.append('preview')
         return columns
 
-    @expose('/photo_preview/<id>', methods=('GET', ))
+    @expose('/photo_preview/<id>', methods=('GET',))
     def photo_preview(self, id):
         album = Album.query.get(id)
         return self.render('yj_admin/photo_preview.html', data=album.photos)
 
 
 class QiniuImageUploadInput(ImageUploadInput):
-
     def get_url(self, field):
         return '{}/{}?imageView/2/w/100'.format(qiniu.PUBLIC_CDN_DOMAIN, field.data)
 
 
 class QiniuImageUploadField(ImageUploadField):
-
     widget = QiniuImageUploadInput()
 
     def _save_file(self, data, filename):
         from qiniu import put_data
+
         data.seek(0)
         bucket_name = current_app.qiniu.PUBLIC_BUCKET_NAME
         # TODO: 上传开启水印转换
@@ -76,12 +76,14 @@ class QiniuImageUploadField(ImageUploadField):
 
 
 class PhotoAdmin(AuthEditorMixin, sqla.ModelView):
-
     column_default_sort = 'id'
 
     list_template = 'yj_admin/photo.list.html'
 
-    column_filters = ('album_id', )
+    column_filters = ('album_id',)
+
+    column_labels = dict(qiniu_key=u'qiniuKey', create_time=u'创建时间', name=u'图片名', preview=u'内容',
+                         album=u'所属相册')
 
     # overide qiniu_key field
     form_extra_fields = {
@@ -101,7 +103,9 @@ class PhotoAdmin(AuthEditorMixin, sqla.ModelView):
         'preview': _preview_formatter
     }
 
+
 from flask_admin.consts import ICON_TYPE_GLYPH
+
 admin.add_view(PhotoAdmin(Photo, db.session, name=u'图片', category=u'资源管理',
                           menu_icon_type=ICON_TYPE_GLYPH, menu_icon_value='glyphicon-picture'))
 admin.add_view(AlbumAdmin(Album, db.session, name=u'相册', category=u'资源管理',
