@@ -58,6 +58,7 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
     column_searchable_list = ('name',)
     can_view_details = True
     details_template = 'json_detail.html'
+    column_labels = dict(name=u'名字', qiniu_key=u'qiniuKey')
 
     @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
     def action_convert_mp4(self, ids):
@@ -119,6 +120,8 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
     can_view_details = True
     details_template = 'json_detail.html'
 
+    column_labels = dict(name=u'名字', qiniu_key=u'qiniuKey')
+
     @action('convert', u'转pdf', u'文档会转换成pdf并存储在私有空间，确定要转换吗?')
     def action_convert_pdf(self, ids):
         try:
@@ -169,6 +172,8 @@ class AudioAdmin(AuthEditorMixin, sqla.ModelView):
         'media_meta': _media_meta
     }
     column_list = ['name', 'qiniu_key', 'mp3']
+
+    column_labels = dict(name=u'名字', qiniu_key=u'qiniuKey')
 
     @action('convert', u'转mp3', u'文件会转换并另存为mp3,确定吗?')
     def action_convert(self, ids):

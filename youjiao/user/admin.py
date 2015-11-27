@@ -16,6 +16,8 @@ class UserAdmin(sqla.ModelView):
     create_modal = True
     edit_modal = True
 
+    column_labels = dict(email=u'邮箱地址', last_login=u'上次登陆时间', name=u'用户名', create_time=u'创建时间')
+
     def create_model(self, form):
         user = super(UserAdmin, self).create_model(form)
         user.set_password(user.password)
@@ -35,6 +37,8 @@ class RoleAdmin(sqla.ModelView):
 
     create_modal = True
     edit_modal = True
+
+    column_labels = dict(name=u'用户名', description=u'用户身份')
 
     def is_accessible(self):
         if not current_user.is_authenticated():
