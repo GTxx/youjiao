@@ -18,6 +18,12 @@ manager = Manager(app)
 @manager.option('-p', '--port', dest='port', default=5000)
 def run(port):
     """Run app."""
+    # build front end 
+    current_path = os.getcwd()
+    static_path = os.path.join(current_path, 'youjiao/static')
+    os.chdir(static_path)
+    os.system('npm run build-dev')
+    os.chdir(current_path)
     app.run(host='0.0.0.0', port=int(port))
 
 

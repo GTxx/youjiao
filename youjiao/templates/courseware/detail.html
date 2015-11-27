@@ -51,9 +51,7 @@
                             {% for document in courseware.document_list %}
                                 <div class="document-img">
                                     {% for img in document.img_list %}
-                                    <a href="{{ img | qiniu_private_url}}" data-lightbox="roadtrip">
                                         <img src="{{ img | qiniu_private_url }}" alt="" {% if loop.index==1 %}class="document-img-first"{% endif %}>
-                                    </a>
                                     {% endfor %}
                                     <span>{{ document.name }}</span>
                                 </div>
