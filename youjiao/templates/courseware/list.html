@@ -18,16 +18,16 @@
             <div class="section-block-title-4">班级分类</div>
             <div class="classes-select-wrapper">
                 <select name="" id="" class="classes-select">
-                    <option value="#" {% if not level %}selected="selected" {%
-                            endif %}></option>
-                    <option value="?level=幼小衔接班" {% if level==
-                    "幼小衔接班" %}selected="selected"{% endif %}>幼小衔接班</option>
-                    <option value="?level=大班" {% if level==
-                    "大班" %}selected="selected"{% endif %}>大班</option>
-                    <option value="?level=中班" {% if level==
-                    "中班" %}selected="selected"{% endif %}>中班</option>
-                    <option value="?level=小班" {% if level==
-                    "小班" %}selected="selected"{% endif %}>小班</option>
+                    <option value="#" {% if not level %}selected="selected"
+                            {% endif %}></option>
+                    <option value="?level=幼小衔接班" {% if level=="幼小衔接班" %}
+                            selected="selected" {% endif %}>幼小衔接班</option>
+                    <option value="?level=大班" {% if level=="大班" %}
+                            selected="selected" {% endif %}>大班</option>
+                    <option value="?level=中班" {% if level=="中班" %}
+                            selected="selected" {% endif %}>中班</option>
+                    <option value="?level=小班" {% if level=="小班" %}
+                            selected="selected" {% endif %}>小班</option>
                 </select>
             </div>
         </div>
@@ -37,18 +37,18 @@
             {% endif %}
             {% for courseware in courseware_list %}
             <li>
-                        <a href="{{ courseware.link }}">
-                            <div class="v-image-wrapper">
-                                <img src="{{ '%s?imageView2/2/w/600'|format(courseware.book.cover) }}" alt="">
+                <a href="{{ courseware.link }}">
+                    <div class="v-image-wrapper">
+                        <img src="{{ '%s?imageView2/2/w/600'|format(courseware.book.cover) }}" alt="">
 
-                                <div class="v-image-hover-layer">
-                                    <div class="v-hover-layer-icon"></div>
-                                </div>
-                            </div>
-                            <h5>{{ courseware.name }}</h5>
-                            <a href="{{ courseware.link }}" class="start-download">开始下载</a>
-                        </a>
-                    </li>
+                        <div class="v-image-hover-layer">
+                            <div class="v-hover-layer-icon"></div>
+                        </div>
+                    </div>
+                    <h5>{{ courseware.name }}</h5>
+                    <a href="{{ courseware.link }}" class="start-download">开始下载</a>
+                </a>
+            </li>
 
             {% endfor %}
         </ul>

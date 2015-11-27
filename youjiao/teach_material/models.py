@@ -44,7 +44,7 @@ class Book(db.Model, CRUDMixin):
     @property
     def cover(self):
         if len(self.image_array) == 0:
-            return 'http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpg'
+            return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
         else:
             return self.image_array[0]
 
@@ -126,4 +126,4 @@ class Courseware(db.Model, CRUDMixin):
     def cover(self):
         if self.book:
             return self.book.cover
-        return 'http://7xn3in.com2.z0.glb.qiniucdn.com/imgo.jpg'
+        return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
