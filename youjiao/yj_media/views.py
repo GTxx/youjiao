@@ -16,7 +16,7 @@ def _get_qiniu_video_callback_url():
     return urljoin(current_app.qiniu.CALLBACK_URL, QINIU_CALLBACK_ROUTE)
 
 # TODO: verify it's from qiniu
-@media_bp.route(QINIU_CALLBACK_ROUTE, methods=['POST'])
+@media_bp.route(Video.QINIU_CALLBACK_ROUTE, methods=['POST'])
 def qiniu_video_callback():
     print('get qiniu callback')
     # import ipdb; ipdb.set_trace()
@@ -31,7 +31,7 @@ def qiniu_video_callback():
     return 'abc'
 
 # TODO: verify it's from qiniu
-@media_bp.route(QINIU_DOCUMENT_CALLBACK_ROUTE, methods=['POST'])
+@media_bp.route(Document.QINIU_DOCUMENT_CALLBACK_ROUTE, methods=['POST'])
 def qiniu_document_callback():
     print('get qiniu document callback')
     # import ipdb; ipdb.set_trace()
