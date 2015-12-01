@@ -6,6 +6,8 @@ from flask_login import current_user
 from flask_admin.actions import action
 from flask import Markup, url_for, flash
 from youjiao.teach_material.admin import JsonField
+import json
+from youjiao.utils.admin import _json_format_field
 from .models import Activity, Page, OnlineCourse
 from .permissions import content_edit_permission
 from ..admin_utils import AuthEditorMixin
@@ -104,6 +106,12 @@ class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
     column_default_sort = 'id'
     form_excluded_columns = ('create_time', 'update_time')
 
+    create_template = 'school/admin_json_editor.html'
+    edit_template = 'school/admin_json_editor.html'
+
+    can_view_details = True
+    details_template = 'json_detail.html'
+
     def scaffold_form(self):
         form_class = super(OnlineCourseAdmin, self).scaffold_form()
         form_class.content = JsonField('content')
@@ -121,11 +129,15 @@ class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
             "<a href='%s'>%s</a>" % (model.link, model.name))
 
     column_formatters = {
-        'preview': _preview_formatter
+        'preview': _preview_formatter,
+        'content': _json_format_field('content')
     }
 
+    column_list = ['title', 'name', 'publish', 'preview']
     column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题', name=u'名称',
-                         url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'简介')
+                         url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'预览')
+    # column_labels = dict(title=u'标题', name=u'名称',
+    #                      url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'预览')
 
     @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):

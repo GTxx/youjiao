@@ -12,12 +12,16 @@
 {% block content %}
     <div id="main-school-body">
 
-        <div class="e-page-title">幼教网校-优秀讲座-祭奠幸福童年 杨友林</div>
+        <div class="e-page-title">{{ video.name }}</div>
         <div class="video-detail">
             <div class="video-detail-v">
                 <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
                        height="522" data-setup='{}' poster="http://www.videojs.com/img/poster.jpg">
-                    <source src='{{ video.url }}' type='video/ogg'/>
+                    {% if current_user.is_authenticated() %}
+                    <source src='{{ video.content.full_video | qiniu_private_url }}' type='video/ogg'/>
+                    {% else %}
+                    <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/ogg'/>
+                    {% endif %}
                 </video>
             </div>
             <div class="video-detail-v-t">{{ video.name }}</div>

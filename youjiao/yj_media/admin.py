@@ -11,24 +11,7 @@ from youjiao.extensions import admin, db
 from .views import (QINIU_CALLBACK_ROUTE, QINIU_DOCUMENT_CALLBACK_ROUTE,
                     )
 from ..admin_utils import AuthEditorMixin
-from youjiao.utils.admin import JsonField
-
-
-def _media_process(view, context, model, name):
-    if model.media_process:
-        return Markup(
-            "<div class='json_field'>%s</div>" % (
-                json.dumps(model.media_process, ensure_ascii=False)
-            ))
-    return ''
-
-def _media_meta(view, context, model, name):
-    if model.media_meta:
-        return Markup(
-            "<div class='json_field'>%s</div>" % (
-                json.dumps(model.media_meta, ensure_ascii=False)
-            ))
-    return ''
+from youjiao.utils.admin import JsonField, _json_format_field
 
 
 class VideoAdmin(AuthEditorMixin, sqla.ModelView):
@@ -51,8 +34,8 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_formatters = {
         u'mp4': _mp4,
-        'media_process': _media_process,
-        'media_meta': _media_meta
+        'media_process': _json_format_field('media_process'),
+        'media_meta': _json_format_field('media_meta')
     }
     column_list = ['name', 'qiniu_key', 'mp4']
     column_searchable_list = ('name',)
@@ -112,8 +95,8 @@ class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_formatters = {
         u'pdf': _pdf,
-        'media_process': _media_process,
-        'media_meta': _media_meta
+        'media_process': _json_format_field('media_process'),
+        'media_meta': _json_format_field('media_meta')
     }
     column_list = ['name', 'qiniu_key', 'pdf']
     column_searchable_list = ('name',)
@@ -168,8 +151,8 @@ class AudioAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_formatters = {
         u'mp3': _mp3,
-        'media_process': _media_process,
-        'media_meta': _media_meta
+        'media_process': _json_format_field('media_process'),
+        'media_meta': _json_format_field('media_process')
     }
     column_list = ['name', 'qiniu_key', 'mp3']
 
