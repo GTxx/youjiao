@@ -74,6 +74,7 @@ class Courseware(db.Model, CRUDMixin):
     book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     content = db.Column(JSON)
     publish = db.Column(sqla.Boolean, default=False)
+    cover_img_url = db.Column(sqla.String(200))
 
     @classmethod
     def top10(cls):
@@ -124,6 +125,8 @@ class Courseware(db.Model, CRUDMixin):
 
     @property
     def cover(self):
+        if self.cover_img_url:
+            return self.cover_img_url
         if self.book:
             return self.book.cover
         return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'

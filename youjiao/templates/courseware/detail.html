@@ -27,15 +27,9 @@
                     <table>
                         <tr>
                             <td class="product-info-detail">课程内容：</td>
-                            <td>{{ courseware.name }}</td>
+                            <td>{{ courseware.name or ''}}</td>
                         </tr>
                     </table>
-                    <div class="product-button">
-                        <a href="javascript:;"
-                           id="{% if current_user.is_authenticated() %}click-to-download{% else %}not-login-pop{% endif %}"
-                           class="product-collection">点击下载</a>
-                        <a href="{{ courseware.book.link }}" class="product-associate">关联教材</a>
-                    </div>
                 </div>
             </div>
             <div class="product-detail-comments">
@@ -124,30 +118,6 @@
                 </div>
             {% endif %}
         </div>
-    </div>
-    <div id="download-box" class="display-none">
-        <ul>
-            {% if current_user.is_authenticated() %}
-                {% for media in courseware.content %}
-                    <li>
-                        {% if media.type == 'document' %}
-                            <span><img
-                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-319-more-items.png"> ： {{ media.name }}</span>
-                            <a href="{{ media.key.strip('.pdf') | qiniu_private_url }}" class="download-button-c"
-                               download>下载</a>
-                        {% elif media.type == 'video' %}
-                            <span><img
-                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-392-video-hd.png"> ： {{ media.name }}</span>
-                            <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                        {% else %}
-                            <span><img
-                                    src="http://7xn3in.com2.z0.glb.qiniucdn.com/glyphicons-77-headphones.png"> ： {{ media.name }}</span>
-                            <a href="{{ media.key | qiniu_private_url }}" class="download-button-c" download>下载</a>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            {% endif %}
-        </ul>
     </div>
 {% endblock %}
 

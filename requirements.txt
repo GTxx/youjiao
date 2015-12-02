@@ -14,3 +14,8 @@ flask-migrate
 wheezy.captcha
 Flask-Redis
 qiniu
+
+# dev and op
+pgcli==0.20.1
+uwsgitop
+
