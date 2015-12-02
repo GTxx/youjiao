@@ -62,26 +62,7 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
     @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
     def action_convert_mp4(self, ids):
         try:
-            query = Video.query.filter(Video.id.in_(ids))
-            count = 0
-            src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
-            dest_bucket_name = src_bucket_name
-            pipeline = current_app.qiniu.PIPELINE
-            QINIU_VIDEO_CALLBACK_URL = urljoin(
-                    current_app.qiniu.CALLBACK_URL, QINIU_CALLBACK_ROUTE)
-            pfop = PersistentFop(current_app.qiniu.qiniu_auth,
-                                 src_bucket_name, pipeline,
-                                 QINIU_VIDEO_CALLBACK_URL)
-            ops = []
-            for video in query.all():
-                saved_key = video.qiniu_key + '.mp4'
-                # import ipdb; ipdb.set_trace()
-                op = op_save('avthumb/mp4', dest_bucket_name, saved_key.encode('utf-8'))
-                ops.append(op)
-                count += 1
-            ret, info = pfop.execute(video.qiniu_key, ops, force=1)
-            if info.status_code != 200:
-                raise Exception(u'error {}'.format(info))
+            count = Video.batch_convert_mp4(ids)
             flash(u'{} video begin to convert.'.format(count))
         except Exception as ex:
             if not self.handle_view_exception(ex):
@@ -89,6 +70,16 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
 
             flash(u'Failed to convert video. {}'.format(str(ex)), 'error')
 
+    @action('cut', u'视频切割', u'视频将切割成3min,确定吗')
+    def video_cut(self, ids):
+        try:
+            count = Video.batch_video_cut(ids)
+            flash(u'{} video begin to cut.'.format(count))
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+
+            flash(u'Failed to cut video. {}'.format(str(ex)), 'error')
 
 class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 

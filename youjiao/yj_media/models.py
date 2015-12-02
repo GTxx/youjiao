@@ -21,7 +21,57 @@ class MediaMixin(object):
 
 class Video(CRUDMixin, MediaMixin, db.Model):
     id = sqla.Column(sqla.Integer, primary_key=True)
+    QINIU_CALLBACK_ROUTE = '/qiniu_video_callback'
 
+    def convert_mp4(self):
+        src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
+        dest_bucket_name = src_bucket_name
+        pipeline = current_app.qiniu.PIPELINE
+        QINIU_VIDEO_CALLBACK_URL = urljoin(
+                current_app.qiniu.CALLBACK_URL, self.QINIU_CALLBACK_ROUTE)
+        pfop = PersistentFop(current_app.qiniu.qiniu_auth,
+                             src_bucket_name, pipeline,
+                             QINIU_VIDEO_CALLBACK_URL)
+        saved_key = self.qiniu_key + '.mp4'
+        # import ipdb; ipdb.set_trace()
+        op = op_save('avthumb/mp4', dest_bucket_name, saved_key.encode('utf-8'))
+        ret, info = pfop.execute(self.qiniu_key, [op, ], force=1)
+        if info.status_code != 200:
+            raise Exception(u'error {}'.format(info))
+
+    @classmethod
+    def batch_convert_mp4(cls, ids):
+        if len(ids) == 0:
+            return 0
+        query = cls.query.filter(Video.id.in_(ids))
+        for video in query.all():
+            video.convert_mp4()
+        return query.count()
+
+    def video_cut(self):
+        src_bucket_name = current_app.qiniu.PRIVATE_BUCKET_NAME
+        dest_bucket_name = src_bucket_name
+        pipeline = current_app.qiniu.PIPELINE
+        QINIU_VIDEO_CALLBACK_URL = urljoin(
+                current_app.qiniu.CALLBACK_URL, self.QINIU_CALLBACK_ROUTE)
+        pfop = PersistentFop(current_app.qiniu.qiniu_auth,
+                             src_bucket_name, pipeline,
+                             QINIU_VIDEO_CALLBACK_URL)
+        saved_key = self.qiniu_key + '_cut'
+        # import ipdb; ipdb.set_trace()
+        op = op_save('avthumb/mp4/t/180', dest_bucket_name, saved_key.encode('utf-8'))
+        ret, info = pfop.execute(self.qiniu_key, [op, ], force=1)
+        if info.status_code != 200:
+            raise Exception(u'error {}'.format(info))
+
+    @classmethod
+    def batch_video_cut(cls, ids):
+        if len(ids) == 0:
+            return 0
+        query = cls.query.filter(Video.id.in_(ids))
+        for video in query.all():
+            video.video_cut()
+        return query.count()
 
 class Audio(CRUDMixin, MediaMixin, db.Model):
 

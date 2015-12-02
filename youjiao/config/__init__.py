@@ -17,7 +17,7 @@ class BaseConfig(object):
     WTF_CSRF_CHECK_DEFAULT = False
 
     # flask_babel
-    BABEL_DEFAULT_LOCALE = 'zh'
+    BABEL_DEFAULT_LOCALE = 'zh_CN'
 
     # flask_redis
     REDIS_URL = 'redis://localhost:6379/0'
