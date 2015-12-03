@@ -24,12 +24,14 @@
                     <div class="product-title">
                         <h3>{{ courseware.book.name }}</h3><span>{{ courseware.book.level }}</span>
                     </div>
-                    <table>
-                        <tr>
-                            <td class="product-info-detail">课程内容：</td>
-                            <td>{{ courseware.name }}</td>
-                        </tr>
-                    </table>
+                    <div class="product-info-card">
+                        <table>
+                            <tr>
+                                <td class="product-info-detail">课程内容：</td>
+                                <td>{{ courseware.name }}</td>
+                            </tr>
+                        </table>
+                    </div>
                     <div class="product-button">
                         <a href="javascript:;"
                            id="{% if current_user.is_authenticated() %}click-to-download{% else %}not-login-pop{% endif %}"
@@ -41,7 +43,7 @@
             <div class="product-detail-comments">
                 <div class="detail-comment-title">
                     <a href="javascript:;" class="book-switch active">课件详情</a>
-                    <a href="javascript:;" class="book-switch">课件评论</a>
+                    {#                    <a href="javascript:;" class="book-switch">课件评论</a>#}
                 </div>
                 <div>
                     <p class="detail-comment-content courseware-detail-content">
@@ -51,79 +53,81 @@
                             {% for document in courseware.document_list %}
                                 <div class="document-img">
                                     {% for img in document.img_list %}
-                                        <img src="{{ img | qiniu_private_url }}" alt="" {% if loop.index==1 %}class="document-img-first"{% endif %}>
+                                        <img src="{{ img | qiniu_private_url }}" alt=""
+                                             {% if loop.index==1 %}class="document-img-first"{% endif %}>
                                     {% endfor %}
                                     <span>{{ document.name }}</span>
                                 </div>
                             {% endfor %}
 
                             {% for video in courseware.video_list %}
-                            <div class="video-detail-course">
-                            <video id="video-detail-c" class="video-js vjs-default-skin" controls
-                                   preload="auto"
-                                   width="760"
-                                   height="400" data-setup='{}'>
-                                <source src='{{ video.key| qiniu_private_url }}' type='video/mp4'/>
-                            </video>
-                                <p>视频： {{ video.name }}</p>
-                            </div>
+                                <div class="video-detail-course">
+                                    <video id="video-detail-c" class="video-js vjs-default-skin" controls
+                                           preload="auto"
+                                           width="760"
+                                           height="400" data-setup='{}'>
+                                        <source src='{{ video.key| qiniu_private_url }}' type='video/mp4'/>
+                                    </video>
+                                    <p>视频： {{ video.name }}</p>
+                                </div>
                             {% endfor %}
 
                             {% if courseware.audio_list| length > 0 %}
                                 <audio preload></audio>
                                 {% for audio in courseware.audio_list %}
                                     <div class="audio-list">
-                                        <p><a href="javascript:;" data-src="{{ audio.key | qiniu_private_url }}">{{ audio.name }}</a></p>
+                                        <p><a href="javascript:;"
+                                              data-src="{{ audio.key | qiniu_private_url }}">{{ audio.name }}</a></p>
                                     </div>
                                 {% endfor %}
                             {% endif %}
                         {% else %}
                             <p>请登陆后观看</p>
                         {% endif %}
-                    </div>
-                    <div class="detail-comment-content display-none">
-                        <ul id="book-content-list">
-                            {% for comment in page_comment.items %}
-                                <li>
-                                    <div>
-                                        <img src="{{ comment.user.avatar }}" alt="">
-                                        <h6>{{ comment.user.nickname or comment.user.name }}</h6>
-                                    </div>
-                                    <span>{{ comment.content }}</span>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <ul class="comment-pagination">
+                </div>
+                <div class="detail-comment-content display-none">
+                    <ul id="book-content-list">
+                        {% for comment in page_comment.items %}
                             <li>
-                                <a href="#">1</a>
+                                <div>
+                                    <img src="{{ comment.user.avatar }}" alt="">
+                                    <h6>{{ comment.user.nickname or comment.user.name }}</h6>
+                                </div>
+                                <span>{{ comment.content }}</span>
                             </li>
-                        </ul>
+                        {% endfor %}
+                    </ul>
+                    <ul class="comment-pagination">
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                    </ul>
                         <textarea name="" id="comment-textarea" {% if not current_user.is_authenticated() %}
                                   disabled {% endif %}>
 
                         </textarea>
-                        <a href="javascript:;"
-                                {% if current_user.is_authenticated() %} id='book-publish-comment' {% endif %}
-                           class="book-publish-comment">发布</a>
-                    </div>
+                    <a href="javascript:;"
+                            {% if current_user.is_authenticated() %} id='book-publish-comment' {% endif %}
+                       class="book-publish-comment">发布</a>
                 </div>
-
             </div>
-            {% if courseware.related_courseware %}
-                <div class="other-associate-courseware">
-                    <p>其他课件相关</p>
-                    {% for courseware in courseware.related_courseware %}
-                        <a href="{{ courseware.link }}">
-                            <div>
-                                <img src="{{ courseware.cover }}" alt="">
 
-                                <p>{{ courseware.name }}</p>
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-            {% endif %}
         </div>
+        {% if courseware.related_courseware %}
+            <div class="other-associate-courseware">
+                <p>其他课件相关</p>
+                {% for courseware in courseware.related_courseware %}
+                    <a href="{{ courseware.link }}">
+                        <div>
+                            <img src="{{ courseware.cover }}" alt="">
+
+                            <p>{{ courseware.name }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
     </div>
     <div id="download-box" class="display-none">
         <ul>
@@ -158,9 +162,9 @@
             var as = audiojs.createAll();
             var audio = as[0];
             audio.load($('.audio-list p').children('a').attr('data-src'));
-            $('.audio-list p').click(function(e){
+            $('.audio-list p').click(function (e) {
                 e.preventDefault();
-                $('.audiojs').css('display','block');
+                $('.audiojs').css('display', 'block');
                 audio.load($('a', this).attr('data-src'));
                 audio.play();
                 $('.audio-playing').removeClass('audio-playing');

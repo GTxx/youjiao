@@ -36,8 +36,8 @@
                        href="{{ url_for('user_view.user_profile') }}">个人资料</a></li>
                 <li><a class="{% if 'learnrecord' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_learnrecord') }}">学习记录</a></li>
-                <li><a class="{% if 'schools' in request.path %} active {% endif %}"
-                       href="{{ url_for('user_view.user_schools') }}">我的园所</a></li>
+{#                <li><a class="{% if 'schools' in request.path %} active {% endif %}"#}
+{#                       href="{{ url_for('user_view.user_schools') }}">我的园所</a></li>#}
                 <li><a class="{% if 'collections' in request.path %} active {% endif %}"
                        href="{{ url_for('user_view.user_collections') }}">我的收藏</a></li>
                 <li><a class="{% if 'consumption' in request.path %} active {% endif %}"
