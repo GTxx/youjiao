@@ -14,11 +14,9 @@
     <div class="product-s-slides">
         <div class="product-s-slides-main">
             <ul class="rslides">
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner1.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner2.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner3.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner4.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner5.jpg" alt=""></li>
+                {% for img_link in slider %}
+                <li><img src="{{ img_link.image }}" alt=""></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

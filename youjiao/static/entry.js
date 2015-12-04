@@ -24,6 +24,12 @@ var entry = {
     'school.detail': path.resolve(dirname, 'school/detail.js'),
     'school.home': path.resolve(dirname, 'school/home.js'),
     'school.sub_node': path.resolve(dirname, 'school/sub_node.js'),
+
+    //onlinecourse
+    'onlinecourse.admin_edit': path.resolve(dirname, 'onlinecourse/admin_edit.js'),
+
+    // content
+    'slider.admin_edit': path.resolve(dirname, 'content/slider.admin_edit.js')
 };
 
 module.exports = entry;

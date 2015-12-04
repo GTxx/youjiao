@@ -24,7 +24,7 @@ from .user.api import user_api_bp
 
 # content
 from .content.admin import ActivityAdmin
-from .content.models import Activity
+from .content.models import Activity, Slider
 from .content.views import content_bp
 
 # book
@@ -46,14 +46,21 @@ from .yj_media.admin import VideoAdmin
 from .yj_media.models import Video, Audio, Document
 from .yj_media.views import media_bp
 
+# online course
+from .onlinecourse.models import OnlineCourse
+from .onlinecourse.views import online_course_bp
+from .onlinecourse.admin import OnlineCourseAdmin
+
 import os
 import json
 
 
 # Flask views
 def index():
+    # import ipdb; ipdb.set_trace()
     return render_template('home/home.html', current_page='home',
-                           Book=Book, Courseware=Courseware)
+                           Book=Book, Courseware=Courseware,
+                           slider=Slider.home_slider())
 
 
 def create_app():
@@ -111,6 +118,7 @@ def create_app():
     app.register_blueprint(book_api_bp)
     app.register_blueprint(user_util_api_bp)
     app.register_blueprint(media_bp)
+    app.register_blueprint(online_course_bp)
 
     # register subscriber
     user_connect(app)

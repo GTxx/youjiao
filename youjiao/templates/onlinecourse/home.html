@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'school/left_bar.html' %}
+    {% include 'onlinecourse/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -31,7 +31,7 @@
             <ul class="video-section-list">
                 {% for video in Video.get_category(category)[:3] %}
                     <li>
-                        <a href="{{ url_for('activity_content.video_detail', video_id=video.id) }}">
+                        <a href="{{ url_for('online_course.video_detail', video_id=video.id) }}">
                         <div class="v-image-wrapper">
                             <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
 

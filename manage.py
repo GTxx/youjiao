@@ -151,7 +151,6 @@ def create_audio():
     # begin to convert
     # Audio.batch_convert_mp3(ids)
 
-
 @manager.command
 def replace_mp3():
     from youjiao.teach_material.models import Courseware
@@ -180,6 +179,9 @@ def replace_mp3():
             except:
                 pass
 
+@manager.command
+def db_shell():
+    os.system('pgcli {}'.format(app.config['SQLALCHEMY_DATABASE_URI']))
 
 @app.template_filter('asset')
 def asset_filter(file_string):

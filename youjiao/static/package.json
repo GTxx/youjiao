@@ -18,6 +18,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "jquery": "^1.11.3",
     "jquery-validation": "^1.14.0",
+    "json-editor": "^0.7.23",
     "webpack": "^1.12.1"
   },
   "devDependencies": {

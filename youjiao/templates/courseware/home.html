@@ -13,11 +13,9 @@
         <div class="courseware-slides">
             <div class="courseware-slides-main">
                 <ul class="rslides">
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg?imageView2/2/w/600" alt="banner"></li>
+                    {% for img_link in slider %}
+                    <li><img src="{{ img_link.image }}" alt="banner"></li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

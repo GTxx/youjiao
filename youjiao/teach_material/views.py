@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from flask import Blueprint, render_template, abort, request
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_, or_
+from youjiao.content.models import Slider
 from .models import Book, Courseware
 from .permissions import book_preview_permission, courseware_preview_permission
 
@@ -17,7 +18,8 @@ def book():
     read_book_list = Book.query.filter_by(category=u'幼教读物').limit(9)
     # import ipdb; ipdb.set_trace()
     return render_template('book/home.html', teach_book_list=teach_book_list,
-                           read_book_list=read_book_list, Book=Book)
+                           read_book_list=read_book_list, Book=Book,
+                           slider=Slider.book_slider())
 
 
 @book_bp.route('/book/upload')
@@ -49,7 +51,7 @@ def book_category(category):
             book_list = []
         top10 = Book.top10()
         return render_template('book/sub_node.html', book_list=book_list, top10=top10,
-                               level=level)
+                               level=level, slider=Slider.book_slider())
 
     elif category == 'read_book':
         book_list = Book.query.filter_by(category=u'幼教读物').limit(9)
@@ -80,7 +82,7 @@ def courseware():
     courseware_list = Courseware.query.limit(12).all()
     return render_template('courseware/home.html', current_page='courseware',
                            courseware_list=courseware_list,
-                           Courseware=Courseware)
+                           Courseware=Courseware, slider=Slider.courseware_slider())
 
 
 @book_bp.route('/courseware/<int:courseware_id>/')
@@ -130,7 +132,8 @@ def courseware_sub():
     else:
         courseware_list = []
     return render_template('courseware/sub_node.html', current_page='courseware',
-                           top10=top10, courseware_list=courseware_list)
+                           top10=top10, courseware_list=courseware_list,
+                           slider=Slider.courseware_slider())
 
 
 from youjiao.flask_qiniu import get_private_url

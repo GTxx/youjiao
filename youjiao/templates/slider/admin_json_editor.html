@@ -1,0 +1,7 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block tail %}
+  {{ super() }}
+<script src="{{ 'vendor/js/jsoneditor.min.js' | vendor_asset }}"></script>
+<script src="{{ 'slider.admin_edit.js' | asset }}"></script>
+{% endblock %}

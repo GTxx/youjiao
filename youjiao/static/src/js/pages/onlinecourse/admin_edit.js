@@ -1,9 +1,3 @@
-{% extends 'admin/model/edit.html' %}
-
-{% block tail %}
-  {{ super() }}
-<script src="http://7xn3in.com2.z0.glb.qiniucdn.com/jsoneditor.min.js"></script>
-<script type="text/javascript">
 $(function () {
     JSONEditor.defaults.options.theme = 'bootstrap3';
     JSONEditor.defaults.language = "zh_CN";
@@ -41,5 +35,3 @@ $(function () {
             }
     )
 });
-</script>
-{% endblock %}

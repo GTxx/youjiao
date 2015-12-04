@@ -14,7 +14,8 @@ var resolve = {
         lightbox_css: path.resolve('vendor/lightbox/css/lightbox.css'),
         lightbox_js: path.resolve('vendor/lightbox/js/lightbox.js'),
         taidii_slides_js: path.resolve('vendor/taidii-slides/slides.js'),
-        taidii_slides_css: path.resolve('vendor/taidii-slides/style.css')
+        taidii_slides_css: path.resolve('vendor/taidii-slides/style.css'),
+        jsoneditor_js: path.resolve('vendor/js/jsoneditor.js'),
         //plupload_js: path.resolve(vendorjs, 'plupload/plupload.dev.js'),
         //moxie_js: path.resolve(vendorjs, 'plupload/moxie.js'),
         //qiniu_js: path.resolve(vendorjs, 'qiniu.js'),

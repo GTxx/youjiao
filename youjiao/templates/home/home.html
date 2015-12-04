@@ -19,31 +19,13 @@
                     网站资源使用声明：本网站所有教学资源均为各大园所教研成果，仅免费提供幼儿园教学使用，用户必须遵守国家相关法律和互联网各项规章制度，下载的资源不得用于非法盈利活动。
                 </marquee>
                 <ul class="rslides">
+                    {% for img_link in slider %}
                     <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=1) }}">
-                            <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="">
+                        <a href="{{ img_link.link }}">
+                            <img src="{{ '%s?imageView2/2/w/600'|format(img_link.image) }}" alt="">
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=2) }}">
-                            <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=3) }}">
-                            <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=4) }}">
-                            <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('book_view.book_detail', book_id=5) }}">
-                            <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="">
-                        </a>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
 
