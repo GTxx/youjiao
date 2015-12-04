@@ -54,6 +54,16 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
 
             flash(u'Failed to convert video. {}'.format(str(ex)), 'error')
 
+    # @action('cut', u'视频切割', u'视频将切割成3min,确定吗')
+    # def video_cut(self, ids):
+    #     try:
+    #         count = Video.batch_video_cut(ids)
+    #         flash(u'{} video begin to cut.'.format(count))
+    #     except Exception as ex:
+    #         if not self.handle_view_exception(ex):
+    #             raise
+    #
+    #         flash(u'Failed to cut video. {}'.format(str(ex)), 'error')
 
 class DocumentAdmin(AuthEditorMixin, sqla.ModelView):
 
