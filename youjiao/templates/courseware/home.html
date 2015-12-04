@@ -21,14 +21,14 @@
         </div>
         <div class="video-section-b">
             <div class="section-block-wrapper">
-                <div class="section-block-title-6">教材配套课件</div>
+                <div class="section-block-title-6" style="width:700px">教材配套课件</div>
             </div>
             <ul class="video-section-list">
                 {% for courseware in courseware_list %}
                     <li>
                         <a href="{{ courseware.link }}">
                             <div class="v-image-wrapper">
-                                <img src="{{ '%s?imageView2/2/w/600'|format(courseware.book.cover) }}" alt="">
+                                <img src="{{ '%s?imageView2/2/w/600'|format(courseware.cover) }}" alt="">
 
                                 <div class="v-image-hover-layer">
                                     <div class="v-hover-layer-icon"></div>
