@@ -51,8 +51,7 @@ var config = {
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
             },
             {test: /\.js$/, loader: 'babel'},
-            {test: /\.(png|gif)$/, loader: "url-loader"},
-            {test: /\.jpg$/, loader: "file-loader"},
+            {test: /\.(png|gif|jpg)$/, loader: "url-loader"},
             {test: /\.woff$/, loader: "url-loader?prefix=font/&limit=5000&mimetype=application/font-woff"},
             {test: /\.ttf$/, loader: "file-loader"},
             {test: /\.eot$/, loader: "file-loader"},
