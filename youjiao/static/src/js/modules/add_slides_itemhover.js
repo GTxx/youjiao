@@ -32,7 +32,7 @@ $(function () {
     }
 
     mouseOverAndOut(".video-section-list li", "video-s-active");
-    mouseOverAndOut(".n-v-section-list li", "n-v-active");
+    mouseOverAndOut(".n-v-section-list a", "n-v-active");
 
 });
 

@@ -36,7 +36,7 @@ def category(category):
     category_name = category_dict[category]
     weekly_popular_top10 = Activity.weekly_popular_top10()
     return render_template('activity/home.html', activity_list=pagination, category_name=category_name,
-                           category_url=category, current_page='activity', weekly_popular_top10=weekly_popular_top10)
+                           category_url=category, current_page='activity', sub_page=category, weekly_popular_top10=weekly_popular_top10)
 
 
 @content_bp.route('/activity/<id>/')

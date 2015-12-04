@@ -32,30 +32,37 @@
                     <div class="product-title">
                         <h3>{{ book.name }}<span>{{ book.level }} 1-5</span></h3>
                     </div>
-                    <table>
-                        <tr>
-                            <td class="product-info-detail">主编：</td>
-                            <td>{{ book.chief_editor }}</td>
-                        </tr>
-                        <tr>
-                            <td class="product-info-detail">责任编辑：</td>
-                            <td>{{ book.executive_editor }}</td>
-                        </tr>
-                        <tr>
-                            <td class="product-info-detail">出版社：</td>
-                            <td>{{ book.publisher }}</td>
-                        </tr>
-                        <tr>
-                            <td class="product-info-detail">开本：</td>
-                            <td>{{ book.book_size }}</td>
-                        </tr>
-                        <tr>
-                            <td class="product-info-detail">版号：</td>
-                            <td>{{ book.publisher}}</td>
-                        </tr>
-                    </table>
+                    <div class="product-info-card">
+                        <table>
+                            <tr>
+                                <td class="product-info-detail">主<span style="margin-left: 28px;">编</span>：</td>
+                                <td>{{ book.chief_editor }}</td>
+                            </tr>
+                            <tr>
+                                <td class="product-info-detail">责任编辑：</td>
+                                <td>{{ book.executive_editor }}</td>
+                            </tr>
+                            <tr>
+                                <td class="product-info-detail">出<span style="margin-left: 7px;">版</span><span
+                                        style="margin-left: 7px;">社</span>：
+                                </td>
+                                <td>{{ book.publisher }}</td>
+                            </tr>
+                            <tr>
+                                <td class="product-info-detail">开<span style="margin-left: 28px;">本</span>：</td>
+                                <td>{{ book.book_size }}</td>
+                            </tr>
+                            <tr>
+                                <td class="product-info-detail">版<span style="margin-left: 28px;">号</span>：</td>
+                                <td>{{ book.publisher }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="product-button">
-                        <a href="javascript:;" id="{% if current_user.is_authenticated() %}product-collection{% else %}not-login-pop{% endif %}" class="product-collection">添加收藏</a>
+                        <a href="javascript:;"
+                           id="{% if current_user.is_authenticated() %}product-collection{% else %}not-login-pop{% endif %}"
+                           class="product-collection">添加收藏</a>
                         <a href="javascript:;" class="product-associate">关联课件</a>
                     </div>
                     <div class="product-order">
@@ -68,7 +75,7 @@
             <div class="product-detail-comments">
                 <div class="detail-comment-title">
                     <a href="javascript:;" class="book-switch active">图书详情</a>
-                    <a href="javascript:;" class="book-switch">图书评论</a>
+                    {#                    <a href="javascript:;" class="book-switch">图书评论</a>#}
                 </div>
                 <div>
                     <div class="detail-comment-content">
@@ -93,7 +100,8 @@
                                 <a href="#">1</a>
                             </li>
                         </ul>
-                        <textarea name="" id="comment-textarea"  {% if not current_user.is_authenticated() %} disabled {% endif %}>
+                        <textarea name="" id="comment-textarea"  {% if not current_user.is_authenticated() %}
+                                  disabled {% endif %}>
 
                         </textarea>
                         <a href="javascript:;"
