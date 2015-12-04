@@ -24,7 +24,7 @@ class UserAdmin(sqla.ModelView):
         return user
 
     def is_accessible(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return False
         if not admin_permission.can():
             return False
@@ -41,7 +41,7 @@ class RoleAdmin(sqla.ModelView):
     column_labels = dict(name=u'用户名', description=u'用户身份')
 
     def is_accessible(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return False
         if not admin_permission.can():
             return False

@@ -50,7 +50,7 @@
             <div class="header-right-top">
                 <span><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a></span>
                 <span class="header-login">
-                {% if current_user.is_authenticated() %}
+                {% if current_user.is_authenticated %}
                     <a class="header-login-name" href="{{ url_for('user_view.user_profile') }}">{{ current_user.name }}</a>
                     {% if 'editor' in current_user.roles_name or 'admin' in current_user.roles_name %}
                     |<a class="header-login-name" href="/admin/">编辑后台</a>

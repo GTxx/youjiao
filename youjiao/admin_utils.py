@@ -8,7 +8,7 @@ class AuthEditorMixin(object):
     # add auth in admin view
     def is_accessible(self):
         edit_permission = Permission(RoleNeed('editor'))
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return False
         if not edit_permission.can():
             return False

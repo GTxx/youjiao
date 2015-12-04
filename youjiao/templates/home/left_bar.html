@@ -25,7 +25,7 @@
             <p>留言板</p>
 
             <div class="message-area">
-                {% if current_user.is_authenticated() %}
+                {% if current_user.is_authenticated %}
                     <textarea name="message"></textarea>
                 {% else %}
                     <span>请<a href="/login">登录</a>后再留言</span>

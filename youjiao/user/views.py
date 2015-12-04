@@ -74,7 +74,7 @@ def login():
 @user_bp.route('/logout')
 def logout():
     from flask_login import logout_user, current_user
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         logout_user()
 
         # Remove session keys set by Flask-Principal

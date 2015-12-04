@@ -95,7 +95,7 @@ class PageAdmin(AuthEditorMixin, sqla.ModelView):
     column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题')
 
     def is_accessible(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return False
         if not content_edit_permission.can():
             return False

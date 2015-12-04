@@ -40,7 +40,7 @@
                 <div>
                     <p class="detail-comment-content courseware-detail-content">
 
-                        {% if current_user.is_authenticated() %}
+                        {% if current_user.is_authenticated %}
 
                             {% for document in courseware.document_list %}
                                 <div class="document-img">
@@ -94,12 +94,12 @@
                             <a href="#">1</a>
                         </li>
                     </ul>
-                        <textarea name="" id="comment-textarea" {% if not current_user.is_authenticated() %}
+                        <textarea name="" id="comment-textarea" {% if not current_user.is_authenticated %}
                                   disabled {% endif %}>
 
                         </textarea>
                     <a href="javascript:;"
-                            {% if current_user.is_authenticated() %} id='book-publish-comment' {% endif %}
+                            {% if current_user.is_authenticated %} id='book-publish-comment' {% endif %}
                        class="book-publish-comment">发布</a>
                 </div>
             </div>
