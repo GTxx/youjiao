@@ -6,6 +6,7 @@ from youjiao.user_util.models import Comment
 from sqlalchemy import and_
 from .models import Book, Courseware
 from .permissions import book_preview_permission, courseware_preview_permission
+from ..extensions import redis_cli
 
 book_bp = Blueprint("book_view", __name__)
 
@@ -32,19 +33,19 @@ def book_category(category):
         # import ipdb; ipdb.set_trace()
         if not level:
             book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.publish==True)).limit(9)
+                and_(Book.category == u'幼教教材', Book.publish == True)).limit(9)
         elif level == u'小班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         elif level == u'中班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         elif level == u'大班':
             book_list = Book.query.filter(
                 and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish==True)).limit(9)
+                     Book.publish == True)).limit(9)
         else:
             book_list = []
         top10 = Book.top10()
@@ -77,15 +78,27 @@ def book_associate():
 
 @book_bp.route('/courseware/')
 def courseware():
+    l = redis_cli.zrevrange("score", 0, 9)
+    rank = []
+    for num in l:
+        courseware = Courseware.query.get(num)
+        rank.append(courseware)
     courseware_list = Courseware.query.limit(12).all()
     return render_template('courseware/home.html', current_page='courseware',
                            courseware_list=courseware_list,
-                           Courseware=Courseware)
+                           Courseware=Courseware, rank=rank)
 
 
 @book_bp.route('/courseware/<int:courseware_id>/')
 def courseware_detail(courseware_id):
+    id = int(courseware_id)
     courseware = Courseware.query.get(courseware_id)
+    #  设置初始值
+    redis_cli.setnx(courseware.name, 0)
+    redis_cli.incr(courseware.name)
+    amount = redis_cli.get(courseware.name)
+    redis_cli.zadd("score", id, amount)
+
     if not courseware.publish and not courseware_preview_permission.can():
         abort(404)
 
@@ -131,7 +144,10 @@ def courseware_sub():
     return render_template('courseware/sub_node.html', current_page='courseware',
                            top10=top10, courseware_list=courseware_list)
 
+
 from youjiao.flask_qiniu import get_private_url
+
+
 @book_bp.app_template_filter('qiniu_private_url')
 def qiniu_private_url(key):
     return get_private_url(key)

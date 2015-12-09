@@ -2,8 +2,11 @@
     <div class="right-bar-list">
         <ul>
             <li class="right-list-first">本月下载排行榜</li>
-            {% for courseware in Courseware.top10() %}
-            <li><a href="{{ courseware.link }}">{{ loop.index }}.{{ courseware.book.name }}</a></li>
+            <!--{% for courseware in Courseware.top10() %}-->
+            <!--<li><a href="{{ courseware.link }}">{{ loop.index }}.{{ courseware.book.name }}</a></li>-->
+            <!--{% endfor %}-->
+            {% for r in rank %}
+            <li><a href="{{ r.link }}">{{ loop.index }}.{{ r.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
