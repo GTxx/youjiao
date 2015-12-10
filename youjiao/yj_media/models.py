@@ -20,6 +20,7 @@ class MediaMixin(object):
 
 
 class Video(CRUDMixin, MediaMixin, db.Model):
+    QINIU_CUT_VIDEO_CALLBACK = '/qiniu_cut_video_callback'
     QINIU_CALLBACK_ROUTE = '/qiniu_video_callback'
     id = sqla.Column(sqla.Integer, primary_key=True)
 
@@ -53,11 +54,11 @@ class Video(CRUDMixin, MediaMixin, db.Model):
         dest_bucket_name = src_bucket_name
         pipeline = current_app.qiniu.PIPELINE
         QINIU_VIDEO_CALLBACK_URL = urljoin(
-                current_app.qiniu.CALLBACK_URL, self.QINIU_CALLBACK_ROUTE)
+                current_app.qiniu.CALLBACK_URL, self.QINIU_CUT_VIDEO_CALLBACK)
         pfop = PersistentFop(current_app.qiniu.qiniu_auth,
                              src_bucket_name, pipeline,
                              QINIU_VIDEO_CALLBACK_URL)
-        saved_key = self.qiniu_key + '_cut'
+        saved_key = self.qiniu_key + '.short.mp4'
         # import ipdb; ipdb.set_trace()
         op = op_save('avthumb/mp4/t/180', dest_bucket_name, saved_key.encode('utf-8'))
         ret, info = pfop.execute(self.qiniu_key, [op, ], force=1)

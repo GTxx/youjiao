@@ -93,7 +93,6 @@ def courseware_detail(courseware_id):
 def courseware_list():
     level = request.args.get('level')
     search = request.args.get('search')
-    Courseware.query.get()
     courseware_list = Courseware.query.outerjoin(Book).filter(Courseware.publish == True)
     if search:
         courseware_list = courseware_list.filter(

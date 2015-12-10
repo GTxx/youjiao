@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'school/left_bar.html' %}
+    {% include 'onlinecourse/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
         </div>
         <div class="video-section-lg">
             <div class="section-block-wrapper">
-                <div class="section-block-title-6">{{ video_list[0].category }}推荐</div>
+                <div class="section-block-title-6">优秀课堂推荐</div>
             </div>
             <ul class="video-section-list">
                 {% for video in video_list %}
@@ -40,7 +40,9 @@
                         <h5>{{ video.name }} </h5>
                         <a href="{{ video.link }}" class="start-download">开始下载</a>
                     </li>
-                        </a>
+                    </a>
+                {% else %}
+                内容即将上线，敬请期待！
                 {% endfor %}
             </ul>
         </div>
