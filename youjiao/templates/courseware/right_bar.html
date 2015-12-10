@@ -3,7 +3,7 @@
         <ul>
             <li class="right-list-first">本月下载排行榜</li>
             {% for r in rank %}
-            <li><a href="{{ r.link }}">{{ loop.index }}.{{ r.name }}</a></li>
+            <li><a href="{{ Courseware.query.get(r).link }}">{{ loop.index }}.{{ Courseware.query.get(r).name }}</a></li>
             {% endfor %}
         </ul>
     </div>

@@ -78,11 +78,7 @@ def book_associate():
 
 @book_bp.route('/courseware/')
 def courseware():
-    l = redis_cli.zrevrange("score", 0, 9)
-    rank = []
-    for num in l:
-        courseware = Courseware.query.get(num)
-        rank.append(courseware)
+    rank = redis_cli.zrevrange("courseware_click_num", 0, 9)
     courseware_list = Courseware.query.limit(12).all()
     return render_template('courseware/home.html', current_page='courseware',
                            courseware_list=courseware_list,
@@ -93,11 +89,7 @@ def courseware():
 def courseware_detail(courseware_id):
     id = int(courseware_id)
     courseware = Courseware.query.get(courseware_id)
-    #  设置初始值
-    redis_cli.setnx(courseware.name, 0)
-    redis_cli.incr(courseware.name)
-    amount = redis_cli.get(courseware.name)
-    redis_cli.zadd("score", id, amount)
+    redis_cli.zincrby("courseware_click_num", id, 1)
 
     if not courseware.publish and not courseware_preview_permission.can():
         abort(404)
