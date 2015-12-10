@@ -2,6 +2,7 @@ import 'normalize_css';
 import 'main_css';
 import area from 'area_js';
 import 'birthday_js';
+import '../modules/add_slides_itemhover.js';
 
 $(function () {
   console.log($)
