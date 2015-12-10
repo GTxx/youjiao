@@ -27,6 +27,10 @@ class Book(db.Model, CRUDMixin):
 
     coursewares = db.relationship('Courseware', backref='book')
 
+    def __repr__(self):
+        uni = u'<图书: {},{}>'.format(self.name, self.level)
+        return uni.encode('utf-8')
+
     @classmethod
     def read_book_top10(cls):
         return cls.query.filter(cls.category==u'幼教读物',
@@ -91,8 +95,8 @@ class Courseware(db.Model, CRUDMixin):
     @property
     def related_courseware(self):
         return Courseware.query.join(Book).filter(
-            Book.id==self.book_id, Courseware.id!=self.id,
-            Courseware.publish==True).all()
+            Book.id == self.book_id, Courseware.id != self.id,
+            Courseware.publish == True).all()
 
     @property
     def edit_link(self):

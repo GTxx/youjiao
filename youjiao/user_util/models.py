@@ -28,7 +28,8 @@ class Favor(CRUDMixin, db.Model):
     # 喜爱对象id
     obj_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     # 喜爱对象类型
-    obj_type = db.Column(sqla.Enum('book', name='like_obj_type'))
+    obj_type = db.Column(sqla.Enum('book', 'courseware', 'onlinecourse',
+                                   name='like_obj_type'))
 
     __table_args__ = (
         UniqueConstraint('user_id', 'obj_id', 'obj_type',
@@ -36,9 +37,14 @@ class Favor(CRUDMixin, db.Model):
 
     @property
     def favor_model(self):
-        from youjiao.teach_material.models import Book
+        from youjiao.teach_material.models import Book, Courseware
+        from youjiao.onlinecourse.models import OnlineCourse
         if self.obj_type == 'book':
             return Book
+        if self.obj_type == 'courseware':
+            return OnlineCourse
+        if self.obj_type == 'onlinecourse':
+            return OnlineCourse
         else:
             return None
 

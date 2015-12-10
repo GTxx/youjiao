@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from datetime import datetime
+import collections
 import sqlalchemy as sqla
 from sqlalchemy import String, Unicode
 from sqlalchemy.dialects.postgresql import JSON, ARRAY
@@ -120,3 +121,68 @@ class Slider(CRUDMixin, db.Model):
                     "image": "http://7xn3in.com2.z0.glb.qiniucdn.com/52bc0da0-6bcc-49f8-a6ee-cb978376e7e3/banner5.jpg",
                     "link": "#"}
             ]
+
+
+class ContentList(CRUDMixin, CreateUpdateTimeMixin, db.Model):
+    ''' 页面出现一些对象, 要求有name这个字段,  保存成一个array(list)放在json中'''
+    id = db.Column(sqla.Integer, primary_key=True)
+    position = db.Column(sqla.String(200))
+    content = db.Column(JSON)
+
+    BOOK = u'幼教教材'
+    COURSEWARE = u'幼教课件'
+    ONLINECOURSE = u'幼教网课'
+
+    # position enum
+    HOME_BOOK = u'首页 教材推荐'
+    HOME_COURSEWARE = u'首页 课件推荐'
+    HOME_RECOMMEND = u'首页推荐'
+
+    from youjiao.teach_material.models import Book, Courseware
+    from youjiao.onlinecourse.models import OnlineCourse
+    name_model = {
+        BOOK: Book, COURSEWARE: Courseware, ONLINECOURSE: OnlineCourse
+    }
+    model_name = {v: k for k, v in name_model.items()}
+
+    @staticmethod
+    def obj_to_dict(obj):
+        obj_dict_list = [
+            {'id': obj.id, 'name': obj.__repr__(), 'model_name': name}
+            for name, model in ContentList.name_model.items()
+            if isinstance(obj, model)]
+        if len(obj_dict_list) == 0:
+            raise Exception('can not handle obj: {}'.format(obj))
+        else:
+            return obj_dict_list[0]
+
+    @staticmethod
+    def dict_to_obj(dct):
+        obj_model = ContentList.name_model[dct['model_name']]
+        obj_id = dct['id']
+        return obj_model.query.get(obj_id)
+
+    @classmethod
+    def add_obj_to_position(cls, obj_list, position_name):
+        if position_name not in [cls.HOME_BOOK, cls.HOME_COURSEWARE,
+                                 cls.HOME_RECOMMEND]:
+            raise Exception('{} is invalid'.format(position_name))
+        contentlist = cls.query.filter(cls.position==position_name).first()
+        if not contentlist:
+            contentlist = cls(position=position_name, content=[])
+            contentlist.save()
+
+        if not isinstance(obj_list, collections.Iterable):
+            obj_list = [obj_list, ]
+        added_content = [cls.obj_to_dict(obj) for obj in obj_list]
+        contentlist.content = contentlist.content + added_content
+        contentlist.save()
+        return contentlist
+
+    @property
+    def ids(self):
+        return [i.get('id') for i in self.content]
+
+    @property
+    def obj_list(self):
+        return [self.dict_to_obj(i) for i in self.content]

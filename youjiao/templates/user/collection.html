@@ -3,9 +3,9 @@
 {% block userinfo_right_top %}
     <div>我的收藏</div>
     <ul>
-        <li><a class="active" href="javascript:;">教材收藏</a></li>
-        <li><a href="javascript:;">产品收藏</a></li>
+        <li><a class="active" href="javascript:;">产品收藏</a></li>
         <li><a href="javascript:;">课件收藏</a></li>
+        <li><a href="javascript:;">网课收藏</a></li>
     </ul>
 {% endblock %}
 
@@ -28,6 +28,8 @@
                                 <h6>{{ favor.real_obj.level }}</h6>
                             </a>
                         </li>
+                    {% else %}
+                    暂时没有收藏
                     {% endfor %}
                 </ul>
             </div>
@@ -35,20 +37,22 @@
         <div class="userinfo-content-tab display-none">
             <div class="n-v-section-b">
                 <ul class="n-v-section-list">
-                    {% for i in range(4) %}
+                    {% for favor in favor_courseware_list %}
                         <li>
-                            <a href="#">
+                            <a href="{{ favor.real_obj.link }}">
                                 <div class="nv-image-wrapper">
-                                    <img src="#"
+                                    <img src="{{ favor.real_obj.cover }}"
                                          alt="">
 
                                     <div class="nv-image-hover-layer"></div>
-                                    <div class="nv-price">30/套</div>
+                                    <!--<div class="nv-price">30/套</div>-->
                                 </div>
-                                <h5>有趣的手影</h5>
-                                <h6>大班</h6>
+                                <h5>{{ favor.real_obj.name }}</h5>
+                                <h6>{{ favor.real_obj.book.level if favor.real_obj.book  else '' }}</h6>
                             </a>
                         </li>
+                    {% else %}
+                    暂时没有收藏
                     {% endfor %}
                 </ul>
             </div>
@@ -56,8 +60,9 @@
         <div class="userinfo-content-tab display-none">
             <div class="video-section-b">
                 <ul class="video-section-list">
-                    {% for i in range(8) %}
+                    {% for favor in favor_onlinecourse_list %}
                         <li>
+                            <a href="{{ favor.link }}">
                             <div class="v-image-wrapper">
                                 <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}"
                                      alt="">
@@ -66,9 +71,12 @@
                                     <div class="v-hover-layer-icon"></div>
                                 </div>
                             </div>
-                            <h5>青花瓷</h5>
+                            <h5>{{ favor.real_obj.name }}</h5>
                             <a href="" class="start-download">取消收藏</a>
+                            </a>
                         </li>
+                    {% else %}
+                    暂时没有收藏
                     {% endfor %}
                 </ul>
             </div>

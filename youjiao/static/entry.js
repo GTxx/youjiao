@@ -29,7 +29,10 @@ var entry = {
     'onlinecourse.admin_edit': path.resolve(dirname, 'onlinecourse/admin_edit.js'),
 
     // content
-    'slider.admin_edit': path.resolve(dirname, 'content/slider.admin_edit.js')
+    'slider.admin_edit': path.resolve(dirname, 'content/slider.admin_edit.js'),
+
+    // contentlist
+    'contentlist.admin_edit': path.resolve(dirname, 'contentlist/admin_edit.js')
 };
 
 module.exports = entry;

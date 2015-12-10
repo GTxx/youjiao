@@ -22,33 +22,23 @@ def book():
                            slider=Slider.book_slider())
 
 
-@book_bp.route('/book/upload')
-def book_upload():
-    return render_template('book/upload.html')
+@book_bp.route('/book/list')
+def book_list():
+    level = request.args.get('level')
+    book_list = Book.query.filter(Book.publish==True)
+    if level:
+        book_list = book_list.filter(Book.level==level)
+    return render_template('book/list.html', book_list=book_list, level=level)
 
 
 @book_bp.route('/book/<category>')
 def book_category(category):
     if category == 'teach_book':
         level = request.args.get('level')
-        # import ipdb; ipdb.set_trace()
-        if not level:
-            book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.publish == True)).limit(9)
-        elif level == u'小班':
-            book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish == True)).limit(9)
-        elif level == u'中班':
-            book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish == True)).limit(9)
-        elif level == u'大班':
-            book_list = Book.query.filter(
-                and_(Book.category == u'幼教教材', Book.level == level,
-                     Book.publish == True)).limit(9)
-        else:
-            book_list = []
+        book_list = Book.query.filter(Book.publish==True, Book.category==u'幼教教材')
+        if level:
+            book_list = book_list.filter(Book.level==level)
+        book_list = book_list.limit(8)
         top10 = Book.top10()
         return render_template('book/sub_node.html', book_list=book_list, top10=top10,
                                level=level, slider=Slider.book_slider())
@@ -103,7 +93,8 @@ def courseware_detail(courseware_id):
 def courseware_list():
     level = request.args.get('level')
     search = request.args.get('search')
-    courseware_list = Courseware.query.join(Book)
+    Courseware.query.get()
+    courseware_list = Courseware.query.outerjoin(Book).filter(Courseware.publish == True)
     if search:
         courseware_list = courseware_list.filter(
             or_(Courseware.name.like(u'{}%'.format(search)),
@@ -123,12 +114,8 @@ def courseware_sub():
     level = request.args.get('level')
     if not level:
         courseware_list = Courseware.query.limit(10).all()
-    elif level == u'小班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'小班').all()
-    elif level == u'中班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'中班').all()
-    elif level == u'大班':
-        courseware_list = Courseware.query.join(Book).filter(Book.level == u'大班').all()
+    elif level in [u'小班', u'中班', u'大班']:
+        courseware_list = Courseware.query.join(Book).filter(Book.level == level).all()
     else:
         courseware_list = []
     return render_template('courseware/sub_node.html', current_page='courseware',

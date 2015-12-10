@@ -45,7 +45,7 @@
                 <div class="section-block-title-6">幼教教材推荐</div>
             </div>
             <ul class="n-v-section-list">
-                {% for book in Book.top10()[0:8] %}
+                {% for book in book_list[0:8] %}
                     <li>
                         <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
                             <div class="nv-image-wrapper">
@@ -67,7 +67,7 @@
                 <div class="section-block-title-6">课件中心推荐</div>
             </div>
             <ul class="video-section-list">
-                {% for courseware in Courseware.top10()[0:8] %}
+                {% for courseware in courseware_list[0:8] %}
                     <li>
                         <div class="v-image-wrapper">
                             <a href="{{ url_for('book_view.courseware_detail', courseware_id=courseware.id) }}">

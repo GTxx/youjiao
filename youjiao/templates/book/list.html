@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block leftBar %}
-{% include 'courseware/left_bar.html' %}
+{% include 'book/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
 <div id="main-school-body">
-    <div class="e-page-title">课件中心-教材配套课件-{{level or '全部课件'}}</div>
+    <div class="e-page-title">幼教教材--{{level or '全部'}}教材</div>
     <div class="video-section-lg">
-        <h3 style="text-align: center;line-height: 40px;">{{ level or '全部' }}课件</h3>
+        <h3 style="text-align: center;line-height: 40px;">{{ level or '全部' }}教材</h3>
 
         <div class="section-block-wrapper">
             <div class="section-block-title-4">班级分类</div>
@@ -32,18 +32,18 @@
             </div>
         </div>
         <ul class="video-section-list">
-            {% for courseware in courseware_list %}
+            {% for book in book_list %}
             <li>
-                <a href="{{ courseware.link }}">
+                <a href="{{ book.link }}">
                     <div class="v-image-wrapper">
-                        <img src="{{ '%s?imageView2/2/w/600'|format(courseware.book.cover) }}" alt="">
+                        <img src="{{ '%s?imageView2/2/w/600'|format(book.cover) }}" alt="">
 
                         <div class="v-image-hover-layer">
                             <div class="v-hover-layer-icon"></div>
                         </div>
                     </div>
-                    <h5>{{ courseware.name }}</h5>
-                    <a href="{{ courseware.link }}" class="start-download">开始下载</a>
+                    <h5>{{ book.name }}</h5>
+                    <a href="{{ book.link }}" class="start-download">开始下载</a>
                 </a>
             </li>
             {% else %}

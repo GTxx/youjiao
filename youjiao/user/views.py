@@ -134,8 +134,14 @@ def user_collections():
     }
     favor_book_list = Favor.query.filter(
         and_(Favor.obj_type=='book', Favor.user_id==current_user.id))
+    favor_courseware_list = Favor.query.filter(Favor.obj_type=='courseware',
+                                               Favor.user_id==current_user.id)
+    favor_onlinecourse_list = Favor.query.filter(Favor.obj_type=='onlinecourse',
+                                                 Favor.user_id==current_user.id)
     return render_template('user/collection.html', current_page=current_page,
-                           favor_book_list=favor_book_list)
+                           favor_book_list=favor_book_list,
+                           favor_courseware_list=favor_courseware_list,
+                           favor_onlinecourse_list=favor_onlinecourse_list)
 
 
 @user_bp.route('/user/consumption')
@@ -178,7 +184,8 @@ class UserAvatarView(MethodView):
         return render_template('user/avatar.html', form=form)
 
     def post(self):
-        form = ModifyPasswordForm(formdata=request.form)
+        form = UserAvatarForm(formdata=request.form)
+        import ipdb; ipdb.set_trace()
         if form.validate_on_submit():
             pass
             # 生成qiniu_key

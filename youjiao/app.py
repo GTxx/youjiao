@@ -24,7 +24,7 @@ from .user.api import user_api_bp
 
 # content
 from .content.admin import ActivityAdmin
-from .content.models import Activity, Slider
+from .content.models import Activity, Slider, ContentList
 from .content.views import content_bp
 
 # book
@@ -58,9 +58,24 @@ import json
 # Flask views
 def index():
     # import ipdb; ipdb.set_trace()
+    book_content_list = ContentList.query.filter(
+        ContentList.position==ContentList.HOME_BOOK).first()
+    if book_content_list:
+        book_list = book_content_list.obj_list
+    else:
+        book_list = Book.top10()
+
+    courseware_content_list = ContentList.query.filter(
+        ContentList.position==ContentList.HOME_COURSEWARE).first()
+    if courseware_content_list:
+        courseware_list = courseware_content_list.obj_list
+    else:
+        courseware_list = Courseware.top10()
+
     return render_template('home/home.html', current_page='home',
                            Book=Book, Courseware=Courseware,
-                           slider=Slider.home_slider())
+                           slider=Slider.home_slider(),
+                           book_list=book_list, courseware_list=courseware_list)
 
 
 def create_app():
