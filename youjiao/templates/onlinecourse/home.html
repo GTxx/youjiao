@@ -14,11 +14,13 @@
 
         <div class="school-slides">
             <ul class="rslides">
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner1.jpg" alt="banner"></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner2.jpg" alt="banner"></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner3.jpg" alt="banner"></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner4.jpg" alt="banner"></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner5.jpg" alt="banner"></li>
+                {% for img_link in slider %}
+                    <li>
+                        <a href="{{ img_link.link }}">
+                        <img src="{{ img_link.image }}" alt="banner">
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
 

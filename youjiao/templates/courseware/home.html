@@ -14,7 +14,11 @@
             <div class="courseware-slides-main">
                 <ul class="rslides">
                     {% for img_link in slider %}
-                    <li><img src="{{ img_link.image }}" alt="banner"></li>
+                    <li>
+                        <a href="{{ img_link.link }}">
+                        <img src="{{ img_link.image }}" alt="banner">
+                        </a>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>

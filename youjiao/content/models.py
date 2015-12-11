@@ -60,9 +60,14 @@ class Slider(CRUDMixin, db.Model):
     name = db.Column(sqla.String(200))
     image_list = db.Column(JSON)
 
+    POSITION_HOME = u'主页'
+    POSITION_COURSEWARE_HOME = u'课件'
+    POSITION_BOOK_HOME = u'教材'
+    POSITION_ONLINECOURSE_HOME = u'网课主页'
+
     @classmethod
     def home_slider(cls):
-        slider = cls.query.filter_by(name=u'主页').first()
+        slider = cls.query.filter_by(name=cls.POSITION_HOME).first()
         if slider:
             return slider.image_list
         else:
@@ -81,7 +86,7 @@ class Slider(CRUDMixin, db.Model):
 
     @classmethod
     def book_slider(cls):
-        slider = cls.query.filter_by(name=u'教材').first()
+        slider = cls.query.filter_by(name=cls.POSITION_BOOK_HOME).first()
         if slider:
             return slider.image_list
         else:
@@ -100,7 +105,7 @@ class Slider(CRUDMixin, db.Model):
 
     @classmethod
     def courseware_slider(cls):
-        slider = cls.query.filter_by(name=u'课件').first()
+        slider = cls.query.filter_by(name=cls.POSITION_COURSEWARE_HOME).first()
         if slider:
             return slider.image_list
         else:
@@ -120,6 +125,20 @@ class Slider(CRUDMixin, db.Model):
                 {
                     "image": "http://7xn3in.com2.z0.glb.qiniucdn.com/52bc0da0-6bcc-49f8-a6ee-cb978376e7e3/banner5.jpg",
                     "link": "#"}
+            ]
+
+    @classmethod
+    def onlinecourse_slider(cls):
+        slider = cls.query.filter_by(name=cls.POSITION_ONLINECOURSE_HOME).first()
+        if slider:
+            return slider.image_list
+        else:
+            return [
+                {"image": "http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner1.jpg", "link": "#"},
+                {"image": "http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner2.jpg", "link": "#"},
+                {"image": "http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner3.jpg", "link": "#"},
+                {"image": "http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner4.jpg", "link": "#"},
+                {"image": "http://7xn3in.com2.z0.glb.qiniucdn.com/lesson%20banner5.jpg", "link": "#"}
             ]
 
 
