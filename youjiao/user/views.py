@@ -114,7 +114,12 @@ def user_learnrecord():
     current_page = {
         'parent': 'learnrecord'
     }
-    return render_template('user/learnrecord.html', current_page=current_page)
+    book_list = current_user.book_visit_recent
+    courseware_list = current_user.courseware_visit_recent
+    onlinecourse_visit_recent = current_user.onlinecourse_visit_recent
+    return render_template('user/learnrecord.html', current_page=current_page,
+                           book_list=book_list, courseware_list=courseware_list,
+                           onlinecourse_list=onlinecourse_visit_recent)
 
 
 @user_bp.route('/user/schools')

@@ -2,6 +2,7 @@
 
 from flask import Blueprint, abort, render_template
 from youjiao.content.models import Slider
+from flask_login import current_user
 from .models import OnlineCourse
 from .permissions import onlinecourse_preview_permission
 
@@ -21,6 +22,9 @@ def video_detail(video_id):
     video = OnlineCourse.query.get_or_404(video_id)
     if not video.publish and not onlinecourse_preview_permission.can():
         abort(404)
+
+    if current_user.is_authenticated:
+        video.add_user_visit_recent(current_user)
     return render_template('onlinecourse/video_detail.html', video=video)
 
 

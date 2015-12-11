@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 from flask import Blueprint, render_template, abort, request
+from flask_login import current_user
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_, or_
 from youjiao.content.models import Slider
@@ -55,6 +56,10 @@ def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
     if not book.publish and not book_preview_permission.can():
         abort(404)
+
+    if current_user.is_authenticated:
+        book.add_user_visit_recent(current_user)
+
     page_comment = Comment.query.filter(
         and_(Comment.comment_obj_type == 'book',
              Comment.comment_obj_id == book.id)).paginate(1)
@@ -80,6 +85,9 @@ def courseware_detail(courseware_id):
     courseware = Courseware.query.get(courseware_id)
     if not courseware.publish and not courseware_preview_permission.can():
         abort(404)
+
+    if current_user.is_authenticated:
+        courseware.add_user_visit_recent(current_user)
 
     page_comment = Comment.query.filter(
         and_(Comment.comment_obj_type == 'courseware',

@@ -3,21 +3,80 @@
 {% block userinfo_right_top %}
     <div>学习记录</div>
     <ul>
-        <li><a class="active" href="javascript:;">课件学习记录</a></li>
+        <li><a class="active" href="javascript:;">教材</a></li>
+        <li><a href="javascript:;">课件</a></li>
+        <li><a href="javascript:;">网课</a></li>
     </ul>
 {% endblock %}
 
 {% block userinfo_content %}
-    <div class="learn_record">
-        <ul>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-            <li><img src=""><span>青花瓷</span></li>
-        </ul>
+    <div class="userinfo-collection-list">
+        <div class="userinfo-content-tab">
+            <div class="n-v-section-b">
+                <ul class="n-v-section-list">
+                    {% for book in book_list %}
+                        <li>
+                            <a href="{{ book.link }}">
+                                <div class="nv-image-wrapper">
+                                    <img src="{{ book.cover }}"
+                                         alt="">
+
+                                    <div class="nv-image-hover-layer"></div>
+                                    <div class="nv-price">{{ book.price }}/套</div>
+                                </div>
+                                <h5>{{ book.name }}</h5>
+                                <h6>{{ book.level }}</h6>
+                            </a>
+                        </li>
+                    {% else %}
+                    暂时没有记录
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="userinfo-content-tab display-none">
+            <div class="n-v-section-b">
+                <ul class="n-v-section-list">
+                    {% for courseware in courseware_list %}
+                        <li>
+                            <a href="{{ courseware.link }}">
+                                <div class="nv-image-wrapper">
+                                    <img src="{{ courseware.cover }}"
+                                         alt="">
+
+                                    <div class="nv-image-hover-layer"></div>
+                                    <!--<div class="nv-price">30/套</div>-->
+                                </div>
+                                <h5>{{ courseware.name }}</h5>
+                            </a>
+                        </li>
+                    {% else %}
+                    暂时没有记录
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="userinfo-content-tab display-none">
+            <div class="video-section-b">
+                <ul class="video-section-list">
+                    {% for onlinecourse in onlinecourse_list %}
+                        <li>
+                            <a href="{{ onlinecourse.link }}">
+                            <div class="v-image-wrapper">
+                                <img src="{{ onlinecourse.cover }}"
+                                     alt="">
+
+                                <div class="v-image-hover-layer">
+                                    <div class="v-hover-layer-icon"></div>
+                                </div>
+                            </div>
+                            <h5>{{ onlinecourse.name }}</h5>
+                        </li>
+                    {% else %}
+                    暂时没有记录
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock %}

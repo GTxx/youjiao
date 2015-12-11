@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from youjiao.extensions import db
+from youjiao.extensions import db, redis_cli
 from youjiao.utils.database import CRUDMixin, CreateUpdateTimeMixin
+from youjiao.flask_qiniu import get_private_url
 import sqlalchemy as sqla
 from flask import url_for
 from sqlalchemy.dialects.postgresql import JSON
@@ -26,4 +27,12 @@ class OnlineCourse(CRUDMixin, CreateUpdateTimeMixin, db.Model):
 
     @property
     def cover(self):
+        if self.content.get('full_video'):
+            video_cover = self.content['full_video'] + '?vframe/jpg/offset/7/w/480/h/360'
+            return get_private_url(video_cover)
         return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
+
+    def add_user_visit_recent(self, user):
+        key = user.onlinecourse_visit_recent_key
+        redis_cli.lpush(key, self.id)
+        redis_cli.ltrim(key, 0, 8)

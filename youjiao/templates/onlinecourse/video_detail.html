@@ -16,7 +16,7 @@
         <div class="video-detail">
             <div class="video-detail-v">
                 <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
-                       height="522" data-setup='{}' poster="http://www.videojs.com/img/poster.jpg">
+                       height="522" data-setup='{}' poster="{{ video.cover}}">
                     {% if current_user.is_authenticated %}
                     <source src='{{ video.content.full_video | qiniu_private_url }}' type='video/ogg'/>
                     {% else %}

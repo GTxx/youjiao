@@ -79,6 +79,36 @@ class User(db.Model, UserMixin, CRUDMixin):
         from youjiao.user_util.models import Favor
         pass
 
+    @property
+    def book_visit_recent_key(self):
+        return 'user_{}_book_visit_list'.format(self.id)
+
+    @property
+    def courseware_visit_recent_key(self):
+        return 'user_{}_courseware_visit_list'.format(self.id)
+
+    @property
+    def onlinecourse_visit_recent_key(self):
+        return 'user_{}_onlinecourse_visit_list'.format(self.id)
+
+    @property
+    def book_visit_recent(self):
+        from youjiao.teach_material.models import Book
+        book_id_list = redis_cli.lrange(self.book_visit_recent_key, 0, 8)
+        return Book.query.filter(Book.id.in_(book_id_list))
+
+    @property
+    def courseware_visit_recent(self):
+        from youjiao.teach_material.models import Courseware
+        courseware = redis_cli.lrange(self.courseware_visit_recent_key, 0, 8)
+        return Courseware.query.filter(Courseware.id.in_(courseware))
+
+    @property
+    def onlinecourse_visit_recent(self):
+        from youjiao.onlinecourse.models import OnlineCourse
+        onlinecourse_id_list = redis_cli.lrange(self.onlinecourse_visit_recent_key, 0, 8)
+        return OnlineCourse.query.filter(OnlineCourse.id.in_(onlinecourse_id_list))
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)

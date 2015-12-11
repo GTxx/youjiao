@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
-from youjiao.extensions import db
+from youjiao.extensions import db, redis_cli
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
 from sqlalchemy import not_
@@ -63,6 +63,11 @@ class Book(db.Model, CRUDMixin):
     def edit_link(self):
         redirect_url = url_for('book_view.book_detail', book_id=self.id)
         return '/admin/book/edit?url={}&id={}'.format(redirect_url, self.id)
+
+    def add_user_visit_recent(self, user):
+        key = user.book_visit_recent_key
+        redis_cli.lpush(key, self.id)
+        redis_cli.ltrim(key, 0, 8)
 
 
 class Courseware(db.Model, CRUDMixin):
@@ -134,3 +139,8 @@ class Courseware(db.Model, CRUDMixin):
         if self.book:
             return self.book.cover
         return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
+
+    def add_user_visit_recent(self, user):
+        key = user.courseware_visit_recent_key
+        redis_cli.lpush(key, self.id)
+        redis_cli.ltrim(key, 0, 8)
