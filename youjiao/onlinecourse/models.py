@@ -18,8 +18,12 @@ class OnlineCourse(CRUDMixin, CreateUpdateTimeMixin, db.Model):
 
     @classmethod
     def get_category(cls, category):
-        return cls.query.filter_by(category=category)
+        return cls.query.filter_by(category=category, publish=True)
 
     @property
     def link(self):
         return url_for('online_course.video_detail', video_id=self.id)
+
+    @property
+    def cover(self):
+        return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'

@@ -26,8 +26,9 @@ def video_detail(video_id):
 
 @online_course_bp.route('/school/<category>/')
 def school_sub(category):
+    video_list = OnlineCourse.query.filter(OnlineCourse.publish==True)
     if category == 'lecture':
-        video_list = OnlineCourse.query.filter(OnlineCourse.category==u'优秀讲座').limit(9)
+        video_list = video_list.filter(OnlineCourse.category==u'优秀讲座')
         slider = Slider.onlinecourse_slider()
         return render_template('onlinecourse/sub_node.html', current_page='school',
                                video_list=video_list, slider=slider)
