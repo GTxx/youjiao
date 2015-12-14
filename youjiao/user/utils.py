@@ -7,6 +7,7 @@ from flask import current_app
 from flask_login import current_user
 from flask_principal import UserNeed, RoleNeed
 from werkzeug.local import LocalProxy
+from datetime import date
 from flask_security.utils import encrypt_password
 
 
@@ -83,6 +84,18 @@ def _on_identity_loaded(sender, identity):
     if hasattr(current_user, 'roles'):
         for role in current_user.roles:
             identity.provides.add(RoleNeed(role.name))
+
+    # provide vip need
+    if hasattr(current_user, 'vips'):
+        from youjiao.user.models import User, VIP
+        from youjiao.extensions import db
+        e = VIP.query.filter(VIP.user_id==current_user.id,
+                             VIP.end>date.today()).exists()
+        if db.session.query(e).scalar():
+            identity.provides.add(RoleNeed('vip'))
+    if hasattr(current_user, 'roles'):
+        if ('admin' in current_user.roles_name) or ('editor' in current_user.roles_name):
+            identity.provides.add(RoleNeed('vip'))
 
     identity.user = current_user
 

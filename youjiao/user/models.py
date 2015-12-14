@@ -5,10 +5,8 @@ from flask_security import RoleMixin
 from flask_login import UserMixin
 from youjiao.extensions import db, redis_cli, USER_TABLE_NAME, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
-from captcha.image import ImageCaptcha
 import sqlalchemy as sqla
-import os
-import time
+from .permissions import vip_permission
 from .utils import generate_random_number_4, generate_random_string_4, encrypt_password, \
     verify_password, get_hmac, password_context
 
@@ -109,6 +107,10 @@ class User(db.Model, UserMixin, CRUDMixin):
         onlinecourse_id_list = redis_cli.lrange(self.onlinecourse_visit_recent_key, 0, 8)
         return OnlineCourse.query.filter(OnlineCourse.id.in_(onlinecourse_id_list))
 
+    @property
+    def can_view_vip_content(self):
+        return vip_permission.can()
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
@@ -167,3 +169,11 @@ class RedisCaptcha(object):
         if real_content and real_content == content:
             return True
         return False
+
+
+class VIP(db.Model, CRUDMixin):
+    id = db.Column(sqla.Integer, primary_key=True)
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('vips'))
+    begin = db.Column(sqla.Date)
+    end = db.Column(sqla.Date)

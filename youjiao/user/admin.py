@@ -2,7 +2,7 @@
 from flask_login import current_user
 from flask_admin.contrib import sqla
 from .permissions import admin_permission
-from .models import User, Role
+from .models import User, Role, VIP
 
 
 class UserAdmin(sqla.ModelView):
@@ -48,6 +48,19 @@ class RoleAdmin(sqla.ModelView):
         return True
 
 
+class VIPAdmin(sqla.ModelView):
+    create_modal = True
+    edit_modal = True
+    column_searchable_list = ('user.name', )
+
+    def is_accessible(self):
+        if not current_user.is_authenticated:
+            return False
+        if not admin_permission.can():
+            return False
+        return True
+
+
 from ..extensions import admin, db
 from flask_admin.consts import ICON_TYPE_GLYPH
 
@@ -58,3 +71,4 @@ admin.add_view(UserAdmin(User, db.session, category=u'用户管理', name=u'用�
 admin.add_view(RoleAdmin(Role, db.session, category=u'用户管理', name=u'身份',
                          menu_icon_type=ICON_TYPE_GLYPH,
                          menu_icon_value='glyphicon-education'))
+admin.add_view(VIPAdmin(VIP, db.session, category=u'用户管理', name=u'VIP'))

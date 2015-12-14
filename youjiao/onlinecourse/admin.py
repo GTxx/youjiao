@@ -10,7 +10,8 @@ from ..admin_utils import AuthEditorMixin
 
 class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
     column_default_sort = 'id'
-    form_excluded_columns = ('create_time', 'update_time')
+    form_excluded_columns = ('create_time', 'update_time', 'url')
+    column_exclude_list = ('content', 'url', 'create_time', 'update_time')
 
     create_template = 'onlinecourse/onlinecourse_admin_json_create.html'
     edit_template = 'onlinecourse/onlinecourse_admin_json_editor.html'

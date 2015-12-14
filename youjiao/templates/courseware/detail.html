@@ -40,7 +40,7 @@
                 <div>
                     <p class="detail-comment-content courseware-detail-content">
 
-                        {% if current_user.is_authenticated %}
+                        {% if current_user.is_authenticated and current_user.can_view_vip_content %}
 
                             {% for document in courseware.document_list %}
                                 <div class="document-img">
@@ -73,8 +73,10 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
+                        {% elif current_user.is_authenticated %}
+                            <p>需要成为VIP会员后才能观看</p>
                         {% else %}
-                            <p>请登陆后观看</p>
+                            <p>请登陆并成为VIP会员后观看</p>
                         {% endif %}
                 </div>
                 <div class="detail-comment-content display-none">
