@@ -74,7 +74,7 @@ def login():
             elif 'editor' in user.roles_name:
                 return redirect(next or '/admin/')
             else:
-                return redirect(next)
+                return redirect(next or '/')
     elif request.method == 'GET':
         form = LoginForm()
     return render_template('security/login.html', form=form)
