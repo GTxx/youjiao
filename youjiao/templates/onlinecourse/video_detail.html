@@ -6,21 +6,20 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'school/left_bar.html' %}
+    {% include 'onlinecourse/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
     <div id="main-school-body">
-
         <div class="e-page-title">{{ video.name }}</div>
         <div class="video-detail">
             <div class="video-detail-v">
                 <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
                        height="522" data-setup='{}' poster="http://www.videojs.com/img/poster.jpg">
                     {% if current_user.is_authenticated %}
-                    <source src='{{ video.content.full_video | qiniu_private_url }}' type='video/ogg'/>
+                        <source src='{{ video.content.full_video | qiniu_private_url }}' type='video/mp4'/>
                     {% else %}
-                    <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/ogg'/>
+                        <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/mp4'/>
                     {% endif %}
                 </video>
             </div>
@@ -35,5 +34,15 @@
     <script src="{{ 'vendor/video-js/videojs-ie8.min.js'| vendor_asset }}"></script>
     <![endif]-->
     <script src="{{ 'video_detail.js' | asset }}"></script>
+    {% if not current_user.is_authenticated %}
+        <script>
+            $(function () {
+                var video = videojs('video-detail-c').ready(function () {
+                    this.on('ended', function () {
+                        $(".short-video-done").removeClass('display-none');
+                    });
+                });
+            });
+        </script>
+    {% endif %}
 {% endblock %}
-
