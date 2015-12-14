@@ -36,3 +36,7 @@ class OnlineCourse(CRUDMixin, CreateUpdateTimeMixin, db.Model):
         key = user.onlinecourse_visit_recent_key
         redis_cli.lpush(key, self.id)
         redis_cli.ltrim(key, 0, 8)
+
+    @classmethod
+    def top10(cls):
+        return cls.query.filter(cls.publish==True).limit(10)

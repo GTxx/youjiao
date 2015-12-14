@@ -56,16 +56,25 @@ def login():
             # TODO: support token auth in @loging_required, refer to flask_security @auth_required
             # login_required
             login_user(user, force=True)
+
+            # flask principal
             from flask_principal import identity_changed, Identity
             from flask import current_app
             identity_changed.send(current_app._get_current_object(),
                                   identity=Identity(user.id))
+
+            next = request.args.get('next')
+            # next_is_valid should check if the user has valid
+            # permission to access the `next` url
+            # if not next_is_valid(next):
+            #     return flask.abort(400)
+
             if 'admin' in user.roles_name:
-                return redirect('/admin/')
+                return redirect(next or '/admin/')
             elif 'editor' in user.roles_name:
-                return redirect('/admin/')
+                return redirect(next or '/admin/')
             else:
-                return redirect('/')
+                return redirect(next)
     elif request.method == 'GET':
         form = LoginForm()
     return render_template('security/login.html', form=form)

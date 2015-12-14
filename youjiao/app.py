@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
 from flask_admin import Admin
@@ -72,10 +73,17 @@ def index():
     else:
         courseware_list = Courseware.top10()
 
+    onlinecourse_content_list = ContentList.query.filter(
+        ContentList.position==u'首页视频').first()
+    if onlinecourse_content_list:
+        onlinecourse_list = onlinecourse_content_list.obj_list
+    else:
+        onlinecourse_list = OnlineCourse.top10()
     return render_template('home/home.html', current_page='home',
                            Book=Book, Courseware=Courseware,
                            slider=Slider.home_slider(),
-                           book_list=book_list, courseware_list=courseware_list)
+                           book_list=book_list, courseware_list=courseware_list,
+                           onlinecourse_list=onlinecourse_list)
 
 
 def create_app():
@@ -99,6 +107,7 @@ def create_app():
     # flask_login
     login_manager = LoginManager(app)
     login_manager.user_loader(load_user)
+    login_manager.login_view = 'user_view.login'
 
     # flask_principal
     Principal(app)

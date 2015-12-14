@@ -84,39 +84,28 @@
                 {% endfor %}
             </ul>
         </div>
-        <!--<div class="video-section-b">-->
-            <!--<div class="section-block-wrapper">-->
-                <!--<div class="section-block-title-6">优秀课堂推荐</div>-->
-            <!--</div>-->
-            <!--<ul class="video-section-list">-->
-                <!--{% for i in range(8) %}-->
-                    <!--<li>-->
-                        <!--<div class="v-image-wrapper">-->
-                            <!--<img src="{{ url_for('static', filename='image/icons/qinghua.png') }}"-->
-                                 <!--alt="">-->
+        <div class="video-section-b">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">优秀课堂推荐</div>
+            </div>
+            <ul class="video-section-list">
+                {% for onlinecourse in onlinecourse_list %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <a href="{{ onlinecourse.link }}">
+                            <img src="{{ onlinecourse.cover }}"
+                                 alt="">
 
-<<<<<<< HEAD
-                            <!--<div class="v-image-hover-layer">-->
-                                <!--<div class="v-hover-layer-icon"></div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<h5>青花瓷</h5>-->
-                        <!--<a href="" class="start-download">开始下载</a>-->
-                    <!--</li>-->
-                <!--{% endfor %}-->
-            <!--</ul>-->
-        <!--</div>-->
-=======
                             <div class="v-image-hover-layer">
                                 <div class="v-hover-layer-icon"></div>
                             </div>
+                            </a>
                         </div>
-                        <h5>青花瓷</h5>
+                        <h5>{{ onlinecourse.name }}</h5>
                     </li>
                 {% endfor %}
             </ul>
         </div>
->>>>>>> remove start-download
     </div>
 {% endblock %}
 

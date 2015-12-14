@@ -12,10 +12,6 @@
 {% block content %}
     <div id="main-school-body">
         <div class="e-page-title">{{ video.name }}</div>
-
-        {% if current_user.is_authenticated and current_user.can_view_vip_content %}
-        123123
-        {% endif %}
         <div class="video-detail">
             <div class="video-detail-v">
                 <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
@@ -26,6 +22,7 @@
                         <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/mp4'/>
                     {% endif %}
                 </video>
+                <div class="short-video-done display-none"><a href="/login?next={{video.link}}">请登陆后看完整版本</a></div>
             </div>
             <div class="video-detail-v-t">{{ video.name }}</div>
         </div>
