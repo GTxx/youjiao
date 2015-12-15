@@ -1,4 +1,3 @@
-from flask_restful import Resource, Api
 from flask import Blueprint, views, request, jsonify
 from flask_login import login_required, current_user
 from .models import Book

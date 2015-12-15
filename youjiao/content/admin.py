@@ -6,7 +6,9 @@ from flask_login import current_user
 from flask_admin.actions import action
 from flask import Markup, url_for, flash
 from youjiao.teach_material.admin import JsonField
-from .models import Activity, Page, OnlineCourse
+import json
+from youjiao.utils.admin import _json_format_field
+from .models import Activity, Page, Slider, ContentList
 from .permissions import content_edit_permission
 from ..admin_utils import AuthEditorMixin
 
@@ -30,7 +32,7 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_exclude_list = ('html', )
+    column_exclude_list = ('html',)
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
     form_choices = {
@@ -44,6 +46,8 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
             ('researchresult', u'教研成果')
         ],
     }
+    column_labels = dict(user=u'用户', create_time=u'创建时间', update_time=u'更新时间', title=u'标题',
+                         origin=u'来源', category=u'类型', publish=u'是否发布', preview=u'内容')
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
@@ -79,7 +83,6 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
 
 
 class PageAdmin(AuthEditorMixin, sqla.ModelView):
-
     column_searchable_list = ('title', 'html')
     form_overrides = {
         'html': CKTextAreaField
@@ -89,59 +92,64 @@ class PageAdmin(AuthEditorMixin, sqla.ModelView):
     column_list = ('title', 'create_time', 'update_time')
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
+    column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题')
+
 
     def is_accessible(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return False
         if not content_edit_permission.can():
             return False
         return True
 
 
-class OnlineCourseAdmin(AuthEditorMixin, sqla.ModelView):
+class SliderAdmin(AuthEditorMixin, sqla.ModelView):
     column_default_sort = 'id'
     form_excluded_columns = ('create_time', 'update_time')
 
+    create_template = 'slider/admin_json_editor.html'
+    edit_template = 'slider/admin_json_editor.html'
+
+    # can_view_details = True
+    # details_template = 'json_detail.html'
+
     def scaffold_form(self):
-        form_class = super(OnlineCourseAdmin, self).scaffold_form()
-        form_class.content = JsonField('content')
+        form_class = super(SliderAdmin, self).scaffold_form()
+        form_class.image_list = JsonField('image_list')
         return form_class
 
     def scaffold_list_columns(self):
-        columns = super(OnlineCourseAdmin, self).scaffold_list_columns()
-        # import ipdb; ipdb.set_trace()
+        columns = super(SliderAdmin, self).scaffold_list_columns()
         columns.append('preview')
         return columns
 
-    def _preview_formatter(view, context, model, name):
-        name = model.category if model.category else '视频'
-        return Markup(
-            "<a href='%s'>%s</a>" % (model.link, model.name))
-
     column_formatters = {
-        'preview': _preview_formatter
+        'image_list': _json_format_field('image_list')
     }
 
-    @action('publish', u'发布', u'确定要发布选择的资料吗?')
-    def action_approve(self, ids):
-        try:
-            query = OnlineCourse.query.filter(OnlineCourse.id.in_(ids))
+    column_display_pk = True
+    # column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题', name=u'名称',
+    #                      url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'预览')
 
-            count = 0
-            for courseware in query.all():
-                courseware.publish = True
-                courseware.save()
-                count += 1
 
-            flash('User was successfully approved. {} users were successfully approved.'.format(count))
-        except Exception as ex:
-            if not self.handle_view_exception(ex):
-                raise
+class ContentListAdmin(AuthEditorMixin, sqla.ModelView):
 
-            flash('Failed to approve users. {}'.format(str(ex)), 'error')
+    form_excluded_columns = ('create_time', 'update_time')
+    column_exclude_list = ('create_time', 'update_time', 'content')
+    edit_template = 'contentlist/contentlist_admin_json_edit.html'
+
+    can_create = False
+
+    def scaffold_form(self):
+        form_class = super(ContentListAdmin, self).scaffold_form()
+        form_class.content = JsonField('content')
+        return form_class
 
 
 from ..extensions import admin, db
+
+
 admin.add_view(ActivityAdmin(Activity, db.session, name=u'幼教动态'))
 admin.add_view(PageAdmin(Page, db.session, name=u'静态页面'))
-admin.add_view(OnlineCourseAdmin(OnlineCourse, db.session, name=u'幼教网课'))
+admin.add_view(SliderAdmin(Slider, db.session, name=u'轮播图'))
+admin.add_view(ContentListAdmin(ContentList, db.session, name=u'首页推荐'))

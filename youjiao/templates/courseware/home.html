@@ -13,31 +13,32 @@
         <div class="courseware-slides">
             <div class="courseware-slides-main">
                 <ul class="rslides">
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/2.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/3.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/4.jpeg?imageView2/2/w/600" alt="banner"></li>
-                    <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/5.jpeg?imageView2/2/w/600" alt="banner"></li>
+                    {% for img_link in slider %}
+                    <li>
+                        <a href="{{ img_link.link }}">
+                        <img src="{{ img_link.image }}" alt="banner">
+                        </a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
         <div class="video-section-b">
             <div class="section-block-wrapper">
-                <div class="section-block-title-6">教材配套课件</div>
+                <div class="section-block-title-6" style="width:700px">教材配套课件</div>
             </div>
             <ul class="video-section-list">
                 {% for courseware in courseware_list %}
                     <li>
                         <a href="{{ courseware.link }}">
                             <div class="v-image-wrapper">
-                                <img src="{{ '%s?imageView2/2/w/600'|format(courseware.book.cover) }}" alt="">
+                                <img src="{{ '%s?imageView2/2/w/600'|format(courseware.cover) }}" alt="">
 
                                 <div class="v-image-hover-layer">
                                     <div class="v-hover-layer-icon"></div>
                                 </div>
                             </div>
                             <h5>{{ courseware.name }}</h5>
-                            <a href="{{ courseware.link }}" class="start-download">开始下载</a>
                         </a>
                     </li>
                 {% endfor %}

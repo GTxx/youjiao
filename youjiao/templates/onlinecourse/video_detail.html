@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ 'video_detail.css' | asset }}">
+    <link rel="stylesheet" href="{{ 'vendor/video-js/video-js.min.css' | vendor_asset }}">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'onlinecourse/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-school-body">
+        <div class="e-page-title">{{ video.name }}</div>
+        <div class="video-detail">
+            <div class="video-detail-v">
+                <video id="video-detail-c" class="video-js vjs-default-skin" controls preload="auto" width="100%"
+                       height="522" data-setup='{}' poster="{{ video.cover}}">
+                    {% if current_user.is_authenticated and current_user.can_view_vip_content %}
+                        <source src='{{ video.content.full_video | qiniu_private_url }}' type='video/mp4'/>
+                    {% else %}
+                        <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/mp4'/>
+                    {% endif %}
+                </video>
+                <div class="short-video-done display-none"><a href="/login?next={{video.link}}">请登陆后看完整版本</a></div>
+            </div>
+            <div class="video-detail-v-t">{{ video.name }}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'vendor/video-js/video.js' | vendor_asset }}"></script>
+    <!--[if lt IE 9]>
+    <script src="{{ 'vendor/video-js/videojs-ie8.min.js'| vendor_asset }}"></script>
+    <![endif]-->
+    <script src="{{ 'video_detail.js' | asset }}"></script>
+    {% if not current_user.is_authenticated %}
+        <script>
+            $(function () {
+                var video = videojs('video-detail-c').ready(function () {
+                    this.on('ended', function () {
+                        $(".short-video-done").removeClass('display-none');
+                    });
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock %}

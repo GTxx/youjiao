@@ -15,46 +15,19 @@
     <div class="product-slide">
         <div class="product-slides-main">
             <ul class="rslides">
+                {% for img_link in slider %}
                 <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=1)}}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="book"/>
+                    <a href="{{ img_link.link }}">
+                        <img src="{{ img_link.image }}" alt="">
                     </a>
                 </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=2)}}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="book">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=3)}}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="book">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=4)}}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="book">
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=4)}}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="book">
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
     <div class="n-v-section-b">
         <div class="section-block-wrapper">
-            <div class="section-block-title-4">幼教教材</div>
-            <!--<div class="classes-select-wrapper">-->
-                <!--<select name="" id="" class="classes-select">-->
-                    <!--<option value="?level=幼小衔接班">幼小衔接班</option>-->
-                    <!--<option value="?level=大班">大班</option>-->
-                    <!--<option value="?level=中班">中班</option>-->
-                    <!--<option value="?level=小班">小班</option>-->
-                <!--</select>-->
-            <!--</div>-->
+            <div class="section-block-title-4" style="width: 699px">幼教教材</div>
         </div>
         <ul class="n-v-section-list">
             {% for book in teach_book_list %}

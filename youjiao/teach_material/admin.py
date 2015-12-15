@@ -15,7 +15,6 @@ import json
 
 
 class BookAdmin(AuthEditorMixin, sqla.ModelView):
-
     def _preview_formatter(view, context, model, name):
         return Markup(
             "<a href='%s'>%s</a>" % (
@@ -30,6 +29,10 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
     column_exclude_list = ('image_array', 'preview_array')
     column_filters = ('level', 'category', 'name')
     column_searchable_list = ('name', 'executive_editor', 'chief_editor')
+    column_labels = dict(name=u'图书名', chief_editor=u'主编', executive_editor=u'责任编辑', publisher=u'出版社',
+                         book_size=u'图书大小', level=u'等级', category=u'分类', price=u'价格',
+                         publish=u'是否发布', preview=u'内容')
+    column_display_pk = True
 
     def scaffold_list_columns(self):
         columns = super(BookAdmin, self).scaffold_list_columns()
@@ -55,14 +58,25 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
 
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
+    @action('recommend', u'加入首页教材推荐', u'把图书加入到首页推荐吗?')
+    def add_home_recommend(self, ids):
+        from youjiao.content.models import ContentList
+        try:
+            query = Book.query.filter(Book.id.in_(ids))
+            ContentList.add_obj_to_position(query, ContentList.HOME_BOOK)
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+            flash(u'操作失败. {}'.format(str(ex)), 'error')
+
 
 class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
-
     create_template = 'json_editor.html'
     edit_template = 'json_editor.html'
-    column_exclude_list = ('content', )
+    column_exclude_list = ('content',)
     column_default_sort = 'id'
-    column_searchable_list = ('name', )
+    column_searchable_list = ('name',)
+    column_display_pk = True
 
     def scaffold_form(self):
         form_class = super(CoursewareAdmin, self).scaffold_form()
@@ -83,11 +97,20 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
                 name
             ))
 
+    def _book(view, context, model, name):
+        if model.book:
+            return model.book.name
+        else:
+            return ''
+
     column_formatters = {
         'preview': _preview_formatter,
+        'book': _book,
     }
 
     column_exclude_list = ['content']
+
+    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布', preview=u'内容')
 
     @action('publish', 'Publish', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
@@ -106,6 +129,17 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
                 raise
 
             flash('Failed to approve users. {}'.format(str(ex)), 'error')
+
+    @action('recommend', u'加入首页课件推荐', u'把课件加入到首页推荐吗?')
+    def add_home_courseware(self, ids):
+        from youjiao.content.models import ContentList
+        try:
+            query = Courseware.query.filter(Courseware.id.in_(ids))
+            ContentList.add_obj_to_position(query, ContentList.HOME_COURSEWARE)
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+            flash(u'操作失败. {}'.format(str(ex)), 'error')
 
 
 admin.add_view(BookAdmin(Book, db.session, name=u'教材'))

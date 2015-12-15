@@ -5,10 +5,8 @@ from flask_security import RoleMixin
 from flask_login import UserMixin
 from youjiao.extensions import db, redis_cli, USER_TABLE_NAME, USER_TABLE_USER_ID
 from youjiao.utils.database import CRUDMixin
-from captcha.image import ImageCaptcha
 import sqlalchemy as sqla
-import os
-import time
+from .permissions import vip_permission
 from .utils import generate_random_number_4, generate_random_string_4, encrypt_password, \
     verify_password, get_hmac, password_context
 
@@ -79,6 +77,40 @@ class User(db.Model, UserMixin, CRUDMixin):
         from youjiao.user_util.models import Favor
         pass
 
+    @property
+    def book_visit_recent_key(self):
+        return 'user_{}_book_visit_list'.format(self.id)
+
+    @property
+    def courseware_visit_recent_key(self):
+        return 'user_{}_courseware_visit_list'.format(self.id)
+
+    @property
+    def onlinecourse_visit_recent_key(self):
+        return 'user_{}_onlinecourse_visit_list'.format(self.id)
+
+    @property
+    def book_visit_recent(self):
+        from youjiao.teach_material.models import Book
+        book_id_list = redis_cli.lrange(self.book_visit_recent_key, 0, 8)
+        return Book.query.filter(Book.id.in_(book_id_list))
+
+    @property
+    def courseware_visit_recent(self):
+        from youjiao.teach_material.models import Courseware
+        courseware = redis_cli.lrange(self.courseware_visit_recent_key, 0, 8)
+        return Courseware.query.filter(Courseware.id.in_(courseware))
+
+    @property
+    def onlinecourse_visit_recent(self):
+        from youjiao.onlinecourse.models import OnlineCourse
+        onlinecourse_id_list = redis_cli.lrange(self.onlinecourse_visit_recent_key, 0, 8)
+        return OnlineCourse.query.filter(OnlineCourse.id.in_(onlinecourse_id_list))
+
+    @property
+    def can_view_vip_content(self):
+        return vip_permission.can()
+
 
 class UserProfile(db.Model, CRUDMixin):
     id = db.Column(sqla.Integer, primary_key=True)
@@ -137,3 +169,11 @@ class RedisCaptcha(object):
         if real_content and real_content == content:
             return True
         return False
+
+
+class VIP(db.Model, CRUDMixin):
+    id = db.Column(sqla.Integer, primary_key=True)
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('vips'))
+    begin = db.Column(sqla.Date)
+    end = db.Column(sqla.Date)

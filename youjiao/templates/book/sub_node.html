@@ -14,20 +14,18 @@
     <div class="product-s-slides">
         <div class="product-s-slides-main">
             <ul class="rslides">
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner1.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner2.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner3.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner4.jpg" alt=""></li>
-                <li><img src="http://7xn3in.com2.z0.glb.qiniucdn.com/banner5.jpg" alt=""></li>
+                {% for img_link in slider %}
+                <li><img src="{{ img_link.image }}" alt=""></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
     <div class="n-v-section-b">
         <div class="section-block-wrapper">
-            <div class="section-block-title-4">幼教教材</div>
+            <div class="section-block-title-4">班级分类</div>
              <div class="classes-select-wrapper">
                 <select name="" id="" class="classes-select">
-                    <option value="#" {% if not level %}selected="selected"{% endif %}></option>
+                    <option value="#" {% if not level %}selected="selected"{% endif %}>全部</option>
                     <option value="?level=幼小衔接班" {% if level == "幼小衔接班" %}selected="selected"{% endif %}>幼小衔接班</option>
                     <option value="?level=大班"  {% if level == "大班" %}selected="selected"{% endif %}>大班</option>
                     <option value="?level=中班"  {% if level == "中班" %}selected="selected"{% endif %}>中班</option>

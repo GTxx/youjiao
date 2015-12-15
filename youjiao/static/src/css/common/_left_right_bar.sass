@@ -3,25 +3,27 @@
   float: left
   box-sizing: border-box
   .left-bar-subul-last
-    padding-bottom: 26px
-    margin-bottom: 48px
+    padding-bottom: 10px
+    margin-bottom: 28px
   ul
     margin: 0
     padding: 0
-    background: $background-brown-2
-    padding-bottom: 16px
+    background: #fff1d1
     li
       height: 30px
       box-sizing: border-box
-      padding-top: 13px
       padding-left: 16px
-      line-height: 17px
+      line-height: 30px
     .left-list-first
+      margin-bottom: 6px
       +list-first
   a
     font-family: $yahei
     color: $font-gray-light
     font-size: 16px
+
+  .active
+    background: #fecbc0
 
   .left-adposition
     width: 180px
@@ -35,10 +37,10 @@
   ul
     li
       position: relative
-      height: 30px
+      height: 36px
       padding-left: 16px
       color: $font-gray
-      line-height: 30px
+      line-height: 36px
       white-space: nowrap
       text-overflow: ellipsis
       &:before
@@ -71,10 +73,10 @@
   ul
     padding-bottom: 26px
     li
-      height: 30px
+      height: 31px
       padding-left: 16px
       color: $font-gray
-      line-height: 30px
+      line-height: 31px
     a
      color: $font-gray
 
@@ -97,7 +99,63 @@
     color: transparent !important
 
 .right-bar-list
+  background: white
   li
     overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
+
+.message-board
+  box-sizing: border-box
+  width: 180px
+  height: 220px
+  background: #63a1db
+  border-radius: 10px 10px 20px 20px
+  padding-left: 8px
+  padding-right: 8px
+  p
+    display: inline-block
+    width: 100%
+    padding-top: 4px
+    text-align: center
+    font-weight: bold
+    font-size: 20px
+    color: white
+  span
+    display: inline-block
+    width: 100%
+    line-height: 148px
+    text-align: center
+    color: #6c6c6c
+    a
+      color: #63a1db
+  .message-area
+    width: 164px
+    height: 148px
+    background: #fff1d1
+    margin-top: 2px
+  .submit-message
+    display: block
+    width: 92px
+    height: 28px
+    margin: 6px auto 0 auto
+    background: white
+    color: #7a7a7a
+    border-radius: 4px
+    line-height: 28px
+    box-sizing: border-box
+    border: 1px solid #CCCCCC
+    outline: 0
+    &:hover
+      background: #ff3c4c
+      color: white
+      border: 1px solid #ff3c4c
+  textarea
+    min-width: 100%
+    max-width: 100%
+    min-height: 100%
+    max-height: 100%
+    border: 0
+    padding: 0
+    margin: 0
+    outline: 0

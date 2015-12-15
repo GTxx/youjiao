@@ -14,14 +14,12 @@
                 <th>商品名称</th>
                 <th>购买时间</th>
                 <th>到期时间</th>
-                <th>购买方式</th>
             </tr>
-            {% for i in range(7) %}
+            {% for i in current_user.vips %}
                 <tr>
                     <td>VIP会员</td>
-                    <td>2014-07-30</td>
-                    <td>2014-10-30</td>
-                    <td><a href="javascript:;">立即激活</a></td>
+                    <td>{{i.begin}}</td>
+                    <td>{{i.end}}</td>
                 </tr>
             {% endfor %}
         </table>

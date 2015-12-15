@@ -16,6 +16,12 @@
 #main-noright-body
   +main-noright
 
+#base-container
+  width: 100%
+  overflow: hidden
+  background: url(../../image/back-ground.jpg) repeat-y
+  background-size: 100%
+
 .main
   width: $wrapper-width
   margin: 26px auto 0 auto
@@ -85,9 +91,9 @@
 
 .news-list
   box-sizing: border-box
-  border: 1px solid #CCCCCC
   min-height: 890px
   margin-bottom: 38px
+  background: white
   li
     position: relative
     padding-left: 28px
@@ -168,7 +174,7 @@
 
 .samples-imgs
   width: 484px
-  height: 592px
+  height: 500px
   float: left
   .s-imglist-container
     width: 484px
@@ -216,27 +222,33 @@
   width: 450px
   margin-left: 42px
   .product-title
-    border-bottom: 1px solid #CCCCCC
     padding-bottom: 20px
     box-sizing: border-box
     h3
-      font-size: 40px
+      font-size: 24px
     span
       float: right
       font-size: 17px
-      line-height: 80px
+      line-height: 90px
       color: $font-gray-light
+  .product-info-card
+    width: 100%
+    padding: 50px
+    background: white
+    box-sizing: border-box
+    margin-top: 20px
   table
-    margin-top: 68px
-    margin-left: 50px
+    font-size: 14px
+    background: white
+    padding: 50px
     .product-info-detail
       text-align: justify
     tr
-      line-height: 30px
+      line-height: 42px
   .product-button
     +clear-float
     padding-left: 20px
-    margin-top: 116px
+    margin-top: 28px
   .product-collection, .product-associate
     width: 160px
     height: 50px
@@ -259,7 +271,7 @@
   padding-bottom: 50px
   margin-bottom: 56px
   margin-top: 28px
-  border: 1px solid #CCCCCC
+  background: white
   .detail-comment-title
     border-bottom: 1px solid #CCCCCC
     a
@@ -286,9 +298,7 @@
     box-sizing: border-box
     padding: 30px 20px
     img
-      margin: 20px 20px
-      width: 422px
-      height: 422px
+      width: 100%
       background: #CCCCCC
     li
       min-height: 60px
@@ -642,3 +652,65 @@
     font-size: 36px
     color: $font-gray
     padding-top: 50px
+
+.document-img
+  width: 80%
+  margin: 0 auto
+
+.audio-list
+  p
+    line-height: 36px
+    width: 460px
+    text-align: left
+    margin: 0 auto
+    border-top: 1px solid #CCCCCC
+    overflow: hidden
+    &:before
+      content: '\25BA'
+      width: 14px
+      height: 14px
+      float: left
+      color: #CCCCCC
+  a
+    display: inline-block
+    width: 90%
+    float: left
+    color: #888888
+
+.audio-playing
+  background: #EFEEE6
+  &:before
+    content: '\266C' !important
+    width: 14px
+    height: 14px
+    float: left
+    color: black !important
+  a
+    color: black
+    
+.lb-outerContainer
+  width: 80% !important
+  height: 80% !important
+.lb-image
+  width: 100% !important
+  height: 100% !important
+
+.copyright
+  margin-bottom: 20px
+
+.video-detail-v
+  position: relative
+
+.short-video-done
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  z-index: 10
+  background: black
+  color: white
+  text-align: center
+  line-height: 446px
+  a
+    color: $youjiao-font-pink

@@ -18,11 +18,21 @@ var entry = {
     'courseware.detail': path.resolve(dirname, 'courseware/detail.js'),
     'courseware.home': path.resolve(dirname, 'courseware/home.js'),
     'courseware.sub_node': path.resolve(dirname, 'courseware/sub_node.js'),
+    'courseware.list': path.resolve(dirname, 'courseware/list.js'),
 
     // school
     'school.detail': path.resolve(dirname, 'school/detail.js'),
     'school.home': path.resolve(dirname, 'school/home.js'),
     'school.sub_node': path.resolve(dirname, 'school/sub_node.js'),
+
+    //onlinecourse
+    'onlinecourse.admin_edit': path.resolve(dirname, 'onlinecourse/admin_edit.js'),
+
+    // content
+    'slider.admin_edit': path.resolve(dirname, 'content/slider.admin_edit.js'),
+
+    // contentlist
+    'contentlist.admin_edit': path.resolve(dirname, 'contentlist/admin_edit.js')
 };
 
 module.exports = entry;

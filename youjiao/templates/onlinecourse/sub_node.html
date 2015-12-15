@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'school/left_bar.html' %}
+    {% include 'onlinecourse/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -14,16 +14,18 @@
 
         <div class="school-slides">
             <ul class="rslides">
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="banner"></li>
-                <li><img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="banner"></li>
+                 {% for img_link in slider %}
+                    <li>
+                        <a href="{{ img_link.link }}">
+                        <img src="{{ img_link.image }}" alt="banner">
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="video-section-lg">
             <div class="section-block-wrapper">
-                <div class="section-block-title-6">{{ video_list[0].category }}推荐</div>
+                <div class="section-block-title-6">优秀课堂推荐</div>
             </div>
             <ul class="video-section-list">
                 {% for video in video_list %}
@@ -31,16 +33,17 @@
                     <li>
 
                         <div class="v-image-wrapper">
-                            <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}" alt="">
+                            <img src="{{ video.cover }}" alt="">
 
                             <div class="v-image-hover-layer">
                                 <div class="v-hover-layer-icon"></div>
                             </div>
                         </div>
                         <h5>{{ video.name }} </h5>
-                        <a href="{{ video.link }}" class="start-download">开始下载</a>
                     </li>
-                        </a>
+                    </a>
+                {% else %}
+                内容即将上线，敬请期待！
                 {% endfor %}
             </ul>
         </div>

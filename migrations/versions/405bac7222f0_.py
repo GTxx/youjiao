@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """empty message
 
 Revision ID: 405bac7222f0
@@ -106,7 +107,10 @@ def upgrade():
     sa.Column('create_time', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('obj_id', sa.Integer(), nullable=True),
-    sa.Column('obj_type', sa.Enum('book', name='like_obj_type'), nullable=True),
+    # 这里其实是后加的，但是直接写一个迁移文件太麻烦，我放弃了。
+    # 因为没有alembic的migrate，我直接在数据库做的alter type。
+    # 这个地方只作为第一次migrate用。
+    sa.Column('obj_type', sa.Enum('book', 'courseware', 'onlinecourse', name='like_obj_type'), nullable=True),
     sa.ForeignKeyConstraint(['obj_id'], ['book.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['youjiao_user.id'], ),
     sa.PrimaryKeyConstraint('id'),

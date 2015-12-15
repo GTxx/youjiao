@@ -16,8 +16,16 @@ manager = Manager(app)
 
 
 @manager.option('-p', '--port', dest='port', default=5000)
-def run(port):
+@manager.option('-b', '--build', dest='build', default=False)
+def run(port, build):
     """Run app."""
+    # build front end 
+    if build:
+        current_path = os.getcwd()
+        static_path = os.path.join(current_path, 'youjiao/static')
+        os.chdir(static_path)
+        os.system('npm run build-dev')
+        os.chdir(current_path)
     app.run(host='0.0.0.0', port=int(port))
 
 
@@ -143,7 +151,6 @@ def create_audio():
     # begin to convert
     # Audio.batch_convert_mp3(ids)
 
-
 @manager.command
 def replace_mp3():
     from youjiao.teach_material.models import Courseware
@@ -172,6 +179,9 @@ def replace_mp3():
             except:
                 pass
 
+@manager.command
+def db_shell():
+    os.system('pgcli {}'.format(app.config['SQLALCHEMY_DATABASE_URI']))
 
 @app.template_filter('asset')
 def asset_filter(file_string):

@@ -3,7 +3,7 @@
         <ul>
             <li class="right-list-first">本月下载排行榜</li>
             {% for courseware in Courseware.top10() %}
-            <li><a href="{{ courseware.link }}">{{ loop.index }}.{{ courseware.book.name }}</a></li>
+            <li><a href="{{ courseware.link }}">{{ loop.index }}.{{ courseware.name or '' }}</a></li>
             {% endfor %}
         </ul>
     </div>

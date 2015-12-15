@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
-from youjiao.extensions import db
+from youjiao.extensions import db, redis_cli
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
 from sqlalchemy import not_
 from sqlalchemy.dialects.postgresql import ARRAY, JSON
 from youjiao.user_util.models import Comment
 from flask import url_for
+from youjiao.yj_media.models import Document
 
 
 class Book(db.Model, CRUDMixin):
@@ -26,6 +27,10 @@ class Book(db.Model, CRUDMixin):
 
     coursewares = db.relationship('Courseware', backref='book')
 
+    def __repr__(self):
+        uni = u'<图书: {},{}>'.format(self.name, self.level)
+        return uni.encode('utf-8')
+
     @classmethod
     def read_book_top10(cls):
         return cls.query.filter(cls.category==u'幼教读物',
@@ -43,7 +48,7 @@ class Book(db.Model, CRUDMixin):
     @property
     def cover(self):
         if len(self.image_array) == 0:
-            return 'http://7xj2zj.com2.z0.glb.qiniucdn.com/1.jpg'
+            return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
         else:
             return self.image_array[0]
 
@@ -59,6 +64,11 @@ class Book(db.Model, CRUDMixin):
         redirect_url = url_for('book_view.book_detail', book_id=self.id)
         return '/admin/book/edit?url={}&id={}'.format(redirect_url, self.id)
 
+    def add_user_visit_recent(self, user):
+        key = user.book_visit_recent_key
+        redis_cli.lpush(key, self.id)
+        redis_cli.ltrim(key, 0, 8)
+
 
 class Courseware(db.Model, CRUDMixin):
     """
@@ -73,6 +83,7 @@ class Courseware(db.Model, CRUDMixin):
     book_id = db.Column(sqla.Integer, db.ForeignKey('book.id'))
     content = db.Column(JSON)
     publish = db.Column(sqla.Boolean, default=False)
+    cover_img_url = db.Column(sqla.String(200))
 
     @classmethod
     def top10(cls):
@@ -89,10 +100,47 @@ class Courseware(db.Model, CRUDMixin):
     @property
     def related_courseware(self):
         return Courseware.query.join(Book).filter(
-            Book.id==self.book_id, Courseware.id!=self.id,
-            Courseware.publish==True).all()
+            Book.id == self.book_id, Courseware.id != self.id,
+            Courseware.publish == True).all()
 
     @property
     def edit_link(self):
         redirect_url = url_for('book_view.courseware_detail', courseware_id=self.id)
         return '/admin/courseware/edit?url={}&id={}'.format(redirect_url, self.id)
+
+    def get_media_list(self, media_type):
+        if not self.content:
+            return []
+        return [media for media in self.content if media.get('type')==media_type]
+
+    @property
+    def document_list(self):
+        documents = self.get_media_list('document')
+        res = []
+        for document in documents:
+            document_obj = Document.query.filter_by(qiniu_key=document.get('key').strip('.pdf')).first()
+            img_list = document_obj.pdf_pic
+            document.update({'img_list': img_list})
+            res.append(document)
+        return res
+
+    @property
+    def audio_list(self):
+        return self.get_media_list('audio')
+
+    @property
+    def video_list(self):
+        return self.get_media_list('video')
+
+    @property
+    def cover(self):
+        if self.cover_img_url:
+            return self.cover_img_url
+        if self.book:
+            return self.book.cover
+        return 'http://7xn3in.com2.z0.glb.qiniucdn.com/logo-big.jpg'
+
+    def add_user_visit_recent(self, user):
+        key = user.courseware_visit_recent_key
+        redis_cli.lpush(key, self.id)
+        redis_cli.ltrim(key, 0, 8)

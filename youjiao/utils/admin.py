@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+# flask_admin的功能扩展
+
+from flask import Markup
 from wtforms.widgets import TextArea
 from wtforms import TextAreaField
 import json
@@ -33,3 +38,16 @@ class JsonField(TextAreaField):
                 raise ValueError(str(e))
         else:
             self.data = {}
+
+
+def _json_format_field(field_name):
+    '''json field for human'''
+    def formatter(view, context, model, name):
+        json_content = getattr(model, field_name)
+        if json_content:
+            return Markup(
+            "<div class='json_field'>%s</div>" % (
+                json.dumps(json_content, ensure_ascii=False)
+            ))
+        return ''
+    return formatter

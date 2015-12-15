@@ -56,16 +56,25 @@ def login():
             # TODO: support token auth in @loging_required, refer to flask_security @auth_required
             # login_required
             login_user(user, force=True)
+
+            # flask principal
             from flask_principal import identity_changed, Identity
             from flask import current_app
             identity_changed.send(current_app._get_current_object(),
                                   identity=Identity(user.id))
+
+            next = request.args.get('next')
+            # next_is_valid should check if the user has valid
+            # permission to access the `next` url
+            # if not next_is_valid(next):
+            #     return flask.abort(400)
+
             if 'admin' in user.roles_name:
-                return redirect('/admin/')
+                return redirect(next or '/admin/')
             elif 'editor' in user.roles_name:
-                return redirect('/admin/')
+                return redirect(next or '/admin/')
             else:
-                return redirect('/')
+                return redirect(next or '/')
     elif request.method == 'GET':
         form = LoginForm()
     return render_template('security/login.html', form=form)
@@ -74,7 +83,7 @@ def login():
 @user_bp.route('/logout')
 def logout():
     from flask_login import logout_user, current_user
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         logout_user()
 
         # Remove session keys set by Flask-Principal
@@ -134,8 +143,14 @@ def user_collections():
     }
     favor_book_list = Favor.query.filter(
         and_(Favor.obj_type=='book', Favor.user_id==current_user.id))
+    favor_courseware_list = Favor.query.filter(Favor.obj_type=='courseware',
+                                               Favor.user_id==current_user.id)
+    favor_onlinecourse_list = Favor.query.filter(Favor.obj_type=='onlinecourse',
+                                                 Favor.user_id==current_user.id)
     return render_template('user/collection.html', current_page=current_page,
-                           favor_book_list=favor_book_list)
+                           favor_book_list=favor_book_list,
+                           favor_courseware_list=favor_courseware_list,
+                           favor_onlinecourse_list=favor_onlinecourse_list)
 
 
 @user_bp.route('/user/consumption')
@@ -178,7 +193,8 @@ class UserAvatarView(MethodView):
         return render_template('user/avatar.html', form=form)
 
     def post(self):
-        form = ModifyPasswordForm(formdata=request.form)
+        form = UserAvatarForm(formdata=request.form)
+        import ipdb; ipdb.set_trace()
         if form.validate_on_submit():
             pass
             # 生成qiniu_key

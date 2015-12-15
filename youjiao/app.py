@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
 from flask_admin import Admin
@@ -24,7 +25,7 @@ from .user.api import user_api_bp
 
 # content
 from .content.admin import ActivityAdmin
-from .content.models import Activity
+from .content.models import Activity, Slider, ContentList
 from .content.views import content_bp
 
 # book
@@ -46,14 +47,43 @@ from .yj_media.admin import VideoAdmin
 from .yj_media.models import Video, Audio, Document
 from .yj_media.views import media_bp
 
+# online course
+from .onlinecourse.models import OnlineCourse
+from .onlinecourse.views import online_course_bp
+from .onlinecourse.admin import OnlineCourseAdmin
+
 import os
 import json
 
 
 # Flask views
 def index():
+    # import ipdb; ipdb.set_trace()
+    book_content_list = ContentList.query.filter(
+        ContentList.position==ContentList.HOME_BOOK).first()
+    if book_content_list:
+        book_list = book_content_list.obj_list
+    else:
+        book_list = Book.top10()
+
+    courseware_content_list = ContentList.query.filter(
+        ContentList.position==ContentList.HOME_COURSEWARE).first()
+    if courseware_content_list:
+        courseware_list = courseware_content_list.obj_list
+    else:
+        courseware_list = Courseware.top10()
+
+    onlinecourse_content_list = ContentList.query.filter(
+        ContentList.position==u'首页视频').first()
+    if onlinecourse_content_list:
+        onlinecourse_list = onlinecourse_content_list.obj_list
+    else:
+        onlinecourse_list = OnlineCourse.top10()
     return render_template('home/home.html', current_page='home',
-                           Book=Book, Courseware=Courseware)
+                           Book=Book, Courseware=Courseware,
+                           slider=Slider.home_slider(),
+                           book_list=book_list, courseware_list=courseware_list,
+                           onlinecourse_list=onlinecourse_list)
 
 
 def create_app():
@@ -77,6 +107,7 @@ def create_app():
     # flask_login
     login_manager = LoginManager(app)
     login_manager.user_loader(load_user)
+    login_manager.login_view = 'user_view.login'
 
     # flask_principal
     Principal(app)
@@ -111,6 +142,7 @@ def create_app():
     app.register_blueprint(book_api_bp)
     app.register_blueprint(user_util_api_bp)
     app.register_blueprint(media_bp)
+    app.register_blueprint(online_course_bp)
 
     # register subscriber
     user_connect(app)

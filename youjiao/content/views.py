@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, request, abort
+from .models import Activity, Page
 
-from .permissions import content_preview_permission
-
-from .models import Activity, OnlineCourse, Page
 
 content_bp = Blueprint("activity_content", __name__)
 
@@ -38,7 +36,7 @@ def category(category):
     category_name = category_dict[category]
     weekly_popular_top10 = Activity.weekly_popular_top10()
     return render_template('activity/home.html', activity_list=pagination, category_name=category_name,
-                           category_url=category, current_page='activity', weekly_popular_top10=weekly_popular_top10)
+                           category_url=category, current_page='activity', sub_page=category, weekly_popular_top10=weekly_popular_top10)
 
 
 @content_bp.route('/activity/<id>/')
@@ -54,45 +52,6 @@ def activity_view(id):
     category_name = category_dict[obj.category]
     return render_template('activity/activity.html', activity=obj, category_name=category_name,
                            current_page='activity', obj=obj)
-
-
-@content_bp.route('/school/')
-def school():
-    return render_template('school/home.html', current_page='school',
-                           Video=OnlineCourse)
-
-
-@content_bp.route('/video/<int:video_id>')
-def video_detail(video_id):
-    video = OnlineCourse.query.get_or_404(video_id)
-    if not video.publish and not content_preview_permission.can():
-        abort(404)
-    return render_template('school/video_detail.html', video=video)
-
-
-@content_bp.route('/school/<category>/')
-def school_sub(category):
-    if category == 'lecture':
-        video_list = OnlineCourse.query.filter(OnlineCourse.category==u'优秀讲座').limit(9)
-        return render_template('school/sub_node.html', current_page='school',
-                               video_list=video_list)
-    else:
-        abort(404)
-
-
-@content_bp.route('/school/teacher/')
-def school_teacher():
-    return render_template('school/teacher_training.html', current_page='school')
-
-
-@content_bp.route('/school/product/')
-def school_product():
-    return render_template('school/product_training.html', current_page='school')
-
-
-@content_bp.route('/school/product/detail/')
-def school_teacher_detail():
-    return render_template('school/video_detail.html', current_page='school')
 
 
 @content_bp.route('/research/home/')

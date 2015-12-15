@@ -2,7 +2,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_admin import Admin
-from flask_restful import Api
 from youjiao.yj_admin.views import YJHomeView
 from flask_redis import FlaskRedis
 from .flask_qiniu import FlaskQiniu

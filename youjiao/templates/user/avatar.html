@@ -18,15 +18,18 @@
             <span>上传本地照片</span>
         </div>
         <div id="userinfo-upload-avator">
-            <form action="">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
                 <div class="fileupload">
                     <div></div>
-                    <input type="file" id='userinfo-upload-input'/>
+                    <input type="file" id='avatar-upload-input'/>
+                    <img id="avatar-img" src="#" alt="avatar"/>
                 </div>
-{#                <input type="submit" value="上传">#}
+                <input type="submit" value="上传">
             </form>
             <span>请点击按钮选择图片</span>
         </div>
         <h4 class="userinfo-upload-tip">仅支持JPG、JPGE、GIF、PNG的图片格式文件不能大于2M</h4>
     </div>
 {% endblock %}
+

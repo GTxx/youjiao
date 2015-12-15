@@ -1,126 +1,114 @@
 {% extends "base/base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ 'home.css' | asset }}">
+    <link rel="stylesheet" href="{{ 'home.css' | asset }}">
 {% endblock %}
 
 {% block leftBar %}
-{% include 'home/left_bar.html' %}
+    {% include 'home/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
-<div id="main-home-body">
-    <div class="home-slides">
-        <div class="home-slides-main">
-            <ul class="rslides">
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=1) }}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/11.jpg?imageView2/2/w/1000" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=2) }}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/12.jpg?imageView2/2/w/1000" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=3) }}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/13.jpg?imageView2/2/w/1000" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=4) }}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/14.jpg?imageView2/2/w/1000" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('book_view.book_detail', book_id=5) }}">
-                        <img src="http://7xj2zj.com2.z0.glb.qiniucdn.com/15.jpg?imageView2/2/w/1000" alt="">
-                    </a>
-                </li>
+    <div id="main-home-body">
+        <div class="home-slides">
+            <div class="home-slides-main">
+                <marquee direction="left" behavior="scroll" scrollamount="5" scrolldelay="0" loop="-1" width="100%"
+                         height="20"
+                         bgcolor="white"
+                         style="line-height:20px;margin: 0;padding: 0;color:#666;position: absolute;top: 0;left: 0;z-index: 9;box-sizing: border-box;">
+                    网站资源使用声明：本网站所有教学资源均为各大园所教研成果，仅免费提供幼儿园教学使用，用户必须遵守国家相关法律和互联网各项规章制度，下载的资源不得用于非法盈利活动。
+                </marquee>
+                <ul class="rslides">
+                    {% for img_link in slider %}
+                    <li>
+                        <a href="{{ img_link.link }}">
+                            <img src="{{ '%s?imageView2/2/w/600'|format(img_link.image) }}" alt="">
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="right-bar-small" style="margin-left: 24px;">
+                <ul class="right-list">
+                    <li class="right-list-first">首页推荐</li>
+                    {% for book in Book.top10() %}
+                        <li class="">
+                            <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">{{ loop.index }}.{{ book.name }}({{ book.level }})</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="n-v-section-b">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">幼教教材推荐</div>
+            </div>
+            <ul class="n-v-section-list">
+                {% for book in book_list[0:8] %}
+                    <li>
+                        <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
+                            <div class="nv-image-wrapper">
+                                <img src="{{ book.cover }}?imageView2/2/w/400 "
+                                     alt="">
+
+                                <div class="nv-image-hover-layer"></div>
+                                <div class="nv-price">{{ book.price }}/套</div>
+                            </div>
+                            <h5>{{ book.name }}</h5>
+                            <h6>{{ book.level }}</h6>
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
+        <div class="video-section-b">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">课件中心推荐</div>
+            </div>
+            <ul class="video-section-list">
+                {% for courseware in courseware_list[0:8] %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <a href="{{ url_for('book_view.courseware_detail', courseware_id=courseware.id) }}">
+                                <img src="{{ courseware.cover }}?imageView2/2/w/400"
+                                     alt="">
 
-        <div class="right-bar-small" style="margin-left: 24px;">
-            <ul class="right-list">
-                <li class="right-list-first">首页推荐</li>
-                {% for book in Book.top10() %}
-                <li class="">
-                    <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">{{loop.index}}.{{ book.name }}({{book.level}})</a>
-                </li>
+                                <div class="v-image-hover-layer">
+                                    <div class="v-hover-layer-icon"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>{{ courseware.name or '' }}</h5>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="video-section-b">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-6">优秀课堂推荐</div>
+            </div>
+            <ul class="video-section-list">
+                {% for onlinecourse in onlinecourse_list %}
+                    <li>
+                        <div class="v-image-wrapper">
+                            <a href="{{ onlinecourse.link }}">
+                            <img src="{{ onlinecourse.cover }}"
+                                 alt="">
+
+                            <div class="v-image-hover-layer">
+                                <div class="v-hover-layer-icon"></div>
+                            </div>
+                            </a>
+                        </div>
+                        <h5>{{ onlinecourse.name }}</h5>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-    <div class="n-v-section-b">
-        <div class="section-block-wrapper">
-            <div class="section-block-title-6">幼教教材推荐</div>
-        </div>
-        <ul class="n-v-section-list">
-            {% for book in Book.top10()[0:8] %}
-            <li>
-                <a href="{{ url_for('book_view.book_detail', book_id=book.id) }}">
-                    <div class="nv-image-wrapper">
-                        <img src="{{ book.cover }}?imageView2/2/w/400 "
-                             alt="">
-
-                        <div class="nv-image-hover-layer"></div>
-                        <div class="nv-price">{{book.price}}/套</div>
-                    </div>
-                    <h5>{{ book.name }}</h5>
-                    <h6>{{ book.level }}</h6>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="video-section-b">
-        <div class="section-block-wrapper">
-            <div class="section-block-title-6">课件中心推荐</div>
-        </div>
-        <ul class="video-section-list">
-            {% for courseware in Courseware.top10()[0:8] %}
-            <li>
-                <div class="v-image-wrapper">
-                    <a href="{{ url_for('book_view.courseware_detail', courseware_id=courseware.id) }}">
-                    <img src="{{ courseware.book.cover }}?imageView2/2/w/400"
-                         alt="">
-
-                    <div class="v-image-hover-layer">
-                        <div class="v-hover-layer-icon"></div>
-                    </div>
-                    </a>
-                </div>
-                <h5>{{ courseware.name }}</h5>
-                <a href="" class="start-download">开始下载</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="video-section-b">
-        <div class="section-block-wrapper">
-            <div class="section-block-title-6">优秀课堂推荐</div>
-        </div>
-        <ul class="video-section-list">
-            {% for i in range(8) %}
-            <li>
-                <div class="v-image-wrapper">
-                    <img src="{{ url_for('static', filename='image/icons/qinghua.png') }}"
-                         alt="">
-
-                    <div class="v-image-hover-layer">
-                        <div class="v-hover-layer-icon"></div>
-                    </div>
-                </div>
-                <h5>青花瓷</h5>
-                <a href="" class="start-download">开始下载</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
 {% endblock %}
 
 {% block js %}
-<script src="{{ 'home.js' | asset }}"></script>
+    <script src="{{ 'home.js' | asset }}"></script>
 {% endblock %}

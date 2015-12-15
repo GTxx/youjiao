@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>61幼教网</title>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?09df80b7266fa5eae1e71221cdf36800";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?09df80b7266fa5eae1e71221cdf36800";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ 'commons.css' | asset }}">
     {% block css %}
     {% endblock %}
@@ -20,61 +20,64 @@ var _hmt = _hmt || [];
         <script src="{{ 'vendor/js/html5shiv.min.js' | vendor_asset }}"></script>
         <script src="{{ 'vendor/js/html5shiv-printshiv.min.js'| vendor_asset }}"></script>
     <![endif]-->
-    <link href="/static/image/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="/static/image/favicon.ico" rel="icon" type="image/x-icon"/>
 </head>
 <body>
 <div id="youjiao-body">
 
     {% include 'base/header.html' %}
 
-    <div class="main">
+    <div id="base-container">
+        <div class="main">
 
-        {% block leftBar %}
-        {% endblock %}
+            {% block leftBar %}
+            {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
 
-        {% block rightBar %}
-        {% endblock %}
+            {% block rightBar %}
+            {% endblock %}
+        </div>
     </div>
+
     <div class="footer-wrapper">
         <div class="footer">
-            <div class="footer-sub-wrapper">
-                <div>
-                    <ul>
-                        <li class="list-style-none"><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a>
-                        </li>
-                        <li><a href="">了解61幼教网</a></li>
-                        <li><a href="">加入61幼教网</a></li>
-                        <li><a href="">联系我们</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        <li class="list-style-none"><a href="">帮助中心</a></li>
-                        <li><a href="">购买指南</a></li>
-                        <li><a href="">疑难帮助</a></li>
-                        <li><a href="">售后服务</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        <li class="list-style-none"><a href="">服务支持</a></li>
-                        <li><a href="">下载中心</a></li>
-                        <li><a href="">61幼教网新语</a></li>
-                        <li><a href="">经销在线订单</a></li>
-                        <li><a href="">统一登陆平台</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        <li class="list-style-none"><a href="">关注我们</a></li>
-                        <li><a href="">新浪微薄</a></li>
-                        <li><a href="">官方微信</a></li>
-                    </ul>
-                </div>
-            </div>
+            {#            <div class="footer-sub-wrapper">#}
+            {#                <div>#}
+            {#                    <ul>#}
+            {#                        <li class="list-style-none"><a href="{{ url_for('activity_content.page_about') }}">关于61幼教网</a>#}
+            {#                        </li>#}
+            {#                        <li><a href="">了解61幼教网</a></li>#}
+            {#                        <li><a href="">加入61幼教网</a></li>#}
+            {#                        <li><a href="">联系我们</a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {#                <div>#}
+            {#                    <ul>#}
+            {#                        <li class="list-style-none"><a href="">帮助中心</a></li>#}
+            {#                        <li><a href="">购买指南</a></li>#}
+            {#                        <li><a href="">疑难帮助</a></li>#}
+            {#                        <li><a href="">售后服务</a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {#                <div>#}
+            {#                    <ul>#}
+            {#                        <li class="list-style-none"><a href="">服务支持</a></li>#}
+            {#                        <li><a href="">下载中心</a></li>#}
+            {#                        <li><a href="">61幼教网新语</a></li>#}
+            {#                        <li><a href="">经销在线订单</a></li>#}
+            {#                        <li><a href="">统一登陆平台</a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {#                <div>#}
+            {#                    <ul>#}
+            {#                        <li class="list-style-none"><a href="">关注我们</a></li>#}
+            {#                        <li><a href="">新浪微薄</a></li>#}
+            {#                        <li><a href="">官方微信</a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {#            </div>#}
             <div class="copyright footer-sub-wrapper">
                 <span>61幼教网版权所有 Copyright © 2015 www.61yj.cn All Rights Reserved.</span>
                 <a style="color:gray" href="http://www.miitbeian.gov.cn/">苏ICP备15050990号-2</a>

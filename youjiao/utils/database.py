@@ -19,9 +19,14 @@ class CRUDMixin(object):
 
     def delete(self):
         """Delete the object from the database."""
-        db.session.delete(self)
-        db.session.commit()
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
         return self
+
 
 class CreateUpdateTimeMixin(object):
     create_time = db.Column(sqla.DateTime, default=datetime.utcnow)

@@ -1,8 +1,13 @@
 import 'normalize_css';
 import 'main_css';
 import '../../modules/not_login_pop';
+import 'lightbox_css';
+import 'lightbox_js';
+import 'taidii_slides_css';
+import 'taidii_slides_js';
 
 $(function () {
+    $('.document-img').taidiiSlides();
 
     $('#not-login-pop').not_login_pop();
 
