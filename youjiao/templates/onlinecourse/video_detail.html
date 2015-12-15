@@ -22,7 +22,10 @@
                         <source src='{{ video.content.short_video | qiniu_private_url }}' type='video/mp4'/>
                     {% endif %}
                 </video>
-                <div class="short-video-done display-none"><a href="/login?next={{video.link}}">请登陆后看完整版本</a></div>
+                <div class="short-video-done display-none">
+                    <a id="login-to-watchfull" href="/login?next={{video.link}}">请登陆后看完整版本</a>
+                    <a id="video-restart" href="javascript:;"></a>
+                </div>
             </div>
             <div class="video-detail-v-t">{{ video.name }}</div>
         </div>
@@ -35,13 +38,32 @@
     <script src="{{ 'vendor/video-js/videojs-ie8.min.js'| vendor_asset }}"></script>
     <![endif]-->
     <script src="{{ 'video_detail.js' | asset }}"></script>
-    {% if not current_user.is_authenticated %}
+    {% if not current_user.is_authenticated and not current_user.can_view_vip_content %}
         <script>
             $(function () {
                 var video = videojs('video-detail-c').ready(function () {
                     this.on('ended', function () {
                         $(".short-video-done").removeClass('display-none');
                     });
+                });
+                $('#video-restart').click(function(){
+                    $('.short-video-done').addClass('display-none');
+                    video.currentTime(0).play();
+                });
+            });
+        </script>
+    {% else %}
+        <script>
+            $(function(){
+                 var video = videojs('video-detail-c').ready(function () {
+                    this.on('ended', function () {
+                        $('#login-to-watchfull').remove();
+                        $(".short-video-done").removeClass('display-none');
+                    });
+                });
+                $('#video-restart').click(function(){
+                    $('.short-video-done').addClass('display-none');
+                    video.currentTime(0).play();
                 });
             });
         </script>
