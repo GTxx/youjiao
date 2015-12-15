@@ -1,6 +1,6 @@
 from youjiao.admin_utils import AuthEditorMixin
 from flask_admin import AdminIndexView, expose
-from permissions import admin_permission,editor_permission
+from permissions import admin_permission
 
 class YJHomeView(AuthEditorMixin, AdminIndexView):
     @expose()
@@ -11,7 +11,9 @@ class YJHomeView(AuthEditorMixin, AdminIndexView):
         from youjiao.onlinecourse.models import OnlineCourse
         from youjiao.yj_media.models import Video, Audio, Document
         from youjiao.photo.models import Photo, Album
+        from youjiao.content.models import ContentList
+        from youjiao.content.models import Slider
         return self.render('yj_admin/dashboard.html', User=User, Role=Role, Activity=Activity,
                            Courseware=Courseware, Book=Book, Page=Page, OnlineCourse=OnlineCourse,
                            Video=Video, Audio=Audio, Document=Document, Photo=Photo, Album=Album,
-                           admin_permission=admin_permission)
+                           ContentList=ContentList, Slider=Slider, admin_permission=admin_permission)
