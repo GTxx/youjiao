@@ -31,6 +31,10 @@ class Book(db.Model, CRUDMixin):
         uni = u'<图书: {},{}>'.format(self.name, self.level)
         return uni.encode('utf-8')
 
+    def __unicode__(self):
+        uni = u'<图书: {},{}>'.format(self.name, self.level)
+        return uni
+
     @classmethod
     def read_book_top10(cls):
         return cls.query.filter(cls.category==u'幼教读物',
@@ -85,6 +89,14 @@ class Courseware(db.Model, CRUDMixin):
     publish = db.Column(sqla.Boolean, default=False)
     cover_img_url = db.Column(sqla.String(200))
 
+    def __repr__(self):
+        uni = u'<课件: {}>'.format(self.name)
+        return uni.encode('utf-8')
+
+    def __unicode__(self):
+        uni = u'<课件: {}>'.format(self.name)
+        return uni
+    
     @classmethod
     def top10(cls):
         return cls.query.filter(cls.publish==True).limit(10)
