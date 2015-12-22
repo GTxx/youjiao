@@ -10,7 +10,7 @@
 
 {% block content %}
 <div id="main-home-body">
-    <div class="e-page-title">产品展示-幼教教材</div>
+    <div class="e-page-title">产品展示-{% if category=='teach_book' %}幼教教材{% else %}幼教读物{% endif %} </div>
     <div class="product-s-slides">
         <div class="product-s-slides-main">
             <ul class="rslides">
