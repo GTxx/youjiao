@@ -41,8 +41,8 @@
                         <div class="nv-price">{{ book.price }}/套</div>
                     </div>
                     <h5>{{ book.name }}</h5>
-                    <h6>{{ book.level }}</h6>
                 </a>
+                <a href="/book/teach_book?level={{ book.level }}"><h6>{{ book.level }}</h6></a>
             </li>
             {% endfor %}
         </ul>

@@ -34,19 +34,23 @@ def book_list():
 
 @book_bp.route('/book/<category>')
 def book_category(category):
+    level = request.args.get('level')
     if category == 'teach_book':
-        level = request.args.get('level')
         book_list = Book.query.filter(Book.publish==True, Book.category==u'幼教教材')
         if level:
             book_list = book_list.filter(Book.level==level)
         book_list = book_list.limit(8)
         top10 = Book.top10()
         return render_template('book/sub_node.html', book_list=book_list, top10=top10,
-                               level=level, slider=Slider.book_slider())
+                               level=level, slider=Slider.book_slider(), category=category)
 
     elif category == 'read_book':
-        book_list = Book.query.filter_by(category=u'幼教读物').limit(9)
-        return render_template('book/sub_node.html', book_list=book_list)
+        book_list = Book.query.filter(Book.publish==True, Book.category==u'幼教读物')
+        if level:
+            book_list = book_list.filter(Book.level==level)
+        book_list = book_list.limit(8)
+        return render_template('book/sub_node.html', book_list=book_list, level=level,
+                               slider=Slider.book_slider(), category=category)
     else:
         abort(404)
 

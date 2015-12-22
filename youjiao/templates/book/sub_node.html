@@ -45,14 +45,15 @@
                         <div class="nv-price">{{ book.price }}/套</div>
                     </div>
                     <h5>{{ book.name }}</h5>
-                    <h6>{{ book.level }}</h6>
                 </a>
+                <a href="/book/{{ category }}?level={{ book.level }}"><h6>{{ book.level }}</h6></a>
             </li>
             {% else %}
             <p>暂无图书</p>
             {% endfor %}
         </ul>
     </div>
+    {% if top10 %}
     <div class="rank-section">
         <div class="section-block-wrapper">
             <div class="section-block-title-7">幼教教材排行榜</div>
@@ -110,6 +111,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
