@@ -42,7 +42,7 @@ def book_category(category):
         book_list = book_list.limit(8)
         top10 = Book.top10()
         return render_template('book/sub_node.html', book_list=book_list, top10=top10,
-                               level=level, slider=Slider.book_slider())
+                               level=level, slider=Slider.book_slider(), category=category)
 
     elif category == 'read_book':
         book_list = Book.query.filter(Book.publish==True, Book.category==u'幼教读物')
@@ -50,7 +50,7 @@ def book_category(category):
             book_list = book_list.filter(Book.level==level)
         book_list = book_list.limit(8)
         return render_template('book/sub_node.html', book_list=book_list, level=level,
-                               slider=Slider.book_slider())
+                               slider=Slider.book_slider(), category=category)
     else:
         abort(404)
 

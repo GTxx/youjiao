@@ -17,18 +17,18 @@ from .utils import verify_password
 
 def unique_user_name(form, field):
     if User.query.filter_by(name=field.data).first() is not None:
-        raise ValidationError('name already exists')
+        raise ValidationError(u'用户名已经存在')
 
 
 def unique_email(form, field):
     if User.query.filter_by(email=field.data).first() is not None:
-        raise ValidationError('email already exists')
+        raise ValidationError(u'email已经存在')
 
 
 def check_captcha(captcha_content):
     captcha_key = session.get('captcha_key')
     if not RedisCaptcha.check(captcha_key, captcha_content):
-        raise ValidationError('captcha error')
+        raise ValidationError(u'验证码错误')
 
 
 def captcha_validator(form, field):
