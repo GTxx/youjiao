@@ -104,30 +104,28 @@ class LoginForm(Form):
             flash('INVALID_REDIRECT')
             raise ValidationError('INVALID_REDIRECT')
 
-    def validate_email_or_name(self, field):
-        from sqlalchemy import or_
-        if not User.query.filter(or_(User.email==field.data, User.name==field.data)).first():
-            raise ValidationError('email/name of password error')
-
     def validate(self):
         # always do captcha validate first
         captcha = self.captcha.data
         try:
             if not captcha:
-                raise ValidationError('captcha is required')
+                raise ValidationError(u'需要填写验证码')
             check_captcha(captcha)
         except ValidationError as e:
-            self.captcha.errors += (str(e), )
+            self.captcha.errors += (unicode(e), )
             return False
         if not super(LoginForm, self).validate():
             return False
         email_or_name = self.email_or_name.data
         password = self.password.data
-        users = User.query.filter((User.email==email_or_name)|(User.name==email_or_name))
-        user = users[0]
+        user = User.query.filter((User.email==email_or_name)|(User.name==email_or_name)).first()
+        if not user:
+            self.email_or_name.errors.append(u'用户名/邮箱 密码错误')
+            self.password.errors.append(u'用户名/邮箱 密码错误')
+            return False
         if not user.verify_and_update_password(password):
-            self.email_or_name.errors.append('email/name or password error')
-            self.password.errors.append('email/name or password error')
+            self.email_or_name.errors.append(u'用户名/邮箱 密码错误')
+            self.password.errors.append(u'用户名/邮箱 密码错误')
             return False
         self.user = user
         return True
