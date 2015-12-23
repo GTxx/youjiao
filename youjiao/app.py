@@ -4,7 +4,8 @@ from __future__ import absolute_import
 from flask_admin import Admin
 from flask import Flask, render_template
 from flask_wtf import CsrfProtect
-from flask_babel import Babel
+# from flask_babel import Babel
+from flask_babelex import Babel
 from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension

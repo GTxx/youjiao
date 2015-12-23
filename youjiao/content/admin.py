@@ -49,7 +49,7 @@ class ActivityAdmin(AuthEditorMixin, sqla.ModelView):
     column_labels = dict(user=u'用户', create_time=u'创建时间', update_time=u'更新时间', title=u'标题',
                          origin=u'来源', category=u'类型', publish=u'是否发布', preview=u'内容')
 
-    @action('publish', 'Publish', u'确定要发布选择的资料吗?')
+    @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
         try:
             query = Activity.query.filter(Activity.id.in_(ids))
@@ -118,18 +118,8 @@ class SliderAdmin(AuthEditorMixin, sqla.ModelView):
         form_class.image_list = JsonField('image_list')
         return form_class
 
-    def scaffold_list_columns(self):
-        columns = super(SliderAdmin, self).scaffold_list_columns()
-        columns.append('preview')
-        return columns
-
-    column_formatters = {
-        'image_list': _json_format_field('image_list')
-    }
-
     column_display_pk = True
-    # column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题', name=u'名称',
-    #                      url=u'地址', content=u'内容', category=u'类型', publish=u'是否发布', preview=u'预览')
+    column_labels = dict(name=u'位置', image_list=u'图片')
 
 
 class ContentListAdmin(AuthEditorMixin, sqla.ModelView):
@@ -145,6 +135,7 @@ class ContentListAdmin(AuthEditorMixin, sqla.ModelView):
         form_class.content = JsonField('content')
         return form_class
 
+    column_labels = dict(position=u'位置')
 
 from ..extensions import admin, db
 

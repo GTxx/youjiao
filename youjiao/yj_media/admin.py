@@ -32,16 +32,23 @@ class VideoAdmin(AuthEditorMixin, sqla.ModelView):
             return model.media_process['mp4']['key']
         return ''
 
+    def _short_mp4(view, context, model, name):
+        if model.media_process:
+            if model.media_process.get('short_mp4'):
+                return model.media_process['short_mp4']['key']
+        return ''
+
     column_formatters = {
         u'mp4': _mp4,
+        u'short_mp4': _short_mp4,
         'media_process': _json_format_field('media_process'),
         'media_meta': _json_format_field('media_meta')
     }
-    column_list = ['name', 'qiniu_key', 'mp4']
+    column_list = ['name', 'qiniu_key', 'mp4', 'short_mp4']
     column_searchable_list = ('name',)
     can_view_details = True
     details_template = 'json_detail.html'
-    column_labels = dict(name=u'名字', qiniu_key=u'qiniuKey')
+    column_labels = dict(name=u'名字', qiniu_key=u'文件地址', mp4=u'转换后mp4文件地址', short_mp4=u'前3分钟视频地址')
 
     @action('convert', u'转mp4', 'Are you sure you want to convert this video?')
     def action_convert_mp4(self, ids):

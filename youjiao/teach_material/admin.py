@@ -31,7 +31,8 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
     column_searchable_list = ('name', 'executive_editor', 'chief_editor')
     column_labels = dict(name=u'图书名', chief_editor=u'主编', executive_editor=u'责任编辑', publisher=u'出版社',
                          book_size=u'图书大小', level=u'等级', category=u'分类', price=u'价格',
-                         publish=u'是否发布', preview=u'内容')
+                         publish=u'是否发布', preview=u'内容', coursewares=u'关联课件', image_array=u'图书封面',
+                         preview_array=u'预览图片')
     column_display_pk = True
 
     def scaffold_list_columns(self):
@@ -40,7 +41,7 @@ class BookAdmin(AuthEditorMixin, sqla.ModelView):
         columns.append('preview')
         return columns
 
-    @action('approve', 'Approve', 'Are you sure you want to approve selected users?')
+    @action('approve', u'发布', u'确定要发布所选择的图书吗?')
     def action_approve(self, ids):
         try:
             query = Book.query.filter(Book.id.in_(ids))
@@ -110,9 +111,9 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_exclude_list = ['content']
 
-    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布', preview=u'内容')
+    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布', preview=u'内容', cover_img_url=u'课件封面')
 
-    @action('publish', 'Publish', u'确定要发布选择的资料吗?')
+    @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):
         try:
             query = Courseware.query.filter(Courseware.id.in_(ids))
