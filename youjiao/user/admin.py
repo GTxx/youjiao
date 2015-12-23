@@ -2,7 +2,7 @@
 from flask_login import current_user
 from flask_admin.contrib import sqla
 from .permissions import admin_permission
-from .models import User, Role, VIP
+from .models import User, Role, VIP, MessageBoard
 
 
 class UserAdmin(sqla.ModelView):
@@ -47,6 +47,14 @@ class RoleAdmin(sqla.ModelView):
             return False
         return True
 
+class MessageBoardAdmin(sqla.ModelView):
+    column_list = ('user', 'content', 'timestamp')
+    column_searchable_list = ('user', 'content')
+
+    create_modal = True
+    edit_modal = True
+
+    column_labels = dict(user=u'用户名', content=u'留言内容', timestamp=u'留言时间')
 
 class VIPAdmin(sqla.ModelView):
     create_modal = True
@@ -72,3 +80,4 @@ admin.add_view(RoleAdmin(Role, db.session, category=u'用户管理', name=u'身�
                          menu_icon_type=ICON_TYPE_GLYPH,
                          menu_icon_value='glyphicon-education'))
 admin.add_view(VIPAdmin(VIP, db.session, category=u'用户管理', name=u'VIP'))
+admin.add_view(MessageBoardAdmin(MessageBoard, db.session, category=u'用户管理',name=u'留言板'))

@@ -18,6 +18,12 @@
                     <li class="list-group-item">
                         <a href="/admin/role/">身份数量</a>
                         <span class="badge">{{ Role.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/vip/">VIP数量</a>
+                        <span class="badge">{{ VIP.query.count() }}</span></li>
+                    <li class="list-group-item">
+                        <a href="/admin/messageboard/">留言板</a>
+                        <span class="badge">{{ MessageBoard.query.count() }}</span></li>
                 </ul>
             </div>
         </div>

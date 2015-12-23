@@ -18,6 +18,13 @@ roles_users = db.Table(
     sqla.UniqueConstraint('user_id', 'role_id')
 )
 
+class MessageBoard(db.Model):
+    __tablename__ = 'messageboard'
+    id = sqla.Column(sqla.Integer, primary_key=True)
+    user = db.Column(db.String(50))
+    content = db.Column(db.Text())
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow)
+
 class User(db.Model, UserMixin, CRUDMixin):
     __tablename__ = USER_TABLE_NAME
     id = sqla.Column(sqla.Integer, primary_key=True)
@@ -35,6 +42,7 @@ class User(db.Model, UserMixin, CRUDMixin):
     # TODO: add login log field, and add field update in login view
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    # messageboards = db.relationship('MessageBoard', backref='user', lazy='dynamic')
     # profile = db.relationship('UserProfile', backref='user', uselist=False)
     # from youjiao.user_util.models import Comment, Favor
     # comments = db.relationship('Comment', backref='user')
