@@ -32,7 +32,10 @@ var entry = {
     'slider.admin_edit': path.resolve(dirname, 'content/slider.admin_edit.js'),
 
     // contentlist
-    'contentlist.admin_edit': path.resolve(dirname, 'contentlist/admin_edit.js')
+    'contentlist.admin_edit': path.resolve(dirname, 'contentlist/admin_edit.js'),
+
+    // photo
+    'photo.admin.list': path.resolve(dirname, 'photo/admin.list.js')
 };
 
 module.exports = entry;

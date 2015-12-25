@@ -42,6 +42,7 @@ from .user_util.api import user_util_api_bp
 # photo
 from .photo.models import Photo, Album
 from .photo.admin import AlbumAdmin
+from .photo.apis import photo_api_bp
 
 # yj_media
 from .yj_media.admin import VideoAdmin
@@ -144,6 +145,7 @@ def create_app():
     app.register_blueprint(user_util_api_bp)
     app.register_blueprint(media_bp)
     app.register_blueprint(online_course_bp)
+    app.register_blueprint(photo_api_bp)
 
     # register subscriber
     user_connect(app)

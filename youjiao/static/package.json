@@ -19,6 +19,9 @@
     "jquery": "^1.11.3",
     "jquery-validation": "^1.14.0",
     "json-editor": "^0.7.23",
+    "react": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
+    "react-dom": "^0.14.3",
     "webpack": "^1.12.1"
   },
   "devDependencies": {

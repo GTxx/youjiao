@@ -13,6 +13,7 @@ from sqlalchemy import and_
 
 user_bp = Blueprint("user_view", __name__)
 
+
 @user_bp.route('/register', methods=['GET', 'POST'])
 @anonymous_user_required
 def register():
