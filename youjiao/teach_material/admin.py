@@ -111,7 +111,8 @@ class CoursewareAdmin(AuthEditorMixin, sqla.ModelView):
 
     column_exclude_list = ['content']
 
-    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布', preview=u'内容', cover_img_url=u'课件封面')
+    column_labels = dict(name=u'课件名', book=u'所属图书', publish=u'是否发布',
+                         preview=u'内容', cover_img_url=u'课件封面', level=u'班级')
 
     @action('publish', u'发布', u'确定要发布选择的资料吗?')
     def action_approve(self, ids):

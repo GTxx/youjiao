@@ -6,6 +6,8 @@ from flask_login import current_user
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_, or_
 from youjiao.content.models import Slider
+from webargs import fields
+from webargs.flaskparser import use_args, use_kwargs
 from .models import Book, Courseware
 from .permissions import book_preview_permission, courseware_preview_permission
 
@@ -24,8 +26,9 @@ def book():
 
 
 @book_bp.route('/book/list')
-def book_list():
-    level = request.args.get('level')
+@use_kwargs({'level': fields.Str(validate=lambda level: level in Book.level_list)})
+def book_list(level):
+    # level = request.args.get('level')
     book_list = Book.query.filter(Book.publish==True)
     if level:
         book_list = book_list.filter(Book.level==level)
@@ -33,8 +36,9 @@ def book_list():
 
 
 @book_bp.route('/book/<category>')
-def book_category(category):
-    level = request.args.get('level')
+@use_kwargs({'level': fields.Str(validate=lambda level: level in Book.level_list)})
+def book_category(category, level):
+    # level = request.args.get('level')
     if category == 'teach_book':
         book_list = Book.query.filter(Book.publish==True, Book.category==u'幼教教材')
         if level:
@@ -101,11 +105,16 @@ def courseware_detail(courseware_id):
                            obj=courseware)
 
 
+courseware_args = {
+    'level': fields.Str(validate=lambda level: level in Courseware.level_list),
+    'search': fields.Str()
+}
+
+
 @book_bp.route('/courseware/list/')
-def courseware_list():
-    level = request.args.get('level')
-    search = request.args.get('search')
-    courseware_list = Courseware.query.outerjoin(Book).filter(Courseware.publish == True)
+@use_kwargs(courseware_args)
+def courseware_list(level, search):
+    courseware_list = Courseware.query.join(Book).filter(Courseware.publish==True)
     if search:
         courseware_list = courseware_list.filter(
             or_(Courseware.name.like(u'{}%'.format(search)),
@@ -113,16 +122,17 @@ def courseware_list():
                 (Book.name + Courseware.name) == search)
         )
     if level:
-        courseware_list = courseware_list.filter(Book.level == level)
+        courseware_list = courseware_list.filter(Courseware.level==level)
     courseware_list = courseware_list.all()
     return render_template('courseware/list.html', current_page='courseware',
                            courseware_list=courseware_list, level=level)
 
 
 @book_bp.route('/courseware/sub/')
-def courseware_sub():
+@use_args(courseware_args)
+def courseware_sub(args):
     top10 = Courseware.top10()
-    level = request.args.get('level')
+    level = args.get('level')
     if not level:
         courseware_list = Courseware.query.limit(10).all()
     elif level in [u'小班', u'中班', u'大班']:

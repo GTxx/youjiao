@@ -4,12 +4,10 @@ from __future__ import absolute_import
 from flask_admin import Admin
 from flask import Flask, render_template
 from flask_wtf import CsrfProtect
-# from flask_babel import Babel
 from flask_babelex import Babel
 from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_migrate import Migrate, MigrateCommand
 
 from .config import Config
 from .user.utils import load_user
@@ -98,8 +96,7 @@ def create_app():
     # flask_redis
     redis_cli.init_app(app)
 
-    # flask_migrate
-    Migrate(app, db)
+
 
     # flask_debug
     if app.config.get('DEBUG'):

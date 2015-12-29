@@ -5,7 +5,7 @@ from youjiao.extensions import db, redis_cli
 from youjiao.utils.database import CRUDMixin
 import sqlalchemy as sqla
 from sqlalchemy import not_
-from sqlalchemy.dialects.postgresql import ARRAY, JSON
+from sqlalchemy.dialects.postgresql import ARRAY, JSON, ENUM
 from youjiao.user_util.models import Comment
 from flask import url_for
 from youjiao.yj_media.models import Document
@@ -17,9 +17,19 @@ class Book(db.Model, CRUDMixin):
     chief_editor = db.Column(sqla.String(16))
     executive_editor = db.Column(sqla.String(16))
     publisher = db.Column(sqla.String(16))
-    book_size = db.Column(sqla.Enum(u'16开', name='book_size'))
-    level = db.Column(sqla.Enum(u'幼小衔接班', u'小班', u'中班', u'大班', name='level'))
-    category = db.Column(sqla.Enum(u'幼教教材', u'幼教读物', name='book_category'))
+
+    book_size_list = [u'16开',]
+    book_size_enum = sqla.Enum(*book_size_list, name='book_size')
+    book_size = db.Column(book_size_enum)
+
+    level_list = [u'幼小衔接班', u'小班', u'中班', u'大班']
+    level_enum = sqla.Enum(*level_list, name='level')
+    level = db.Column(level_enum)
+
+    category_list = [u'幼教教材', u'幼教读物']
+    category_enum = sqla.Enum(*category_list, name='book category')
+    category = db.Column(category_enum)
+
     price = db.Column(sqla.Numeric(10, 2), default=30)
     publish = db.Column(sqla.Boolean, default=False)
     image_array = db.Column(ARRAY(sqla.String(255)))
@@ -88,6 +98,10 @@ class Courseware(db.Model, CRUDMixin):
     content = db.Column(JSON)
     publish = db.Column(sqla.Boolean, default=False)
     cover_img_url = db.Column(sqla.String(200))
+
+    level_list = Book.level_list
+    level_enum = ENUM(*level_list, name='courseware level', create_type=False)
+    level = sqla.Column(level_enum)
 
     def __repr__(self):
         uni = u'<课件: {}>'.format(self.name)

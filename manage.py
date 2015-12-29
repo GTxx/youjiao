@@ -1,18 +1,18 @@
 # coding: utf-8
-from flask_script import Manager
-from flask_migrate import MigrateCommand
 from flask import url_for
-from youjiao.extensions import db, qiniu
+from youjiao.extensions import db, qiniu, manager
 from youjiao.app import create_app
 from youjiao.user.models import User, Role, UserProfile
-import os, json
+from flask_migrate import Migrate, MigrateCommand
+import os
 import urlparse
 
-# Used by app debug & livereload
-PORT = 5000
+# import command
+from youjiao.command.db import db_shell
+from youjiao.command.qiniu import create_qiniu_conf
 
-app = create_app()
-manager = Manager(app)
+
+app = manager(app=create_app)
 
 
 @manager.option('-p', '--port', dest='port', default=5000)
@@ -27,13 +27,6 @@ def run(port, build):
         os.system('npm run build-dev')
         os.chdir(current_path)
     app.run(host='0.0.0.0', port=int(port))
-
-
-@manager.command
-def createdb():
-    # -*- coding: utf-8 -*-
-    """Create database."""
-    db.create_all()
 
 
 @manager.command
@@ -74,14 +67,7 @@ def make_shell_context():
     return dict(app=app, db=db)
 
 
-@manager.command
-def create_qiniu_conf():
-    static_dir = os.path.join(os.getcwd(), 'youjiao/static/build')
-    dest = "qiniu:access_key={}&secret_key={}&bucket={}&key_prefix={}".format(
-        qiniu.AK, qiniu.SK, qiniu.PUBLIC_BUCKET_NAME, qiniu.STATIC_CDN_PREFIX)
-    config = {"src": static_dir, "dest": dest, "debug_level": 1}
-    with open('qiniu.json', 'w') as f:
-        f.write(json.dumps(config))
+
 
 
 @manager.option('-n', '--name', dest='name', default='admin')
@@ -179,9 +165,6 @@ def replace_mp3():
             except:
                 pass
 
-@manager.command
-def db_shell():
-    os.system('pgcli {}'.format(app.config['SQLALCHEMY_DATABASE_URI']))
 
 @app.template_filter('asset')
 def asset_filter(file_string):
@@ -215,6 +198,10 @@ def vendor_asset_filter(file_string):
 
 
 manager.add_command('db', MigrateCommand)
+
+# flask_migrate
+# add compare type to check like string max length
+Migrate(app, db, compare_type=True)
 
 if __name__ == "__main__":
     manager.run()
