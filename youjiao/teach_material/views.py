@@ -114,7 +114,7 @@ courseware_args = {
 @book_bp.route('/courseware/list/')
 @use_kwargs(courseware_args)
 def courseware_list(level, search):
-    courseware_list = Courseware.query.join(Book).filter(Courseware.publish==True)
+    courseware_list = Courseware.query.outerjoin(Book).filter(Courseware.publish==True)
     if search:
         courseware_list = courseware_list.filter(
             or_(Courseware.name.like(u'{}%'.format(search)),
