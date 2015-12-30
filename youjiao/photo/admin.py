@@ -9,10 +9,10 @@ from flask_login import current_user
 from .permissions import photo_edit_permission, album_edit_permission
 from ..admin_utils import AuthEditorMixin
 from wtforms.widgets import TextArea
-from youjiao.extensions import qiniu
+from youjiao.extensions import flask_qiniu
 from flask import Markup, url_for, flash, current_app
 from uuid import uuid4
-from ..extensions import admin, db, qiniu
+from ..extensions import admin, db, flask_qiniu
 from .models import Photo, Album
 import json
 
@@ -52,7 +52,7 @@ class AlbumAdmin(AuthEditorMixin, sqla.ModelView):
 
 class QiniuImageUploadInput(ImageUploadInput):
     def get_url(self, field):
-        return '{}/{}?imageView/2/w/100'.format(qiniu.PUBLIC_CDN_DOMAIN, field.data)
+        return '{}/{}?imageView/2/w/100'.format(flask_qiniu.PUBLIC_CDN_DOMAIN, field.data)
 
 
 class QiniuImageUploadField(ImageUploadField):
@@ -64,7 +64,7 @@ class QiniuImageUploadField(ImageUploadField):
         data.seek(0)
         bucket_name = current_app.qiniu.PUBLIC_BUCKET_NAME
         # TODO: 上传开启水印转换
-        up_token = qiniu.qiniu_auth.upload_token(
+        up_token = flask_qiniu.qiniu_auth.upload_token(
             bucket_name, filename,
             policy={})
         res = put_data(up_token=up_token, key=filename, data=data.read())

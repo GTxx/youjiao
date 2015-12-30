@@ -3,7 +3,7 @@ import sqlalchemy as sqla
 from datetime import datetime
 from youjiao.utils.database import CRUDMixin
 from flask import current_app
-from youjiao.extensions import qiniu
+from youjiao.extensions import flask_qiniu
 
 
 class Photo(db.Model, CRUDMixin):
@@ -18,7 +18,7 @@ class Photo(db.Model, CRUDMixin):
 
     @property
     def url(self):
-        return u'{}/{}'.format(qiniu.PUBLIC_CDN_DOMAIN, self.qiniu_key)
+        return u'{}/{}'.format(flask_qiniu.PUBLIC_CDN_DOMAIN, self.qiniu_key)
 
     @property
     def thumbnail(self):

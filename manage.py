@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask import url_for
-from youjiao.extensions import db, qiniu, manager
+from youjiao.extensions import db, flask_qiniu, manager
 from youjiao.app import create_app
 from youjiao.user.models import User, Role, UserProfile
 from flask_migrate import Migrate, MigrateCommand
@@ -9,7 +9,7 @@ import urlparse
 
 # import command
 from youjiao.command.db import db_shell
-from youjiao.command.qiniu import create_qiniu_conf
+from youjiao.command.qiniu_command import create_qiniu_conf, upload_static
 
 
 app = manager(app=create_app)
@@ -172,7 +172,7 @@ def asset_filter(file_string):
         if app.debug == True:
             static_path = '/static/build'
         else:
-            static_path = urlparse.urljoin(qiniu.PUBLIC_CDN_DOMAIN, qiniu.STATIC_CDN_PREFIX)
+            static_path = urlparse.urljoin(flask_qiniu.PUBLIC_CDN_DOMAIN, flask_qiniu.STATIC_CDN_PREFIX)
         filename = '.'.join(file_string.split('.')[:-1])
         filetype = file_string.split('.').pop()
         file_resolve_name = app.assets[filename][filetype]
@@ -190,8 +190,8 @@ def vendor_asset_filter(file_string):
         if app.debug == True:
             return url_for('static', filename=file_path)
         else:
-            relative_path = os.path.join(qiniu.STATIC_CDN_PREFIX, file_string)
-            res = urlparse.urljoin(qiniu.PUBLIC_CDN_DOMAIN, relative_path)
+            relative_path = os.path.join(flask_qiniu.STATIC_CDN_PREFIX, file_string)
+            res = urlparse.urljoin(flask_qiniu.PUBLIC_CDN_DOMAIN, relative_path)
             return res
     except Exception as e:
         return ''

@@ -12,7 +12,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from .config import Config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
-from .extensions import db, limiter, admin, redis_cli, qiniu
+from .extensions import db, limiter, admin, redis_cli, flask_qiniu
 from .utils.csrf import check_csrf
 
 # user
@@ -123,7 +123,7 @@ def create_app():
     limiter.init_app(app)
 
     # flask_qiniu
-    qiniu.init_app(app)
+    flask_qiniu.init_app(app)
 
     # flask_admin
     admin.init_app(app)

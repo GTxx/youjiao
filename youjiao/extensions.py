@@ -17,6 +17,6 @@ admin = Admin(index_view=YJHomeView(name=u'数据面板'), name=u'幼教后台',
 
 redis_cli = FlaskRedis(strict=True)
 
-qiniu = FlaskQiniu()
+flask_qiniu = FlaskQiniu()
 
 manager = Manager()
