@@ -13,20 +13,26 @@
     <div class="e-page-title">课件中心-教材配套课件-{{level or '全部课件'}}</div>
     <div class="video-section-lg">
         <h3 style="text-align: center;line-height: 40px;">{{ level or '全部' }}课件</h3>
-
+        <div class="search-input">
+            <a class="search-button" href="javascript:;" id="search-button">
+                <img src="{{ url_for('static', filename='image/icons/iconfont-search.png') }}"
+                     style="width: 18px;height: 18px;margin-top: 6px;" alt="">
+            </a>
+            <input id="search-input" type="text" value="{{search}}">
+        </div>
         <div class="section-block-wrapper">
             <div class="section-block-title-4">班级分类</div>
             <div class="classes-select-wrapper">
                 <select name="" id="" class="classes-select">
-                    <option value="#" {% if not level %}selected="selected"
+                    <option value="" {% if not level %}selected="selected"
                             {% endif %}>全部</option>
-                    <option value="?level=幼小衔接班" {% if level=="幼小衔接班" %}
+                    <option value="幼小衔接班" {% if level=="幼小衔接班" %}
                             selected="selected" {% endif %}>幼小衔接班</option>
-                    <option value="?level=大班" {% if level=="大班" %}
+                    <option value="大班" {% if level=="大班" %}
                             selected="selected" {% endif %}>大班</option>
-                    <option value="?level=中班" {% if level=="中班" %}
+                    <option value="中班" {% if level=="中班" %}
                             selected="selected" {% endif %}>中班</option>
-                    <option value="?level=小班" {% if level=="小班" %}
+                    <option value="小班" {% if level=="小班" %}
                             selected="selected" {% endif %}>小班</option>
                 </select>
             </div>

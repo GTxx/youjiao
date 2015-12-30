@@ -6,7 +6,7 @@ from flask_login import current_user
 from youjiao.user_util.models import Comment
 from sqlalchemy import and_, or_
 from youjiao.content.models import Slider
-from webargs import fields
+from webargs import fields, validate
 from webargs.flaskparser import use_args, use_kwargs
 from .models import Book, Courseware
 from .permissions import book_preview_permission, courseware_preview_permission
@@ -25,14 +25,22 @@ def book():
                            slider=Slider.book_slider())
 
 
+book_args = {
+    'level': fields.Str(missing='', validate=validate.OneOf(Book.level_list+[''])),
+    'search': fields.Str(missing='')
+}
+
 @book_bp.route('/book/list')
-@use_kwargs({'level': fields.Str(validate=lambda level: level in Book.level_list)})
-def book_list(level):
+@use_kwargs(book_args)
+def book_list(level, search):
     # level = request.args.get('level')
-    book_list = Book.query.filter(Book.publish==True)
+    query = Book.query.filter(Book.publish==True)
     if level:
-        book_list = book_list.filter(Book.level==level)
-    return render_template('book/list.html', book_list=book_list, level=level)
+        query = query.filter(Book.level==level)
+    if search:
+        query = query.filter(Book.name.like(u'%{}%'.format(search)))
+    return render_template('book/list.html', book_list=query, level=level,
+                           search=search)
 
 
 @book_bp.route('/book/<category>')
@@ -106,14 +114,15 @@ def courseware_detail(courseware_id):
 
 
 courseware_args = {
-    'level': fields.Str(validate=lambda level: level in Courseware.level_list),
-    'search': fields.Str()
+    'level': fields.Str(missing='', validate=validate.OneOf(Courseware.level_list+[''])),
+    'search': fields.Str(missing='')
 }
 
 
 @book_bp.route('/courseware/list/')
 @use_kwargs(courseware_args)
 def courseware_list(level, search):
+    # import ipdb; ipdb.set_trace()
     courseware_list = Courseware.query.outerjoin(Book).filter(Courseware.publish==True)
     if search:
         courseware_list = courseware_list.filter(
@@ -125,7 +134,8 @@ def courseware_list(level, search):
         courseware_list = courseware_list.filter(Courseware.level==level)
     courseware_list = courseware_list.all()
     return render_template('courseware/list.html', current_page='courseware',
-                           courseware_list=courseware_list, level=level)
+                           courseware_list=courseware_list, level=level,
+                           search=search)
 
 
 @book_bp.route('/courseware/sub/')

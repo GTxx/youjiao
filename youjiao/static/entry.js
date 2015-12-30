@@ -13,6 +13,7 @@ var entry = {
     'book.detail': path.resolve(dirname, 'book/detail.js'),
     'book.home': path.resolve(dirname, 'book/home.js'),
     'book.sub_node': path.resolve(dirname, 'book/sub_node.js'),
+    'book.list': path.resolve(dirname, 'book/list.js'),
 
     // courseware
     'courseware.detail': path.resolve(dirname, 'courseware/detail.js'),
