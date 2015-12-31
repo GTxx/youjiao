@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'research/left_bar.html' %}
+    {% include 'pages/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
             {% if activity_list.items %}
             {% for activity in activity_list.items %}
                 <li>
-                    <a href="{{ url_for('activity_content.research_post', id=activity.id) }}">{{ activity.title }} <span
+                    <a href="{{ url_for('activity_content.page_post', id=activity.id) }}">{{ activity.title }} <span
                             class="news-date float-right">[{{ activity.create_time.date() }}]</span></a>
                 </li>
             {% endfor %}
@@ -31,7 +31,7 @@
                 {% if page %}
                     {% if page != activity_list.page %}
                         <li>
-                            <a href="{{ url_for('activity_content.category', category=category_url, page=page) }}">{{ page }}</a>
+                            <a href="{{ url_for('activity_content.page_activity', page=page) }}">{{ page }}</a>
                         </li>
                     {% else %}
                         <li class="pagination-active"><a href="javascript:;">{{ page }}</a></li>
@@ -48,7 +48,7 @@
 {% endblock %}
 
 {% block rightBar %}
-    {% include 'research/research_activity_right.html' %}
+    {% include 'pages/research_activity_right.html' %}
 {% endblock %}
 
 {% block js %}

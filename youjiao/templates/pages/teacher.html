@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link href="{{ 'research.css' | asset }}" rel="stylesheet">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'pages/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <div class="e-page-title">教学教研-名师名园</div>
+        <div class="research-introduce-switch">
+            <a href="{{ url_for('activity_content.page_teacher', page=1) }}" class="research-tab-s active">名师风采</a>
+            <a href="{{ url_for('activity_content.page_kindergarten', page=1) }}" class="research-tab-s">名园介绍</a>
+        </div>
+        <div class="research-introduce-tab">
+            <ul class="research-introduce-teachers">
+                {% for teacher in teacher_list.items %}
+                <li>
+                    <a href="{{ url_for('activity_content.pages', page_id=teacher.id) }}">
+                        <img src="{{ teacher.img_url }}">
+                    </a>
+                    <div>
+                        <h4>
+                            <a style="color:black;" href="{{ url_for('activity_content.pages', page_id=teacher.id) }}">{{ teacher.title }}</a>
+                            <span>{% if teacher.summary_s==None %} {% else %} {{ teacher.summary_s }} {% endif %}</span>
+                        </h4>
+                        <span>{% if teacher.summary_l==None %} {% else %} {{ teacher.summary_l }} {% endif %}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="activity-pagination">
+            {% for page in teacher_list.iter_pages() %}
+                {% if page %}
+                    {% if page != teacher_list.page %}
+                        <li>
+                            <a href="{{ url_for('activity_content.page_teacher', page=page) }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="pagination-active"><a href="javascript:;">{{ page }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{{ 'research.js' | asset }}"></script>
+{% endblock %}

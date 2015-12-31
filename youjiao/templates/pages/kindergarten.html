@@ -1,0 +1,56 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link href="{{ 'research.css' | asset }}" rel="stylesheet">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'pages/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <div class="e-page-title">教学教研-名师名园</div>
+        <div class="research-introduce-switch">
+            <a href="{{ url_for('activity_content.page_teacher', page=1) }}" class="research-tab-s">名师风采</a>
+            <a href="{{ url_for('activity_content.page_kindergarten', page=1) }}" class="research-tab-s active">名园介绍</a>
+        </div>
+        <div class="research-introduce-tab">
+            <ul class="research-introduce-teachers">
+                {% for kindergarten in kindergarten_list.items %}
+                <li>
+                    <a href="{{ url_for('activity_content.pages', page_id=kindergarten.id) }}">
+                        <img src="{{ kindergarten.img_url }}">
+                    </a>
+                    <div>
+                        <h4>
+                            <a style="color:black;" href="{{ url_for('activity_content.pages', page_id=kindergarten.id) }}">{{ kindergarten.title }}</a>
+                            <span>{% if kindergarten.summary_s==None %} {% else %} {{ kindergarten.summary_s }} {% endif %}</span>
+                        </h4>
+                        <span>{% if kindergarten.summary_l==None %} {% else %} {{ kindergarten.summary_l }} {% endif %}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="activity-pagination">
+            {% for page in kindergarten_list.iter_pages() %}
+                {% if page %}
+                    {% if page != kindergarten_list.page %}
+                        <li>
+                            <a href="{{ url_for('activity_content.page_kindergarten', page=page) }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="pagination-active"><a href="javascript:;">{{ page }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'research.js' | asset }}"></script>
+{% endblock %}

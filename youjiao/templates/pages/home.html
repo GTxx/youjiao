@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link href="{{ 'research.css' | asset }}" rel="stylesheet">
+{% endblock %}
+
+{% block leftBar %}
+    {% include 'pages/left_bar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div id="main-big-body">
+        <div class="section-block-wrapper">
+            <div class="section-block-title-4" style="width: 700px;">名师名园</div>
+        </div>
+        <ul class="research-home-teachers">
+            {% for t_k in data.teacher_kindergarten %}
+            <li>
+                <a href="{{ url_for('activity_content.pages', page_id=t_k.id) }}">
+                    <img src="{{ t_k.img_url }}">
+                </a>
+                <h4><a style="color: black;" href="{{ url_for('activity_content.pages', page_id=t_k.id) }}">{{ t_k.title }}</a></h4>
+                <span>{% if t_k.summary_s==None %} {% else %} {{ t_k.summary_s }} {% endif %}</span>
+            </li>
+            {% endfor %}
+            <!--<li>-->
+                <!--<a href="{{ url_for('activity_content.pages', page_id='jxgbdsyey') }}">-->
+                    <!--<img src="http://7xlydq.com1.z0.glb.clouddn.com/jxgbdsyey.jpg?imageView2/2/w/300">-->
+                <!--</a>-->
+                <!--<h4><a style="color: black;" href="{{ url_for('activity_content.pages', page_id='jxgbdsyey') }}">江西广播电视艺术幼儿园</a></h4>-->
+                <!--<span>省级示范园</span>-->
+            <!--</li>-->
+        </ul>
+        <!--<div class="body_content">-->
+        <!--<div class="section-block-title-4">教研活动</div>-->
+        <!--<ul class="research-home-list">-->
+        <!--{% for activity in data.research_events %}-->
+            <!--<li>-->
+            <!--<a href="{{ url_for('activity_content.page_post', id=activity.id) }}">{{ activity.title }}</a>-->
+            <!--<span>[{{ activity.create_time.date() }}]</span>-->
+            <!--</li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
+        <!--</div>-->
+        <div class="research-home-news">
+            <div class="section-block-wrapper">
+                <div class="section-block-title-4" style="width: 700px;">教研成果</div>
+            </div>
+            <ul class="news-list">
+                {% for ac in data.achievement %}
+                    <li>
+                        <a href="{{ url_for('activity_content.page_post', id=ac.id) }}">{{ ac.title }}</a>
+                        <span class="news-date float-right">[{{ ac.create_time.date() }}]</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block rightBar %}
+    {% include 'pages/home_right_bar.html' %}
+{% endblock %}
+
+{% block js %}
+    <script src="{{ 'research.js' | asset }}"></script>
+{% endblock %}

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, request, abort
 from .models import Activity, Page
+from sqlalchemy import or_, and_
 
 
 content_bp = Blueprint("activity_content", __name__)
@@ -53,58 +54,76 @@ def activity_view(id):
     return render_template('activity/activity.html', activity=obj, category_name=category_name,
                            current_page='activity', obj=obj)
 
-
-@content_bp.route('/research/home/')
-def research_home():
-    research_events = Activity.query.filter_by(category='research').filter_by(publish=True).limit(7).all()
-    research_result = Activity.query.filter_by(category='achievement').filter_by(publish=True).limit(7).all()
+# 教学教研总页
+@content_bp.route('/page/home/')
+def page_home():
+    teacher_kindergarten = Page.query.filter(or_(Page.status=='0', Page.status=='1')).filter(Page.publish==True).order_by('-id').limit(3)
+    achievement = Page.query.filter_by(status='2').filter(Page.publish==True).limit(10).all()
     data = {
-        'research_events': research_events,
-        'research_result': research_result
+        'teacher_kindergarten': teacher_kindergarten,
+        'achievement': achievement
     }
-    return render_template('research/home.html', data=data, current_page='research')
+    return render_template('pages/home.html', data=data, current_page='research')
 
 
-@content_bp.route('/research/<category>/<page>/')
-def research_activity(category, page):
+# 教研成果总页
+@content_bp.route('/page/achievement/')
+def page_activity():
     try:
-        page = int(page)
+        page = int(request.args.get('page'))
     except ValueError:
         page = 1
 
-    pagination = Activity.query.filter_by(category=category).filter_by(publish=True).paginate(page, per_page=20)
-    category_dict = {
-        'event': u'教研活动',
-        'achievement': u'教研成果'
-    }
-    category_name = category_dict[category]
-    return render_template('research/research_activity.html', category_name=category_name, activity_list=pagination,
+    pagination = Page.query.filter(Page.status=='2').filter(Page.publish==True).paginate(page, per_page=18)
+    category_name = u'教研成果'
+    return render_template('pages/research_activity.html', category_name=category_name, activity_list=pagination,
                            current_page='research')
 
-
-@content_bp.route('/research/post/<id>')
-def research_post(id):
-    obj = Activity.query.get(id)
-    category_dict = {
-        'researchevents': u'教研活动',
-        'researchresult': u'教研成果'
+# 教研成果单页
+@content_bp.route('/page/achievement/<id>')
+def page_post(id):
+    obj = Page.query.get(id).filter(Page.publish==True)
+    status_name = {
+        # 'researchevents': u'教研活动',
+        '2': u'教研成果'
     }
-    category_name = category_dict[obj.category]
-    return render_template('research/research_activity_content.html', category_name=category_name, activity=obj,
+    # status_url = {
+    #     '2': 'achievement'
+    # }
+
+    category_name = status_name[obj.status]
+    return render_template('pages/research_activity_content.html', category_name=category_name, activity=obj,
                            current_page='research')
 
+# 名师名园总页--名师
+@content_bp.route('/page/teacher&kindergarten/teacher/')
+def page_teacher():
+    try:
+        page = int(request.args.get('page'))
+    except ValueError:
+        page = 1
+    teacher_pagination = Page.query.filter(Page.status=='0').filter(Page.publish==True).paginate(page, per_page=5)
+    return render_template('pages/teacher.html', current_page='research', teacher_list=teacher_pagination)
 
-@content_bp.route('/research/teacher/')
-def research_teacher():
-    return render_template('research/teacher.html', current_page='research')
+# 名园
+@content_bp.route('/page/teacher&kindergarten/kindergarten/')
+def page_kindergarten():
+    try:
+        page = int(request.args.get('page'))
+    except ValueError:
+        page = 1
+    kindergarten_pagination = Page.query.filter(Page.status=='1').filter(Page.publish==True).paginate(page, per_page=5)
+    return render_template('pages/kindergarten.html', current_page='research',
+                           kindergarten_list=kindergarten_pagination)
+
+# 名师名园单页
+@content_bp.route('/page/teacher&kindergarten/<page_id>/')
+def pages(page_id):
+    content = Page.query.filter_by(id=page_id).filter(Page.publish==True).first()
+    return render_template('pages/tpl.html', content=content)
 
 
 @content_bp.route('/page/about/')
 def page_about():
     return render_template('pages/about.html')
 
-
-@content_bp.route('/page/<page_title>/')
-def pages(page_title):
-    content = Page.query.filter_by(title=page_title).first()
-    return render_template('pages/tpl.html', content=content, obj=content)

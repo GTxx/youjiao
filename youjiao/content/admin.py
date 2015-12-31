@@ -89,11 +89,37 @@ class PageAdmin(AuthEditorMixin, sqla.ModelView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
-    column_list = ('title', 'create_time', 'update_time')
+    form_choices = {
+        'status': [
+            ('0', u'名师名园-名师'),
+            ('1', u'名师名园-名园'),
+            ('2', u'教研成果')
+        ],
+    }
+    column_list = ('title', 'summary_s', 'summary_l', 'publish', 'create_time', 'update_time', 'status')
     column_searchable_list = ('title',)
     form_excluded_columns = ('create_time', 'update_time')
-    column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题')
 
+    column_labels = dict(create_time=u'创建时间', update_time=u'更新时间', title=u'标题', status=u'分类',
+                         summary_s=u'简介', summary_l=u'介绍')
+
+    @action('publish', u'发布', u'确定要发布选择的资料吗?')
+    def action_approve(self, ids):
+        try:
+            query = Page.query.filter(Page.id.in_(ids))
+
+            count = 0
+            for page in query.all():
+                page.publish = True
+                page.save()
+                count += 1
+
+            flash('Page was successfully approved. {} users were successfully approved.'.format(count))
+        except Exception as ex:
+            if not self.handle_view_exception(ex):
+                raise
+
+            flash('Failed to approve users. {}'.format(str(ex)), 'error')
 
     def is_accessible(self):
         if not current_user.is_authenticated:

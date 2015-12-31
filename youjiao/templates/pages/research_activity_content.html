@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block leftBar %}
-    {% include 'research/left_bar.html' %}
+    {% include 'pages/left_bar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -15,9 +15,6 @@
         <div class="activity-content">
             <h2 class="activity-title">{{ activity.title }}</h2>
 
-            <div class="activity-author">
-                来源： 中国学前教育研究会 2015年06月20日 作者：admin
-            </div>
             <div class="activity-main-content">
                 {% autoescape off %}
                 {{ activity.html }}
