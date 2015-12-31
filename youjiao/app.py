@@ -12,7 +12,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from .config import Config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
-from .extensions import db, limiter, admin, redis_cli, flask_qiniu
+from .extensions import db, limiter, admin, redis_cli, flask_qiniu, jwt
 from .utils.csrf import check_csrf
 
 # user
@@ -106,6 +106,9 @@ def create_app():
     login_manager = LoginManager(app)
     login_manager.user_loader(load_user)
     login_manager.login_view = 'user_view.login'
+
+    # flask_jwt
+    jwt.init_app(app)
 
     # flask_principal
     Principal(app)

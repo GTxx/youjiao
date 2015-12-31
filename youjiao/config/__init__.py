@@ -1,3 +1,4 @@
+from datetime import timedelta
 class BaseConfig(object):
     # Create dummy secrey key so we can use sessions
     SECRET_KEY = '123456790'
@@ -33,7 +34,8 @@ class BaseConfig(object):
     QINIU_PRIVATE_BUCKET_NAME = 'private bucket name'
     QINIU_PRIVATE_CDN_DOMAIN = 'private domain name'
 
-
+    # flask_jwt
+    JWT_EXPIRATION_DELTA = timedelta(days=1)
 
 
 try:

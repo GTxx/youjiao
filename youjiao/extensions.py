@@ -5,6 +5,7 @@ from flask_admin import Admin
 from flask_script import Manager
 from youjiao.yj_admin.views import YJHomeView
 from flask_redis import FlaskRedis
+from flask_jwt import JWT
 from .flask_qiniu import FlaskQiniu
 
 db = SQLAlchemy()
@@ -20,3 +21,5 @@ redis_cli = FlaskRedis(strict=True)
 flask_qiniu = FlaskQiniu()
 
 manager = Manager()
+
+jwt = JWT()

@@ -118,12 +118,8 @@ class LoginForm(Form):
             return False
         email_or_name = self.email_or_name.data
         password = self.password.data
-        user = User.query.filter((User.email==email_or_name)|(User.name==email_or_name)).first()
+        user = User.verify(email_or_name, password)
         if not user:
-            self.email_or_name.errors.append(u'用户名/邮箱 密码错误')
-            self.password.errors.append(u'用户名/邮箱 密码错误')
-            return False
-        if not user.verify_and_update_password(password):
             self.email_or_name.errors.append(u'用户名/邮箱 密码错误')
             self.password.errors.append(u'用户名/邮箱 密码错误')
             return False

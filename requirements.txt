@@ -13,6 +13,7 @@ Flask-Redis
 qiniu==7.0.5
 Flask-Login==0.3.2
 webargs==1.1.1
+Flask-JWT==0.3.2
 
 # dev and op
 pgcli

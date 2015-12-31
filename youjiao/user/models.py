@@ -53,6 +53,15 @@ class User(db.Model, UserMixin, CRUDMixin):
         user.save()
         return user
 
+    @classmethod
+    def verify(cls, email_or_name, password):
+        user = cls.query.filter((User.email==email_or_name)|(User.name==email_or_name)).first()
+        if not user:
+            return None
+        if not user.verify_and_update_password(password):
+            return None
+        return user
+
     def set_password(self, new_password):
         self.password = encrypt_password(new_password)
         self.save()

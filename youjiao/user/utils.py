@@ -3,11 +3,12 @@ import random
 import hashlib
 import hmac
 import base64
-from flask import current_app
+from flask import current_app, request
 from flask_login import current_user
 from flask_principal import UserNeed, RoleNeed
 from werkzeug.local import LocalProxy
 from datetime import date
+from youjiao.extensions import jwt
 from flask_security.utils import encrypt_password
 
 
@@ -76,6 +77,23 @@ def load_user(userid):
     return User.query.filter_by(id=userid).first()
 
 
+@jwt.identity_handler
+def identity(payload):
+    # print(payload)
+    # import ipdb; ipdb.set_trace()
+    from .models import User
+    user_id = payload.get('identity')
+    return User.query.filter(User.id==user_id).first()
+    # return None
+
+
+@jwt.authentication_handler
+def authenticate(username, password):
+    from youjiao.user.models import User
+    user = User.verify(username, password)
+    return user if user else None
+
+
 def _on_identity_loaded(sender, identity):
     """ flask_principal used to load user"""
     if hasattr(current_user, 'id'):
@@ -100,7 +118,52 @@ def _on_identity_loaded(sender, identity):
     identity.user = current_user
 
 
-# TODO: use auth_required to replace login_required
-def auth_required():
-    #TODO: auth_required support multipal auth backend
-    pass
+def jwt_auth_method():
+    from flask_jwt import _jwt_required
+    try:
+        _jwt_required(current_app.config['JWT_DEFAULT_REALM'])
+        return True
+    except Exception as e:
+        print(e)
+    else:
+        return False
+
+
+def handle_unauthorized_response():
+    from flask_jwt import _jwt_required
+    if request.mimetype == 'application/json':
+        _jwt_required(current_app.config['JWT_DEFAULT_REALM'])
+    else:
+        return current_app.login_manager.unauthorized()
+
+
+def auth_required(auth_methods=['session', 'jwt']):
+    """
+    inspired by flask security, now support flask_login and flask_jwt
+    Decorator that protects enpoints through multiple mechanisms
+    Example::
+
+        @app.route('/dashboard')
+        @auth_required(auth_methods=['jwt', 'session'])
+        def dashboard():
+            return 'Dashboard'
+
+    :param auth_methods: Specified mechanisms.
+    """
+    from functools import partial, wraps
+    login_mechanisms = {
+        'session': lambda: current_user.is_authenticated,
+        'jwt': jwt_auth_method
+    }
+
+    def wrapper(fn):
+        @wraps(fn)
+        def decorated_view(*args, **kwargs):
+            # import ipdb; ipdb.set_trace()
+            mechanisms = [login_mechanisms.get(method) for method in auth_methods]
+            for mechanism in mechanisms:
+                if mechanism and mechanism():
+                    return fn(*args, **kwargs)
+            return handle_unauthorized_response()
+        return decorated_view
+    return wrapper
