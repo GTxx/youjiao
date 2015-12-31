@@ -9,7 +9,8 @@ from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
 
-from .config import Config
+# from .config import Config
+from . import config as youjiao_config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
 from .extensions import db, limiter, admin, redis_cli, flask_qiniu, jwt
@@ -87,7 +88,7 @@ def index():
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(youjiao_config)
 
     # flask_sqlalchemy
     # import ipdb; ipdb.set_trace()
