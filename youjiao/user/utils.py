@@ -119,9 +119,13 @@ def _on_identity_loaded(sender, identity):
 
 
 def jwt_auth_method():
-    from flask_jwt import _jwt_required
+    from flask_jwt import _jwt_required, current_identity
+    from youjiao.extensions import login_manager
     try:
         _jwt_required(current_app.config['JWT_DEFAULT_REALM'])
+
+        # load user to flask_login
+        login_manager.reload_user(user=current_identity)
         return True
     except Exception as e:
         print(e)

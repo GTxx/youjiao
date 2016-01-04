@@ -5,7 +5,6 @@ from flask_admin import Admin
 from flask import Flask, render_template
 from flask_wtf import CsrfProtect
 from flask_babelex import Babel
-from flask_login import LoginManager
 from flask_principal import Principal, identity_loaded
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -13,7 +12,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 from . import config as youjiao_config
 from .user.utils import load_user
 from .user.subscribers import connect as user_connect
-from .extensions import db, limiter, admin, redis_cli, flask_qiniu, jwt
+from .extensions import db, limiter, admin, redis_cli, flask_qiniu, jwt, \
+    login_manager
 from .utils.csrf import check_csrf
 
 # user
@@ -37,6 +37,7 @@ from .teach_material.api import book_api_bp
 # user util
 from .user_util.models import Favor
 from .user_util.api import user_util_api_bp
+from .user_util.admin import LeaveMessageAdmin
 
 # photo
 from .photo.models import Photo, Album
@@ -104,9 +105,9 @@ def create_app():
         DebugToolbarExtension(app)
 
     # flask_login
-    login_manager = LoginManager(app)
     login_manager.user_loader(load_user)
     login_manager.login_view = 'user_view.login'
+    login_manager.init_app(app)
 
     # flask_jwt
     jwt.init_app(app)

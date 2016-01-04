@@ -61,6 +61,7 @@ class VIPAdmin(sqla.ModelView):
         return True
 
 
+
 from ..extensions import admin, db
 from flask_admin.consts import ICON_TYPE_GLYPH
 

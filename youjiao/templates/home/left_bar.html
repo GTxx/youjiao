@@ -26,7 +26,7 @@
 
             <div class="message-area">
                 {% if current_user.is_authenticated %}
-                    <textarea name="message"></textarea>
+                    <textarea id='message-content' name="message"></textarea>
                 {% else %}
                     <span>请<a href="/login">登录</a>后再留言</span>
                 {% endif %}

@@ -4,7 +4,18 @@ import 'slides_js';
 import '../modules/add_slides_itemhover';
 
 $(function(){
-    $(".submit-message").click(function(){
-        alert("留言已发送");
+    $(".submit-message").click(function(e){
+        e.preventDefault();
+        let content = $('#message-content').val();
+        $.ajax({
+            type: "POST",
+            url: "/api/leavemessage/",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({ 'content': content }),
+            success: function (jsonResult) {
+                alert("留言已发送");
+            }
+        });
     });
 });

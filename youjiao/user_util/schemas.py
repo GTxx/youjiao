@@ -27,3 +27,8 @@ class CommentSchema(Schema):
     comment_obj_id = fields.Integer()
     comment_obj_type = fields.String()
     content = fields.String()
+
+
+class LeaveMessageSchema(Schema):
+    user_id = fields.Integer()
+    content = fields.String(validate=Length(min=1, max=1000), required=True)

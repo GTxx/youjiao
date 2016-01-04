@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
+from flask.views import MethodView
 from flask_login import login_required, current_user
 from .schemas import FavorSchema
-from .models import Favor
+from .models import Favor, LeaveMessage
+from youjiao.user.utils import auth_required
 
 
 user_util_api_bp = Blueprint('user_util_api_bp', __name__)
@@ -39,3 +41,21 @@ def favor():
         favor.save()
     return jsonify(data), 201
 
+
+class LeaveMessageView(MethodView):
+    decorators = [auth_required()]
+
+    def post(self):
+        from .schemas import LeaveMessageSchema
+        import ipdb; ipdb.set_trace()
+        data = request.get_json()
+        data.update({'user_id': current_user.id})
+        result = LeaveMessageSchema().load(data)
+        if result.errors:
+            return jsonify(result.errors), 400
+        lm = LeaveMessage(**result.data)
+        lm.save()
+        return jsonify(result.data), 201
+
+
+user_util_api_bp.add_url_rule('/api/leavemessage/', view_func=LeaveMessageView.as_view('leavemessage_view'))

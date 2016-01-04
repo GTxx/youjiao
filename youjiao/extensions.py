@@ -2,6 +2,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_admin import Admin
+from flask_login import LoginManager
 from flask_script import Manager
 from youjiao.yj_admin.views import YJHomeView
 from flask_redis import FlaskRedis
@@ -23,3 +24,5 @@ flask_qiniu = FlaskQiniu()
 manager = Manager()
 
 jwt = JWT()
+
+login_manager = LoginManager()

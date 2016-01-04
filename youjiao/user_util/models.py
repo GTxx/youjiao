@@ -52,3 +52,12 @@ class Favor(CRUDMixin, db.Model):
     def real_obj(self):
         model = self.favor_model
         return model.query.get(self.obj_id)
+
+
+class LeaveMessage(CRUDMixin, db.Model):
+    id = sqla.Column(sqla.Integer, primary_key=True)
+    create_time = db.Column(sqla.DateTime, default=datetime.utcnow)
+    content = db.Column(sqla.String(length=1000))
+
+    user_id = db.Column(sqla.Integer, db.ForeignKey(USER_TABLE_USER_ID))
+    user = db.relationship('User', backref=db.backref('leave_messages'))
