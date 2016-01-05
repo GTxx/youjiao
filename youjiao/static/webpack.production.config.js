@@ -34,7 +34,11 @@ var plugins = [
         },
         sourceMap: false
     }),
-    new Vendor2BuildPlugin()
+    new Vendor2BuildPlugin(),
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    })
 ];
 
 config.plugins = plugins;
