@@ -47,7 +47,6 @@ class LeaveMessageView(MethodView):
 
     def post(self):
         from .schemas import LeaveMessageSchema
-        import ipdb; ipdb.set_trace()
         data = request.get_json()
         data.update({'user_id': current_user.id})
         result = LeaveMessageSchema().load(data)
