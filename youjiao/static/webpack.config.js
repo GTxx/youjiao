@@ -28,7 +28,11 @@ var plugins = [
     new ExtractTextPlugin('../css/[name].css'),
     new webpack.optimize.DedupePlugin(),
     new AssetsPlugin({filename: 'assets.json.py'}),
-    new Vendor2BuildPlugin()
+    new Vendor2BuildPlugin(),
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    })
 ];
 
 var config = {
