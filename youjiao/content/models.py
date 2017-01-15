@@ -46,7 +46,11 @@ class Page(CRUDMixin, CreateUpdateTimeMixin, db.Model):
     # update_time = db.Column(db.DateTime, onupdate=datetime.now)
     title = db.Column(db.String(255))
     html = db.Column(db.Text)
-    status = db.Column(db.String(2), default='1')
+    summary_s = db.Column(db.String(64))
+    summary_l = db.Column(db.String(200))
+    status = db.Column(db.Integer, default=0)
+    img_url = db.Column(sqla.String(200))
+    publish = db.Column(sqla.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey(USER_TABLE_USER_ID))
 
     @property

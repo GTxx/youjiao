@@ -23,11 +23,11 @@
                     </ul>
                 </li>
                 <li><a class="{% if request.path.startswith('/research') %}nav-active{% endif %}"
-                       href="{{ url_for('activity_content.research_home') }}">教学教研</a>
+                       href="{{ url_for('activity_content.page_home') }}">教学教研</a>
                     <ul class="youjiao-nav-sub">
-                        <li><a href="{{ url_for('activity_content.research_teacher') }}">名师名园</a></li>
-{#                        <li><a href="{{ url_for('activity_content.research_activity', category='researchevents', page=1 ) }}">教研活动</a></li>#}
-                        <li><a href="{{ url_for('activity_content.research_activity', category='achievement', page=1 ) }}">教研成果</a></li>
+                        <li><a href="{{ url_for('activity_content.page_teacher', page=1 ) }}">名师名园</a></li>
+{#                        <li><a href="{{ url_for('activity_content.page_activity', category='researchevents', page=1 ) }}">教研活动</a></li>#}
+                        <li><a href="{{ url_for('activity_content.page_activity', page=1 ) }}">教研成果</a></li>
                     </ul>
                 </li>
                 <li><a class="{% if request.path.startswith('/courseware') %}nav-active{% endif %}"
