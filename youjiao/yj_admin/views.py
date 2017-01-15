@@ -5,7 +5,7 @@ from permissions import admin_permission
 class YJHomeView(AuthEditorMixin, AdminIndexView):
     @expose()
     def index(self):
-        from youjiao.user.models import User, Role
+        from youjiao.user.models import User, Role, VIP, MessageBoard
         from youjiao.content.models import Activity, Page
         from youjiao.teach_material.models import Courseware, Book
         from youjiao.onlinecourse.models import OnlineCourse
@@ -16,4 +16,5 @@ class YJHomeView(AuthEditorMixin, AdminIndexView):
         return self.render('yj_admin/dashboard.html', User=User, Role=Role, Activity=Activity,
                            Courseware=Courseware, Book=Book, Page=Page, OnlineCourse=OnlineCourse,
                            Video=Video, Audio=Audio, Document=Document, Photo=Photo, Album=Album,
-                           ContentList=ContentList, Slider=Slider, admin_permission=admin_permission)
+                           ContentList=ContentList, Slider=Slider, admin_permission=admin_permission,
+                           VIP=VIP, MessageBoard=MessageBoard)

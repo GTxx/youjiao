@@ -3,7 +3,7 @@ from flask_login import current_user
 import inspect
 from flask import flash, request, session
 from wtforms import HiddenField
-from wtforms import StringField, PasswordField, Field
+from wtforms import StringField, PasswordField, Field, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from flask_wtf import Form
 from wtforms import ValidationError
@@ -78,7 +78,7 @@ class RegisterForm(Form):
                 raise ValidationError('captcha is required')
             check_captcha(captcha)
         except ValidationError as e:
-            self.captcha.errors += (str(e), )
+            self.captcha.errors += (unicode(e), )
             return False
         return super(RegisterForm, self).validate()
 
@@ -166,3 +166,21 @@ class ModifyPasswordForm(Form):
             return False
         return True
 
+class MessageBoardForm(Form):
+    content = TextAreaField(u'内容', validators=[Length(0, 140)])
+    captcha = CaptchaField()
+    submit = SubmitField(u'确定')
+
+    def validate(self):
+        captcha = self.captcha.data
+        length = self.content.data
+        try:
+            if not captcha:
+                raise ValidationError(u'请输入验证码')
+            check_captcha(captcha)
+            if len(length) > 140:
+                raise ValidationError(u'不要超过140个字')
+        except ValidationError as e:
+            self.captcha.errors += (unicode(e), )
+            return False
+        return super(MessageBoardForm, self).validate()
